@@ -3,7 +3,10 @@ all: test
 
 # all clean and test are phony targets
 # i.e. they are not files
-.PHONY: all clean test
+.PHONY: all clean test run
+
+run: all
+	./test0
 
 # depends on all test files
 test: test0
