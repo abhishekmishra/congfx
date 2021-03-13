@@ -54,3 +54,6 @@ dkms.conf
 # Editor temp files
 *.swp
 *~
+
+# exe files
+test0
