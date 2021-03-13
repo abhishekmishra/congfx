@@ -36,9 +36,9 @@ void background(wchar_t c);
 void showCanvas();
 
 // drawing functions
-
-void line(size_t x1, size_t y1, size_t x2, size_t y2);
 void point(size_t x1, size_t y1, wchar_t c);
+void line(size_t x1, size_t y1, size_t x2, size_t y2);
+void rect(size_t x1, size_t y1, size_t width, size_t height);
 
 int main(int argc, char *argv[])
 {
@@ -148,6 +148,10 @@ void showCanvas()
 
 void point(size_t x1, size_t y1, wchar_t c)
 {
+    if (x1 >= width || y1 >= height || x1 < 0 || y1 < 0)
+    {
+        return;
+    }
     size_t cvloc = ((width + 1) * y1) + x1;
     canvas_contents[cvloc] = c;
 }
@@ -155,7 +159,7 @@ void point(size_t x1, size_t y1, wchar_t c)
 void line(size_t x1, size_t y1, size_t x2, size_t y2)
 {
     // swap coordinates if y1 is lower
-    if (y1 > y2)
+    if (x1 > x2)
     {
         size_t tx, ty;
         tx = x2;
@@ -168,10 +172,29 @@ void line(size_t x1, size_t y1, size_t x2, size_t y2)
 
     if (x1 == x2)
     {
-        //slope is 0
+        //slope is infinite
+        for (size_t y = y1; y <= y2; y++)
+        {
+            point(x1, y, L'*');
+        }
     }
+    else
+    {
+        double slope = (y2 - y1) / (x2 - x1);
+        for (size_t x = x1; x <= x2; x++)
+        {
+            size_t y = y1 + (slope * x);
+            point(x, y, L'*');
+        }
+    }
+}
 
-    double slope = (y2 - y1) / (x2 - x1);
+void rect(size_t x1, size_t y1, size_t width, size_t height)
+{
+    line(x1, y1, x1 + width, y1);
+    line(x1 + width, y1, x1 + width, y1 + height);
+    line(x1 + width, y1 + height, x1, y1 + height);
+    line(x1, y1, x1, y1 + height);
 }
 
 #endif //__PIECER_H__
