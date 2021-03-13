@@ -8,7 +8,7 @@ void setup()
 size_t x = 0;
 size_t y = 0;
 
-void draw()
+void draw(long dt)
 {
 	// draw() is run multiple times per second.
 

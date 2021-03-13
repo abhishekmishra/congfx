@@ -10,7 +10,7 @@
 
 void setup();
 
-void draw();
+void draw(long dt);
 
 void noLoop();
 
@@ -45,6 +45,11 @@ int main(int argc, char *argv[])
     setlocale(LC_ALL, "");
     fwide(stdout, 1);
 
+    struct timespec start_time, prev_time, current_time;
+    clock_gettime(CLOCK_MONOTONIC_RAW, &start_time);
+    prev_time = start_time;
+    current_time = start_time;
+
     setup();
 
     // if there is no canvas created, create a default one
@@ -55,9 +60,15 @@ int main(int argc, char *argv[])
 
     while (loop == 1)
     {
+        prev_time = current_time;
+        clock_gettime(CLOCK_MONOTONIC_RAW, &current_time);
+        long dt = (current_time.tv_sec - prev_time.tv_sec) * 1000000 + (current_time.tv_nsec - prev_time.tv_nsec) / 1000;
+
         cls();
         home();
-        draw();
+
+        draw(dt);
+
         showCanvas();
     }
 }
