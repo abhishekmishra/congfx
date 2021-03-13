@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
         draw(dt);
 
         showCanvas();
+        // wprintf(L"%ld\n", dt);
     }
 }
 
