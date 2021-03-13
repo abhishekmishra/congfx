@@ -5,8 +5,8 @@ void setup()
 	// setup() is run once at startup
 }
 
-size_t x1 = 0;
-size_t y1 = 0;
+size_t x = 0;
+size_t y = 0;
 
 void draw()
 {
@@ -21,16 +21,16 @@ void draw()
 	// set point 3,4 to B
 	point(3, 4, L'B');
 
-	// set point x1, y1 to C
-	point(x1, y1, L'C');
+	// set point x, y to C
+	point(x, y, L'C');
 
-	if (y1 == height)
+	if (y == height)
 	{
-		y1 = 0;
+		y = 0;
 	}
 	else
 	{
-		y1 += 1;
+		y += 1;
 	}
 
 	// a couple of lines
@@ -40,5 +40,5 @@ void draw()
 	// a rectangle
 	rect(5, 5, 10, 10);
 
-	// noLoop(); // noLoop stops the draw loop.
+	//noLoop(); // noLoop stops the draw loop.
 }

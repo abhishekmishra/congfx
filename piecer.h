@@ -75,12 +75,12 @@ void startLoop()
 // terminal utility functions
 void cls()
 {
-    printf("\033[2J");
+    wprintf(L"\033[2J");
 }
 
 void home()
 {
-    puts("\033[H");
+    wprintf(L"\033[H");
 }
 
 //canvas functions
