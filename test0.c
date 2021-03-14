@@ -36,7 +36,7 @@ ball **balls;
 void setup()
 {
 	ball *_b = NULL;
-	balls = (ball**)calloc(NUM_BALLS, sizeof(ball*));
+	balls = (ball **)calloc(NUM_BALLS, sizeof(ball *));
 	createCanvas(100, 25);
 
 	for (integer i = 0; i < NUM_BALLS; i++)
@@ -80,10 +80,11 @@ void ball_update(ball *b, uinteger dt)
 
 void ball_show(ball *b)
 {
-	point(
-		(uinteger)(b->position[0]),
-		(uinteger)(b->position[1]),
-		L'█');
+	rect(
+		(uinteger)(b->position[0] - 2),
+		(uinteger)(b->position[1] - 2),
+		4,
+		4);
 }
 
 string calc_fps(uinteger dt)
