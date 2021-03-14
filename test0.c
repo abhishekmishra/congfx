@@ -1,7 +1,7 @@
 #include "piecer.h"
 
-size_t x = 0;
-size_t y = 0;
+uinteger x = 0;
+uinteger y = 0;
 
 //ball position
 double ballx = 0;

@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "piecer.h": "c"
+        "piecer.h": "c",
+        "time.h": "c"
     }
 }
