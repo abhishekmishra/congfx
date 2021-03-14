@@ -58,6 +58,10 @@ character background_char = DEFAULT_BACKGROUND_CHAR;
 // terminal utility functions
 void cls();
 void home();
+void resetTerm();
+void setForegroundColour(integer colour);
+void setBackgroundColour(integer colour);
+
 
 // canvas functions
 character *canvas_contents = L'\0';
@@ -93,6 +97,11 @@ int main(int argc, char *argv[])
 
     // init random numbers
     srand(time(NULL));
+
+    // set default background and forground
+    resetTerm();
+    setForegroundColour(51);
+    setBackgroundColour(244);
 
     struct timespec start_time, prev_time, current_time, after_draw_time;
     clock_gettime(CLOCK_MONOTONIC, &start_time);
@@ -252,6 +261,26 @@ void cls()
 void home()
 {
     wprintf(L"\033[H");
+}
+
+void resetTerm() {
+    wprintf(L"\033[0m");
+}
+
+void setForegroundColour(integer colour)
+{
+    if (colour > -1 && colour < 256)
+    {
+        wprintf(L"\033[38;5;%dm");
+    }
+}
+
+void setBackgroundColour(integer colour)
+{
+    if (colour > -1 && colour < 256)
+    {
+        wprintf(L"\033[48;5;%dm");
+    }
 }
 
 //canvas functions
