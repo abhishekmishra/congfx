@@ -36,8 +36,8 @@ ball **balls;
 void setup()
 {
 	ball *_b = NULL;
-	balls = (ball **)calloc(NUM_BALLS, sizeof(ball *));
-	createCanvas(100, 25);
+	balls = (ball**)calloc(NUM_BALLS, sizeof(ball*));
+	createCanvas(100, 50);
 
 	for (integer i = 0; i < NUM_BALLS; i++)
 	{
@@ -54,7 +54,7 @@ void setup()
 		wprintf(L"ball %lu at %Lf, %Lf\n", i, balls[i]->position[0], balls[i]->position[1]);
 	}
 	// setup() is run once at startup
-	frameRate(40);
+	frameRate(60);
 	// noLoop();
 }
 
@@ -80,11 +80,14 @@ void ball_update(ball *b, uinteger dt)
 
 void ball_show(ball *b)
 {
+	// point(
+	// 	(uinteger)(b->position[0]),
+	// 	(uinteger)(b->position[1]),
+	// 	L'█');
 	rect(
-		(uinteger)(b->position[0] - 2),
-		(uinteger)(b->position[1] - 2),
-		4,
-		4);
+		numberToUinteger(b->position[0] - 2),
+		numberToUinteger(b->position[1] - 2),
+		4, 4);
 }
 
 string calc_fps(uinteger dt)

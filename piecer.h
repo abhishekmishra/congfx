@@ -25,6 +25,14 @@ typedef long integer;
 typedef unsigned long uinteger;
 typedef long double number;
 
+uinteger numberToUinteger(number x) {
+    if(x < 0) {
+        return 0;
+    } else {
+        return (uinteger)x;
+    }
+}
+
 typedef number *vec2;
 
 // type utility functions
@@ -376,7 +384,7 @@ void showCanvas()
         {
             for (uinteger j = 0; j < width; j++)
             {
-                setForegroundColour(canvas_foreground_colour[(i * width) + j]);
+                // setForegroundColour(canvas_foreground_colour[(i * width) + j]);
                 // setBackgroundColour(canvas_background_colour[(i * width) + j]);
                 putwchar(canvas_contents[idx]);
                 idx += 1;
@@ -395,14 +403,16 @@ void point(uinteger x1, uinteger y1, character c)
     }
     uinteger cvloc = ((width + 1) * y1) + x1;
     canvas_contents[cvloc] = c;
-    canvas_background_colour[(y1 * width) + x1] = background_colour;
-    canvas_foreground_colour[(y1 * width) + x1] = foreground_colour;
+    // canvas_background_colour[(y1 * width) + x1] = background_colour;
+    // canvas_foreground_colour[(y1 * width) + x1] = foreground_colour;
     // wprintf(L"\033[%lu;%luf", y1, x1);
     // wprintf(L"%c", c);
 }
 
 void line(uinteger x1, uinteger y1, uinteger x2, uinteger y2)
 {
+    // wprintf(L"line [%lu,%lu] -> [%lu, %lu]", x1, y1, x2, y2);
+
     // swap coordinates if y1 is lower
     if (x1 > x2)
     {
@@ -420,7 +430,7 @@ void line(uinteger x1, uinteger y1, uinteger x2, uinteger y2)
         //slope is infinite
         for (uinteger y = y1; y <= y2; y++)
         {
-            point(x1, y, L'*');
+            point(x1, y, L'█');
         }
     }
     else
@@ -429,7 +439,7 @@ void line(uinteger x1, uinteger y1, uinteger x2, uinteger y2)
         for (uinteger x = x1; x <= x2; x++)
         {
             uinteger y = y1 + (slope * x);
-            point(x, y, L'*');
+            point(x, y, L'█');
         }
     }
 }
