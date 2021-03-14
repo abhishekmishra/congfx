@@ -28,26 +28,35 @@ void disposeBall(ball *b)
 	}
 }
 
-ball *b = NULL;
-integer NUM_BALLS = 5;
+integer NUM_BALLS = 10;
 ball **balls;
 
 void setup()
 {
-	balls = *ball[NUM_BALLS];
+	ball *_b = NULL;
+	balls = (ball**)calloc(NUM_BALLS, sizeof(ball*));
+	createCanvas(100, 25);
+
 	for (integer i = 0; i < NUM_BALLS; i++)
 	{
-		b = makeBall();
-		b->position = makeVec2(20, 10);
-		b->velocity = makeVec2(0.00001, 0.00001);
-		balls[i] = b;
+		_b = makeBall();
+		int x = randNumber(0, width);
+		int y = randNumber(0, height);
+		wprintf(L"%d, %d\n", x, y);
+		_b->position = makeVec2(x, y);
+		_b->velocity = makeVec2(0.00001 * randNumber(-10, 10), 0.00001 * randNumber(-10, 10));
+		balls[i] = _b;
 	}
-
+	for (integer i = 0; i < NUM_BALLS; i++)
+	{
+		wprintf(L"ball %lu at %Lf, %Lf\n", i, balls[i]->position[0], balls[i]->position[1]);
+	}
 	// setup() is run once at startup
 	frameRate(25);
+	// noLoop();
 }
 
-void ball_update(uinteger dt)
+void ball_update(ball *b, uinteger dt)
 {
 	vec2 vToAdd = vec2MultScalar(b->velocity, dt);
 	vec2 newPos = vec2Add(
@@ -65,6 +74,14 @@ void ball_update(uinteger dt)
 	{
 		b->velocity[1] = b->velocity[1] * -1.0;
 	}
+}
+
+void ball_show(ball *b)
+{
+	point(
+		(uinteger)(b->position[0]),
+		(uinteger)(b->position[1]),
+		L'█');
 }
 
 string calc_fps(uinteger dt)
@@ -90,16 +107,16 @@ void draw(uinteger dt)
 	text(fps_str, 0, 0);
 
 	// show ball pos
-	string ballpos_str = vec2ToString(b->position);
-	text(ballpos_str, 0, 1);
-	disposeString(ballpos_str);
+	// string ballpos_str = vec2ToString(b->position);
+	// text(ballpos_str, 0, 1);
+	// disposeString(ballpos_str);
 
-	point(
-		(uinteger)(b->position[0]),
-		(uinteger)(b->position[1]),
-		L'█');
-	ball_update(dt);
-
+	for (integer i = 0; i < NUM_BALLS; i++)
+	{
+		ball *a = balls[i];
+		ball_show(a);
+		ball_update(a, dt);
+	}
 	// // set point 0,0 to A
 	// point(0, 0, L'A');
 

@@ -12,7 +12,7 @@ run: all
 test: test0
 
 test0: test0.o
-	cc test0.o -o test0
+	cc -lm test0.o -o test0
 
 test0.o: test0.c
 	cc -c test0.c

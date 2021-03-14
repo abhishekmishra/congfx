@@ -7,6 +7,7 @@
 #include <wchar.h>
 #include <wctype.h>
 #include <locale.h>
+#include <math.h>
 
 #include <unistd.h>
 
@@ -36,6 +37,8 @@ vec2 vec2Add(vec2 v1, vec2 v2);
 vec2 vec2MultScalar(vec2 vin, number x);
 string vec2ToString(vec2 v);
 void disposeVec2(vec2 v);
+
+int randNumber(int from, int to);
 
 void setup();
 
@@ -84,8 +87,12 @@ uinteger _diff_time_micros(struct timespec time1, struct timespec time2)
 
 int main(int argc, char *argv[])
 {
+    // init locale for terminal, and wide output
     setlocale(LC_ALL, "");
     fwide(stdout, 1);
+
+    // init random numbers
+    srand(time(NULL));
 
     struct timespec start_time, prev_time, current_time, after_draw_time;
     clock_gettime(CLOCK_MONOTONIC, &start_time);
@@ -192,7 +199,8 @@ vec2 vec2MultScalar(vec2 vin, number x)
     return v;
 }
 
-string vec2ToString(vec2 v) {
+string vec2ToString(vec2 v)
+{
     string s = makeString(100);
     swprintf(s, 100, L"%.2Lf, %.2Lf", v[0], v[1]);
     return s;
@@ -204,6 +212,12 @@ void disposeVec2(vec2 v)
     {
         _PIECER_FREE(v);
     }
+}
+
+int randNumber(int from, int to)
+{
+    int num = (rand() % (to - from + 1)) + from;
+    return num;
 }
 
 void noLoop()
