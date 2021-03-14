@@ -10,22 +10,35 @@
 
 #include <unistd.h>
 
+// defaults
+#define DEFAULT_FPS 30 // times per second
+#define DEFAULT_BACKGROUND_CHAR L' '
+
 // typedefs
 typedef wchar_t character;
+typedef character *string;
 typedef long integer;
 typedef unsigned long uinteger;
 typedef long double number;
 
+// type utility functions
+string makeString(uinteger length);
+void disposeString(string);
+
 void setup();
 
-void draw(long dt);
+void draw(uinteger dt);
 
 void noLoop();
 
-void startLoop();
+void loop();
+
+void frameRate(uinteger fps);
 
 // system variables
-int loop = 1;
+int _loop = 1;
+uinteger _fps = DEFAULT_FPS;
+character background_char = DEFAULT_BACKGROUND_CHAR;
 
 // terminal utility functions
 void cls();
@@ -35,11 +48,6 @@ void home();
 character *canvas_contents = L'\0';
 uinteger width;
 uinteger height;
-
-#define DEFAULT_FPS 30 // times per second
-#define DEFAULT_BACKGROUND_CHAR L' '
-uinteger fps = DEFAULT_FPS;
-character background_char = DEFAULT_BACKGROUND_CHAR;
 
 void createCanvas();
 void background(character c);
@@ -57,7 +65,7 @@ uinteger _diff_time_micros(struct timespec time1, struct timespec time2)
     //wprintf(L"time1 [%ld, %ld], time2[%ld, %ld]\n", time1.tv_sec, time1.tv_nsec, time2.tv_sec, time2.tv_nsec);
     uinteger seconds_delta = (time1.tv_sec - time2.tv_sec);
     integer nanos_delta = (time1.tv_nsec - time2.tv_nsec);
-    uinteger delta =  (seconds_delta * 1000000) + (nanos_delta / 1000);
+    uinteger delta = (seconds_delta * 1000000) + (nanos_delta / 1000);
     //wprintf(L"seconds_delta = %lu, nanos_delta = %ld, delta = %lu\n", seconds_delta, nanos_delta, delta);
     return delta;
 }
@@ -80,9 +88,9 @@ int main(int argc, char *argv[])
         createCanvas(100, 25);
     }
 
-    uinteger delta_time_ideal = 1000000 / fps; //in microseconds
+    uinteger delta_time_ideal = 1000000 / _fps; //in microseconds
 
-    while (loop == 1)
+    while (_loop == 1)
     {
         uinteger dt = _diff_time_micros(current_time, prev_time);
 
@@ -108,19 +116,52 @@ int main(int argc, char *argv[])
 
         prev_time = current_time;
         clock_gettime(CLOCK_MONOTONIC, &current_time);
-        dt_done = _diff_time_micros(current_time, prev_time);
+        // dt_done = _diff_time_micros(current_time, prev_time);
         // wprintf(L"After sleep: Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
+    }
+}
+
+// type utility functions
+string makeString(uinteger length)
+{
+    string s = (string)calloc(length + 1, sizeof(character));
+    if (s == NULL)
+    {
+        wprintf(L"FATAL Error: Unable to allocate string.\n");
+        exit(-1);
+    }
+    return s;
+}
+
+void disposeString(string s)
+{
+    if (s != NULL)
+    {
+        free(s);
     }
 }
 
 void noLoop()
 {
-    loop = 0;
+    _loop = 0;
 }
 
-void startLoop()
+void loop()
 {
-    loop = 1;
+    _loop = 1;
+}
+
+void frameRate(uinteger fps)
+{
+    if (fps > 0 && fps < 100)
+    {
+        _fps = fps;
+    }
+    else
+    {
+        wprintf(L"FATAL: Invalid fps [%lu], should be in range (0, 100). \n", fps);
+        exit(-1);
+    }
 }
 
 // terminal utility functions
@@ -246,6 +287,18 @@ void rect(uinteger x1, uinteger y1, uinteger width, uinteger height)
     line(x1 + width, y1, x1 + width, y1 + height);
     line(x1 + width, y1 + height, x1, y1 + height);
     line(x1, y1, x1, y1 + height);
+}
+
+void text(character *t, uinteger x, uinteger y)
+{
+    uinteger len = wcslen(t);
+    if (len > 0)
+    {
+        for (uinteger i = 0; i < len; i++)
+        {
+            point(x + i, y, t[i]);
+        }
+    }
 }
 
 #endif //__PIECER_H__
