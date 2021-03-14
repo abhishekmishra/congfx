@@ -7,6 +7,7 @@ typedef struct
 {
 	vec2 position;
 	vec2 velocity;
+	number colour;
 } ball;
 
 ball *makeBall()
@@ -17,6 +18,7 @@ ball *makeBall()
 		wprintf(L"Unable to allocate ball struct.\n");
 		exit(-1);
 	}
+	b->colour = 15;
 	return b;
 }
 
@@ -52,7 +54,7 @@ void setup()
 		wprintf(L"ball %lu at %Lf, %Lf\n", i, balls[i]->position[0], balls[i]->position[1]);
 	}
 	// setup() is run once at startup
-	frameRate(25);
+	frameRate(40);
 	// noLoop();
 }
 
@@ -78,6 +80,7 @@ void ball_update(ball *b, uinteger dt)
 
 void ball_show(ball *b)
 {
+	setColour(31);
 	point(
 		(uinteger)(b->position[0]),
 		(uinteger)(b->position[1]),
@@ -97,8 +100,8 @@ void draw(uinteger dt)
 {
 	// draw() is run multiple times per second.
 
-	//set background character
-	background(L' ');
+	//set background colour
+	//background(2);
 
 	text(L"PIECER: EXPERIMENT IN C ", width / 2 - 12, height / 2);
 
@@ -116,6 +119,7 @@ void draw(uinteger dt)
 		ball *a = balls[i];
 		ball_show(a);
 		ball_update(a, dt);
+		setColour(15);
 	}
 	// // set point 0,0 to A
 	// point(0, 0, L'A');

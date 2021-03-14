@@ -54,6 +54,8 @@ void frameRate(uinteger fps);
 int _loop = 1;
 uinteger _fps = DEFAULT_FPS;
 character background_char = DEFAULT_BACKGROUND_CHAR;
+number background_colour = 0;
+number foreground_colour = 15;
 
 // terminal utility functions
 void cls();
@@ -62,14 +64,16 @@ void resetTerm();
 void setForegroundColour(integer colour);
 void setBackgroundColour(integer colour);
 
-
 // canvas functions
 character *canvas_contents = L'\0';
+number *canvas_background_colour;
+number *canvas_foreground_colour;
 uinteger width;
 uinteger height;
 
 void createCanvas();
-void background(character c);
+void background(number c);
+void setColour(number c);
 void showCanvas();
 
 // drawing functions
@@ -98,11 +102,6 @@ int main(int argc, char *argv[])
     // init random numbers
     srand(time(NULL));
 
-    // set default background and forground
-    resetTerm();
-    setForegroundColour(51);
-    setBackgroundColour(244);
-
     struct timespec start_time, prev_time, current_time, after_draw_time;
     clock_gettime(CLOCK_MONOTONIC, &start_time);
     prev_time = start_time;
@@ -122,15 +121,16 @@ int main(int argc, char *argv[])
     {
         uinteger dt = _diff_time_micros(current_time, prev_time);
 
+        // set default background and forground
+        resetTerm();
+        setForegroundColour(45);
+        background(235);
+
         cls();
         home();
 
         draw(dt);
         showCanvas();
-
-        // vec2 x = makeVec2(100, 100);
-        // wprintf(vec2ToString(x));
-        // noLoop();
 
         // how much time spent
         clock_gettime(CLOCK_MONOTONIC, &after_draw_time);
@@ -263,7 +263,8 @@ void home()
     wprintf(L"\033[H");
 }
 
-void resetTerm() {
+void resetTerm()
+{
     wprintf(L"\033[0m");
 }
 
@@ -271,7 +272,8 @@ void setForegroundColour(integer colour)
 {
     if (colour > -1 && colour < 256)
     {
-        wprintf(L"\033[38;5;%dm");
+        //fputws(L"\033[38;5;8m", stdout);
+        //wprintf(L"\033[38;5;%lum", colour);
     }
 }
 
@@ -279,7 +281,7 @@ void setBackgroundColour(integer colour)
 {
     if (colour > -1 && colour < 256)
     {
-        wprintf(L"\033[48;5;%dm");
+        wprintf(L"\033[48;5;%lum", colour);
     }
 }
 
@@ -295,11 +297,14 @@ void createCanvas(uinteger w, uinteger h)
         if (canvas_contents != NULL)
         {
             _PIECER_FREE(canvas_contents);
+            _PIECER_FREE(canvas_background_colour);
         }
 
         uinteger canvas_len = ((width + 1) * height) + 1;
         canvas_contents = _PIECER_CALLOC(sizeof(character), canvas_len);
-        if (canvas_contents == NULL)
+        canvas_background_colour = _PIECER_CALLOC(sizeof(number), width * height);
+        canvas_foreground_colour = _PIECER_CALLOC(sizeof(number), width * height);
+        if (canvas_contents == NULL || canvas_background_colour == NULL || canvas_foreground_colour == NULL)
         {
             printf("Error: unable to allocate canvas.\n");
             exit(-1);
@@ -317,6 +322,15 @@ void createCanvas(uinteger w, uinteger h)
             idx += 1;
         }
         canvas_contents[idx] = L'\0';
+
+        for (uinteger i = 0; i < height; i++)
+        {
+            for (uinteger j = 0; j < width; j++)
+            {
+                canvas_background_colour[(i * width) + j] = background_colour;
+                canvas_foreground_colour[(i * width) + j] = foreground_colour;
+            }
+        }
     }
     else
     {
@@ -325,9 +339,9 @@ void createCanvas(uinteger w, uinteger h)
     }
 }
 
-void background(character c)
+void background(number col)
 {
-    background_char = c;
+    background_colour = col;
     for (uinteger x = 0; x < width; x++)
     {
         for (uinteger y = 0; y < height; y++)
@@ -337,12 +351,28 @@ void background(character c)
     }
 }
 
+void setColour(number col) {
+    foreground_colour = col;
+}
+
 void showCanvas()
 {
     if (canvas_contents != NULL)
     {
-
-        wprintf(L"%ls", canvas_contents);
+        // wprintf(L"%ls", canvas_contents);
+        uinteger idx = 0;
+        for (uinteger i = 0; i < height; i++)
+        {
+            for (uinteger j = 0; j < width; j++)
+            {
+                setForegroundColour(canvas_foreground_colour[(i * width) + j]);
+                // setBackgroundColour(canvas_background_colour[(i * width) + j]);
+                putwchar(canvas_contents[idx]);
+                idx += 1;
+            }
+            putwchar(L'\n');
+            idx += 1;
+        }
     }
 }
 
@@ -354,6 +384,10 @@ void point(uinteger x1, uinteger y1, character c)
     }
     uinteger cvloc = ((width + 1) * y1) + x1;
     canvas_contents[cvloc] = c;
+    canvas_background_colour[(y1 * width) + x1] = background_colour;
+    canvas_foreground_colour[(y1 * width) + x1] = foreground_colour;
+    // wprintf(L"\033[%lu;%luf", y1, x1);
+    // wprintf(L"%c", c);
 }
 
 void line(uinteger x1, uinteger y1, uinteger x2, uinteger y2)
