@@ -47,11 +47,13 @@ void draw(uinteger dt)
 	//set background character
 	background(L' ');
 
+	text(L"PIECER: EXPERIMENT IN C ", width / 2 - 12, height / 2);
+
 	// show fps
 	string fps_str = calc_fps(dt);
 	text(fps_str, 0, 0);
 
-	point(ballx, bally, L'X');
+	point(ballx, bally, L'█');
 	ball_update(dt);
 
 	// // set point 0,0 to A
