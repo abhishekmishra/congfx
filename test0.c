@@ -3,31 +3,67 @@
 uinteger x = 0;
 uinteger y = 0;
 
-//ball position
-double ballx = 20;
-double bally = 10;
+typedef struct
+{
+	vec2 position;
+	vec2 velocity;
+} ball;
 
-//ball velocity
-double balldx = 0.00001;
-double balldy = 0.00001;
+ball *makeBall()
+{
+	ball *b = (ball *)calloc(1, sizeof(ball));
+	if (b == NULL)
+	{
+		wprintf(L"Unable to allocate ball struct.\n");
+		exit(-1);
+	}
+	return b;
+}
+
+void disposeBall(ball *b)
+{
+	if (b == NULL)
+	{
+		free(b);
+	}
+}
+
+ball *b = NULL;
+integer NUM_BALLS = 5;
+ball **balls;
 
 void setup()
 {
+	balls = *ball[NUM_BALLS];
+	for (integer i = 0; i < NUM_BALLS; i++)
+	{
+		b = makeBall();
+		b->position = makeVec2(20, 10);
+		b->velocity = makeVec2(0.00001, 0.00001);
+		balls[i] = b;
+	}
+
 	// setup() is run once at startup
 	frameRate(25);
 }
 
 void ball_update(uinteger dt)
 {
-	ballx = ballx + (balldx * dt);
-	bally = bally + (balldy * dt);
-	if (ballx > width || ballx < 0)
+	vec2 vToAdd = vec2MultScalar(b->velocity, dt);
+	vec2 newPos = vec2Add(
+		b->position,
+		vToAdd);
+	disposeVec2(b->position);
+	disposeVec2(vToAdd);
+	b->position = newPos;
+
+	if (b->position[0] > width || b->position[0] < 0)
 	{
-		balldx = balldx * -1.0;
+		b->velocity[0] = b->velocity[0] * -1.0;
 	}
-	if (bally > height || bally < 0)
+	if (b->position[1] > height || b->position[1] < 0)
 	{
-		balldy = balldy * -1.0;
+		b->velocity[1] = b->velocity[1] * -1.0;
 	}
 }
 
@@ -53,7 +89,15 @@ void draw(uinteger dt)
 	string fps_str = calc_fps(dt);
 	text(fps_str, 0, 0);
 
-	point(ballx, bally, L'█');
+	// show ball pos
+	string ballpos_str = vec2ToString(b->position);
+	text(ballpos_str, 0, 1);
+	disposeString(ballpos_str);
+
+	point(
+		(uinteger)(b->position[0]),
+		(uinteger)(b->position[1]),
+		L'█');
 	ball_update(dt);
 
 	// // set point 0,0 to A

@@ -14,6 +14,9 @@
 #define DEFAULT_FPS 30 // times per second
 #define DEFAULT_BACKGROUND_CHAR L' '
 
+#define _PIECER_CALLOC calloc
+#define _PIECER_FREE free
+
 // typedefs
 typedef wchar_t character;
 typedef character *string;
@@ -21,9 +24,18 @@ typedef long integer;
 typedef unsigned long uinteger;
 typedef long double number;
 
+typedef number *vec2;
+
 // type utility functions
 string makeString(uinteger length);
-void disposeString(string);
+void disposeString(string s);
+
+vec2 makeVec2(number v1, number v2);
+vec2 makeVec2From(vec2 other);
+vec2 vec2Add(vec2 v1, vec2 v2);
+vec2 vec2MultScalar(vec2 vin, number x);
+string vec2ToString(vec2 v);
+void disposeVec2(vec2 v);
 
 void setup();
 
@@ -100,6 +112,10 @@ int main(int argc, char *argv[])
         draw(dt);
         showCanvas();
 
+        // vec2 x = makeVec2(100, 100);
+        // wprintf(vec2ToString(x));
+        // noLoop();
+
         // how much time spent
         clock_gettime(CLOCK_MONOTONIC, &after_draw_time);
         uinteger dt_done = _diff_time_micros(after_draw_time, current_time);
@@ -124,7 +140,7 @@ int main(int argc, char *argv[])
 // type utility functions
 string makeString(uinteger length)
 {
-    string s = (string)calloc(length + 1, sizeof(character));
+    string s = (string)_PIECER_CALLOC(length + 1, sizeof(character));
     if (s == NULL)
     {
         wprintf(L"FATAL Error: Unable to allocate string.\n");
@@ -137,7 +153,56 @@ void disposeString(string s)
 {
     if (s != NULL)
     {
-        free(s);
+        _PIECER_FREE(s);
+    }
+}
+
+vec2 makeVec2(number v0, number v1)
+{
+    vec2 v = (vec2)_PIECER_CALLOC(2, sizeof(number));
+    if (v == NULL)
+    {
+        wprintf(L"FATAL Error: Unable to allocate vec2.\n");
+        exit(-1);
+    }
+    v[0] = v0;
+    v[1] = v1;
+    return v;
+}
+
+vec2 makeVec2From(vec2 other)
+{
+    vec2 v = makeVec2(other[0], other[1]);
+    return v;
+}
+
+vec2 vec2Add(vec2 v1, vec2 v2)
+{
+    vec2 res = makeVec2From(v1);
+    res[0] = res[0] + v2[0];
+    res[1] = res[1] + v2[1];
+    return res;
+}
+
+vec2 vec2MultScalar(vec2 vin, number x)
+{
+    vec2 v = makeVec2From(vin);
+    v[0] = v[0] * x;
+    v[1] = v[1] * x;
+    return v;
+}
+
+string vec2ToString(vec2 v) {
+    string s = makeString(100);
+    swprintf(s, 100, L"%.2Lf, %.2Lf", v[0], v[1]);
+    return s;
+}
+
+void disposeVec2(vec2 v)
+{
+    if (v != NULL)
+    {
+        _PIECER_FREE(v);
     }
 }
 
@@ -186,11 +251,11 @@ void createCanvas(uinteger w, uinteger h)
 
         if (canvas_contents != NULL)
         {
-            free(canvas_contents);
+            _PIECER_FREE(canvas_contents);
         }
 
         uinteger canvas_len = ((width + 1) * height) + 1;
-        canvas_contents = calloc(sizeof(character), canvas_len);
+        canvas_contents = _PIECER_CALLOC(sizeof(character), canvas_len);
         if (canvas_contents == NULL)
         {
             printf("Error: unable to allocate canvas.\n");
