@@ -80,7 +80,6 @@ void ball_update(ball *b, uinteger dt)
 
 void ball_show(ball *b)
 {
-	setColour(31);
 	point(
 		(uinteger)(b->position[0]),
 		(uinteger)(b->position[1]),
@@ -119,7 +118,6 @@ void draw(uinteger dt)
 		ball *a = balls[i];
 		ball_show(a);
 		ball_update(a, dt);
-		setColour(15);
 	}
 	// // set point 0,0 to A
 	// point(0, 0, L'A');

@@ -125,6 +125,7 @@ int main(int argc, char *argv[])
         resetTerm();
         setForegroundColour(45);
         background(235);
+        setColour(15);
 
         cls();
         home();
@@ -272,8 +273,18 @@ void setForegroundColour(integer colour)
 {
     if (colour > -1 && colour < 256)
     {
+        // putwchar(L'\033');
+        // putwchar(L'[');
+        // putwchar(L'3');
+        // putwchar(L'8');
+        // putwchar(L';');
+        // putwchar(L'5');
+        // putwchar(L';');
+        // putwchar(L'1');
+        // putwchar(L'5');
+        // putwchar(L'm');
         //fputws(L"\033[38;5;8m", stdout);
-        //wprintf(L"\033[38;5;%lum", colour);
+        // wprintf(L"\033[38;5;%lum", colour);
     }
 }
 
