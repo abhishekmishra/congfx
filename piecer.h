@@ -25,7 +25,7 @@ typedef long integer;
 typedef unsigned long uinteger;
 typedef long double number;
 
-uinteger numberToUinteger(number x) {
+uinteger number_to_uinteger(number x) {
     if(x < 0) {
         return 0;
     } else {
@@ -36,23 +36,23 @@ uinteger numberToUinteger(number x) {
 typedef number *vec2;
 
 // type utility functions
-string makeString(uinteger length);
-void disposeString(string s);
+string make_string(uinteger length);
+void dispose_string(string s);
 
-vec2 makeVec2(number v1, number v2);
-vec2 makeVec2From(vec2 other);
-vec2 vec2Add(vec2 v1, vec2 v2);
-vec2 vec2MultScalar(vec2 vin, number x);
-string vec2ToString(vec2 v);
-void disposeVec2(vec2 v);
+vec2 make_vec2(number v1, number v2);
+vec2 make_vec2_from(vec2 other);
+vec2 vec2_add(vec2 v1, vec2 v2);
+vec2 vec2_mult_scalar(vec2 vin, number x);
+string vec2_to_string(vec2 v);
+void dispose_vec2(vec2 v);
 
-int randNumber(int from, int to);
+int rand_number(int from, int to);
 
 void setup();
 
 void draw(uinteger dt);
 
-void noLoop();
+void no_loop();
 
 void loop();
 
@@ -68,9 +68,9 @@ number foreground_colour = 15;
 // terminal utility functions
 void cls();
 void home();
-void resetTerm();
-void setForegroundColour(integer colour);
-void setBackgroundColour(integer colour);
+void reset_term();
+void set_foreground_colour(integer colour);
+void set_background_colour(integer colour);
 
 // canvas functions
 character *canvas_contents = L'\0';
@@ -79,10 +79,10 @@ number *canvas_foreground_colour;
 uinteger width;
 uinteger height;
 
-void createCanvas();
+void create_canvas(uinteger w, uinteger h);
 void background(number c);
-void setColour(number c);
-void showCanvas();
+void set_colour(number c);
+void show_canvas();
 
 // drawing functions
 void point(uinteger x1, uinteger y1, character c);
@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
     // if there is no canvas created, create a default one
     if (canvas_contents == NULL)
     {
-        createCanvas(100, 25);
+        create_canvas(100, 25);
     }
 
     uinteger delta_time_ideal = 1000000 / _fps; //in microseconds
@@ -130,16 +130,16 @@ int main(int argc, char *argv[])
         uinteger dt = _diff_time_micros(current_time, prev_time);
 
         // set default background and forground
-        resetTerm();
-        setForegroundColour(45);
+        reset_term();
+        set_foreground_colour(45);
         background(235);
-        setColour(15);
+        set_colour(15);
 
         cls();
         home();
 
         draw(dt);
-        showCanvas();
+        show_canvas();
 
         // how much time spent
         clock_gettime(CLOCK_MONOTONIC, &after_draw_time);
@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
 }
 
 // type utility functions
-string makeString(uinteger length)
+string make_string(uinteger length)
 {
     string s = (string)_PIECER_CALLOC(length + 1, sizeof(character));
     if (s == NULL)
@@ -174,7 +174,7 @@ string makeString(uinteger length)
     return s;
 }
 
-void disposeString(string s)
+void dispose_string(string s)
 {
     if (s != NULL)
     {
@@ -182,7 +182,7 @@ void disposeString(string s)
     }
 }
 
-vec2 makeVec2(number v0, number v1)
+vec2 make_vec2(number v0, number v1)
 {
     vec2 v = (vec2)_PIECER_CALLOC(2, sizeof(number));
     if (v == NULL)
@@ -195,36 +195,36 @@ vec2 makeVec2(number v0, number v1)
     return v;
 }
 
-vec2 makeVec2From(vec2 other)
+vec2 make_vec2_from(vec2 other)
 {
-    vec2 v = makeVec2(other[0], other[1]);
+    vec2 v = make_vec2(other[0], other[1]);
     return v;
 }
 
-vec2 vec2Add(vec2 v1, vec2 v2)
+vec2 vec2_add(vec2 v1, vec2 v2)
 {
-    vec2 res = makeVec2From(v1);
+    vec2 res = make_vec2_from(v1);
     res[0] = res[0] + v2[0];
     res[1] = res[1] + v2[1];
     return res;
 }
 
-vec2 vec2MultScalar(vec2 vin, number x)
+vec2 vec2_mult_scalar(vec2 vin, number x)
 {
-    vec2 v = makeVec2From(vin);
+    vec2 v = make_vec2_from(vin);
     v[0] = v[0] * x;
     v[1] = v[1] * x;
     return v;
 }
 
-string vec2ToString(vec2 v)
+string vec2_to_string(vec2 v)
 {
-    string s = makeString(100);
+    string s = make_string(100);
     swprintf(s, 100, L"%.2Lf, %.2Lf", v[0], v[1]);
     return s;
 }
 
-void disposeVec2(vec2 v)
+void dispose_vec2(vec2 v)
 {
     if (v != NULL)
     {
@@ -232,13 +232,13 @@ void disposeVec2(vec2 v)
     }
 }
 
-int randNumber(int from, int to)
+int rand_number(int from, int to)
 {
     int num = (rand() % (to - from + 1)) + from;
     return num;
 }
 
-void noLoop()
+void no_loop()
 {
     _loop = 0;
 }
@@ -272,12 +272,12 @@ void home()
     wprintf(L"\033[H");
 }
 
-void resetTerm()
+void reset_term()
 {
     wprintf(L"\033[0m");
 }
 
-void setForegroundColour(integer colour)
+void set_foreground_colour(integer colour)
 {
     if (colour > -1 && colour < 256)
     {
@@ -296,7 +296,7 @@ void setForegroundColour(integer colour)
     }
 }
 
-void setBackgroundColour(integer colour)
+void set_background_colour(integer colour)
 {
     if (colour > -1 && colour < 256)
     {
@@ -306,7 +306,7 @@ void setBackgroundColour(integer colour)
 
 //canvas functions
 
-void createCanvas(uinteger w, uinteger h)
+void create_canvas(uinteger w, uinteger h)
 {
     if (width != w || height != h)
     {
@@ -370,11 +370,11 @@ void background(number col)
     }
 }
 
-void setColour(number col) {
+void set_colour(number col) {
     foreground_colour = col;
 }
 
-void showCanvas()
+void show_canvas()
 {
     if (canvas_contents != NULL)
     {
@@ -384,8 +384,8 @@ void showCanvas()
         {
             for (uinteger j = 0; j < width; j++)
             {
-                // setForegroundColour(canvas_foreground_colour[(i * width) + j]);
-                // setBackgroundColour(canvas_background_colour[(i * width) + j]);
+                // set_foreground_colour(canvas_foreground_colour[(i * width) + j]);
+                // set_background_colour(canvas_background_colour[(i * width) + j]);
                 putwchar(canvas_contents[idx]);
                 idx += 1;
             }

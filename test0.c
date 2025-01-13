@@ -37,16 +37,16 @@ void setup()
 {
 	ball *_b = NULL;
 	balls = (ball**)calloc(NUM_BALLS, sizeof(ball*));
-	createCanvas(100, 50);
+	create_canvas(100, 50);
 
 	for (integer i = 0; i < NUM_BALLS; i++)
 	{
 		_b = makeBall();
-		int x = randNumber(0, width);
-		int y = randNumber(0, height);
+		int x = rand_number(0, width);
+		int y = rand_number(0, height);
 		wprintf(L"%d, %d\n", x, y);
-		_b->position = makeVec2(x, y);
-		_b->velocity = makeVec2(0.00001 * randNumber(-10, 10), 0.00001 * randNumber(-10, 10));
+		_b->position = make_vec2(x, y);
+		_b->velocity = make_vec2(0.00001 * rand_number(-10, 10), 0.00001 * rand_number(-10, 10));
 		balls[i] = _b;
 	}
 	for (integer i = 0; i < NUM_BALLS; i++)
@@ -55,17 +55,17 @@ void setup()
 	}
 	// setup() is run once at startup
 	frameRate(60);
-	// noLoop();
+	// no_loop();
 }
 
 void ball_update(ball *b, uinteger dt)
 {
-	vec2 vToAdd = vec2MultScalar(b->velocity, dt);
-	vec2 newPos = vec2Add(
+	vec2 vToAdd = vec2_mult_scalar(b->velocity, dt);
+	vec2 newPos = vec2_add(
 		b->position,
 		vToAdd);
-	disposeVec2(b->position);
-	disposeVec2(vToAdd);
+	dispose_vec2(b->position);
+	dispose_vec2(vToAdd);
 	b->position = newPos;
 
 	if (b->position[0] > width || b->position[0] < 0)
@@ -85,8 +85,8 @@ void ball_show(ball *b)
 	// 	(uinteger)(b->position[1]),
 	// 	L'█');
 	rect(
-		numberToUinteger(b->position[0] - 2),
-		numberToUinteger(b->position[1] - 2),
+		number_to_uinteger(b->position[0] - 2),
+		number_to_uinteger(b->position[1] - 2),
 		4, 4);
 }
 
@@ -94,7 +94,7 @@ string calc_fps(uinteger dt)
 {
 	uinteger dt_millis = dt / 1000;
 	uinteger fps = (1000.0 / dt_millis);
-	string fps_str = makeString(100);
+	string fps_str = make_string(100);
 	swprintf(fps_str, 100, L"FPS: %lu", fps);
 	return fps_str;
 }
@@ -113,9 +113,9 @@ void draw(uinteger dt)
 	text(fps_str, 0, 0);
 
 	// show ball pos
-	// string ballpos_str = vec2ToString(b->position);
+	// string ballpos_str = vec2_to_string(b->position);
 	// text(ballpos_str, 0, 1);
-	// disposeString(ballpos_str);
+	// dispose_string(ballpos_str);
 
 	for (integer i = 0; i < NUM_BALLS; i++)
 	{
@@ -148,6 +148,6 @@ void draw(uinteger dt)
 	// // a rectangle
 	// rect(5, 5, 10, 10);
 
-	// noLoop(); // noLoop stops the draw loop.
-	disposeString(fps_str);
+	// no_loop(); // no_loop stops the draw loop.
+	dispose_string(fps_str);
 }
