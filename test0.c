@@ -10,7 +10,7 @@ typedef struct
 	number colour;
 } ball;
 
-ball *makeBall()
+ball *make_ball()
 {
 	ball *b = (ball *)calloc(1, sizeof(ball));
 	if (b == NULL)
@@ -22,7 +22,7 @@ ball *makeBall()
 	return b;
 }
 
-void disposeBall(ball *b)
+void dispose_ball(ball *b)
 {
 	if (b == NULL)
 	{
@@ -41,7 +41,7 @@ void setup()
 
 	for (integer i = 0; i < NUM_BALLS; i++)
 	{
-		_b = makeBall();
+		_b = make_ball();
 		int x = rand_number(0, width);
 		int y = rand_number(0, height);
 		wprintf(L"%d, %d\n", x, y);
