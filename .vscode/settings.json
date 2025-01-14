@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "piecer.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "wchar.h": "c",
+        "_wchar.h": "c"
     }
 }
