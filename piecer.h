@@ -31,7 +31,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <math.h>
 
 // TODO: removed for now, check if needed later
-// #include <unistd.h>
+#include <unistd.h>
 
 // defaults
 #define DEFAULT_FPS 30 // times per second
