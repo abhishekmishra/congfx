@@ -1,11 +1,14 @@
 # Variables
 CC = cc
 CFLAGS = -c
-OBJ = file1.o file2.o
+EXE = ex1_fill_lines
 INC = -I..
 
 # Targets
-all: $(OBJ)
+all: $(EXE)
+
+ex1_fill_lines: ex1_fill_lines.o
+	$(CC) $< -o $@
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) $< -o $@
