@@ -1,12 +1,17 @@
-# default target is all, and it builds the test
-all: test
-
 # all clean and test are phony targets
 # i.e. they are not files
 .PHONY: all clean test run
 
+SUBDIRS = examples
+
+# default target is all, and it builds the test
+all: test $(SUBDIRS)
+
 run: all
 	./test0
+
+$(SUBDIRS):
+	$(MAKE) -C $@
 
 # depends on all test files
 test: test0
@@ -22,3 +27,8 @@ clean:
 	rm -f *.o
 	rm -f *.exe
 	rm -f test0
+
+# clean all subdirectories
+	for dir in $(SUBDIRS); do \
+		$(MAKE) -C $$dir clean; \
+	done	
