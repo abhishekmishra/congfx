@@ -78,7 +78,7 @@ void no_loop();
 
 void loop();
 
-void frameRate(uinteger fps);
+void frame_rate(uinteger fps);
 
 // system variables
 int _loop = 1;
@@ -270,7 +270,7 @@ void loop()
     _loop = 1;
 }
 
-void frameRate(uinteger fps)
+void frame_rate(uinteger fps)
 {
     if (fps > 0 && fps < 100)
     {

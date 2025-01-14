@@ -54,7 +54,7 @@ void setup()
 		wprintf(L"ball %lu at %Lf, %Lf\n", i, balls[i]->position[0], balls[i]->position[1]);
 	}
 	// setup() is run once at startup
-	frameRate(60);
+	frame_rate(60);
 	// no_loop();
 }
 
