@@ -9,7 +9,8 @@
 #include <locale.h>
 #include <math.h>
 
-#include <unistd.h>
+// TODO: removed for now, check if needed later
+// #include <unistd.h>
 
 // defaults
 #define DEFAULT_FPS 30 // times per second
