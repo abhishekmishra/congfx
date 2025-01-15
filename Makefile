@@ -5,13 +5,14 @@
 SUBDIRS = examples
 
 # default target is all, and it builds the test
-all: test $(SUBDIRS)
+all: test
+# make all subdirectories
+	for dir in $(SUBDIRS); do \
+		$(MAKE) -C $$dir all; \
+	done	
 
 run: all
 	./test0
-
-$(SUBDIRS):
-	$(MAKE) -C $@
 
 # depends on all test files
 test: test0
