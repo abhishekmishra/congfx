@@ -15,3 +15,4 @@ ex1_fill_lines: ex1_fill_lines.o
 
 clean:
 	rm -f *.o
+	rm -f $(EXE)
