@@ -19,7 +19,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "piecer.h"
+#include "congfx.h"
 
 uinteger x = 0;
 uinteger y = 0;
@@ -127,7 +127,7 @@ void draw(uinteger dt)
 	//set background colour
 	//background(2);
 
-	text(L"PIECER: EXPERIMENT IN C ", width / 2 - 12, height / 2);
+	text(L"CONGFX: EXPERIMENT IN C ", width / 2 - 12, height / 2);
 
 	// show fps
 	string fps_str = calc_fps(dt);

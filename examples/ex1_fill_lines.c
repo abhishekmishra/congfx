@@ -41,7 +41,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * To exit the program, press `Ctrl+C`.
  */
 
-#include "piecer.h"
+#include "congfx.h"
 
 uinteger total_time = 0;
 uinteger step_time = 50000;

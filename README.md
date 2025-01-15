@@ -1,2 +1,2 @@
-# piecer
-Piecer: experiment with terminal programs in c
+# ConGfx
+ConGfx: experiment with terminal programs in c

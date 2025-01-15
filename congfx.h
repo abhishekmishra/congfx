@@ -19,8 +19,8 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef __PIECER_H__
-#define __PIECER_H__
+#ifndef __CONGFX_H__
+#define __CONGFX_H__
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,8 +37,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define DEFAULT_FPS 30 // times per second
 #define DEFAULT_BACKGROUND_CHAR L' '
 
-#define _PIECER_CALLOC calloc
-#define _PIECER_FREE free
+#define _CONGFX_CALLOC calloc
+#define _CONGFX_FREE free
 
 // typedefs
 typedef wchar_t character;
@@ -187,7 +187,7 @@ int main(int argc, char *argv[])
 // type utility functions
 string make_string(uinteger length)
 {
-    string s = (string)_PIECER_CALLOC(length + 1, sizeof(character));
+    string s = (string)_CONGFX_CALLOC(length + 1, sizeof(character));
     if (s == NULL)
     {
         wprintf(L"FATAL Error: Unable to allocate string.\n");
@@ -200,13 +200,13 @@ void dispose_string(string s)
 {
     if (s != NULL)
     {
-        _PIECER_FREE(s);
+        _CONGFX_FREE(s);
     }
 }
 
 vec2 make_vec2(number v0, number v1)
 {
-    vec2 v = (vec2)_PIECER_CALLOC(2, sizeof(number));
+    vec2 v = (vec2)_CONGFX_CALLOC(2, sizeof(number));
     if (v == NULL)
     {
         wprintf(L"FATAL Error: Unable to allocate vec2.\n");
@@ -250,7 +250,7 @@ void dispose_vec2(vec2 v)
 {
     if (v != NULL)
     {
-        _PIECER_FREE(v);
+        _CONGFX_FREE(v);
     }
 }
 
@@ -337,14 +337,14 @@ void create_canvas(uinteger w, uinteger h)
 
         if (canvas_contents != NULL)
         {
-            _PIECER_FREE(canvas_contents);
-            _PIECER_FREE(canvas_background_colour);
+            _CONGFX_FREE(canvas_contents);
+            _CONGFX_FREE(canvas_background_colour);
         }
 
         uinteger canvas_len = ((width + 1) * height) + 1;
-        canvas_contents = _PIECER_CALLOC(sizeof(character), canvas_len);
-        canvas_background_colour = _PIECER_CALLOC(sizeof(number), width * height);
-        canvas_foreground_colour = _PIECER_CALLOC(sizeof(number), width * height);
+        canvas_contents = _CONGFX_CALLOC(sizeof(character), canvas_len);
+        canvas_background_colour = _CONGFX_CALLOC(sizeof(number), width * height);
+        canvas_foreground_colour = _CONGFX_CALLOC(sizeof(number), width * height);
         if (canvas_contents == NULL || canvas_background_colour == NULL || canvas_foreground_colour == NULL)
         {
             printf("Error: unable to allocate canvas.\n");
@@ -486,4 +486,4 @@ void text(character *t, uinteger x, uinteger y)
     }
 }
 
-#endif //__PIECER_H__
+#endif //__CONGFX_H__
