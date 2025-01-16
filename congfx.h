@@ -34,19 +34,52 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <unistd.h>
 
 // defaults
-#define DEFAULT_FPS 30 // times per second
-#define DEFAULT_BACKGROUND_CHAR L' '
+#define _CG_DEFAULT_FPS 30 // times per second
+#define _CG_DEFAULT_BACKGROUND_CHAR L' '
 
-#define _CONGFX_CALLOC calloc
-#define _CONGFX_FREE free
+#define _CG_CALLOC calloc
+#define _CG_FREE free
 
 // typedefs
+
+/** 
+ * The default character type used in the congfx programs
+ * are wide characters (wchar_t).
+ */
 typedef wchar_t cg_char;
+
+/** 
+ * The default string type used in the congfx programs
+ * are wide strings (wchar_t).
+ */
 typedef cg_char *cg_string;
+
+/** 
+ * The default integer type used in the congfx programs
+ * are long integers (long).
+ */
 typedef long cg_int;
+
+/** 
+ * The default unsigned integer type used in the congfx programs
+ * are unsigned long integers (unsigned long).
+ */
 typedef unsigned long cg_uint;
+
+/** 
+ * The default number type used in the congfx programs
+ * are long double (long double).
+ */
 typedef long double cg_number;
 
+// type conversion functions
+
+/**
+ * Convert a number to an unsigned integer.
+ * 
+ * @param x The number to convert.
+ * @return The unsigned integer value of the number.
+ */
 cg_uint number_to_uinteger(cg_number x) {
     if(x < 0) {
         return 0;
@@ -55,19 +88,90 @@ cg_uint number_to_uinteger(cg_number x) {
     }
 }
 
+// Vector type
+
+/** 
+ * The default vector type used in the congfx programs
+ * are arrays of long double (long double *).
+ */
 typedef cg_number *vec2;
 
-// type utility functions
-cg_string make_string(cg_uint length);
-void dispose_string(cg_string s);
-
+/**
+ * Create a new vector of 2 elements.
+ * 
+ * @param v1 The first element of the vector.
+ * @param v2 The second element of the vector.
+ * @return The new vector.
+ */
 vec2 make_vec2(cg_number v1, cg_number v2);
+
+/**
+ * Create a new vector of 2 elements from another vector.
+ * 
+ * @param other The vector to copy from.
+ * @return The new vector.
+ */
 vec2 make_vec2_from(vec2 other);
+
+/**
+ * Add two vectors.
+ * 
+ * @param v1 The first vector.
+ * @param v2 The second vector.
+ * @return The sum of the two vectors.
+ */
 vec2 vec2_add(vec2 v1, vec2 v2);
+
+/**
+ * Multiply a vector by a scalar.
+ * 
+ * @param vin The vector to multiply.
+ * @param x The scalar to multiply by.
+ * @return The product of the vector and the scalar.
+ */
 vec2 vec2_mult_scalar(vec2 vin, cg_number x);
+
+/**
+ * Convert a vector to a string.
+ * 
+ * @param v The vector to convert.
+ * @return The string representation of the vector.
+ */
 cg_string vec2_to_string(vec2 v);
+
+/**
+ * Dispose of a vector.
+ * 
+ * @param v The vector to dispose of.
+ */
 void dispose_vec2(vec2 v);
 
+// string type utility functions
+
+/**
+ * Create a new string of a given length.
+ * 
+ * @param length The length of the string.
+ * @return The new string.
+ */
+cg_string make_string(cg_uint length);
+
+/**
+ * Dispose of a string.
+ * 
+ * @param s The string to dispose of.
+ */
+void dispose_string(cg_string s);
+
+// number utility functions
+
+/**
+ * Generate a random number between two values.
+ * 
+ * @param from The lower bound of the random number.
+ * @param to The upper bound of the random number.
+ * @return The random number.
+ */
 int rand_number(int from, int to);
 
 void setup();
@@ -82,8 +186,8 @@ void frame_rate(cg_uint fps);
 
 // system variables
 int _loop = 1;
-cg_uint _fps = DEFAULT_FPS;
-cg_char background_char = DEFAULT_BACKGROUND_CHAR;
+cg_uint _fps = _CG_DEFAULT_FPS;
+cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
 cg_number background_colour = 0;
 cg_number foreground_colour = 15;
 
@@ -187,7 +291,7 @@ int main(int argc, char *argv[])
 // type utility functions
 cg_string make_string(cg_uint length)
 {
-    cg_string s = (cg_string)_CONGFX_CALLOC(length + 1, sizeof(cg_char));
+    cg_string s = (cg_string)_CG_CALLOC(length + 1, sizeof(cg_char));
     if (s == NULL)
     {
         wprintf(L"FATAL Error: Unable to allocate cg_string.\n");
@@ -200,13 +304,13 @@ void dispose_string(cg_string s)
 {
     if (s != NULL)
     {
-        _CONGFX_FREE(s);
+        _CG_FREE(s);
     }
 }
 
 vec2 make_vec2(cg_number v0, cg_number v1)
 {
-    vec2 v = (vec2)_CONGFX_CALLOC(2, sizeof(cg_number));
+    vec2 v = (vec2)_CG_CALLOC(2, sizeof(cg_number));
     if (v == NULL)
     {
         wprintf(L"FATAL Error: Unable to allocate vec2.\n");
@@ -250,7 +354,7 @@ void dispose_vec2(vec2 v)
 {
     if (v != NULL)
     {
-        _CONGFX_FREE(v);
+        _CG_FREE(v);
     }
 }
 
@@ -337,14 +441,14 @@ void create_canvas(cg_uint w, cg_uint h)
 
         if (canvas_contents != NULL)
         {
-            _CONGFX_FREE(canvas_contents);
-            _CONGFX_FREE(canvas_background_colour);
+            _CG_FREE(canvas_contents);
+            _CG_FREE(canvas_background_colour);
         }
 
         cg_uint canvas_len = ((width + 1) * height) + 1;
-        canvas_contents = _CONGFX_CALLOC(sizeof(cg_char), canvas_len);
-        canvas_background_colour = _CONGFX_CALLOC(sizeof(cg_number), width * height);
-        canvas_foreground_colour = _CONGFX_CALLOC(sizeof(cg_number), width * height);
+        canvas_contents = _CG_CALLOC(sizeof(cg_char), canvas_len);
+        canvas_background_colour = _CG_CALLOC(sizeof(cg_number), width * height);
+        canvas_foreground_colour = _CG_CALLOC(sizeof(cg_number), width * height);
         if (canvas_contents == NULL || canvas_background_colour == NULL || canvas_foreground_colour == NULL)
         {
             printf("Error: unable to allocate canvas.\n");
