@@ -63,11 +63,11 @@ void setup()
 	for (cg_int i = 0; i < NUM_BALLS; i++)
 	{
 		_b = make_ball();
-		int x = rand_number(0, width);
-		int y = rand_number(0, height);
+		int x = rand_int(0, width);
+		int y = rand_int(0, height);
 		wprintf(L"%d, %d\n", x, y);
 		_b->position = make_vec2(x, y);
-		_b->velocity = make_vec2(0.00001 * rand_number(-10, 10), 0.00001 * rand_number(-10, 10));
+		_b->velocity = make_vec2(0.00001 * rand_int(-10, 10), 0.00001 * rand_int(-10, 10));
 		balls[i] = _b;
 	}
 	for (cg_int i = 0; i < NUM_BALLS; i++)

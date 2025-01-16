@@ -166,13 +166,13 @@ void dispose_string(cg_string s);
 // number utility functions
 
 /**
- * Generate a random number between two values.
+ * Generate a random integer between two values.
  * 
- * @param from The lower bound of the random number.
- * @param to The upper bound of the random number.
- * @return The random number.
+ * @param from The lower bound of the random integer.
+ * @param to The upper bound of the random integer.
+ * @return The random integer.
  */
-int rand_number(int from, int to);
+int rand_int(int from, int to);
 
 void setup();
 
@@ -358,7 +358,7 @@ void dispose_vec2(vec2 v)
     }
 }
 
-int rand_number(int from, int to)
+int rand_int(int from, int to)
 {
     int num = (rand() % (to - from + 1)) + from;
     return num;
