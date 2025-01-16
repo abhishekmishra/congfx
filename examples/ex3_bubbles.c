@@ -6,14 +6,12 @@ cg_uint radius = 1;
 
 void setup()
 {
-    // does nothing
+    set_background_colour(12);
+    set_foreground_colour(13);
 }
 
 void draw(cg_uint dt)
 {
-    set_background_colour(12);
-    set_foreground_colour(13);
-
     // determine the number of lines to draw
     // based on the total time elapsed
     // since the last times the number of lines to draw was updated
