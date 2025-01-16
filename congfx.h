@@ -269,7 +269,7 @@ int main(int argc, char *argv[])
         background(235);
         set_colour(15);
 
-        cls();
+        // cls();
         home();
 
         draw(dt);
@@ -512,12 +512,22 @@ void show_canvas()
 {
     if (canvas_contents != NULL)
     {
+        cg_colour current_fg = canvas_foreground_colour[0];
+        cg_colour current_bg = canvas_background_colour[0];
         // wprintf(L"%ls", canvas_contents);
         cg_uint idx = 0;
         for (cg_uint i = 0; i < height; i++)
         {
             for (cg_uint j = 0; j < width; j++)
             {
+                if(canvas_foreground_colour[(i * width) + j] != current_fg) {
+                    _cg_term_set_foreground_colour(canvas_foreground_colour[(i * width) + j]);
+                    current_fg = canvas_foreground_colour[(i * width) + j];
+                }
+                if(canvas_background_colour[(i * width) + j] != current_bg) {
+                    _cg_term_set_background_colour(canvas_background_colour[(i * width) + j]);
+                    current_bg = canvas_background_colour[(i * width) + j];
+                }
                 // _cg_term_set_foreground_colour(canvas_foreground_colour[(i * width) + j]);
                 // _cg_term_set_background_colour(canvas_background_colour[(i * width) + j]);
                 putwchar(canvas_contents[idx]);
@@ -537,8 +547,8 @@ void point(cg_uint x1, cg_uint y1, cg_char c)
     }
     cg_uint cvloc = ((width + 1) * y1) + x1;
     canvas_contents[cvloc] = c;
-    // canvas_background_colour[(y1 * width) + x1] = background_colour;
-    // canvas_foreground_colour[(y1 * width) + x1] = foreground_colour;
+    canvas_background_colour[(y1 * width) + x1] = background_colour;
+    canvas_foreground_colour[(y1 * width) + x1] = stroke_colour;
     // wprintf(L"\033[%lu;%luf", y1, x1);
     // wprintf(L"%c", c);
 }
