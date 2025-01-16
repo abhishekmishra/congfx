@@ -199,7 +199,7 @@ void set_foreground_colour(cg_int colour);
 void set_background_colour(cg_int colour);
 
 // canvas functions
-cg_char *canvas_contents = L'\0';
+cg_char *canvas_contents = NULL;
 cg_number *canvas_background_colour;
 cg_number *canvas_foreground_colour;
 cg_uint width;
