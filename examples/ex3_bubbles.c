@@ -12,6 +12,7 @@ void setup()
 
 void draw(cg_uint dt)
 {
+    stroke(dt % 256);
     // determine the number of lines to draw
     // based on the total time elapsed
     // since the last times the number of lines to draw was updated
