@@ -12,6 +12,7 @@ void setup()
 void draw(cg_uint dt)
 {
     set_background_colour(12);
+    set_foreground_colour(13);
 
     // determine the number of lines to draw
     // based on the total time elapsed
