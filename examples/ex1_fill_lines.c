@@ -43,10 +43,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "congfx.h"
 
-uinteger total_time = 0;
-uinteger step_time = 50000;
-character total_time_string[1024];
-uinteger lines_to_draw = 0;
+cg_uint total_time = 0;
+cg_uint step_time = 50000;
+cg_char total_time_string[1024];
+cg_uint lines_to_draw = 0;
 
 void setup()
 {
@@ -59,7 +59,7 @@ void setup()
  * 
  * @param dt delta time in microseconds
  */
-void draw(uinteger dt)
+void draw(cg_uint dt)
 {
     // determine the number of lines to draw
     // based on the total time elapsed
@@ -75,7 +75,7 @@ void draw(uinteger dt)
     }
 
     // draw the lines
-    for (uinteger i = 0; i < lines_to_draw; i++)
+    for (cg_uint i = 0; i < lines_to_draw; i++)
     {
         line(0, i, width, i);
     }

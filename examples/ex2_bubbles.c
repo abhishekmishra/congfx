@@ -1,15 +1,15 @@
 #include "congfx.h"
 
-uinteger total_time = 0;
-uinteger step_time = 50000;
-uinteger radius = 1;
+cg_uint total_time = 0;
+cg_uint step_time = 50000;
+cg_uint radius = 1;
 
 void setup()
 {
     // does nothing
 }
 
-void draw(uinteger dt)
+void draw(cg_uint dt)
 {
     // determine the number of lines to draw
     // based on the total time elapsed

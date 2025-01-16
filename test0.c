@@ -21,14 +21,14 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "congfx.h"
 
-uinteger x = 0;
-uinteger y = 0;
+cg_uint x = 0;
+cg_uint y = 0;
 
 typedef struct
 {
 	vec2 position;
 	vec2 velocity;
-	number colour;
+	cg_number colour;
 } ball;
 
 ball *make_ball()
@@ -51,7 +51,7 @@ void dispose_ball(ball *b)
 	}
 }
 
-integer NUM_BALLS = 10;
+cg_int NUM_BALLS = 10;
 ball **balls;
 
 void setup()
@@ -60,7 +60,7 @@ void setup()
 	balls = (ball**)calloc(NUM_BALLS, sizeof(ball*));
 	create_canvas(100, 50);
 
-	for (integer i = 0; i < NUM_BALLS; i++)
+	for (cg_int i = 0; i < NUM_BALLS; i++)
 	{
 		_b = make_ball();
 		int x = rand_number(0, width);
@@ -70,7 +70,7 @@ void setup()
 		_b->velocity = make_vec2(0.00001 * rand_number(-10, 10), 0.00001 * rand_number(-10, 10));
 		balls[i] = _b;
 	}
-	for (integer i = 0; i < NUM_BALLS; i++)
+	for (cg_int i = 0; i < NUM_BALLS; i++)
 	{
 		wprintf(L"ball %lu at %Lf, %Lf\n", i, balls[i]->position[0], balls[i]->position[1]);
 	}
@@ -79,7 +79,7 @@ void setup()
 	// no_loop();
 }
 
-void ball_update(ball *b, uinteger dt)
+void ball_update(ball *b, cg_uint dt)
 {
 	vec2 vToAdd = vec2_mult_scalar(b->velocity, dt);
 	vec2 newPos = vec2_add(
@@ -102,8 +102,8 @@ void ball_update(ball *b, uinteger dt)
 void ball_show(ball *b)
 {
 	// point(
-	// 	(uinteger)(b->position[0]),
-	// 	(uinteger)(b->position[1]),
+	// 	(cg_uint)(b->position[0]),
+	// 	(cg_uint)(b->position[1]),
 	// 	L'█');
 	rect(
 		number_to_uinteger(b->position[0] - 2),
@@ -111,16 +111,16 @@ void ball_show(ball *b)
 		4, 4);
 }
 
-string calc_fps(uinteger dt)
+cg_string calc_fps(cg_uint dt)
 {
-	uinteger dt_millis = dt / 1000;
-	uinteger fps = (1000.0 / dt_millis);
-	string fps_str = make_string(100);
+	cg_uint dt_millis = dt / 1000;
+	cg_uint fps = (1000.0 / dt_millis);
+	cg_string fps_str = make_string(100);
 	swprintf(fps_str, 100, L"FPS: %lu", fps);
 	return fps_str;
 }
 
-void draw(uinteger dt)
+void draw(cg_uint dt)
 {
 	// draw() is run multiple times per second.
 
@@ -130,15 +130,15 @@ void draw(uinteger dt)
 	text(L"CONGFX: EXPERIMENT IN C ", width / 2 - 12, height / 2);
 
 	// show fps
-	string fps_str = calc_fps(dt);
+	cg_string fps_str = calc_fps(dt);
 	text(fps_str, 0, 0);
 
 	// show ball pos
-	// string ballpos_str = vec2_to_string(b->position);
+	// cg_string ballpos_str = vec2_to_string(b->position);
 	// text(ballpos_str, 0, 1);
 	// dispose_string(ballpos_str);
 
-	for (integer i = 0; i < NUM_BALLS; i++)
+	for (cg_int i = 0; i < NUM_BALLS; i++)
 	{
 		ball *a = balls[i];
 		ball_show(a);
