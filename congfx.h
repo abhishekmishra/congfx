@@ -444,8 +444,8 @@ void create_canvas(cg_uint w, cg_uint h)
 
         cg_uint canvas_len = ((width + 1) * height) + 1;
         canvas_contents = _CG_CALLOC(sizeof(cg_char), canvas_len);
-        canvas_background_colour = _CG_CALLOC(sizeof(cg_uint), width * height);
-        canvas_foreground_colour = _CG_CALLOC(sizeof(cg_uint), width * height);
+        canvas_background_colour = _CG_CALLOC(sizeof(cg_colour), width * height);
+        canvas_foreground_colour = _CG_CALLOC(sizeof(cg_colour), width * height);
         if (canvas_contents == NULL || canvas_background_colour == NULL || canvas_foreground_colour == NULL)
         {
             printf("Error: unable to allocate canvas.\n");
