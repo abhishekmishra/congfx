@@ -189,7 +189,8 @@ int _loop = 1;
 cg_uint _fps = _CG_DEFAULT_FPS;
 cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
 cg_number background_colour = 0;
-cg_number foreground_colour = 15;
+cg_number stroke_colour = 15;
+cg_number fill_colour = 15;
 
 // terminal utility functions
 void cls();
@@ -200,14 +201,16 @@ void set_background_colour(cg_int colour);
 
 // canvas functions
 cg_char *canvas_contents = NULL;
-cg_number *canvas_background_colour;
-cg_number *canvas_foreground_colour;
+cg_uint *canvas_background_colour;
+cg_uint *canvas_foreground_colour;
 cg_uint width;
 cg_uint height;
 
 void create_canvas(cg_uint w, cg_uint h);
-void background(cg_number c);
-void set_colour(cg_number c);
+void background(cg_uint c);
+void stroke(cg_uint c);
+void fill(cg_uint c);
+void set_colour(cg_uint c);
 void show_canvas();
 
 // drawing functions
@@ -447,8 +450,8 @@ void create_canvas(cg_uint w, cg_uint h)
 
         cg_uint canvas_len = ((width + 1) * height) + 1;
         canvas_contents = _CG_CALLOC(sizeof(cg_char), canvas_len);
-        canvas_background_colour = _CG_CALLOC(sizeof(cg_number), width * height);
-        canvas_foreground_colour = _CG_CALLOC(sizeof(cg_number), width * height);
+        canvas_background_colour = _CG_CALLOC(sizeof(cg_uint), width * height);
+        canvas_foreground_colour = _CG_CALLOC(sizeof(cg_uint), width * height);
         if (canvas_contents == NULL || canvas_background_colour == NULL || canvas_foreground_colour == NULL)
         {
             printf("Error: unable to allocate canvas.\n");
@@ -473,7 +476,7 @@ void create_canvas(cg_uint w, cg_uint h)
             for (cg_uint j = 0; j < width; j++)
             {
                 canvas_background_colour[(i * width) + j] = background_colour;
-                canvas_foreground_colour[(i * width) + j] = foreground_colour;
+                canvas_foreground_colour[(i * width) + j] = stroke_colour;
             }
         }
     }
@@ -484,7 +487,7 @@ void create_canvas(cg_uint w, cg_uint h)
     }
 }
 
-void background(cg_number col)
+void background(cg_uint col)
 {
     background_colour = col;
     for (cg_uint x = 0; x < width; x++)
@@ -496,8 +499,19 @@ void background(cg_number col)
     }
 }
 
-void set_colour(cg_number col) {
-    foreground_colour = col;
+void stroke(cg_uint col)
+{
+    stroke_colour = col;
+}
+
+void fill(cg_uint col)
+{
+    fill_colour = col;
+}
+
+void set_colour(cg_uint col) {
+    stroke(col);
+    fill(col);
 }
 
 void show_canvas()
