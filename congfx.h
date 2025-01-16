@@ -72,6 +72,11 @@ typedef unsigned long cg_uint;
  */
 typedef long double cg_number;
 
+/**
+ * Define a colour type.
+ */
+typedef cg_uint cg_colour;
+
 // type conversion functions
 
 /**
@@ -188,29 +193,29 @@ void frame_rate(cg_uint fps);
 int _loop = 1;
 cg_uint _fps = _CG_DEFAULT_FPS;
 cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
-cg_number background_colour = 0;
-cg_number stroke_colour = 15;
-cg_number fill_colour = 15;
+cg_colour background_colour = 0;
+cg_colour stroke_colour = 15;
+cg_colour fill_colour = 15;
 
 // terminal utility functions
 void cls();
 void home();
 void reset_term();
-void set_foreground_colour(cg_int colour);
-void set_background_colour(cg_int colour);
+void set_foreground_colour(cg_colour colour);
+void set_background_colour(cg_colour colour);
 
 // canvas functions
 cg_char *canvas_contents = NULL;
-cg_uint *canvas_background_colour;
-cg_uint *canvas_foreground_colour;
+cg_colour *canvas_background_colour;
+cg_colour *canvas_foreground_colour;
 cg_uint width;
 cg_uint height;
 
 void create_canvas(cg_uint w, cg_uint h);
-void background(cg_uint c);
-void stroke(cg_uint c);
-void fill(cg_uint c);
-void set_colour(cg_uint c);
+void background(cg_colour c);
+void stroke(cg_colour c);
+void fill(cg_colour c);
+void set_colour(cg_colour c);
 void show_canvas();
 
 // drawing functions
@@ -406,7 +411,7 @@ void reset_term()
     wprintf(L"\033[0m");
 }
 
-void set_foreground_colour(cg_int colour)
+void set_foreground_colour(cg_colour colour)
 {
     if (colour > -1 && colour < 256)
     {
@@ -425,7 +430,7 @@ void set_foreground_colour(cg_int colour)
     }
 }
 
-void set_background_colour(cg_int colour)
+void set_background_colour(cg_colour colour)
 {
     if (colour > -1 && colour < 256)
     {
@@ -487,7 +492,7 @@ void create_canvas(cg_uint w, cg_uint h)
     }
 }
 
-void background(cg_uint col)
+void background(cg_colour col)
 {
     background_colour = col;
     for (cg_uint x = 0; x < width; x++)
@@ -499,17 +504,17 @@ void background(cg_uint col)
     }
 }
 
-void stroke(cg_uint col)
+void stroke(cg_colour col)
 {
     stroke_colour = col;
 }
 
-void fill(cg_uint col)
+void fill(cg_colour col)
 {
     fill_colour = col;
 }
 
-void set_colour(cg_uint col) {
+void set_colour(cg_colour col) {
     stroke(col);
     fill(col);
 }
