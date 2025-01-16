@@ -269,9 +269,9 @@ int main(int argc, char *argv[])
 
         // set default background and forground
         _cg_term_reset();
-        // _cg_term_set_foreground_colour(45);
-        // background(235);
-        // set_colour(15);
+        _cg_term_set_foreground_colour(45);
+        background(235);
+        set_colour(15);
 
         cls();
         home();
@@ -488,13 +488,13 @@ void create_canvas(cg_uint w, cg_uint h)
 void background(cg_colour col)
 {
     background_colour = col;
-    // for (cg_uint x = 0; x < width; x++)
-    // {
-    //     for (cg_uint y = 0; y < height; y++)
-    //     {
-    //         point(x, y, background_char);
-    //     }
-    // }
+    for (cg_uint x = 0; x < width; x++)
+    {
+        for (cg_uint y = 0; y < height; y++)
+        {
+            point(x, y, background_char);
+        }
+    }
 }
 
 void stroke(cg_colour col)
