@@ -200,9 +200,9 @@ cg_colour fill_colour = 15;
 // terminal utility functions
 void cls();
 void home();
-void reset_term();
-void set_foreground_colour(cg_colour colour);
-void set_background_colour(cg_colour colour);
+void _cg_term_reset();
+void _cg_term_set_foreground_colour(cg_colour colour);
+void _cg_term_set_background_colour(cg_colour colour);
 
 // canvas functions
 cg_char *canvas_contents = NULL;
@@ -264,8 +264,8 @@ int main(int argc, char *argv[])
         cg_uint dt = _diff_time_micros(current_time, prev_time);
 
         // set default background and forground
-        reset_term();
-        set_foreground_colour(45);
+        _cg_term_reset();
+        _cg_term_set_foreground_colour(45);
         background(235);
         set_colour(15);
 
@@ -406,12 +406,12 @@ void home()
     wprintf(L"\033[H");
 }
 
-void reset_term()
+void _cg_term_reset()
 {
     wprintf(L"\033[0m");
 }
 
-void set_foreground_colour(cg_colour colour)
+void _cg_term_set_foreground_colour(cg_colour colour)
 {
     if (colour > -1 && colour < 256)
     {
@@ -419,7 +419,7 @@ void set_foreground_colour(cg_colour colour)
     }
 }
 
-void set_background_colour(cg_colour colour)
+void _cg_term_set_background_colour(cg_colour colour)
 {
     if (colour > -1 && colour < 256)
     {
@@ -518,8 +518,8 @@ void show_canvas()
         {
             for (cg_uint j = 0; j < width; j++)
             {
-                // set_foreground_colour(canvas_foreground_colour[(i * width) + j]);
-                // set_background_colour(canvas_background_colour[(i * width) + j]);
+                // _cg_term_set_foreground_colour(canvas_foreground_colour[(i * width) + j]);
+                // _cg_term_set_background_colour(canvas_background_colour[(i * width) + j]);
                 putwchar(canvas_contents[idx]);
                 idx += 1;
             }
