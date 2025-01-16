@@ -42,31 +42,31 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 // typedefs
 
-/** 
+/**
  * The default character type used in the congfx programs
  * are wide characters (wchar_t).
  */
 typedef wchar_t cg_char;
 
-/** 
+/**
  * The default string type used in the congfx programs
  * are wide strings (wchar_t).
  */
 typedef cg_char *cg_string;
 
-/** 
+/**
  * The default integer type used in the congfx programs
  * are long integers (long).
  */
 typedef long cg_int;
 
-/** 
+/**
  * The default unsigned integer type used in the congfx programs
  * are unsigned long integers (unsigned long).
  */
 typedef unsigned long cg_uint;
 
-/** 
+/**
  * The default number type used in the congfx programs
  * are long double (long double).
  */
@@ -81,21 +81,25 @@ typedef cg_uint cg_colour;
 
 /**
  * Convert a number to an unsigned integer.
- * 
+ *
  * @param x The number to convert.
  * @return The unsigned integer value of the number.
  */
-cg_uint number_to_uinteger(cg_number x) {
-    if(x < 0) {
+cg_uint number_to_uinteger(cg_number x)
+{
+    if (x < 0)
+    {
         return 0;
-    } else {
+    }
+    else
+    {
         return (cg_uint)x;
     }
 }
 
 // Vector type
 
-/** 
+/**
  * The default vector type used in the congfx programs
  * are arrays of long double (long double *).
  */
@@ -103,7 +107,7 @@ typedef cg_number *vec2;
 
 /**
  * Create a new vector of 2 elements.
- * 
+ *
  * @param v1 The first element of the vector.
  * @param v2 The second element of the vector.
  * @return The new vector.
@@ -112,7 +116,7 @@ vec2 make_vec2(cg_number v1, cg_number v2);
 
 /**
  * Create a new vector of 2 elements from another vector.
- * 
+ *
  * @param other The vector to copy from.
  * @return The new vector.
  */
@@ -120,7 +124,7 @@ vec2 make_vec2_from(vec2 other);
 
 /**
  * Add two vectors.
- * 
+ *
  * @param v1 The first vector.
  * @param v2 The second vector.
  * @return The sum of the two vectors.
@@ -129,7 +133,7 @@ vec2 vec2_add(vec2 v1, vec2 v2);
 
 /**
  * Multiply a vector by a scalar.
- * 
+ *
  * @param vin The vector to multiply.
  * @param x The scalar to multiply by.
  * @return The product of the vector and the scalar.
@@ -138,7 +142,7 @@ vec2 vec2_mult_scalar(vec2 vin, cg_number x);
 
 /**
  * Convert a vector to a string.
- * 
+ *
  * @param v The vector to convert.
  * @return The string representation of the vector.
  */
@@ -146,7 +150,7 @@ cg_string vec2_to_string(vec2 v);
 
 /**
  * Dispose of a vector.
- * 
+ *
  * @param v The vector to dispose of.
  */
 void dispose_vec2(vec2 v);
@@ -155,7 +159,7 @@ void dispose_vec2(vec2 v);
 
 /**
  * Create a new string of a given length.
- * 
+ *
  * @param length The length of the string.
  * @return The new string.
  */
@@ -163,7 +167,7 @@ cg_string make_string(cg_uint length);
 
 /**
  * Dispose of a string.
- * 
+ *
  * @param s The string to dispose of.
  */
 void dispose_string(cg_string s);
@@ -172,7 +176,7 @@ void dispose_string(cg_string s);
 
 /**
  * Generate a random integer between two values.
- * 
+ *
  * @param from The lower bound of the random integer.
  * @param to The upper bound of the random integer.
  * @return The random integer.
@@ -227,11 +231,11 @@ void text(cg_char *t, cg_uint x, cg_uint y);
 // internal functions
 cg_uint _diff_time_micros(struct timespec time1, struct timespec time2)
 {
-    //wprintf(L"time1 [%ld, %ld], time2[%ld, %ld]\n", time1.tv_sec, time1.tv_nsec, time2.tv_sec, time2.tv_nsec);
+    // wprintf(L"time1 [%ld, %ld], time2[%ld, %ld]\n", time1.tv_sec, time1.tv_nsec, time2.tv_sec, time2.tv_nsec);
     cg_uint seconds_delta = (time1.tv_sec - time2.tv_sec);
     cg_int nanos_delta = (time1.tv_nsec - time2.tv_nsec);
     cg_uint delta = (seconds_delta * 1000000) + (nanos_delta / 1000);
-    //wprintf(L"seconds_delta = %lu, nanos_delta = %ld, delta = %lu\n", seconds_delta, nanos_delta, delta);
+    // wprintf(L"seconds_delta = %lu, nanos_delta = %ld, delta = %lu\n", seconds_delta, nanos_delta, delta);
     return delta;
 }
 
@@ -257,7 +261,7 @@ int main(int argc, char *argv[])
         create_canvas(100, 25);
     }
 
-    cg_uint delta_time_ideal = 1000000 / _fps; //in microseconds
+    cg_uint delta_time_ideal = 1000000 / _fps; // in microseconds
 
     while (_loop == 1)
     {
@@ -265,11 +269,11 @@ int main(int argc, char *argv[])
 
         // set default background and forground
         _cg_term_reset();
-        _cg_term_set_foreground_colour(45);
-        background(235);
-        set_colour(15);
+        // _cg_term_set_foreground_colour(45);
+        // background(235);
+        // set_colour(15);
 
-        // cls();
+        cls();
         home();
 
         draw(dt);
@@ -284,8 +288,8 @@ int main(int argc, char *argv[])
             struct timespec dt_diff, dt_diff_rem;
             dt_diff.tv_sec = 0;
             dt_diff.tv_nsec = (delta_time_ideal - dt_done) * 1000;
-            //sleep for the difference
-            // wprintf(L"sleep for -> [%ld]nanos\n", dt_diff.tv_nsec);
+            // sleep for the difference
+            //  wprintf(L"sleep for -> [%ld]nanos\n", dt_diff.tv_nsec);
             nanosleep(&dt_diff, &dt_diff_rem);
         }
 
@@ -413,7 +417,7 @@ void _cg_term_reset()
 
 void _cg_term_set_foreground_colour(cg_colour colour)
 {
-    if (colour > -1 && colour < 256)
+    if (colour >= 0 && colour < 256)
     {
         wprintf(L"\033[38;5;%lum", colour);
     }
@@ -421,13 +425,13 @@ void _cg_term_set_foreground_colour(cg_colour colour)
 
 void _cg_term_set_background_colour(cg_colour colour)
 {
-    if (colour > -1 && colour < 256)
+    if (colour >= 0 && colour < 256)
     {
         wprintf(L"\033[48;5;%lum", colour);
     }
 }
 
-//canvas functions
+// canvas functions
 
 void create_canvas(cg_uint w, cg_uint h)
 {
@@ -442,7 +446,7 @@ void create_canvas(cg_uint w, cg_uint h)
             _CG_FREE(canvas_background_colour);
         }
 
-        cg_uint canvas_len = ((width + 1) * height) + 1;
+        cg_uint canvas_len = ((width)*height) + 1;
         canvas_contents = _CG_CALLOC(sizeof(cg_char), canvas_len);
         canvas_background_colour = _CG_CALLOC(sizeof(cg_colour), width * height);
         canvas_foreground_colour = _CG_CALLOC(sizeof(cg_colour), width * height);
@@ -460,8 +464,8 @@ void create_canvas(cg_uint w, cg_uint h)
                 canvas_contents[idx] = background_char;
                 idx += 1;
             }
-            canvas_contents[idx] = L'\n';
-            idx += 1;
+            // canvas_contents[idx] = L'\n';
+            // idx += 1;
         }
         canvas_contents[idx] = L'\0';
 
@@ -484,13 +488,13 @@ void create_canvas(cg_uint w, cg_uint h)
 void background(cg_colour col)
 {
     background_colour = col;
-    for (cg_uint x = 0; x < width; x++)
-    {
-        for (cg_uint y = 0; y < height; y++)
-        {
-            point(x, y, background_char);
-        }
-    }
+    // for (cg_uint x = 0; x < width; x++)
+    // {
+    //     for (cg_uint y = 0; y < height; y++)
+    //     {
+    //         point(x, y, background_char);
+    //     }
+    // }
 }
 
 void stroke(cg_colour col)
@@ -503,7 +507,8 @@ void fill(cg_colour col)
     fill_colour = col;
 }
 
-void set_colour(cg_colour col) {
+void set_colour(cg_colour col)
+{
     stroke(col);
     fill(col);
 }
@@ -512,29 +517,35 @@ void show_canvas()
 {
     if (canvas_contents != NULL)
     {
-        cg_colour current_fg = canvas_foreground_colour[0];
-        cg_colour current_bg = canvas_background_colour[0];
+        cg_colour current_fg = 0;
+        cg_colour current_bg = 0;
         // wprintf(L"%ls", canvas_contents);
         cg_uint idx = 0;
         for (cg_uint i = 0; i < height; i++)
         {
             for (cg_uint j = 0; j < width; j++)
             {
-                if(canvas_foreground_colour[(i * width) + j] != current_fg) {
-                    _cg_term_set_foreground_colour(canvas_foreground_colour[(i * width) + j]);
-                    current_fg = canvas_foreground_colour[(i * width) + j];
+                cg_colour cell_fg = canvas_foreground_colour[(i * width) + j];
+                cg_colour cell_bg = canvas_background_colour[(i * width) + j];
+                
+                if(cell_fg != current_fg)
+                {
+                    _cg_term_set_foreground_colour(cell_fg);
+                    current_fg = cell_fg;
                 }
-                if(canvas_background_colour[(i * width) + j] != current_bg) {
-                    _cg_term_set_background_colour(canvas_background_colour[(i * width) + j]);
-                    current_bg = canvas_background_colour[(i * width) + j];
+                if(cell_bg != current_bg)
+                {
+                    _cg_term_set_background_colour(cell_bg);
+                    current_bg = cell_bg;
                 }
                 // _cg_term_set_foreground_colour(canvas_foreground_colour[(i * width) + j]);
                 // _cg_term_set_background_colour(canvas_background_colour[(i * width) + j]);
-                putwchar(canvas_contents[idx]);
-                idx += 1;
+                cg_char c = canvas_contents[(i * width) + j];
+                putwchar(c);
+                // idx += 1;
             }
             putwchar(L'\n');
-            idx += 1;
+            // idx += 1;
         }
     }
 }
@@ -545,8 +556,7 @@ void point(cg_uint x1, cg_uint y1, cg_char c)
     {
         return;
     }
-    cg_uint cvloc = ((width + 1) * y1) + x1;
-    canvas_contents[cvloc] = c;
+    canvas_contents[(y1 * width) + x1] = c;
     canvas_background_colour[(y1 * width) + x1] = background_colour;
     canvas_foreground_colour[(y1 * width) + x1] = stroke_colour;
     // wprintf(L"\033[%lu;%luf", y1, x1);
@@ -571,7 +581,7 @@ void line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
 
     if (x1 == x2)
     {
-        //slope is infinite
+        // slope is infinite
         for (cg_uint y = y1; y <= y2; y++)
         {
             point(x1, y, L'█');

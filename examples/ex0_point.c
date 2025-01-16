@@ -1,12 +1,19 @@
 #include "congfx.h"
 
-setup()
+void setup()
 {
-
+    // background(12);
+    // stroke(15);
 }
 
-draw(cg_uint dt)
+void draw(cg_uint dt)
 {
+    background(11);
+    stroke(14);
+
     // draw a point at the center of the canvas
     point(width / 2, height / 2, L'X');
+
+    // no loop
+    no_loop();
 }
