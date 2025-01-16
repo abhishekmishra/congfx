@@ -6,8 +6,8 @@ cg_uint radius = 1;
 
 void setup()
 {
-    set_background_colour(12);
-    set_foreground_colour(13);
+    background(12);
+    stroke(13);
 }
 
 void draw(cg_uint dt)
