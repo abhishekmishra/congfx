@@ -1,7 +1,7 @@
 # Variables
 CC = cc
 CFLAGS = -c
-EXE = ex1_fill_lines ex2_bubble
+EXE = ex1_fill_lines ex2_bubble ex3_bubbles
 INC = -I..
 
 # Targets
@@ -11,6 +11,9 @@ ex1_fill_lines: ex1_fill_lines.o
 	$(CC) $< -o $@
 
 ex2_bubble: ex2_bubble.o
+	$(CC) $< -o $@
+
+ex3_bubbles: ex3_bubbles.o
 	$(CC) $< -o $@
 
 %.o: %.c

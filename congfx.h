@@ -418,7 +418,7 @@ void set_foreground_colour(cg_int colour)
         // putwchar(L'5');
         // putwchar(L'm');
         //fputws(L"\033[38;5;8m", stdout);
-        // wprintf(L"\033[38;5;%lum", colour);
+        wprintf(L"\033[38;5;%lum", colour);
     }
 }
 
