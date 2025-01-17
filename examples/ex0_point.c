@@ -1,5 +1,8 @@
 #include "congfx.h"
 
+cg_rgb_t fg_colour = {255, 100, 0};
+cg_rgb_t bg_colour = {0, 100, 0};
+
 void setup()
 {
     // background(12);
@@ -8,8 +11,8 @@ void setup()
 
 void draw(cg_uint dt)
 {
-    background(46);
-    stroke(33);
+    background(bg_colour);
+    stroke(fg_colour);
 
     // draw a point at the center of the canvas
     point(width / 2, height / 2, L'X');
