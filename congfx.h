@@ -79,6 +79,42 @@ typedef long double cg_number;
  */
 typedef cg_uint cg_colour;
 
+
+// system variables
+
+int _loop = 1;
+cg_uint _fps = _CG_DEFAULT_FPS;
+cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
+cg_colour background_colour = 0;
+cg_colour stroke_colour = 15;
+cg_colour fill_colour = 15;
+struct termios orig_termios;
+int _cg_term_orig_flags;
+
+// canvas state variables
+cg_char *canvas_contents = NULL;
+cg_colour *canvas_background_colour;
+cg_colour *canvas_foreground_colour;
+cg_uint width;
+cg_uint height;
+
+// Error reporting functions
+
+/**
+ * Print an error message and exit the program.
+ *
+ * @param message The error message to print.
+ * @param code The error code to exit with.
+ */
+void cg_err_fatal(cg_string message, cg_uint code);
+
+/**
+ * Print an error message and exit the program with a default error code.
+ *
+ * @param message The error message to print.
+ */
+void cg_err_fatal_msg(cg_string message);
+
 // type conversion functions
 
 /**
@@ -87,17 +123,7 @@ typedef cg_uint cg_colour;
  * @param x The number to convert.
  * @return The unsigned integer value of the number.
  */
-cg_uint number_to_uinteger(cg_number x)
-{
-    if (x < 0)
-    {
-        return 0;
-    }
-    else
-    {
-        return (cg_uint)x;
-    }
-}
+cg_uint number_to_uinteger(cg_number x);
 
 // Vector type
 
@@ -185,30 +211,25 @@ void dispose_string(cg_string s);
  */
 int rand_int(int from, int to);
 
+// Life-cycle functions, to be defined by the main program
+
 void setup();
 
 void draw(cg_uint dt);
 
+// Graphics System functions
 void no_loop();
 
 void loop();
 
 void frame_rate(cg_uint fps);
 
-// system variables
-int _loop = 1;
-cg_uint _fps = _CG_DEFAULT_FPS;
-cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
-cg_colour background_colour = 0;
-cg_colour stroke_colour = 15;
-cg_colour fill_colour = 15;
-struct termios orig_termios;
-int _cg_term_orig_flags;
-
-// terminal utility functions
+// Terminal utility functions
 void cls();
+
 void home();
 
+// Internal terminal utility functions
 /**
  * Enable raw mode for the terminal.
  * see https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
@@ -225,16 +246,12 @@ void _cg_term_disable_raw_mode();
  * Reset the terminal to its default state.
  */
 void _cg_term_reset();
+
 void _cg_term_set_foreground_colour(cg_colour colour);
+
 void _cg_term_set_background_colour(cg_colour colour);
 
-// canvas functions
-cg_char *canvas_contents = NULL;
-cg_colour *canvas_background_colour;
-cg_colour *canvas_foreground_colour;
-cg_uint width;
-cg_uint height;
-
+// Canvas functions
 void create_canvas(cg_uint w, cg_uint h);
 void background(cg_colour c);
 void stroke(cg_colour c);
@@ -334,6 +351,30 @@ int main(int argc, char *argv[])
         clock_gettime(CLOCK_MONOTONIC, &current_time);
         // dt_done = _diff_time_micros(current_time, prev_time);
         // wprintf(L"After sleep: Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
+    }
+}
+
+void cg_err_fatal(cg_string message, cg_uint code)
+{
+    wprintf(L"FATAL: %ls\n", message);
+    exit(code);
+}
+
+void cg_err_fatal_msg(cg_string message)
+{
+    fatal(message, -1);
+}
+
+
+cg_uint number_to_uinteger(cg_number x)
+{
+    if (x < 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return (cg_uint)x;
     }
 }
 
@@ -449,7 +490,11 @@ void home()
 
 void _cg_term_enable_raw_mode()
 {
-    tcgetattr(STDIN_FILENO, &orig_termios);
+    if (tcgetattr(STDIN_FILENO, &orig_termios) == -1)
+    {
+        cg_err_fatal_msg(L"tcgetattr");
+    }
+    
     atexit(_cg_term_disable_raw_mode);
     struct termios raw = orig_termios;
     raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
@@ -461,7 +506,10 @@ void _cg_term_enable_raw_mode()
     raw.c_cc[VMIN] = 0;
     raw.c_cc[VTIME] = 1;
 
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+    if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
+    {
+        cg_err_fatal_msg(L"tcsetattr");
+    }
 
     // Get the current flags
     _cg_term_orig_flags = fcntl(STDIN_FILENO, F_GETFL, 0);
