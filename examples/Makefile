@@ -1,22 +1,14 @@
 # Variables
 CC = cc
 CFLAGS = -c
-EXE = ex0_point ex1_fill_lines ex2_bubble ex3_bubbles
+# All files that start with 'ex' and end with '.c'
+EXE = $(patsubst %.c,%,$(wildcard ex*.c))
 INC = -I..
 
 # Targets
 all: $(EXE)
 
-ex0_point: ex0_point.o
-	$(CC) $< -o $@
-
-ex1_fill_lines: ex1_fill_lines.o
-	$(CC) $< -o $@
-
-ex2_bubble: ex2_bubble.o
-	$(CC) $< -o $@
-
-ex3_bubbles: ex3_bubbles.o
+%: %.o
 	$(CC) $< -o $@
 
 %.o: %.c
