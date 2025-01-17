@@ -31,6 +31,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <locale.h>
 #include <math.h>
 #include <fcntl.h>
+#include <errno.h>
+#include <ctype.h>
 
 // TODO: removed for now, check if needed later
 #include <unistd.h>
@@ -78,7 +80,6 @@ typedef long double cg_number;
  * Define a colour type.
  */
 typedef cg_uint cg_colour;
-
 
 // system variables
 
@@ -310,16 +311,40 @@ int main(int argc, char *argv[])
         cg_uint dt = _diff_time_micros(current_time, prev_time);
 
         // read input
-        int numRead = read(0, read_buf, 4);
-        if (numRead > 0)
+        // int numRead = read(0, read_buf, 4);
+        // if (numRead == -1 && errno != EAGAIN)
+        // {
+        //     cg_err_fatal_msg(L"read");
+        // }
+        // else
+        // {
+        //     // wprintf(L"You said: %s", read_buf);
+        //     if (read_buf[0] == 'q')
+        //     {
+        //         no_loop();
+        //         exit(0);
+        //     }
+        // }
+
+        char c = '\0';
+        if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
         {
-            // wprintf(L"You said: %s", read_buf);
-            if (read_buf[0] == 'q')
-            {
-                no_loop();
-                exit(0);
-            }
+            cg_err_fatal_msg(L"read");
         }
+        // if (iscntrl(c))
+        // {
+        //     wprintf(L"%d\r\n", c);
+        // }
+        // else
+        // {
+        //     wprintf(L"%d ('%c')\r\n", c, c);
+        // }
+        if (c == 'q')
+        {
+            break;
+        }
+
+        // no_loop();
 
         // set default background and forground
         _cg_term_reset();
@@ -364,7 +389,6 @@ void cg_err_fatal_msg(cg_string message)
 {
     cg_err_fatal(message, -1);
 }
-
 
 cg_uint number_to_uinteger(cg_number x)
 {
@@ -494,11 +518,10 @@ void _cg_term_enable_raw_mode()
     {
         cg_err_fatal_msg(L"tcgetattr");
     }
-    
+
     atexit(_cg_term_disable_raw_mode);
     struct termios raw = orig_termios;
     raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
-    raw.c_iflag &= ~(ICRNL | IXON);
     raw.c_oflag &= ~(OPOST);
     raw.c_cflag |= (CS8);
     raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
@@ -518,10 +541,10 @@ void _cg_term_enable_raw_mode()
     }
 
     // Set the flags to be non-blocking
-    if ((fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags | O_NONBLOCK) == -1))
-    {
-        cg_err_fatal_msg(L"fcntl error setting flags");
-    }
+    // if ((fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags | O_NONBLOCK) == -1))
+    // {
+    //     cg_err_fatal_msg(L"fcntl error setting flags");
+    // }
 }
 
 void _cg_term_disable_raw_mode()
