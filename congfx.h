@@ -700,10 +700,9 @@ void show_canvas()
             }
 
             // check if system is cygwin, then add a CR \r before LF \n
-            if (__CYGWIN__)
-            {
-                putwchar(L'\r');
-            }
+#ifdef __CYGWIN__
+            putwchar(L'\r');
+#endif
             putwchar(L'\n');
 
             // idx += 1;
