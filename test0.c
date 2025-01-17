@@ -172,3 +172,8 @@ void draw(cg_uint dt)
 	// no_loop(); // no_loop stops the draw loop.
 	dispose_string(fps_str);
 }
+
+void key_pressed(char c)
+{
+	// do nothing
+}
