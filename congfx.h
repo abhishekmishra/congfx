@@ -541,10 +541,10 @@ void _cg_term_enable_raw_mode()
     }
 
     // Set the flags to be non-blocking
-    // if ((fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags | O_NONBLOCK) == -1))
-    // {
-    //     cg_err_fatal_msg(L"fcntl error setting flags");
-    // }
+    if ((fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags | O_NONBLOCK) == -1))
+    {
+        cg_err_fatal_msg(L"fcntl error setting flags");
+    }
 }
 
 void _cg_term_disable_raw_mode()
