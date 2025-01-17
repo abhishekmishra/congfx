@@ -526,10 +526,16 @@ void _cg_term_enable_raw_mode()
 
 void _cg_term_disable_raw_mode()
 {
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+    if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios) == -1)
+    {
+        cg_err_fatal_msg(L"tcsetattr");
+    }
 
     // Reset the flags
-    fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags);
+    if (fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags) == -1)
+    {
+        cg_err_fatal_msg(L"fcntl error resetting flags");
+    }
 }
 
 void _cg_term_reset()
