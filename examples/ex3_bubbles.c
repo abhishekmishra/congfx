@@ -6,13 +6,13 @@ cg_uint radius = 1;
 
 void setup()
 {
-    background(12);
-    stroke(13);
 }
 
 void draw(cg_uint dt)
 {
-    stroke(dt % 256);
+    cg_rgb_t col = {0, 0, dt % 256};
+    stroke(col);
+
     // determine the number of lines to draw
     // based on the total time elapsed
     // since the last times the number of lines to draw was updated
