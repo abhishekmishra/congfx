@@ -362,7 +362,7 @@ void cg_err_fatal(cg_string message, cg_uint code)
 
 void cg_err_fatal_msg(cg_string message)
 {
-    fatal(message, -1);
+    cg_err_fatal(message, -1);
 }
 
 
@@ -512,10 +512,16 @@ void _cg_term_enable_raw_mode()
     }
 
     // Get the current flags
-    _cg_term_orig_flags = fcntl(STDIN_FILENO, F_GETFL, 0);
+    if ((_cg_term_orig_flags = fcntl(STDIN_FILENO, F_GETFL, 0)) == -1)
+    {
+        cg_err_fatal_msg(L"fcntl error getting flags");
+    }
 
     // Set the flags to be non-blocking
-    fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags | O_NONBLOCK);
+    if ((fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags | O_NONBLOCK) == -1))
+    {
+        cg_err_fatal_msg(L"fcntl error setting flags");
+    }
 }
 
 void _cg_term_disable_raw_mode()
