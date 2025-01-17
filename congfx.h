@@ -22,6 +22,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef __CONGFX_H__
 #define __CONGFX_H__
 
+#include <termios.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -200,10 +201,27 @@ cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
 cg_colour background_colour = 0;
 cg_colour stroke_colour = 15;
 cg_colour fill_colour = 15;
+struct termios orig_termios;
 
 // terminal utility functions
 void cls();
 void home();
+
+/**
+ * Enable raw mode for the terminal.
+ * see https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
+ */
+void _cg_term_enable_raw_mode();
+
+/**
+ * Disable raw mode for the terminal.
+ * see https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
+ */
+void _cg_term_disable_raw_mode();
+
+/**
+ * Reset the terminal to its default state.
+ */
 void _cg_term_reset();
 void _cg_term_set_foreground_colour(cg_colour colour);
 void _cg_term_set_background_colour(cg_colour colour);
@@ -410,6 +428,28 @@ void home()
     wprintf(L"\033[H");
 }
 
+void _cg_term_enable_raw_mode()
+{
+    tcgetattr(STDIN_FILENO, &orig_termios);
+    atexit(_cg_term_disable_raw_mode);
+    struct termios raw = orig_termios;
+    raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+    raw.c_iflag &= ~(ICRNL | IXON);
+    raw.c_oflag &= ~(OPOST);
+    raw.c_cflag |= (CS8);
+    raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+
+    raw.c_cc[VMIN] = 0;
+    raw.c_cc[VTIME] = 1;
+
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+}
+
+void _cg_term_disable_raw_mode()
+{
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+}
+
 void _cg_term_reset()
 {
     wprintf(L"\033[0m");
@@ -527,13 +567,13 @@ void show_canvas()
             {
                 cg_colour cell_fg = canvas_foreground_colour[(i * width) + j];
                 cg_colour cell_bg = canvas_background_colour[(i * width) + j];
-                
-                if(cell_fg != current_fg)
+
+                if (cell_fg != current_fg)
                 {
                     _cg_term_set_foreground_colour(cell_fg);
                     current_fg = cell_fg;
                 }
-                if(cell_bg != current_bg)
+                if (cell_bg != current_bg)
                 {
                     _cg_term_set_background_colour(cell_bg);
                     current_bg = cell_bg;
