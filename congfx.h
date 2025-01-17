@@ -30,6 +30,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <wctype.h>
 #include <locale.h>
 #include <math.h>
+#include <fcntl.h>
 
 // TODO: removed for now, check if needed later
 #include <unistd.h>
@@ -202,6 +203,7 @@ cg_colour background_colour = 0;
 cg_colour stroke_colour = 15;
 cg_colour fill_colour = 15;
 struct termios orig_termios;
+int _cg_term_orig_flags;
 
 // terminal utility functions
 void cls();
@@ -259,6 +261,11 @@ cg_uint _diff_time_micros(struct timespec time1, struct timespec time2)
 
 int main(int argc, char *argv[])
 {
+    cg_char read_buf[20];
+
+    // enable raw mode for terminal
+    _cg_term_enable_raw_mode();
+
     // init locale for terminal, and wide output
     setlocale(LC_ALL, "");
     fwide(stdout, 1);
@@ -284,6 +291,18 @@ int main(int argc, char *argv[])
     while (_loop == 1)
     {
         cg_uint dt = _diff_time_micros(current_time, prev_time);
+
+        // read input
+        int numRead = read(0, read_buf, 4);
+        if (numRead > 0)
+        {
+            // wprintf(L"You said: %s", read_buf);
+            if (read_buf[0] == 'q')
+            {
+                no_loop();
+                exit(0);
+            }
+        }
 
         // set default background and forground
         _cg_term_reset();
@@ -443,11 +462,20 @@ void _cg_term_enable_raw_mode()
     raw.c_cc[VTIME] = 1;
 
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+
+    // Get the current flags
+    _cg_term_orig_flags = fcntl(STDIN_FILENO, F_GETFL, 0);
+
+    // Set the flags to be non-blocking
+    fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags | O_NONBLOCK);
 }
 
 void _cg_term_disable_raw_mode()
 {
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+
+    // Reset the flags
+    fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags);
 }
 
 void _cg_term_reset()

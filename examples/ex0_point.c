@@ -15,5 +15,5 @@ void draw(cg_uint dt)
     point(width / 2, height / 2, L'X');
 
     // no loop
-    no_loop();
+    // no_loop();
 }
