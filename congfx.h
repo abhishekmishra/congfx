@@ -224,6 +224,8 @@ void setup();
 
 void draw(cg_uint dt);
 
+void key_pressed(char c);
+
 // Graphics System functions
 void no_loop();
 
@@ -349,6 +351,7 @@ int main(int argc, char *argv[])
         {
             break;
         }
+        key_pressed(c);
 
         // no_loop();
 

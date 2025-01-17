@@ -85,3 +85,7 @@ void draw(cg_uint dt)
     text(total_time_string, (width - wcslen(total_time_string))/2, 10);
     total_time += dt;
 }
+
+void key_pressed(char c)
+{
+}

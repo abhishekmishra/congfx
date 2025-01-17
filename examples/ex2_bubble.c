@@ -30,3 +30,7 @@ void draw(cg_uint dt)
     // increment the total time
     total_time += dt;
 }
+
+void key_pressed(char c)
+{
+}

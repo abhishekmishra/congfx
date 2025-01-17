@@ -20,3 +20,7 @@ void draw(cg_uint dt)
     // no loop
     // no_loop();
 }
+
+void key_pressed(char c)
+{
+}
