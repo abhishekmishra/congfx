@@ -85,6 +85,86 @@ typedef struct{
     cg_uint b;
 } cg_rgb_t;
 
+/**
+ * Define a cell contents type
+ */
+typedef struct{
+    cg_char c;
+    cg_rgb_t bg;
+    cg_rgb_t fg;
+} cg_cell_t;
+
+cg_cell_t *make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg)
+{
+    cg_cell_t *cell = (cg_cell_t *)_CG_CALLOC(1, sizeof(cg_cell_t));
+    if (cell == NULL)
+    {
+        wprintf(L"FATAL Error: Unable to allocate cg_cell_t.\n");
+        exit(-1);
+    }
+    cell->c = c;
+    cell->bg = bg;
+    cell->fg = fg;
+    return cell;
+}
+
+void dispose_cell(cg_cell_t *cell)
+{
+    if (cell != NULL)
+    {
+        _CG_FREE(cell);
+    }
+}
+
+/**
+ * Define a canvas type
+ */
+typedef struct{
+    cg_uint width;
+    cg_uint height;
+    cg_cell_t *cells;
+} cg_canvas_t;
+
+cg_canvas_t *make_canvas(cg_uint w, cg_uint h)
+{
+    cg_canvas_t *canvas = (cg_canvas_t *)_CG_CALLOC(1, sizeof(cg_canvas_t));
+    if (canvas == NULL)
+    {
+        wprintf(L"FATAL Error: Unable to allocate cg_canvas_t.\n");
+        exit(-1);
+    }
+    canvas->width = w;
+    canvas->height = h;
+    canvas->cells = (cg_cell_t *)_CG_CALLOC(w * h, sizeof(cg_cell_t));
+    if (canvas->cells == NULL)
+    {
+        wprintf(L"FATAL Error: Unable to allocate cg_cell_t array.\n");
+        exit(-1);
+    }
+
+    // allocate cells
+    for (cg_uint i = 0; i < h; i++)
+    {
+        for (cg_uint j = 0; j < w; j++)
+        {
+            canvas->cells[(i * w) + j] = *make_cell(_CG_DEFAULT_BACKGROUND_CHAR, default_bg_colour, default_fg_colour);
+        }
+    }
+    return canvas;
+}
+
+void dispose_canvas(cg_canvas_t *canvas)
+{
+    if (canvas != NULL)
+    {
+        if (canvas->cells != NULL)
+        {
+            _CG_FREE(canvas->cells);
+        }
+        _CG_FREE(canvas);
+    }
+}
+
 // system variables
 
 int _loop = 1;
