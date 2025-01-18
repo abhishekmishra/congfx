@@ -28,15 +28,11 @@ endif
 
 # Targets
 all: $(EXE)
-	echo $(EXE)
-	echo $(OSFLAG)
 
 %.exe: %.o
-	echo "blah" $@
 	$(CC) $< -o $@
 
 %: %.o
-	echo $@
 	$(CC) $< -o $@
 
 %.o: %.c
