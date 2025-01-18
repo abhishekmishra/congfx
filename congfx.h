@@ -125,6 +125,26 @@ typedef struct{
     cg_cell_t *cells;
 } cg_canvas_t;
 
+// system variables
+
+int _loop = 1;
+cg_uint _fps = _CG_DEFAULT_FPS;
+cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
+cg_rgb_t default_bg_colour = {0, 0, 0};
+cg_rgb_t default_fg_colour = {255, 255, 255};
+cg_rgb_t background_colour = {0, 0, 0};
+cg_rgb_t stroke_colour = {255, 255, 255};
+cg_rgb_t fill_colour = {255, 255, 255};
+struct termios orig_termios;
+int _cg_term_orig_flags;
+
+// canvas state variables
+cg_char *canvas_contents = NULL;
+cg_rgb_t *canvas_background_colour;
+cg_rgb_t *canvas_foreground_colour;
+cg_uint width;
+cg_uint height;
+
 cg_canvas_t *make_canvas(cg_uint w, cg_uint h)
 {
     cg_canvas_t *canvas = (cg_canvas_t *)_CG_CALLOC(1, sizeof(cg_canvas_t));
@@ -165,25 +185,6 @@ void dispose_canvas(cg_canvas_t *canvas)
     }
 }
 
-// system variables
-
-int _loop = 1;
-cg_uint _fps = _CG_DEFAULT_FPS;
-cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
-cg_rgb_t default_bg_colour = {0, 0, 0};
-cg_rgb_t default_fg_colour = {255, 255, 255};
-cg_rgb_t background_colour = {0, 0, 0};
-cg_rgb_t stroke_colour = {255, 255, 255};
-cg_rgb_t fill_colour = {255, 255, 255};
-struct termios orig_termios;
-int _cg_term_orig_flags;
-
-// canvas state variables
-cg_char *canvas_contents = NULL;
-cg_rgb_t *canvas_background_colour;
-cg_rgb_t *canvas_foreground_colour;
-cg_uint width;
-cg_uint height;
 
 // Error reporting functions
 
