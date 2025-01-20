@@ -138,6 +138,10 @@ cg_rgb_t fill_colour = {255, 255, 255};
 struct termios orig_termios;
 int _cg_term_orig_flags;
 
+// canvas variables for the current and previous canvas
+cg_canvas_t *canvas_previous = NULL;
+cg_canvas_t *canvas_current = NULL;
+
 // canvas state variables
 cg_char *canvas_contents = NULL;
 cg_rgb_t *canvas_background_colour;
