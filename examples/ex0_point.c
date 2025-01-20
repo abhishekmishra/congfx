@@ -7,6 +7,7 @@ void setup()
 {
     // background(12);
     // stroke(15);
+    frame_rate(60);
 }
 
 void draw(cg_uint dt)
