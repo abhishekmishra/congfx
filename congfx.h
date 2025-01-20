@@ -399,22 +399,6 @@ int main(int argc, char *argv[])
     {
         cg_uint dt = _diff_time_micros(current_time, prev_time);
 
-        // read input
-        // int numRead = read(0, read_buf, 4);
-        // if (numRead == -1 && errno != EAGAIN)
-        // {
-        //     cg_err_fatal_msg(L"read");
-        // }
-        // else
-        // {
-        //     // wprintf(L"You said: %s", read_buf);
-        //     if (read_buf[0] == 'q')
-        //     {
-        //         no_loop();
-        //         exit(0);
-        //     }
-        // }
-
         char c = '\0';
         if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
         {
