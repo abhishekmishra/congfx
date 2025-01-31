@@ -79,7 +79,8 @@ typedef long double cg_number;
 /**
  * Define a colour type.
  */
-typedef struct{
+typedef struct
+{
     cg_uint r;
     cg_uint g;
     cg_uint b;
@@ -88,7 +89,8 @@ typedef struct{
 /**
  * Define a cell contents type
  */
-typedef struct{
+typedef struct
+{
     cg_char c;
     cg_rgb_t bg;
     cg_rgb_t fg;
@@ -108,6 +110,57 @@ cg_cell_t *make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg)
     return cell;
 }
 
+cg_rgb_t get_cell_bg(cg_cell_t *cell)
+{
+    if (cell != NULL)
+    {
+        return cell->bg;
+    }
+    return (cg_rgb_t){0, 0, 0};
+}
+
+cg_rgb_t get_cell_fg(cg_cell_t *cell)
+{
+    if (cell != NULL)
+    {
+        return cell->fg;
+    }
+    return (cg_rgb_t){255, 255, 255};
+}
+
+cg_char get_cell_char(cg_cell_t *cell)
+{
+    if (cell != NULL)
+    {
+        return cell->c;
+    }
+    return L' ';
+}
+
+void set_cell_bg(cg_cell_t *cell, cg_rgb_t bg)
+{
+    if (cell != NULL)
+    {
+        cell->bg = bg;
+    }
+}
+
+void set_cell_fg(cg_cell_t *cell, cg_rgb_t fg)
+{
+    if (cell != NULL)
+    {
+        cell->fg = fg;
+    }
+}
+
+void set_cell_char(cg_cell_t *cell, cg_char c)
+{
+    if (cell != NULL)
+    {
+        cell->c = c;
+    }
+}
+
 void dispose_cell(cg_cell_t *cell)
 {
     if (cell != NULL)
@@ -119,7 +172,8 @@ void dispose_cell(cg_cell_t *cell)
 /**
  * Define a canvas type
  */
-typedef struct{
+typedef struct
+{
     cg_uint width;
     cg_uint height;
     cg_cell_t *cells;
@@ -143,9 +197,9 @@ cg_canvas_t *canvas_previous = NULL;
 cg_canvas_t *canvas_current = NULL;
 
 // canvas state variables
-cg_char *canvas_contents = NULL;
-cg_rgb_t *canvas_background_colour;
-cg_rgb_t *canvas_foreground_colour;
+// cg_char *canvas_contents = NULL;
+// cg_rgb_t *canvas_background_colour;
+// cg_rgb_t *canvas_foreground_colour;
 cg_uint width;
 cg_uint height;
 
@@ -177,6 +231,19 @@ cg_canvas_t *make_canvas(cg_uint w, cg_uint h)
     return canvas;
 }
 
+cg_cell_t *get_cell(cg_canvas_t *canvas, cg_uint x, cg_uint y)
+{
+    if (canvas == NULL)
+    {
+        return NULL;
+    }
+    if (x >= canvas->width || y >= canvas->height)
+    {
+        return NULL;
+    }
+    return &(canvas->cells[(y * canvas->width) + x]);
+}
+
 void dispose_canvas(cg_canvas_t *canvas)
 {
     if (canvas != NULL)
@@ -188,7 +255,6 @@ void dispose_canvas(cg_canvas_t *canvas)
         _CG_FREE(canvas);
     }
 }
-
 
 // Error reporting functions
 
@@ -392,7 +458,7 @@ int main(int argc, char *argv[])
     setup();
 
     // if there is no canvas created, create a default one
-    if (canvas_contents == NULL)
+    if (canvas_current == NULL)
     {
         create_canvas(100, 25);
     }
@@ -658,62 +724,27 @@ void _cg_term_set_background_colour(cg_rgb_t colour)
 
 void create_canvas(cg_uint w, cg_uint h)
 {
-    if (width != w || height != h)
+    if (canvas_current != NULL)
     {
-        width = w;
-        height = h;
-
-        if (canvas_contents != NULL)
-        {
-            _CG_FREE(canvas_contents);
-            _CG_FREE(canvas_background_colour);
-        }
-
-        cg_uint canvas_len = ((width)*height) + 1;
-        canvas_contents = _CG_CALLOC(sizeof(cg_char), canvas_len);
-        canvas_background_colour = _CG_CALLOC(sizeof(cg_rgb_t), width * height);
-        canvas_foreground_colour = _CG_CALLOC(sizeof(cg_rgb_t), width * height);
-        if (canvas_contents == NULL || canvas_background_colour == NULL || canvas_foreground_colour == NULL)
-        {
-            printf("Error: unable to allocate canvas.\n");
-            exit(-1);
-        }
-
-        cg_uint idx = 0;
-        for (cg_uint i = 0; i < height; i++)
-        {
-            for (cg_uint j = 0; j < width; j++)
-            {
-                canvas_contents[idx] = background_char;
-                idx += 1;
-            }
-            // canvas_contents[idx] = L'\n';
-            // idx += 1;
-        }
-        canvas_contents[idx] = L'\0';
-
-        for (cg_uint i = 0; i < height; i++)
-        {
-            for (cg_uint j = 0; j < width; j++)
-            {
-                canvas_background_colour[(i * width) + j] = background_colour;
-                canvas_foreground_colour[(i * width) + j] = stroke_colour;
-            }
-        }
+        dispose_canvas(canvas_current);
     }
-    else
+    canvas_current = make_canvas(w, h);
+    if (canvas_previous != NULL)
     {
-        // canvas size does not change.
-        // TODO: might want to print a warning here;
+        dispose_canvas(canvas_previous);
     }
+    canvas_previous = make_canvas(w, h);
+
+    width = w;
+    height = h;
 }
 
 void background(cg_rgb_t col)
 {
     background_colour = col;
-    for (cg_uint x = 0; x < width; x++)
+    for (cg_uint x = 0; x < canvas_current->width; x++)
     {
-        for (cg_uint y = 0; y < height; y++)
+        for (cg_uint y = 0; y < canvas_current->height; y++)
         {
             point(x, y, background_char);
         }
@@ -738,18 +769,19 @@ void set_colour(cg_rgb_t col)
 
 void show_canvas()
 {
-    if (canvas_contents != NULL)
+    if (canvas_current != NULL)
     {
         cg_rgb_t current_fg = {255, 255, 255};
         cg_rgb_t current_bg = {0, 0, 0};
         // wprintf(L"%ls", canvas_contents);
         cg_uint idx = 0;
-        for (cg_uint i = 0; i < height; i++)
+        for (cg_uint i = 0; i < canvas_current->height; i++)
         {
-            for (cg_uint j = 0; j < width; j++)
+            for (cg_uint j = 0; j < canvas_current->width; j++)
             {
-                cg_rgb_t cell_fg = canvas_foreground_colour[(i * width) + j];
-                cg_rgb_t cell_bg = canvas_background_colour[(i * width) + j];
+                cg_cell_t *cell = get_cell(canvas_current, j, i);
+                cg_rgb_t cell_fg = get_cell_fg(cell);
+                cg_rgb_t cell_bg = get_cell_bg(cell);
 
                 if (cell_fg.r != current_fg.r || cell_fg.g != current_fg.g || cell_fg.b != current_fg.b)
                 {
@@ -763,7 +795,7 @@ void show_canvas()
                 }
                 // _cg_term_set_foreground_colour(canvas_foreground_colour[(i * width) + j]);
                 // _cg_term_set_background_colour(canvas_background_colour[(i * width) + j]);
-                cg_char c = canvas_contents[(i * width) + j];
+                cg_char c = get_cell_char(cell);
                 putwchar(c);
                 // idx += 1;
             }
@@ -778,13 +810,14 @@ void show_canvas()
 
 void point(cg_uint x1, cg_uint y1, cg_char c)
 {
-    if (x1 >= width || y1 >= height || x1 < 0 || y1 < 0)
+    if (x1 >= canvas_current->width || y1 >= canvas_current->height || x1 < 0 || y1 < 0)
     {
         return;
     }
-    canvas_contents[(y1 * width) + x1] = c;
-    canvas_background_colour[(y1 * width) + x1] = background_colour;
-    canvas_foreground_colour[(y1 * width) + x1] = stroke_colour;
+    cg_cell_t *cell = get_cell(canvas_current, x1, y1);
+    set_cell_char(cell, c);
+    set_cell_bg(cell, background_colour);
+    set_cell_fg(cell, stroke_colour);
     // wprintf(L"\033[%lu;%luf", y1, x1);
     // wprintf(L"%c", c);
 }
