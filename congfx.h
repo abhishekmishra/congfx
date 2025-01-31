@@ -169,6 +169,31 @@ void dispose_cell(cg_cell_t *cell)
     }
 }
 
+int compare_cells(cg_cell_t *cell1, cg_cell_t *cell2)
+{
+    if (cell1 == NULL && cell2 == NULL)
+    {
+        return 0;
+    }
+    if (cell1 == NULL || cell2 == NULL)
+    {
+        return -1;
+    }
+    if (cell1->c != cell2->c)
+    {
+        return -1;
+    }
+    if (cell1->bg.r != cell2->bg.r || cell1->bg.g != cell2->bg.g || cell1->bg.b != cell2->bg.b)
+    {
+        return -1;
+    }
+    if (cell1->fg.r != cell2->fg.r || cell1->fg.g != cell2->fg.g || cell1->fg.b != cell2->fg.b)
+    {
+        return -1;
+    }
+    return 0;
+}
+
 /**
  * Define a canvas type
  */
@@ -790,9 +815,14 @@ void show_canvas()
         {
             for (cg_uint j = 0; j < canvas_current->width; j++)
             {
-                cg_cell_t *cell = get_cell(canvas_current, j, i);
-                cg_rgb_t cell_fg = get_cell_fg(cell);
-                cg_rgb_t cell_bg = get_cell_bg(cell);
+                cg_cell_t *current_cell = get_cell(canvas_current, j, i);
+                cg_cell_t *previous_cell = get_cell(canvas_previous, j, i);
+                // if (compare_cells(current_cell, previous_cell) == 0)
+                // {
+                //     continue;
+                // }
+                cg_rgb_t cell_fg = get_cell_fg(current_cell);
+                cg_rgb_t cell_bg = get_cell_bg(current_cell);
 
                 if (cell_fg.r != current_fg.r || cell_fg.g != current_fg.g || cell_fg.b != current_fg.b)
                 {
@@ -806,7 +836,7 @@ void show_canvas()
                 }
                 // _cg_term_set_foreground_colour(canvas_foreground_colour[(i * width) + j]);
                 // _cg_term_set_background_colour(canvas_background_colour[(i * width) + j]);
-                cg_char c = get_cell_char(cell);
+                cg_char c = get_cell_char(current_cell);
                 putwchar(c);
                 // idx += 1;
             }
