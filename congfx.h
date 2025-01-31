@@ -418,6 +418,7 @@ void stroke(cg_rgb_t c);
 void fill(cg_rgb_t c);
 void set_colour(cg_rgb_t c);
 void show_canvas();
+void swap_canvas();
 
 // drawing functions
 void point(cg_uint x1, cg_uint y1, cg_char c);
@@ -520,6 +521,9 @@ int main(int argc, char *argv[])
         clock_gettime(CLOCK_MONOTONIC, &current_time);
         // dt_done = _diff_time_micros(current_time, prev_time);
         // wprintf(L"After sleep: Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
+
+        // swap canvas
+        swap_canvas();
     }
 }
 
@@ -737,6 +741,13 @@ void create_canvas(cg_uint w, cg_uint h)
 
     width = w;
     height = h;
+}
+
+void swap_canvas()
+{
+    cg_canvas_t *temp = canvas_current;
+    canvas_current = canvas_previous;
+    canvas_previous = temp;
 }
 
 void background(cg_rgb_t col)
