@@ -435,7 +435,72 @@ void cg_text(cg_char *t, cg_uint x, cg_uint y);
 
 /*+++++++++ END Graphics FUNCTIONS +++++++++*/
 
-/*--------- BEGIN PUBLIC FUNCTION PROTOTYPES -----------*/
+/*--------- END PUBLIC FUNCTION PROTOTYPES -----------*/
+
+/*--------- BEGIN PUBLIC VARIABLES -----------*/
+
+cg_uint width;
+cg_uint height;
+
+/*--------- END PUBLIC VARIABLES -----------*/
+
+/*--------- BEGIN PRIVATE VARIABLES -----------*/
+
+// system variables
+
+int _loop = 1;
+cg_uint _fps = _CG_DEFAULT_FPS;
+cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
+cg_rgb_t default_bg_colour = {0, 0, 0};
+cg_rgb_t default_fg_colour = {255, 255, 255};
+cg_rgb_t background_colour = {0, 0, 0};
+cg_rgb_t stroke_colour = {255, 255, 255};
+cg_rgb_t fill_colour = {255, 255, 255};
+struct termios orig_termios;
+int _cg_term_orig_flags;
+
+// canvas variables for the current and previous canvas
+cg_canvas_t *canvas_previous = NULL;
+cg_canvas_t *canvas_current = NULL;
+
+/*--------- END PRIVATE VARIABLES -----------*/
+
+/*--------- BEGIN INTERNAL FUNCTION PROTOTYPES -----------*/
+
+// Internal terminal utility functions
+/**
+ * Enable raw mode for the terminal.
+ * see https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
+ */
+void _cg_term_enable_raw_mode();
+
+/**
+ * Disable raw mode for the terminal.
+ * see https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
+ */
+void _cg_term_disable_raw_mode();
+
+/**
+ * Reset the terminal to its default state.
+ */
+void _cg_term_reset();
+
+void _cg_term_set_foreground_colour(cg_rgb_t colour);
+
+void _cg_term_set_background_colour(cg_rgb_t colour);
+
+// internal functions
+
+/**
+ * Calculate the difference in time between two timespec structures.
+ *
+ * @param time1 The first time.
+ * @param time2 The second time.
+ * @return The difference in time in microseconds.
+ */
+cg_uint _diff_time_micros(struct timespec time1, struct timespec time2);
+
+/*--------- END INTERNAL FUNCTION PROTOTYPES -----------*/
 
 cg_cell_t *cg_make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg)
 {
@@ -538,30 +603,6 @@ int cg_compare_cells(cg_cell_t *cell1, cg_cell_t *cell2)
     return 0;
 }
 
-// system variables
-
-int _loop = 1;
-cg_uint _fps = _CG_DEFAULT_FPS;
-cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
-cg_rgb_t default_bg_colour = {0, 0, 0};
-cg_rgb_t default_fg_colour = {255, 255, 255};
-cg_rgb_t background_colour = {0, 0, 0};
-cg_rgb_t stroke_colour = {255, 255, 255};
-cg_rgb_t fill_colour = {255, 255, 255};
-struct termios orig_termios;
-int _cg_term_orig_flags;
-
-// canvas variables for the current and previous canvas
-cg_canvas_t *canvas_previous = NULL;
-cg_canvas_t *canvas_current = NULL;
-
-// canvas state variables
-// cg_char *canvas_contents = NULL;
-// cg_rgb_t *canvas_background_colour;
-// cg_rgb_t *canvas_foreground_colour;
-cg_uint width;
-cg_uint height;
-
 cg_canvas_t *cg_make_canvas(cg_uint w, cg_uint h)
 {
     cg_canvas_t *canvas = (cg_canvas_t *)_CG_CALLOC(1, sizeof(cg_canvas_t));
@@ -590,7 +631,6 @@ cg_canvas_t *cg_make_canvas(cg_uint w, cg_uint h)
     return canvas;
 }
 
-
 cg_cell_t *cg_get_cell(cg_canvas_t *canvas, cg_uint x, cg_uint y)
 {
     if (canvas == NULL)
@@ -615,40 +655,6 @@ void cg_dispose_canvas(cg_canvas_t *canvas)
         _CG_FREE(canvas);
     }
 }
-
-// Internal terminal utility functions
-/**
- * Enable raw mode for the terminal.
- * see https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
- */
-void _cg_term_enable_raw_mode();
-
-/**
- * Disable raw mode for the terminal.
- * see https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
- */
-void _cg_term_disable_raw_mode();
-
-/**
- * Reset the terminal to its default state.
- */
-void _cg_term_reset();
-
-void _cg_term_set_foreground_colour(cg_rgb_t colour);
-
-void _cg_term_set_background_colour(cg_rgb_t colour);
-
-// internal functions
-
-/**
- * Calculate the difference in time between two timespec structures.
- *
- * @param time1 The first time.
- * @param time2 The second time.
- * @return The difference in time in microseconds.
- */
-cg_uint _diff_time_micros(struct timespec time1, struct timespec time2);
-
 cg_uint _diff_time_micros(struct timespec time1, struct timespec time2)
 {
     // wprintf(L"time1 [%ld, %ld], time2[%ld, %ld]\n", time1.tv_sec, time1.tv_nsec, time2.tv_sec, time2.tv_nsec);
