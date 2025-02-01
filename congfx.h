@@ -736,6 +736,7 @@ void _cg_term_disable_raw_mode()
 
 void _cg_term_reset()
 {
+    // the [0m code resets all terminal attributes
     fputws(L"\033[0m", stdout);
 }
 
