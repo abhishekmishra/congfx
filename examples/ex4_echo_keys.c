@@ -8,7 +8,7 @@ cg_uint char_col = 0;
 void setup()
 {
     // does nothing
-    contents = make_string((width * height) + 1);
+    contents = cg_make_string((width * height) + 1);
     contents[0] = L'\0';
 }
 

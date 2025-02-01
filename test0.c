@@ -63,11 +63,11 @@ void setup()
 	for (cg_int i = 0; i < NUM_BALLS; i++)
 	{
 		_b = make_ball();
-		int x = rand_int(0, width);
-		int y = rand_int(0, height);
+		int x = cg_rand_int(0, width);
+		int y = cg_rand_int(0, height);
 		wprintf(L"%d, %d\n", x, y);
-		_b->position = make_vec2(x, y);
-		_b->velocity = make_vec2(0.00001 * rand_int(-10, 10), 0.00001 * rand_int(-10, 10));
+		_b->position = cg_make_vec2(x, y);
+		_b->velocity = cg_make_vec2(0.00001 * cg_rand_int(-10, 10), 0.00001 * cg_rand_int(-10, 10));
 		balls[i] = _b;
 	}
 	for (cg_int i = 0; i < NUM_BALLS; i++)
@@ -81,12 +81,12 @@ void setup()
 
 void ball_update(ball *b, cg_uint dt)
 {
-	vec2 vToAdd = vec2_mult_scalar(b->velocity, dt);
-	vec2 newPos = vec2_add(
+	vec2 vToAdd = cg_vec2_mult_scalar(b->velocity, dt);
+	vec2 newPos = cg_vec2_add(
 		b->position,
 		vToAdd);
-	dispose_vec2(b->position);
-	dispose_vec2(vToAdd);
+	cg_dispose_vec2(b->position);
+	cg_dispose_vec2(vToAdd);
 	b->position = newPos;
 
 	if (b->position[0] > width || b->position[0] < 0)
@@ -106,8 +106,8 @@ void ball_show(ball *b)
 	// 	(cg_uint)(b->position[1]),
 	// 	L'█');
 	rect(
-		number_to_uinteger(b->position[0] - 2),
-		number_to_uinteger(b->position[1] - 2),
+		cg_number_to_uinteger(b->position[0] - 2),
+		cg_number_to_uinteger(b->position[1] - 2),
 		4, 4);
 }
 
@@ -115,7 +115,7 @@ cg_string calc_fps(cg_uint dt)
 {
 	cg_uint dt_millis = dt / 1000;
 	cg_uint fps = (1000.0 / dt_millis);
-	cg_string fps_str = make_string(100);
+	cg_string fps_str = cg_make_string(100);
 	swprintf(fps_str, 100, L"FPS: %lu", fps);
 	return fps_str;
 }
@@ -134,9 +134,9 @@ void draw(cg_uint dt)
 	text(fps_str, 0, 0);
 
 	// show ball pos
-	// cg_string ballpos_str = vec2_to_string(b->position);
+	// cg_string ballpos_str = cg_vec2_to_string(b->position);
 	// text(ballpos_str, 0, 1);
-	// dispose_string(ballpos_str);
+	// cg_dispose_string(ballpos_str);
 
 	for (cg_int i = 0; i < NUM_BALLS; i++)
 	{
@@ -170,7 +170,7 @@ void draw(cg_uint dt)
 	// rect(5, 5, 10, 10);
 
 	// no_loop(); // no_loop stops the draw loop.
-	dispose_string(fps_str);
+	cg_dispose_string(fps_str);
 }
 
 void key_pressed(char c)

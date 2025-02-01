@@ -170,7 +170,7 @@ typedef cg_number *vec2;
  * @param fg The foreground colour of the cell.
  * @return The new cell.
  */
-cg_cell_t *make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg);
+cg_cell_t *cg_make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg);
 
 /**
  * Get the background colour of a cell.
@@ -178,7 +178,7 @@ cg_cell_t *make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg);
  * @param cell The cell to get the background colour of.
  * @return The background colour of the cell.
  */
-cg_rgb_t get_cell_bg(cg_cell_t *cell);
+cg_rgb_t cg_get_cell_bg(cg_cell_t *cell);
 
 
 /**
@@ -187,7 +187,7 @@ cg_rgb_t get_cell_bg(cg_cell_t *cell);
  * @param cell The cell to get the foreground colour of.
  * @return The foreground colour of the cell.
  */
-cg_rgb_t get_cell_fg(cg_cell_t *cell);
+cg_rgb_t cg_get_cell_fg(cg_cell_t *cell);
 
 /**
  * Get the character of a cell.
@@ -195,7 +195,7 @@ cg_rgb_t get_cell_fg(cg_cell_t *cell);
  * @param cell The cell to get the character of.
  * @return The character of the cell.
  */
-cg_char get_cell_char(cg_cell_t *cell);
+cg_char cg_get_cell_char(cg_cell_t *cell);
 
 /**
  * Set the background colour of a cell.
@@ -203,7 +203,7 @@ cg_char get_cell_char(cg_cell_t *cell);
  * @param cell The cell to set the background colour of.
  * @param bg The background colour to set.
  */
-void set_cell_bg(cg_cell_t *cell, cg_rgb_t bg);
+void cg_set_cell_bg(cg_cell_t *cell, cg_rgb_t bg);
 
 /**
  * Set the foreground colour of a cell.
@@ -211,7 +211,7 @@ void set_cell_bg(cg_cell_t *cell, cg_rgb_t bg);
  * @param cell The cell to set the foreground colour of.
  * @param fg The foreground colour to set.
  */
-void set_cell_fg(cg_cell_t *cell, cg_rgb_t fg);
+void cg_set_cell_fg(cg_cell_t *cell, cg_rgb_t fg);
 
 /**
  * Set the character of a cell.
@@ -219,14 +219,14 @@ void set_cell_fg(cg_cell_t *cell, cg_rgb_t fg);
  * @param cell The cell to set the character of.
  * @param c The character to set.
  */
-void set_cell_char(cg_cell_t *cell, cg_char c);
+void cg_set_cell_char(cg_cell_t *cell, cg_char c);
 
 /**
  * Dispose of a cell.
  *
  * @param cell The cell to dispose of.
  */
-void dispose_cell(cg_cell_t *cell);
+void cg_dispose_cell(cg_cell_t *cell);
 
 /**
  * Compare two cells.
@@ -235,7 +235,7 @@ void dispose_cell(cg_cell_t *cell);
  * @param cell2 The second cell to compare.
  * @return 0 if the cells are equal, -1 otherwise.
  */
-int compare_cells(cg_cell_t *cell1, cg_cell_t *cell2);
+int cg_compare_cells(cg_cell_t *cell1, cg_cell_t *cell2);
 
 /*+++++++++ END Cell TYPE FUNCTIONS +++++++++*/
 
@@ -248,7 +248,7 @@ int compare_cells(cg_cell_t *cell1, cg_cell_t *cell2);
  * @param h The height of the canvas.
  * @return The new canvas.
  */
-cg_canvas_t *make_canvas(cg_uint w, cg_uint h);
+cg_canvas_t *cg_make_canvas(cg_uint w, cg_uint h);
 
 /**
  * Get the cell at the given coordinates in the canvas.
@@ -258,14 +258,14 @@ cg_canvas_t *make_canvas(cg_uint w, cg_uint h);
  * @param y The y-coordinate of the cell.
  * @return The cell at the given coordinates.
  */
-cg_cell_t *get_cell(cg_canvas_t *canvas, cg_uint x, cg_uint y);
+cg_cell_t *cg_get_cell(cg_canvas_t *canvas, cg_uint x, cg_uint y);
 
 /**
  * Dispose of a canvas.
  *
  * @param canvas The canvas to dispose of.
  */
-void dispose_canvas(cg_canvas_t *canvas);
+void cg_dispose_canvas(cg_canvas_t *canvas);
 
 /*+++++++++ END Canvas TYPE FUNCTIONS +++++++++*/
 
@@ -278,7 +278,7 @@ void dispose_canvas(cg_canvas_t *canvas);
  * @param v2 The second element of the vector.
  * @return The new vector.
  */
-vec2 make_vec2(cg_number v1, cg_number v2);
+vec2 cg_make_vec2(cg_number v1, cg_number v2);
 
 /**
  * Create a new vector of 2 elements from another vector.
@@ -286,7 +286,7 @@ vec2 make_vec2(cg_number v1, cg_number v2);
  * @param other The vector to copy from.
  * @return The new vector.
  */
-vec2 make_vec2_from(vec2 other);
+vec2 cg_make_vec2_from(vec2 other);
 
 /**
  * Add two vectors.
@@ -295,7 +295,7 @@ vec2 make_vec2_from(vec2 other);
  * @param v2 The second vector.
  * @return The sum of the two vectors.
  */
-vec2 vec2_add(vec2 v1, vec2 v2);
+vec2 cg_vec2_add(vec2 v1, vec2 v2);
 
 /**
  * Multiply a vector by a scalar.
@@ -304,7 +304,7 @@ vec2 vec2_add(vec2 v1, vec2 v2);
  * @param x The scalar to multiply by.
  * @return The product of the vector and the scalar.
  */
-vec2 vec2_mult_scalar(vec2 vin, cg_number x);
+vec2 cg_vec2_mult_scalar(vec2 vin, cg_number x);
 
 /**
  * Convert a vector to a string.
@@ -312,14 +312,14 @@ vec2 vec2_mult_scalar(vec2 vin, cg_number x);
  * @param v The vector to convert.
  * @return The string representation of the vector.
  */
-cg_string vec2_to_string(vec2 v);
+cg_string cg_vec2_to_string(vec2 v);
 
 /**
  * Dispose of a vector.
  *
  * @param v The vector to dispose of.
  */
-void dispose_vec2(vec2 v);
+void cg_dispose_vec2(vec2 v);
 
 /*+++++++++ END Vec2 TYPE FUNCTIONS +++++++++*/
 
@@ -331,14 +331,14 @@ void dispose_vec2(vec2 v);
  * @param length The length of the string.
  * @return The new string.
  */
-cg_string make_string(cg_uint length);
+cg_string cg_make_string(cg_uint length);
 
 /**
  * Dispose of a string.
  *
  * @param s The string to dispose of.
  */
-void dispose_string(cg_string s);
+void cg_dispose_string(cg_string s);
 
 /*+++++++++ END String TYPE FUNCTIONS +++++++++*/
 
@@ -350,7 +350,7 @@ void dispose_string(cg_string s);
  * @param x The number to convert.
  * @return The unsigned integer value of the number.
  */
-cg_uint number_to_uinteger(cg_number x);
+cg_uint cg_number_to_uinteger(cg_number x);
 
 // number utility functions
 
@@ -361,7 +361,7 @@ cg_uint number_to_uinteger(cg_number x);
  * @param to The upper bound of the random integer.
  * @return The random integer.
  */
-int rand_int(int from, int to);
+int cg_rand_int(int from, int to);
 
 /*+++++++++ END Number TYPE FUNCTIONS +++++++++*/
 
@@ -437,7 +437,7 @@ void text(cg_char *t, cg_uint x, cg_uint y);
 
 /*--------- BEGIN PUBLIC FUNCTION PROTOTYPES -----------*/
 
-cg_cell_t *make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg)
+cg_cell_t *cg_make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg)
 {
     cg_cell_t *cell = (cg_cell_t *)_CG_CALLOC(1, sizeof(cg_cell_t));
     if (cell == NULL)
@@ -451,7 +451,7 @@ cg_cell_t *make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg)
     return cell;
 }
 
-cg_rgb_t get_cell_bg(cg_cell_t *cell)
+cg_rgb_t cg_get_cell_bg(cg_cell_t *cell)
 {
     if (cell != NULL)
     {
@@ -461,7 +461,7 @@ cg_rgb_t get_cell_bg(cg_cell_t *cell)
 }
 
 
-cg_rgb_t get_cell_fg(cg_cell_t *cell)
+cg_rgb_t cg_get_cell_fg(cg_cell_t *cell)
 {
     if (cell != NULL)
     {
@@ -471,7 +471,7 @@ cg_rgb_t get_cell_fg(cg_cell_t *cell)
 }
 
 
-cg_char get_cell_char(cg_cell_t *cell)
+cg_char cg_get_cell_char(cg_cell_t *cell)
 {
     if (cell != NULL)
     {
@@ -480,7 +480,7 @@ cg_char get_cell_char(cg_cell_t *cell)
     return L' ';
 }
 
-void set_cell_bg(cg_cell_t *cell, cg_rgb_t bg)
+void cg_set_cell_bg(cg_cell_t *cell, cg_rgb_t bg)
 {
     if (cell != NULL)
     {
@@ -488,7 +488,7 @@ void set_cell_bg(cg_cell_t *cell, cg_rgb_t bg)
     }
 }
 
-void set_cell_fg(cg_cell_t *cell, cg_rgb_t fg)
+void cg_set_cell_fg(cg_cell_t *cell, cg_rgb_t fg)
 {
     if (cell != NULL)
     {
@@ -497,7 +497,7 @@ void set_cell_fg(cg_cell_t *cell, cg_rgb_t fg)
 }
 
 
-void set_cell_char(cg_cell_t *cell, cg_char c)
+void cg_set_cell_char(cg_cell_t *cell, cg_char c)
 {
     if (cell != NULL)
     {
@@ -505,7 +505,7 @@ void set_cell_char(cg_cell_t *cell, cg_char c)
     }
 }
 
-void dispose_cell(cg_cell_t *cell)
+void cg_dispose_cell(cg_cell_t *cell)
 {
     if (cell != NULL)
     {
@@ -513,7 +513,7 @@ void dispose_cell(cg_cell_t *cell)
     }
 }
 
-int compare_cells(cg_cell_t *cell1, cg_cell_t *cell2)
+int cg_compare_cells(cg_cell_t *cell1, cg_cell_t *cell2)
 {
     if (cell1 == NULL && cell2 == NULL)
     {
@@ -562,7 +562,7 @@ cg_canvas_t *canvas_current = NULL;
 cg_uint width;
 cg_uint height;
 
-cg_canvas_t *make_canvas(cg_uint w, cg_uint h)
+cg_canvas_t *cg_make_canvas(cg_uint w, cg_uint h)
 {
     cg_canvas_t *canvas = (cg_canvas_t *)_CG_CALLOC(1, sizeof(cg_canvas_t));
     if (canvas == NULL)
@@ -584,14 +584,14 @@ cg_canvas_t *make_canvas(cg_uint w, cg_uint h)
     {
         for (cg_uint j = 0; j < w; j++)
         {
-            canvas->cells[(i * w) + j] = *make_cell(_CG_DEFAULT_BACKGROUND_CHAR, default_bg_colour, default_fg_colour);
+            canvas->cells[(i * w) + j] = *cg_make_cell(_CG_DEFAULT_BACKGROUND_CHAR, default_bg_colour, default_fg_colour);
         }
     }
     return canvas;
 }
 
 
-cg_cell_t *get_cell(cg_canvas_t *canvas, cg_uint x, cg_uint y)
+cg_cell_t *cg_get_cell(cg_canvas_t *canvas, cg_uint x, cg_uint y)
 {
     if (canvas == NULL)
     {
@@ -604,7 +604,7 @@ cg_cell_t *get_cell(cg_canvas_t *canvas, cg_uint x, cg_uint y)
     return &(canvas->cells[(y * canvas->width) + x]);
 }
 
-void dispose_canvas(cg_canvas_t *canvas)
+void cg_dispose_canvas(cg_canvas_t *canvas)
 {
     if (canvas != NULL)
     {
@@ -760,7 +760,7 @@ void cg_err_fatal_msg(cg_string message)
     cg_err_fatal(message, -1);
 }
 
-cg_uint number_to_uinteger(cg_number x)
+cg_uint cg_number_to_uinteger(cg_number x)
 {
     if (x < 0)
     {
@@ -773,7 +773,7 @@ cg_uint number_to_uinteger(cg_number x)
 }
 
 // type utility functions
-cg_string make_string(cg_uint length)
+cg_string cg_make_string(cg_uint length)
 {
     cg_string s = (cg_string)_CG_CALLOC(length + 1, sizeof(cg_char));
     if (s == NULL)
@@ -784,7 +784,7 @@ cg_string make_string(cg_uint length)
     return s;
 }
 
-void dispose_string(cg_string s)
+void cg_dispose_string(cg_string s)
 {
     if (s != NULL)
     {
@@ -792,7 +792,7 @@ void dispose_string(cg_string s)
     }
 }
 
-vec2 make_vec2(cg_number v0, cg_number v1)
+vec2 cg_make_vec2(cg_number v0, cg_number v1)
 {
     vec2 v = (vec2)_CG_CALLOC(2, sizeof(cg_number));
     if (v == NULL)
@@ -805,36 +805,36 @@ vec2 make_vec2(cg_number v0, cg_number v1)
     return v;
 }
 
-vec2 make_vec2_from(vec2 other)
+vec2 cg_make_vec2_from(vec2 other)
 {
-    vec2 v = make_vec2(other[0], other[1]);
+    vec2 v = cg_make_vec2(other[0], other[1]);
     return v;
 }
 
-vec2 vec2_add(vec2 v1, vec2 v2)
+vec2 cg_vec2_add(vec2 v1, vec2 v2)
 {
-    vec2 res = make_vec2_from(v1);
+    vec2 res = cg_make_vec2_from(v1);
     res[0] = res[0] + v2[0];
     res[1] = res[1] + v2[1];
     return res;
 }
 
-vec2 vec2_mult_scalar(vec2 vin, cg_number x)
+vec2 cg_vec2_mult_scalar(vec2 vin, cg_number x)
 {
-    vec2 v = make_vec2_from(vin);
+    vec2 v = cg_make_vec2_from(vin);
     v[0] = v[0] * x;
     v[1] = v[1] * x;
     return v;
 }
 
-cg_string vec2_to_string(vec2 v)
+cg_string cg_vec2_to_string(vec2 v)
 {
-    cg_string s = make_string(100);
+    cg_string s = cg_make_string(100);
     swprintf(s, 100, L"%.2Lf, %.2Lf", v[0], v[1]);
     return s;
 }
 
-void dispose_vec2(vec2 v)
+void cg_dispose_vec2(vec2 v)
 {
     if (v != NULL)
     {
@@ -842,7 +842,7 @@ void dispose_vec2(vec2 v)
     }
 }
 
-int rand_int(int from, int to)
+int cg_rand_int(int from, int to)
 {
     int num = (rand() % (to - from + 1)) + from;
     return num;
@@ -953,14 +953,14 @@ void create_canvas(cg_uint w, cg_uint h)
 {
     if (canvas_current != NULL)
     {
-        dispose_canvas(canvas_current);
+        cg_dispose_canvas(canvas_current);
     }
-    canvas_current = make_canvas(w, h);
+    canvas_current = cg_make_canvas(w, h);
     if (canvas_previous != NULL)
     {
-        dispose_canvas(canvas_previous);
+        cg_dispose_canvas(canvas_previous);
     }
-    canvas_previous = make_canvas(w, h);
+    canvas_previous = cg_make_canvas(w, h);
 
     width = w;
     height = h;
@@ -1013,14 +1013,14 @@ void show_canvas()
         {
             for (cg_uint j = 0; j < canvas_current->width; j++)
             {
-                cg_cell_t *current_cell = get_cell(canvas_current, j, i);
-                cg_cell_t *previous_cell = get_cell(canvas_previous, j, i);
-                // if (compare_cells(current_cell, previous_cell) == 0)
+                cg_cell_t *current_cell = cg_get_cell(canvas_current, j, i);
+                cg_cell_t *previous_cell = cg_get_cell(canvas_previous, j, i);
+                // if (cg_compare_cells(current_cell, previous_cell) == 0)
                 // {
                 //     continue;
                 // }
-                cg_rgb_t cell_fg = get_cell_fg(current_cell);
-                cg_rgb_t cell_bg = get_cell_bg(current_cell);
+                cg_rgb_t cell_fg = cg_get_cell_fg(current_cell);
+                cg_rgb_t cell_bg = cg_get_cell_bg(current_cell);
 
                 if (cell_fg.r != current_fg.r || cell_fg.g != current_fg.g || cell_fg.b != current_fg.b)
                 {
@@ -1034,7 +1034,7 @@ void show_canvas()
                 }
                 // _cg_term_set_foreground_colour(canvas_foreground_colour[(i * width) + j]);
                 // _cg_term_set_background_colour(canvas_background_colour[(i * width) + j]);
-                cg_char c = get_cell_char(current_cell);
+                cg_char c = cg_get_cell_char(current_cell);
                 putwchar(c);
                 // idx += 1;
             }
@@ -1053,10 +1053,10 @@ void point(cg_uint x1, cg_uint y1, cg_char c)
     {
         return;
     }
-    cg_cell_t *cell = get_cell(canvas_current, x1, y1);
-    set_cell_char(cell, c);
-    set_cell_bg(cell, background_colour);
-    set_cell_fg(cell, stroke_colour);
+    cg_cell_t *cell = cg_get_cell(canvas_current, x1, y1);
+    cg_set_cell_char(cell, c);
+    cg_set_cell_bg(cell, background_colour);
+    cg_set_cell_fg(cell, stroke_colour);
     // wprintf(L"\033[%lu;%luf", y1, x1);
     // wprintf(L"%c", c);
 }
