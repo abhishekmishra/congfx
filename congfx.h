@@ -19,6 +19,13 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+/**
+ * @file congfx.h
+ * @brief A simple graphics library for the terminal.
+ *
+ * This library provides a simple graphics library for the terminal.
+ */
+
 #ifndef __CONGFX_H__
 #define __CONGFX_H__
 
