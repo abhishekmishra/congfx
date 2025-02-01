@@ -736,7 +736,7 @@ void _cg_term_disable_raw_mode()
 
 void _cg_term_reset()
 {
-    wprintf(L"\033[0m");
+    fputws(L"\033[0m", stdout);
 }
 
 void _cg_term_set_foreground_colour(cg_rgb_t colour)
