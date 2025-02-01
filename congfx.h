@@ -24,7 +24,42 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @brief A simple graphics library for the terminal.
  *
  * This library provides a simple graphics library for the terminal.
- */
+**/
+
+/*
+********************************************************************************
+***************************** VERSION HISTORY **********************************
+********************************************************************************
+
+Date       | Version | Comments
+--------------------------------------------------------------------------------
+2025/02/01 | 0.1a    | An initial internal release trying out various
+           |         | experiments. At this time, not sure if this will ever be
+           |         | good enough to release.
+
+********************************************************************************
+********************************************************************************
+*/
+
+/*
+********************************************************************************
+********************************** README **************************************
+********************************************************************************
+ConGfx - A simple graphics exploration library for the terminal.
+
+This graphics exploration library is inspired by p5.js, love2d, and the kilo
+text editor and corresponding tutorial to build an editor for the terminal from
+scratch.
+
+I've noticed that terminals over time have become quite capable, and looking at
+the cool things being built for the terminal I wondered how far I could go in
+building p5.js or love2d like game/graphics loop. Can we draw stuff on the
+terminal and refresh the drawing fast enough to create the illusion of moving
+pictures.
+
+********************************************************************************
+********************************************************************************
+*/
 
 #ifndef __CONGFX_H__
 #define __CONGFX_H__
