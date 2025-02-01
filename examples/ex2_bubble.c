@@ -25,7 +25,7 @@ void draw(cg_uint dt)
     }
 
     // draw the circle of radius `radius`
-    rect(width / 2 - radius, height / 2 - radius, 2 * radius, 2 * radius);
+    cg_rect(width / 2 - radius, height / 2 - radius, 2 * radius, 2 * radius);
 
     // increment the total time
     total_time += dt;

@@ -401,35 +401,35 @@ void key_pressed(char c);
 /*+++++++++ BEGIN Graphics FUNCTIONS +++++++++*/
 
 // Graphics System functions
-void no_loop();
+void cg_no_loop();
 
-void loop();
+void cg_loop();
 
-void frame_rate(cg_uint fps);
+void cg_frame_rate(cg_uint fps);
 
 // Terminal utility functions
-void cls();
+void cg_cls();
 
-void home();
+void cg_home();
 
 /*========= BEGIN Graphics Canvas FUNCTIONS =========*/
 // Canvas functions
-void create_canvas(cg_uint w, cg_uint h);
-void background(cg_rgb_t c);
-void stroke(cg_rgb_t c);
-void fill(cg_rgb_t c);
-void set_colour(cg_rgb_t c);
-void show_canvas();
-void swap_canvas();
+void cg_create_canvas(cg_uint w, cg_uint h);
+void cg_background(cg_rgb_t c);
+void cg_stroke(cg_rgb_t c);
+void cg_fill(cg_rgb_t c);
+void cg_set_colour(cg_rgb_t c);
+void cg_show_canvas();
+void cg_swap_canvas();
 /*========= END Graphics Canvas FUNCTIONS =========*/
 
 /*========= BEGIN Graphics Drawing FUNCTIONS =========*/
 
 // drawing functions
-void point(cg_uint x1, cg_uint y1, cg_char c);
-void line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2);
-void rect(cg_uint x1, cg_uint y1, cg_uint width, cg_uint height);
-void text(cg_char *t, cg_uint x, cg_uint y);
+void cg_point(cg_uint x1, cg_uint y1, cg_char c);
+void cg_line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2);
+void cg_rect(cg_uint x1, cg_uint y1, cg_uint width, cg_uint height);
+void cg_text(cg_char *t, cg_uint x, cg_uint y);
 
 /*========= END Graphics Drawing FUNCTIONS =========*/
 
@@ -683,7 +683,7 @@ int main(int argc, char *argv[])
     // if there is no canvas created, create a default one
     if (canvas_current == NULL)
     {
-        create_canvas(100, 25);
+        cg_create_canvas(100, 25);
     }
 
     cg_uint delta_time_ideal = 1000000 / _fps; // in microseconds
@@ -711,19 +711,19 @@ int main(int argc, char *argv[])
         }
         key_pressed(c);
 
-        // no_loop();
+        // cg_no_loop();
 
         // set default background and forground
         _cg_term_reset();
         _cg_term_set_foreground_colour(default_fg_colour);
-        background(default_bg_colour);
-        set_colour(default_fg_colour);
+        cg_background(default_bg_colour);
+        cg_set_colour(default_fg_colour);
 
-        cls();
-        home();
+        cg_cls();
+        cg_home();
 
         draw(dt);
-        show_canvas();
+        cg_show_canvas();
 
         // how much time spent
         clock_gettime(CLOCK_MONOTONIC, &after_draw_time);
@@ -745,7 +745,7 @@ int main(int argc, char *argv[])
         // wprintf(L"After sleep: Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
 
         // swap canvas
-        swap_canvas();
+        cg_swap_canvas();
     }
 }
 
@@ -848,17 +848,17 @@ int cg_rand_int(int from, int to)
     return num;
 }
 
-void no_loop()
+void cg_no_loop()
 {
     _loop = 0;
 }
 
-void loop()
+void cg_loop()
 {
     _loop = 1;
 }
 
-void frame_rate(cg_uint fps)
+void cg_frame_rate(cg_uint fps)
 {
     if (fps > 0 && fps < 100)
     {
@@ -872,12 +872,12 @@ void frame_rate(cg_uint fps)
 }
 
 // terminal utility functions
-void cls()
+void cg_cls()
 {
     wprintf(L"\033[2J");
 }
 
-void home()
+void cg_home()
 {
     wprintf(L"\033[H");
 }
@@ -949,7 +949,7 @@ void _cg_term_set_background_colour(cg_rgb_t colour)
 
 // canvas functions
 
-void create_canvas(cg_uint w, cg_uint h)
+void cg_create_canvas(cg_uint w, cg_uint h)
 {
     if (canvas_current != NULL)
     {
@@ -966,42 +966,42 @@ void create_canvas(cg_uint w, cg_uint h)
     height = h;
 }
 
-void swap_canvas()
+void cg_swap_canvas()
 {
     cg_canvas_t *temp = canvas_current;
     canvas_current = canvas_previous;
     canvas_previous = temp;
 }
 
-void background(cg_rgb_t col)
+void cg_background(cg_rgb_t col)
 {
     background_colour = col;
     for (cg_uint x = 0; x < canvas_current->width; x++)
     {
         for (cg_uint y = 0; y < canvas_current->height; y++)
         {
-            point(x, y, background_char);
+            cg_point(x, y, background_char);
         }
     }
 }
 
-void stroke(cg_rgb_t col)
+void cg_stroke(cg_rgb_t col)
 {
     stroke_colour = col;
 }
 
-void fill(cg_rgb_t col)
+void cg_fill(cg_rgb_t col)
 {
     fill_colour = col;
 }
 
-void set_colour(cg_rgb_t col)
+void cg_set_colour(cg_rgb_t col)
 {
-    stroke(col);
-    fill(col);
+    cg_stroke(col);
+    cg_fill(col);
 }
 
-void show_canvas()
+void cg_show_canvas()
 {
     if (canvas_current != NULL)
     {
@@ -1047,7 +1047,7 @@ void show_canvas()
     }
 }
 
-void point(cg_uint x1, cg_uint y1, cg_char c)
+void cg_point(cg_uint x1, cg_uint y1, cg_char c)
 {
     if (x1 >= canvas_current->width || y1 >= canvas_current->height || x1 < 0 || y1 < 0)
     {
@@ -1061,7 +1061,7 @@ void point(cg_uint x1, cg_uint y1, cg_char c)
     // wprintf(L"%c", c);
 }
 
-void line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
+void cg_line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
 {
     // wprintf(L"line [%lu,%lu] -> [%lu, %lu]", x1, y1, x2, y2);
 
@@ -1082,7 +1082,7 @@ void line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
         // slope is infinite
         for (cg_uint y = y1; y <= y2; y++)
         {
-            point(x1, y, L'█');
+            cg_point(x1, y, L'█');
         }
     }
     else
@@ -1091,27 +1091,27 @@ void line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
         for (cg_uint x = x1; x <= x2; x++)
         {
             cg_uint y = y1 + (slope * x);
-            point(x, y, L'█');
+            cg_point(x, y, L'█');
         }
     }
 }
 
-void rect(cg_uint x1, cg_uint y1, cg_uint width, cg_uint height)
+void cg_rect(cg_uint x1, cg_uint y1, cg_uint width, cg_uint height)
 {
-    line(x1, y1, x1 + width, y1);
-    line(x1 + width, y1, x1 + width, y1 + height);
-    line(x1 + width, y1 + height, x1, y1 + height);
-    line(x1, y1, x1, y1 + height);
+    cg_line(x1, y1, x1 + width, y1);
+    cg_line(x1 + width, y1, x1 + width, y1 + height);
+    cg_line(x1 + width, y1 + height, x1, y1 + height);
+    cg_line(x1, y1, x1, y1 + height);
 }
 
-void text(cg_char *t, cg_uint x, cg_uint y)
+void cg_text(cg_char *t, cg_uint x, cg_uint y)
 {
     cg_uint len = wcslen(t);
     if (len > 0)
     {
         for (cg_uint i = 0; i < len; i++)
         {
-            point(x + i, y, t[i]);
+            cg_point(x + i, y, t[i]);
         }
     }
 }

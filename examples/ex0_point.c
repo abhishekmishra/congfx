@@ -5,21 +5,21 @@ cg_rgb_t bg_colour = {0, 100, 0};
 
 void setup()
 {
-    // background(12);
-    // stroke(15);
-    frame_rate(60);
+    // cg_background(12);
+    // cg_stroke(15);
+    cg_frame_rate(60);
 }
 
 void draw(cg_uint dt)
 {
-    background(bg_colour);
-    stroke(fg_colour);
+    cg_background(bg_colour);
+    cg_stroke(fg_colour);
 
     // draw a point at the center of the canvas
-    point(width / 2, height / 2, L'X');
+    cg_point(width / 2, height / 2, L'X');
 
     // no loop
-    // no_loop();
+    // cg_no_loop();
 }
 
 void key_pressed(char c)

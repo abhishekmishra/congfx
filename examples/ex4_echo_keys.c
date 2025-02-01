@@ -19,7 +19,7 @@ void draw(cg_uint dt)
     cg_uint cr = 0, cc = 0;
     for (int i = 0; i < len; i++)
     {
-        point(cc, cr, contents[i]);
+        cg_point(cc, cr, contents[i]);
         cc++;
         if (cc >= width)
         {
@@ -31,7 +31,7 @@ void draw(cg_uint dt)
 
 void key_pressed(char c)
 {
-    point(char_col, char_row, c);
+    cg_point(char_col, char_row, c);
     char_col++;
     if (char_col >= width)
     {

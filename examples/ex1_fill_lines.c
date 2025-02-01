@@ -77,12 +77,12 @@ void draw(cg_uint dt)
     // draw the lines
     for (cg_uint i = 0; i < lines_to_draw; i++)
     {
-        line(0, i, width, i);
+        cg_line(0, i, width, i);
     }
 
     // draw the total time in the center of the canvas
     swprintf(total_time_string, 1024, L"Total time: %5lu", total_time);
-    text(total_time_string, (width - wcslen(total_time_string))/2, 10);
+    cg_text(total_time_string, (width - wcslen(total_time_string))/2, 10);
     total_time += dt;
 }
 

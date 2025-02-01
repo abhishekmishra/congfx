@@ -58,7 +58,7 @@ void setup()
 {
 	ball *_b = NULL;
 	balls = (ball**)calloc(NUM_BALLS, sizeof(ball*));
-	create_canvas(100, 50);
+	cg_create_canvas(100, 50);
 
 	for (cg_int i = 0; i < NUM_BALLS; i++)
 	{
@@ -75,8 +75,8 @@ void setup()
 		wprintf(L"ball %lu at %Lf, %Lf\n", i, balls[i]->position[0], balls[i]->position[1]);
 	}
 	// setup() is run once at startup
-	frame_rate(60);
-	// no_loop();
+	cg_frame_rate(60);
+	// cg_no_loop();
 }
 
 void ball_update(ball *b, cg_uint dt)
@@ -101,11 +101,11 @@ void ball_update(ball *b, cg_uint dt)
 
 void ball_show(ball *b)
 {
-	// point(
+	// cg_point(
 	// 	(cg_uint)(b->position[0]),
 	// 	(cg_uint)(b->position[1]),
 	// 	L'█');
-	rect(
+	cg_rect(
 		cg_number_to_uinteger(b->position[0] - 2),
 		cg_number_to_uinteger(b->position[1] - 2),
 		4, 4);
@@ -125,17 +125,17 @@ void draw(cg_uint dt)
 	// draw() is run multiple times per second.
 
 	//set background colour
-	//background(2);
+	//cg_background(2);
 
-	text(L"CONGFX: EXPERIMENT IN C ", width / 2 - 12, height / 2);
+	cg_text(L"CONGFX: EXPERIMENT IN C ", width / 2 - 12, height / 2);
 
 	// show fps
 	cg_string fps_str = calc_fps(dt);
-	text(fps_str, 0, 0);
+	cg_text(fps_str, 0, 0);
 
 	// show ball pos
 	// cg_string ballpos_str = cg_vec2_to_string(b->position);
-	// text(ballpos_str, 0, 1);
+	// cg_text(ballpos_str, 0, 1);
 	// cg_dispose_string(ballpos_str);
 
 	for (cg_int i = 0; i < NUM_BALLS; i++)
@@ -145,13 +145,13 @@ void draw(cg_uint dt)
 		ball_update(a, dt);
 	}
 	// // set point 0,0 to A
-	// point(0, 0, L'A');
+	// cg_point(0, 0, L'A');
 
 	// // set point 3,4 to B
-	// point(3, 4, L'B');
+	// cg_point(3, 4, L'B');
 
 	// // set point x, y to C
-	// point(x, y, L'C');
+	// cg_point(x, y, L'C');
 
 	// if (y == height)
 	// {
@@ -163,13 +163,13 @@ void draw(cg_uint dt)
 	// }
 
 	// // a couple of lines
-	// line(20, 20, 20, 25);
-	// line(10, 10, 20, 20);
+	// cg_line(20, 20, 20, 25);
+	// cg_line(10, 10, 20, 20);
 
 	// // a rectangle
-	// rect(5, 5, 10, 10);
+	// cg_rect(5, 5, 10, 10);
 
-	// no_loop(); // no_loop stops the draw loop.
+	// cg_no_loop(); // cg_no_loop stops the draw loop.
 	cg_dispose_string(fps_str);
 }
 

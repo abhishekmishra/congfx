@@ -11,7 +11,7 @@ void setup()
 void draw(cg_uint dt)
 {
     cg_rgb_t col = {0, 0, dt % 256};
-    stroke(col);
+    cg_stroke(col);
 
     // determine the number of lines to draw
     // based on the total time elapsed
@@ -27,7 +27,7 @@ void draw(cg_uint dt)
     }
 
     // draw the circle of radius `radius`
-    rect(width / 2 - radius, height / 2 - radius, 2 * radius, 2 * radius);
+    cg_rect(width / 2 - radius, height / 2 - radius, 2 * radius, 2 * radius);
 
     // increment the total time
     total_time += dt;
