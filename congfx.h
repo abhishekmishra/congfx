@@ -489,6 +489,8 @@ void _cg_term_set_foreground_colour(cg_rgb_t colour);
 
 void _cg_term_set_background_colour(cg_rgb_t colour);
 
+void _cg_term_move_to(cg_uint x, cg_uint y);
+
 // internal functions
 
 /**
@@ -951,6 +953,15 @@ void _cg_term_set_foreground_colour(cg_rgb_t colour)
 void _cg_term_set_background_colour(cg_rgb_t colour)
 {
     wprintf(L"\033[48;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
+}
+
+void _cg_term_move_to(cg_uint x, cg_uint y)
+{
+    wprintf(L"\033[%lu;%luf", y, x);
+    // fputws(L"\033[", stdout);
+    // fputc(y, stdout);
+    // fputws(L";", stdout);
+    // fputc(x, stdout);
 }
 
 // canvas functions
