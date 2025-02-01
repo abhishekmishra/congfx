@@ -44,7 +44,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define _CG_CALLOC calloc
 #define _CG_FREE free
 
-// typedefs
+/*--------- BEGIN TYPE DEFINITIONS -----------*/
 
 /**
  * The default character type used in the congfx programs
@@ -96,6 +96,305 @@ typedef struct
     cg_rgb_t fg;
 } cg_cell_t;
 
+/**
+ * Define a canvas type
+ */
+typedef struct
+{
+    cg_uint width;
+    cg_uint height;
+    cg_cell_t *cells;
+} cg_canvas_t;
+
+// Vector type
+
+/**
+ * The default vector type used in the congfx programs
+ * are arrays of long double (long double *).
+ */
+typedef cg_number *vec2;
+
+/*--------- END TYPE DEFINITIONS -----------*/
+
+/*--------- BEGIN PUBLIC FUNCTION PROTOTYPES -----------*/
+
+/*+++++++++ BEGIN Cell TYPE FUNCTIONS +++++++++*/
+
+/**
+ * Create a new cell with the given character and colours.
+ *
+ * @param c The character to display in the cell.
+ * @param bg The background colour of the cell.
+ * @param fg The foreground colour of the cell.
+ * @return The new cell.
+ */
+cg_cell_t *make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg);
+
+/**
+ * Get the background colour of a cell.
+ *
+ * @param cell The cell to get the background colour of.
+ * @return The background colour of the cell.
+ */
+cg_rgb_t get_cell_bg(cg_cell_t *cell);
+
+
+/**
+ * Get the foreground colour of a cell.
+ *
+ * @param cell The cell to get the foreground colour of.
+ * @return The foreground colour of the cell.
+ */
+cg_rgb_t get_cell_fg(cg_cell_t *cell);
+
+/**
+ * Get the character of a cell.
+ *
+ * @param cell The cell to get the character of.
+ * @return The character of the cell.
+ */
+cg_char get_cell_char(cg_cell_t *cell);
+
+/**
+ * Set the background colour of a cell.
+ *
+ * @param cell The cell to set the background colour of.
+ * @param bg The background colour to set.
+ */
+void set_cell_bg(cg_cell_t *cell, cg_rgb_t bg);
+
+/**
+ * Set the foreground colour of a cell.
+ *
+ * @param cell The cell to set the foreground colour of.
+ * @param fg The foreground colour to set.
+ */
+void set_cell_fg(cg_cell_t *cell, cg_rgb_t fg);
+
+/**
+ * Set the character of a cell.
+ *
+ * @param cell The cell to set the character of.
+ * @param c The character to set.
+ */
+void set_cell_char(cg_cell_t *cell, cg_char c);
+
+/**
+ * Dispose of a cell.
+ *
+ * @param cell The cell to dispose of.
+ */
+void dispose_cell(cg_cell_t *cell);
+
+/**
+ * Compare two cells.
+ *
+ * @param cell1 The first cell to compare.
+ * @param cell2 The second cell to compare.
+ * @return 0 if the cells are equal, -1 otherwise.
+ */
+int compare_cells(cg_cell_t *cell1, cg_cell_t *cell2);
+
+/*+++++++++ END Cell TYPE FUNCTIONS +++++++++*/
+
+/*+++++++++ BEGIN Canvas TYPE FUNCTIONS +++++++++*/
+
+/**
+ * Create a new canvas with the given width and height.
+ *
+ * @param w The width of the canvas.
+ * @param h The height of the canvas.
+ * @return The new canvas.
+ */
+cg_canvas_t *make_canvas(cg_uint w, cg_uint h);
+
+/**
+ * Get the cell at the given coordinates in the canvas.
+ *
+ * @param canvas The canvas to get the cell from.
+ * @param x The x-coordinate of the cell.
+ * @param y The y-coordinate of the cell.
+ * @return The cell at the given coordinates.
+ */
+cg_cell_t *get_cell(cg_canvas_t *canvas, cg_uint x, cg_uint y);
+
+/**
+ * Dispose of a canvas.
+ *
+ * @param canvas The canvas to dispose of.
+ */
+void dispose_canvas(cg_canvas_t *canvas);
+
+/*+++++++++ END Canvas TYPE FUNCTIONS +++++++++*/
+
+/*+++++++++ BEGIN Vec2 TYPE FUNCTIONS +++++++++*/
+
+/**
+ * Create a new vector of 2 elements.
+ *
+ * @param v1 The first element of the vector.
+ * @param v2 The second element of the vector.
+ * @return The new vector.
+ */
+vec2 make_vec2(cg_number v1, cg_number v2);
+
+/**
+ * Create a new vector of 2 elements from another vector.
+ *
+ * @param other The vector to copy from.
+ * @return The new vector.
+ */
+vec2 make_vec2_from(vec2 other);
+
+/**
+ * Add two vectors.
+ *
+ * @param v1 The first vector.
+ * @param v2 The second vector.
+ * @return The sum of the two vectors.
+ */
+vec2 vec2_add(vec2 v1, vec2 v2);
+
+/**
+ * Multiply a vector by a scalar.
+ *
+ * @param vin The vector to multiply.
+ * @param x The scalar to multiply by.
+ * @return The product of the vector and the scalar.
+ */
+vec2 vec2_mult_scalar(vec2 vin, cg_number x);
+
+/**
+ * Convert a vector to a string.
+ *
+ * @param v The vector to convert.
+ * @return The string representation of the vector.
+ */
+cg_string vec2_to_string(vec2 v);
+
+/**
+ * Dispose of a vector.
+ *
+ * @param v The vector to dispose of.
+ */
+void dispose_vec2(vec2 v);
+
+/*+++++++++ END Vec2 TYPE FUNCTIONS +++++++++*/
+
+/*+++++++++ BEGIN String TYPE FUNCTIONS +++++++++*/
+
+/**
+ * Create a new string of a given length.
+ *
+ * @param length The length of the string.
+ * @return The new string.
+ */
+cg_string make_string(cg_uint length);
+
+/**
+ * Dispose of a string.
+ *
+ * @param s The string to dispose of.
+ */
+void dispose_string(cg_string s);
+
+/*+++++++++ END String TYPE FUNCTIONS +++++++++*/
+
+/*+++++++++ BEGIN Number TYPE FUNCTIONS +++++++++*/
+
+/**
+ * Convert a number to an unsigned integer.
+ *
+ * @param x The number to convert.
+ * @return The unsigned integer value of the number.
+ */
+cg_uint number_to_uinteger(cg_number x);
+
+// number utility functions
+
+/**
+ * Generate a random integer between two values.
+ *
+ * @param from The lower bound of the random integer.
+ * @param to The upper bound of the random integer.
+ * @return The random integer.
+ */
+int rand_int(int from, int to);
+
+/*+++++++++ END Number TYPE FUNCTIONS +++++++++*/
+
+/*+++++++++ BEGIN ERROR REPORTING UTILITY FUNCTIONS +++++++++*/
+
+// Error reporting functions
+
+/**
+ * Print an error message and exit the program.
+ *
+ * @param message The error message to print.
+ * @param code The error code to exit with.
+ */
+void cg_err_fatal(cg_string message, cg_uint code);
+
+/**
+ * Print an error message and exit the program with a default error code.
+ *
+ * @param message The error message to print.
+ */
+void cg_err_fatal_msg(cg_string message);
+
+/*+++++++++ END ERROR REPORTING UTILITY FUNCTIONS +++++++++*/
+
+/*+++++++++ BEGIN LIFECYCLE STUB FUNCTIONS +++++++++*/
+
+// Life-cycle functions, to be defined by the main program
+
+void setup();
+
+void draw(cg_uint dt);
+
+void key_pressed(char c);
+
+/*+++++++++ END LIFECYCLE STUB FUNCTIONS +++++++++*/
+
+/*+++++++++ BEGIN Graphics FUNCTIONS +++++++++*/
+
+// Graphics System functions
+void no_loop();
+
+void loop();
+
+void frame_rate(cg_uint fps);
+
+// Terminal utility functions
+void cls();
+
+void home();
+
+/*========= BEGIN Graphics Canvas FUNCTIONS =========*/
+// Canvas functions
+void create_canvas(cg_uint w, cg_uint h);
+void background(cg_rgb_t c);
+void stroke(cg_rgb_t c);
+void fill(cg_rgb_t c);
+void set_colour(cg_rgb_t c);
+void show_canvas();
+void swap_canvas();
+/*========= END Graphics Canvas FUNCTIONS =========*/
+
+/*========= BEGIN Graphics Drawing FUNCTIONS =========*/
+
+// drawing functions
+void point(cg_uint x1, cg_uint y1, cg_char c);
+void line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2);
+void rect(cg_uint x1, cg_uint y1, cg_uint width, cg_uint height);
+void text(cg_char *t, cg_uint x, cg_uint y);
+
+/*========= END Graphics Drawing FUNCTIONS =========*/
+
+/*+++++++++ END Graphics FUNCTIONS +++++++++*/
+
+/*--------- BEGIN PUBLIC FUNCTION PROTOTYPES -----------*/
+
 cg_cell_t *make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg)
 {
     cg_cell_t *cell = (cg_cell_t *)_CG_CALLOC(1, sizeof(cg_cell_t));
@@ -119,6 +418,7 @@ cg_rgb_t get_cell_bg(cg_cell_t *cell)
     return (cg_rgb_t){0, 0, 0};
 }
 
+
 cg_rgb_t get_cell_fg(cg_cell_t *cell)
 {
     if (cell != NULL)
@@ -127,6 +427,7 @@ cg_rgb_t get_cell_fg(cg_cell_t *cell)
     }
     return (cg_rgb_t){255, 255, 255};
 }
+
 
 cg_char get_cell_char(cg_cell_t *cell)
 {
@@ -152,6 +453,7 @@ void set_cell_fg(cg_cell_t *cell, cg_rgb_t fg)
         cell->fg = fg;
     }
 }
+
 
 void set_cell_char(cg_cell_t *cell, cg_char c)
 {
@@ -193,16 +495,6 @@ int compare_cells(cg_cell_t *cell1, cg_cell_t *cell2)
     }
     return 0;
 }
-
-/**
- * Define a canvas type
- */
-typedef struct
-{
-    cg_uint width;
-    cg_uint height;
-    cg_cell_t *cells;
-} cg_canvas_t;
 
 // system variables
 
@@ -256,6 +548,7 @@ cg_canvas_t *make_canvas(cg_uint w, cg_uint h)
     return canvas;
 }
 
+
 cg_cell_t *get_cell(cg_canvas_t *canvas, cg_uint x, cg_uint y)
 {
     if (canvas == NULL)
@@ -281,139 +574,6 @@ void dispose_canvas(cg_canvas_t *canvas)
     }
 }
 
-// Error reporting functions
-
-/**
- * Print an error message and exit the program.
- *
- * @param message The error message to print.
- * @param code The error code to exit with.
- */
-void cg_err_fatal(cg_string message, cg_uint code);
-
-/**
- * Print an error message and exit the program with a default error code.
- *
- * @param message The error message to print.
- */
-void cg_err_fatal_msg(cg_string message);
-
-// type conversion functions
-
-/**
- * Convert a number to an unsigned integer.
- *
- * @param x The number to convert.
- * @return The unsigned integer value of the number.
- */
-cg_uint number_to_uinteger(cg_number x);
-
-// Vector type
-
-/**
- * The default vector type used in the congfx programs
- * are arrays of long double (long double *).
- */
-typedef cg_number *vec2;
-
-/**
- * Create a new vector of 2 elements.
- *
- * @param v1 The first element of the vector.
- * @param v2 The second element of the vector.
- * @return The new vector.
- */
-vec2 make_vec2(cg_number v1, cg_number v2);
-
-/**
- * Create a new vector of 2 elements from another vector.
- *
- * @param other The vector to copy from.
- * @return The new vector.
- */
-vec2 make_vec2_from(vec2 other);
-
-/**
- * Add two vectors.
- *
- * @param v1 The first vector.
- * @param v2 The second vector.
- * @return The sum of the two vectors.
- */
-vec2 vec2_add(vec2 v1, vec2 v2);
-
-/**
- * Multiply a vector by a scalar.
- *
- * @param vin The vector to multiply.
- * @param x The scalar to multiply by.
- * @return The product of the vector and the scalar.
- */
-vec2 vec2_mult_scalar(vec2 vin, cg_number x);
-
-/**
- * Convert a vector to a string.
- *
- * @param v The vector to convert.
- * @return The string representation of the vector.
- */
-cg_string vec2_to_string(vec2 v);
-
-/**
- * Dispose of a vector.
- *
- * @param v The vector to dispose of.
- */
-void dispose_vec2(vec2 v);
-
-// string type utility functions
-
-/**
- * Create a new string of a given length.
- *
- * @param length The length of the string.
- * @return The new string.
- */
-cg_string make_string(cg_uint length);
-
-/**
- * Dispose of a string.
- *
- * @param s The string to dispose of.
- */
-void dispose_string(cg_string s);
-
-// number utility functions
-
-/**
- * Generate a random integer between two values.
- *
- * @param from The lower bound of the random integer.
- * @param to The upper bound of the random integer.
- * @return The random integer.
- */
-int rand_int(int from, int to);
-
-// Life-cycle functions, to be defined by the main program
-
-void setup();
-
-void draw(cg_uint dt);
-
-void key_pressed(char c);
-
-// Graphics System functions
-void no_loop();
-
-void loop();
-
-void frame_rate(cg_uint fps);
-
-// Terminal utility functions
-void cls();
-
-void home();
-
 // Internal terminal utility functions
 /**
  * Enable raw mode for the terminal.
@@ -436,22 +596,17 @@ void _cg_term_set_foreground_colour(cg_rgb_t colour);
 
 void _cg_term_set_background_colour(cg_rgb_t colour);
 
-// Canvas functions
-void create_canvas(cg_uint w, cg_uint h);
-void background(cg_rgb_t c);
-void stroke(cg_rgb_t c);
-void fill(cg_rgb_t c);
-void set_colour(cg_rgb_t c);
-void show_canvas();
-void swap_canvas();
-
-// drawing functions
-void point(cg_uint x1, cg_uint y1, cg_char c);
-void line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2);
-void rect(cg_uint x1, cg_uint y1, cg_uint width, cg_uint height);
-void text(cg_char *t, cg_uint x, cg_uint y);
-
 // internal functions
+
+/**
+ * Calculate the difference in time between two timespec structures.
+ *
+ * @param time1 The first time.
+ * @param time2 The second time.
+ * @return The difference in time in microseconds.
+ */
+cg_uint _diff_time_micros(struct timespec time1, struct timespec time2);
+
 cg_uint _diff_time_micros(struct timespec time1, struct timespec time2)
 {
     // wprintf(L"time1 [%ld, %ld], time2[%ld, %ld]\n", time1.tv_sec, time1.tv_nsec, time2.tv_sec, time2.tv_nsec);
