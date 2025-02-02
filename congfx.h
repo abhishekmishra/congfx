@@ -85,6 +85,7 @@ pictures.
 #define _CG_DEFAULT_BACKGROUND_CHAR L' '
 
 #define _CG_CALLOC calloc
+#define _CG_REALLOC realloc
 #define _CG_FREE free
 
 /*--------- BEGIN TYPE DEFINITIONS -----------*/
@@ -480,6 +481,59 @@ void _cg_term_enable_raw_mode();
  */
 void _cg_term_disable_raw_mode();
 
+/**
+ * A structure to hold a command buffer for the terminal.
+ */
+typedef struct {
+    cg_char *buffer;
+    size_t length;
+    size_t size;
+} _cg_term_command_buffer_t;
+
+#define _CG_TERM_COMMAND_BUFFER_START_SIZE 1024
+
+/**
+ * Create a new command buffer for the terminal.
+ * 
+ * @param buffer The command buffer to create.
+ * @return 0 if successful, -1 otherwise.
+ */
+int _cg_term_create_command_buffer(_cg_term_command_buffer_t **buffer);
+
+/**
+ * Expand the command buffer for the terminal.
+ * 
+ * @param buffer The command buffer to expand.
+ * @param more_required The additional space required.
+ * @return 0 if successful, -1 otherwise.
+ */
+int _cg_term_expand_command_buffer(_cg_term_command_buffer_t *buffer, size_t more_required);
+
+/**
+ * Dispose of a command buffer for the terminal.
+ * 
+ * @param buffer The command buffer to dispose of.
+ */
+void _cg_term_dispose_command_buffer(_cg_term_command_buffer_t *buffer);
+
+/**
+ * Add a command to the command buffer for the terminal.
+ * 
+ * @param buffer The command buffer to add to.
+ * @param command The command to add.
+ * @return 0 if successful, -1 otherwise.
+ */
+int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command);
+
+/**
+ * Flush the command buffer for the terminal.
+ * The commands are written to the terminal, and the buffer is reset.
+ * 
+ * @param buffer The command buffer to flush.
+ * @return 0 if successful, -1 otherwise.
+ */
+int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer);
+ 
 /**
  * Reset the terminal to its default state.
  */
@@ -970,6 +1024,76 @@ void _cg_term_disable_raw_mode()
     {
         cg_err_fatal_msg(L"fcntl error resetting flags");
     }
+}
+
+int _cg_term_create_command_buffer(_cg_term_command_buffer_t **buffer)
+{
+    *buffer = (_cg_term_command_buffer_t *)_CG_CALLOC(1, sizeof(_cg_term_command_buffer_t));
+    if (*buffer == NULL)
+    {
+        return -1;
+    }
+    (*buffer)->buffer = (cg_char *)_CG_CALLOC(_CG_TERM_COMMAND_BUFFER_START_SIZE, sizeof(cg_char));
+    if ((*buffer)->buffer == NULL)
+    {
+        return -1;
+    }
+    (*buffer)->length = 0;
+    // Mark the first character as the null terminator
+    (*buffer)->buffer[0] = L'\0';
+    (*buffer)->size = _CG_TERM_COMMAND_BUFFER_START_SIZE;
+    return 0;
+}
+
+int _cg_term_expand_command_buffer(_cg_term_command_buffer_t *buffer, size_t more_required)
+{
+    // use realloc to expand the buffer
+    size_t new_size = buffer->size + more_required;
+    cg_char *new_buffer = (cg_char *)_CG_REALLOC(buffer->buffer, new_size * sizeof(cg_char));
+    if (new_buffer == NULL)
+    {
+        return -1;
+    }
+    buffer->buffer = new_buffer;
+    buffer->size = new_size;
+    return 0;
+}
+
+void _cg_term_dispose_command_buffer(_cg_term_command_buffer_t *buffer)
+{
+    if (buffer != NULL)
+    {
+        if (buffer->buffer != NULL)
+        {
+            _CG_FREE(buffer->buffer);
+        }
+        _CG_FREE(buffer);
+    }
+}
+
+int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command)
+{
+    size_t command_length = wcslen(command);
+    size_t new_size = buffer->length + command_length + 1;
+    if (new_size >= buffer->size)
+    {
+        if (_cg_term_expand_command_buffer(buffer, command_length + 1) == -1)
+        {
+            return -1;
+        }
+    }
+    wcsncat(buffer->buffer, command, command_length);
+    buffer->buffer[new_size] = L'\0';
+    buffer->length += command_length;
+    return 0;
+}
+
+int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer)
+{
+    wprintf(L"%ls", buffer->buffer);
+    buffer->length = 0;
+    buffer->buffer[0] = L'\0';
+    return 0;
 }
 
 void _cg_term_reset()
