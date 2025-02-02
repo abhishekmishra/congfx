@@ -88,6 +88,8 @@ pictures.
 #define _CG_REALLOC realloc
 #define _CG_FREE free
 
+#define _CG_TERM_COMMAND_BUFFER_START_SIZE 1024
+
 /*--------- BEGIN TYPE DEFINITIONS -----------*/
 
 /**
@@ -157,6 +159,16 @@ typedef struct
  * are arrays of long double (long double *).
  */
 typedef cg_number *vec2;
+
+/**
+ * A structure to hold a command buffer for the terminal.
+ */
+typedef struct
+{
+    cg_char *buffer;
+    size_t length;
+    size_t size;
+} _cg_term_command_buffer_t;
 
 /*--------- END TYPE DEFINITIONS -----------*/
 
@@ -464,6 +476,9 @@ int _cg_term_orig_flags;
 cg_canvas_t *canvas_previous = NULL;
 cg_canvas_t *canvas_current = NULL;
 
+// command buffer for the terminal
+_cg_term_command_buffer_t *_cg_buffer = NULL;
+
 /*--------- END PRIVATE VARIABLES -----------*/
 
 /*--------- BEGIN INTERNAL FUNCTION PROTOTYPES -----------*/
@@ -480,18 +495,6 @@ void _cg_term_enable_raw_mode();
  * see https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
  */
 void _cg_term_disable_raw_mode();
-
-/**
- * A structure to hold a command buffer for the terminal.
- */
-typedef struct
-{
-    cg_char *buffer;
-    size_t length;
-    size_t size;
-} _cg_term_command_buffer_t;
-
-#define _CG_TERM_COMMAND_BUFFER_START_SIZE 1024
 
 /**
  * Create a new command buffer for the terminal.
@@ -547,6 +550,8 @@ void _cg_term_set_foreground_colour(cg_rgb_t colour);
 void _cg_term_set_background_colour(cg_rgb_t colour);
 
 void _cg_term_move_to(cg_uint x, cg_uint y);
+
+void _cg_term_write_char(cg_char c);
 
 void _cg_hide_cursor();
 
@@ -747,6 +752,13 @@ int main(int argc, char *argv[])
 {
     cg_char read_buf[20];
 
+    // create the command buffer
+    if (_cg_term_create_command_buffer(&_cg_buffer) == -1)
+    {
+        wprintf(L"FATAL Error: Unable to create command buffer.\n");
+        exit(-1);
+    }
+
     // enable raw mode for terminal
     _cg_term_enable_raw_mode();
 
@@ -845,6 +857,9 @@ int main(int argc, char *argv[])
         // swap canvas
         cg_swap_canvas();
     }
+
+    // dispose of the command buffer
+    _cg_term_dispose_command_buffer(_cg_buffer);
 }
 
 void cg_err_fatal(cg_string message, cg_uint code)
@@ -1099,6 +1114,7 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
 int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer)
 {
     fputws(buffer->buffer, stdout);
+    fflush(stdout);
     buffer->length = 0;
     buffer->buffer[0] = L'\0';
     return 0;
@@ -1107,36 +1123,43 @@ int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer)
 void _cg_term_reset()
 {
     // the [0m code resets all terminal attributes
-    fputws(L"\033[0m", stdout);
+    _cg_term_buffer_command(_cg_buffer, L"\033[0m", 4);
 }
 
 void _cg_term_set_foreground_colour(cg_rgb_t colour)
 {
-    wprintf(L"\033[38;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
+    cg_char buffer[25];
+    swprintf(buffer, 25, L"\033[38;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
+    _cg_term_buffer_command(_cg_buffer, buffer, 0);// 22);
 }
 
 void _cg_term_set_background_colour(cg_rgb_t colour)
 {
-    wprintf(L"\033[48;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
+    cg_char buffer[25];
+    swprintf(buffer, 25, L"\033[48;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
+    _cg_term_buffer_command(_cg_buffer, buffer, 0);// 22);
 }
 
 void _cg_term_move_to(cg_uint x, cg_uint y)
 {
-    wprintf(L"\033[%lu;%luf", y, x);
-    // fputws(L"\033[", stdout);
-    // fputc(y, stdout);
-    // fputws(L";", stdout);
-    // fputc(x, stdout);
+    cg_char buffer[20];
+    swprintf(buffer, 20, L"\033[%lu;%luf", y, x);
+    _cg_term_buffer_command(_cg_buffer, buffer, 0);
+}
+
+void _cg_term_write_char(cg_char c)
+{
+    _cg_term_buffer_command(_cg_buffer, &c, 1);
 }
 
 void _cg_hide_cursor()
 {
-    wprintf(L"\033[?25l");
+    _cg_term_buffer_command(_cg_buffer, L"\033[?25l", 6);
 }
 
 void _cg_show_cursor()
 {
-    wprintf(L"\033[?25h");
+    _cg_term_buffer_command(_cg_buffer, L"\033[?25h", 6);
 }
 
 int _cg_get_cursor_position(int *rows, int *cols)
@@ -1259,14 +1282,20 @@ void cg_show_canvas()
                 // get the cell character
                 cg_char c = cg_get_cell_char(current_cell);
 
+                // move to the cell position
                 _cg_term_move_to(j, i);
+
+                // set the colours
                 _cg_term_set_foreground_colour(cell_fg);
                 _cg_term_set_background_colour(cell_bg);
-                putwchar(c);
-                fflush(stdout);
+
+                // write the character
+                _cg_term_write_char(c);
             }
         }
     }
+
+    _cg_term_flush_command_buffer(_cg_buffer);
 
     _cg_show_cursor();
 }
