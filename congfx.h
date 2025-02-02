@@ -491,6 +491,10 @@ void _cg_term_set_background_colour(cg_rgb_t colour);
 
 void _cg_term_move_to(cg_uint x, cg_uint y);
 
+void _cg_hide_cursor();
+
+void _cg_show_cursor();
+
 // internal functions
 
 /**
@@ -970,6 +974,16 @@ void _cg_term_move_to(cg_uint x, cg_uint y)
     // fputc(x, stdout);
 }
 
+void _cg_hide_cursor()
+{
+    wprintf(L"\033[?25l");
+}
+
+void _cg_show_cursor()
+{
+    wprintf(L"\033[?25h");
+}
+
 // canvas functions
 
 void cg_create_canvas(cg_uint w, cg_uint h)
@@ -1026,6 +1040,8 @@ void cg_set_colour(cg_rgb_t col)
 
 void cg_show_canvas()
 {
+    _cg_hide_cursor();
+
     if (canvas_current != NULL)
     {
         for (cg_uint i = 0; i < canvas_current->height; i++)
@@ -1057,6 +1073,8 @@ void cg_show_canvas()
             }
         }
     }
+
+    _cg_show_cursor();
 }
 
 void cg_point(cg_uint x1, cg_uint y1, cg_char c)
