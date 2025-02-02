@@ -1081,7 +1081,7 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
     {
         command_length = wcslen(command);
     }
-    
+
     size_t new_size = buffer->length + command_length + 1;
     if (new_size >= buffer->size)
     {
@@ -1098,7 +1098,7 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
 
 int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer)
 {
-    wprintf(L"%ls", buffer->buffer);
+    fputws(buffer->buffer, stdout);
     buffer->length = 0;
     buffer->buffer[0] = L'\0';
     return 0;
