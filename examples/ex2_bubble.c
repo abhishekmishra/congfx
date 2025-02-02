@@ -1,16 +1,20 @@
 #include "congfx.h"
 
 cg_uint total_time = 0;
-cg_uint step_time = 50000;
+cg_uint step_time = 100000;
 cg_uint radius = 1;
+cg_rgb_t bg_colour = {1, 1, 1};
+cg_rgb_t col = {255, 255, 255};
 
 void setup()
 {
-    // does nothing
 }
 
 void draw(cg_uint dt)
 {
+    cg_background(bg_colour);
+    cg_stroke(col);
+
     // determine the number of lines to draw
     // based on the total time elapsed
     // since the last times the number of lines to draw was updated
