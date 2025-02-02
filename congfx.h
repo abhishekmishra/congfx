@@ -24,7 +24,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @brief A simple graphics library for the terminal.
  *
  * This library provides a simple graphics library for the terminal.
-**/
+ **/
 
 /*
 ********************************************************************************
@@ -180,7 +180,6 @@ cg_cell_t *cg_make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg);
  * @return The background colour of the cell.
  */
 cg_rgb_t cg_get_cell_bg(cg_cell_t *cell);
-
 
 /**
  * Get the foreground colour of a cell.
@@ -496,33 +495,23 @@ void _cg_hide_cursor();
 
 void _cg_show_cursor();
 
-// see https://viewsourcecode.org/snaptoken/kilo/03.rawInputAndOutput.html#window-size-the-hard-way
-int _cg_get_cursor_position(int *rows, int *cols) {
-  char buf[32];
-  unsigned int i = 0;
-  if (write(STDOUT_FILENO, "\x1b[6n", 4) != 4) return -1;
-  while (i < sizeof(buf) - 1) {
-    if (read(STDIN_FILENO, &buf[i], 1) != 1) break;
-    if (buf[i] == 'R') break;
-    i++;
-  }
-  buf[i] = '\0';
-  if (buf[0] != '\x1b' || buf[1] != '[') return -1;
-  if (sscanf(&buf[2], "%d;%d", rows, cols) != 2) return -1;
-  return 0;
-}
+/**
+ * Get the cursor position in the terminal.
+ * see https://viewsourcecode.org/snaptoken/kilo/03.rawInputAndOutput.html#window-size-the-hard-way
+ * @param rows The row position of the cursor.
+ * @param cols The column position of the cursor.
+ * @return 0 if successful, -1 otherwise.
+ */
+int _cg_get_cursor_position(int *rows, int *cols);
 
-int _cg_get_window_size(int *rows, int *cols) {
-  struct winsize ws;
-  if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1 || ws.ws_col == 0) {
-    if (write(STDOUT_FILENO, "\x1b[999C\x1b[999B", 12) != 12) return -1;
-    return _cg_get_cursor_position(rows, cols);
-  } else {
-    *cols = ws.ws_col;
-    *rows = ws.ws_row;
-    return 0;
-  }
-}
+/**
+ * Get the window size of the terminal.
+ * see https://viewsourcecode.org/snaptoken/kilo/03.rawInputAndOutput.html#window-size-the-hard-way
+ * @param rows The number of rows in the terminal.
+ * @param cols The number of columns in the terminal.
+ * @return 0 if successful, -1 otherwise.
+ */
+int _cg_get_window_size(int *rows, int *cols);
 
 // internal functions
 
@@ -560,7 +549,6 @@ cg_rgb_t cg_get_cell_bg(cg_cell_t *cell)
     return (cg_rgb_t){0, 0, 0};
 }
 
-
 cg_rgb_t cg_get_cell_fg(cg_cell_t *cell)
 {
     if (cell != NULL)
@@ -569,7 +557,6 @@ cg_rgb_t cg_get_cell_fg(cg_cell_t *cell)
     }
     return (cg_rgb_t){255, 255, 255};
 }
-
 
 cg_char cg_get_cell_char(cg_cell_t *cell)
 {
@@ -595,7 +582,6 @@ void cg_set_cell_fg(cg_cell_t *cell, cg_rgb_t fg)
         cell->fg = fg;
     }
 }
-
 
 void cg_set_cell_char(cg_cell_t *cell, cg_char c)
 {
@@ -1019,6 +1005,45 @@ void _cg_hide_cursor()
 void _cg_show_cursor()
 {
     wprintf(L"\033[?25h");
+}
+
+int _cg_get_cursor_position(int *rows, int *cols)
+{
+    char buf[32];
+    unsigned int i = 0;
+    if (write(STDOUT_FILENO, "\x1b[6n", 4) != 4)
+        return -1;
+    while (i < sizeof(buf) - 1)
+    {
+        if (read(STDIN_FILENO, &buf[i], 1) != 1)
+            break;
+        if (buf[i] == 'R')
+            break;
+        i++;
+    }
+    buf[i] = '\0';
+    if (buf[0] != '\x1b' || buf[1] != '[')
+        return -1;
+    if (sscanf(&buf[2], "%d;%d", rows, cols) != 2)
+        return -1;
+    return 0;
+}
+
+int _cg_get_window_size(int *rows, int *cols)
+{
+    struct winsize ws;
+    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1 || ws.ws_col == 0)
+    {
+        if (write(STDOUT_FILENO, "\x1b[999C\x1b[999B", 12) != 12)
+            return -1;
+        return _cg_get_cursor_position(rows, cols);
+    }
+    else
+    {
+        *cols = ws.ws_col;
+        *rows = ws.ws_row;
+        return 0;
+    }
 }
 
 // canvas functions
