@@ -484,7 +484,8 @@ void _cg_term_disable_raw_mode();
 /**
  * A structure to hold a command buffer for the terminal.
  */
-typedef struct {
+typedef struct
+{
     cg_char *buffer;
     size_t length;
     size_t size;
@@ -494,7 +495,7 @@ typedef struct {
 
 /**
  * Create a new command buffer for the terminal.
- * 
+ *
  * @param buffer The command buffer to create.
  * @return 0 if successful, -1 otherwise.
  */
@@ -502,7 +503,7 @@ int _cg_term_create_command_buffer(_cg_term_command_buffer_t **buffer);
 
 /**
  * Expand the command buffer for the terminal.
- * 
+ *
  * @param buffer The command buffer to expand.
  * @param more_required The additional space required.
  * @return 0 if successful, -1 otherwise.
@@ -511,29 +512,31 @@ int _cg_term_expand_command_buffer(_cg_term_command_buffer_t *buffer, size_t mor
 
 /**
  * Dispose of a command buffer for the terminal.
- * 
+ *
  * @param buffer The command buffer to dispose of.
  */
 void _cg_term_dispose_command_buffer(_cg_term_command_buffer_t *buffer);
 
 /**
  * Add a command to the command buffer for the terminal.
- * 
+ *
  * @param buffer The command buffer to add to.
  * @param command The command to add.
+ * @param length The length of the command. (if 0, then the length is calculated)
  * @return 0 if successful, -1 otherwise.
  */
-int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command);
+int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer,
+                            cg_string command, size_t length);
 
 /**
  * Flush the command buffer for the terminal.
  * The commands are written to the terminal, and the buffer is reset.
- * 
+ *
  * @param buffer The command buffer to flush.
  * @return 0 if successful, -1 otherwise.
  */
 int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer);
- 
+
 /**
  * Reset the terminal to its default state.
  */
@@ -1071,9 +1074,14 @@ void _cg_term_dispose_command_buffer(_cg_term_command_buffer_t *buffer)
     }
 }
 
-int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command)
+int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command, size_t length)
 {
-    size_t command_length = wcslen(command);
+    size_t command_length = length;
+    if (command_length == 0)
+    {
+        command_length = wcslen(command);
+    }
+    
     size_t new_size = buffer->length + command_length + 1;
     if (new_size >= buffer->size)
     {
