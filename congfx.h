@@ -692,9 +692,24 @@ int main(int argc, char *argv[])
     if (canvas_current == NULL)
     {
         cg_create_canvas(100, 25);
+
+        cg_background(default_bg_colour);
+        cg_set_colour(default_fg_colour);
+
+        cg_swap_canvas();
+
+        cg_background(default_bg_colour);
+        cg_set_colour(default_fg_colour);
     }
 
     cg_uint delta_time_ideal = 1000000 / _fps; // in microseconds
+
+    // set default background and forground
+    _cg_term_reset();
+    _cg_term_set_foreground_colour(default_fg_colour);
+
+    cg_cls();
+    cg_home();
 
     while (_loop == 1)
     {
@@ -720,15 +735,6 @@ int main(int argc, char *argv[])
         key_pressed(c);
 
         // cg_no_loop();
-
-        // set default background and forground
-        _cg_term_reset();
-        _cg_term_set_foreground_colour(default_fg_colour);
-        cg_background(default_bg_colour);
-        cg_set_colour(default_fg_colour);
-
-        cg_cls();
-        cg_home();
 
         draw(dt);
         cg_show_canvas();
@@ -1022,44 +1028,33 @@ void cg_show_canvas()
 {
     if (canvas_current != NULL)
     {
-        cg_rgb_t current_fg = {255, 255, 255};
-        cg_rgb_t current_bg = {0, 0, 0};
-        // wprintf(L"%ls", canvas_contents);
-        cg_uint idx = 0;
         for (cg_uint i = 0; i < canvas_current->height; i++)
         {
             for (cg_uint j = 0; j < canvas_current->width; j++)
             {
                 cg_cell_t *current_cell = cg_get_cell(canvas_current, j, i);
                 cg_cell_t *previous_cell = cg_get_cell(canvas_previous, j, i);
-                // if (cg_compare_cells(current_cell, previous_cell) == 0)
-                // {
-                //     continue;
-                // }
+                if (cg_compare_cells(current_cell, previous_cell) == 0)
+                {
+                    continue;
+                }
+
+                // wprintf(L"Cells not equal at [%lu, %lu]\n", j, i);
+
+                // cg_no_loop();
+
+                // get the cell colours
                 cg_rgb_t cell_fg = cg_get_cell_fg(current_cell);
                 cg_rgb_t cell_bg = cg_get_cell_bg(current_cell);
-
-                if (cell_fg.r != current_fg.r || cell_fg.g != current_fg.g || cell_fg.b != current_fg.b)
-                {
-                    _cg_term_set_foreground_colour(cell_fg);
-                    current_fg = cell_fg;
-                }
-                if (cell_bg.r != current_bg.r || cell_bg.g != current_bg.g || cell_bg.b != current_bg.b)
-                {
-                    _cg_term_set_background_colour(cell_bg);
-                    current_bg = cell_bg;
-                }
-                // _cg_term_set_foreground_colour(canvas_foreground_colour[(i * width) + j]);
-                // _cg_term_set_background_colour(canvas_background_colour[(i * width) + j]);
+                // get the cell character
                 cg_char c = cg_get_cell_char(current_cell);
+
+                _cg_term_move_to(j, i);
+                _cg_term_set_foreground_colour(cell_fg);
+                _cg_term_set_background_colour(cell_bg);
                 putwchar(c);
-                // idx += 1;
+                fflush(stdout);
             }
-
-            putwchar(L'\r');
-            putwchar(L'\n');
-
-            // idx += 1;
         }
     }
 }
