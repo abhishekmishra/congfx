@@ -75,6 +75,7 @@ pictures.
 #include <fcntl.h>
 #include <errno.h>
 #include <ctype.h>
+#include <sys/ioctl.h>
 
 // TODO: removed for now, check if needed later
 #include <unistd.h>
@@ -495,6 +496,34 @@ void _cg_hide_cursor();
 
 void _cg_show_cursor();
 
+// see https://viewsourcecode.org/snaptoken/kilo/03.rawInputAndOutput.html#window-size-the-hard-way
+int _cg_get_cursor_position(int *rows, int *cols) {
+  char buf[32];
+  unsigned int i = 0;
+  if (write(STDOUT_FILENO, "\x1b[6n", 4) != 4) return -1;
+  while (i < sizeof(buf) - 1) {
+    if (read(STDIN_FILENO, &buf[i], 1) != 1) break;
+    if (buf[i] == 'R') break;
+    i++;
+  }
+  buf[i] = '\0';
+  if (buf[0] != '\x1b' || buf[1] != '[') return -1;
+  if (sscanf(&buf[2], "%d;%d", rows, cols) != 2) return -1;
+  return 0;
+}
+
+int _cg_get_window_size(int *rows, int *cols) {
+  struct winsize ws;
+  if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1 || ws.ws_col == 0) {
+    if (write(STDOUT_FILENO, "\x1b[999C\x1b[999B", 12) != 12) return -1;
+    return _cg_get_cursor_position(rows, cols);
+  } else {
+    *cols = ws.ws_col;
+    *rows = ws.ws_row;
+    return 0;
+  }
+}
+
 // internal functions
 
 /**
@@ -678,6 +707,14 @@ int main(int argc, char *argv[])
     // enable raw mode for terminal
     _cg_term_enable_raw_mode();
 
+    // get the window size
+    int rows, cols;
+    if (_cg_get_window_size(&rows, &cols) == -1)
+    {
+        wprintf(L"FATAL Error: Unable to get window size.\n");
+        exit(-1);
+    }
+
     // init locale for terminal, and wide output
     setlocale(LC_ALL, "");
     fwide(stdout, 1);
@@ -695,7 +732,7 @@ int main(int argc, char *argv[])
     // if there is no canvas created, create a default one
     if (canvas_current == NULL)
     {
-        cg_create_canvas(100, 25);
+        cg_create_canvas(cols, rows);
 
         cg_background(default_bg_colour);
         cg_set_colour(default_fg_colour);
