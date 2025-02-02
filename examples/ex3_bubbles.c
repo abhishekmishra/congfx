@@ -1,8 +1,9 @@
 #include "congfx.h"
 
 cg_uint total_time = 0;
-cg_uint step_time = 50000;
+cg_uint step_time = 100000;
 cg_uint radius = 1;
+cg_rgb_t bg_colour = {0, 100, 0};
 
 void setup()
 {
@@ -10,6 +11,8 @@ void setup()
 
 void draw(cg_uint dt)
 {
+    cg_background(bg_colour);
+
     cg_rgb_t col = {0, 0, dt % 256};
     cg_stroke(col);
 
