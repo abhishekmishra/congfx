@@ -178,6 +178,15 @@ typedef struct
 /*+++++++++ BEGIN Cell TYPE FUNCTIONS +++++++++*/
 
 /**
+ * Compare two colours.
+ *
+ * @param colour1 The first colour to compare.
+ * @param colour2 The second colour to compare.
+ * @return 0 if the colours are equal, -1 otherwise.
+ */
+int cg_compare_colour(cg_rgb_t colour1, cg_rgb_t colour2);
+
+/**
  * Create a new cell with the given character and colours.
  *
  * @param c The character to display in the cell.
@@ -588,6 +597,17 @@ int _cg_get_window_size(int *rows, int *cols);
 cg_uint _diff_time_micros(struct timespec time1, struct timespec time2);
 
 /*--------- END INTERNAL FUNCTION PROTOTYPES -----------*/
+
+int cg_compare_colour(cg_rgb_t colour1, cg_rgb_t colour2)
+{
+    if (colour1.r != colour2.r
+        || colour1.g != colour2.g
+        || colour1.b != colour2.b)
+    {
+        return -1;
+    }
+    return 0;
+}
 
 cg_cell_t *cg_make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg)
 {
