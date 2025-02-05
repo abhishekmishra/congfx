@@ -1286,6 +1286,9 @@ void cg_show_canvas()
 {
     _cg_hide_cursor();
 
+    cg_rgb_t current_bg = {300, 300, 300};
+    cg_rgb_t current_fg = {300, 300, 300};
+
     if (canvas_current != NULL)
     {
         for (cg_uint i = 0; i < canvas_current->height; i++)
@@ -1313,8 +1316,16 @@ void cg_show_canvas()
                 _cg_term_move_to(j, i);
 
                 // set the colours
-                _cg_term_set_foreground_colour(cell_fg);
-                _cg_term_set_background_colour(cell_bg);
+                if (cg_compare_colour(cell_fg, current_fg) != 0)
+                {
+                    _cg_term_set_foreground_colour(cell_fg);
+                    current_fg = cell_fg;
+                }
+                if (cg_compare_colour(cell_bg, current_bg) != 0)
+                {
+                    _cg_term_set_background_colour(cell_bg);
+                    current_bg = cell_bg;
+                }
 
                 // write the character
                 _cg_term_write_char(c);
