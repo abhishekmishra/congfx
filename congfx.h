@@ -89,6 +89,7 @@ pictures.
 #define _CG_FREE free
 
 #define _CG_TERM_COMMAND_BUFFER_START_SIZE 1024
+#define _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT 32
 
 /*--------- BEGIN TYPE DEFINITIONS -----------*/
 
@@ -1108,6 +1109,12 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
     wcsncat(buffer->buffer, command, command_length);
     buffer->buffer[new_size] = L'\0';
     buffer->length += command_length;
+
+    if (buffer->length >= _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT)
+    {
+        return _cg_term_flush_command_buffer(buffer);
+    }
+
     return 0;
 }
 
