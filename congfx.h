@@ -862,7 +862,10 @@ int main(int argc, char *argv[])
         {
             break;
         }
-        key_pressed(c);
+        if (c != '\0')
+        {
+            key_pressed(c);
+        }
 
         // cg_no_loop();
 
