@@ -12,8 +12,7 @@ void setup()
 
 void draw(cg_uint dt)
 {
-    cg_background(bg_colour);
-    cg_stroke(col);
+    cg_clear_canvas();
 
     // determine the number of lines to draw
     // based on the total time elapsed

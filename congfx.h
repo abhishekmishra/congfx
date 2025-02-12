@@ -444,6 +444,7 @@ void cg_fill(cg_rgb_t c);
 void cg_set_colour(cg_rgb_t c);
 void cg_show_canvas();
 void cg_swap_canvas();
+void cg_clear_canvas();
 /*========= END Graphics Canvas FUNCTIONS =========*/
 
 /*========= BEGIN Graphics Drawing FUNCTIONS =========*/
@@ -813,8 +814,20 @@ int main(int argc, char *argv[])
         cg_background(default_bg_colour);
         cg_set_colour(default_fg_colour);
 
+        // swap out the current canvas,
+        // make the current canvas dirty with a foreground colour so that
+        // it will not match with the previous canvas in the draw call
+        // then draw the initial canvas
         cg_swap_canvas();
+        cg_background(default_fg_colour);
+        cg_swap_canvas();
+        
+        // now draw the canvas
+        cg_show_canvas();
 
+        // swap out the current canvas, and set the default background and foreground
+        // to restore the initial state in both back and front canvas
+        cg_swap_canvas();
         cg_background(default_bg_colour);
         cg_set_colour(default_fg_colour);
     }
@@ -827,7 +840,7 @@ int main(int argc, char *argv[])
 
     cg_cls();
     cg_home();
-
+    
     while (_loop == 1)
     {
         cg_uint dt = _diff_time_micros(current_time, prev_time);
@@ -1336,6 +1349,11 @@ void cg_show_canvas()
     _cg_term_flush_command_buffer(_cg_buffer);
 
     _cg_show_cursor();
+}
+
+void cg_clear_canvas()
+{
+    cg_background(default_bg_colour);
 }
 
 void cg_point(cg_uint x1, cg_uint y1, cg_char c)
