@@ -15,11 +15,12 @@ void setup()
 void draw(cg_uint dt)
 {
     // loop over the contents and print them
-    int len = wcslen(contents);
+    int len = char_row * width + char_col;
     cg_uint cr = 0, cc = 0;
-    for (int i = 0; i < len; i++)
+    for (cg_uint i = 0; i < len; i++)
     {
         cg_point(cc, cr, contents[i]);
+        cg_point(cc, 10, i+48);
         cc++;
         if (cc >= width)
         {
@@ -32,15 +33,16 @@ void draw(cg_uint dt)
 void key_pressed(char c)
 {
     cg_point(char_col, char_row, c);
+
+    // append to contents
+    cg_char wc = (cg_char)c;
+    contents[char_row * width + char_col] = wc;
+
+    // set the next position
     char_col++;
     if (char_col >= width)
     {
         char_col = 0;
         char_row++;
     }
-
-    // append to contents
-    wchar_t wc = c;
-    contents = wcsncat(contents, &wc, 1);
-    contents = wcsncat(contents, L"\0", 1);
 }
