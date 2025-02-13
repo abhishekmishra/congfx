@@ -833,15 +833,6 @@ cg_uint _diff_time_micros(struct timespec time1, struct timespec time2)
 
 int main(int argc, char *argv[])
 {
-    cg_char read_buf[20];
-
-    struct timespec start_time, prev_time, current_time, after_draw_time;
-    clock_gettime(CLOCK_MONOTONIC, &start_time);
-    prev_time = start_time;
-    current_time = start_time;
-
-    cg_uint delta_time_ideal = 1000000 / _fps; // in microseconds
-
     setup();
 
     // create the graphics engine
@@ -854,56 +845,19 @@ int main(int argc, char *argv[])
     
     while (_loop == 1)
     {
-        cg_uint dt = _diff_time_micros(current_time, prev_time);
-
-        char c = '\0';
-        if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
-        {
-            cg_err_fatal_msg(L"read");
-        }
-        // if (iscntrl(c))
-        // {
-        //     wprintf(L"%d\r\n", c);
-        // }
-        // else
-        // {
-        //     wprintf(L"%d ('%c')\r\n", c, c);
-        // }
-        if (c == 'q')
+        // begin the draw
+        err = cg_begin_draw();
+        if (err != 0)
         {
             break;
         }
-        if (c != '\0')
-        {
-            key_pressed(c);
-        }
 
-        // cg_no_loop();
+        // TODO: change all programs to use millis,
+        // then switch to millis here
+        draw(cg_get_deltatime_micros());
 
-        draw(dt);
-        cg_show_canvas();
-
-        // how much time spent
-        clock_gettime(CLOCK_MONOTONIC, &after_draw_time);
-        cg_uint dt_done = _diff_time_micros(after_draw_time, current_time);
-        // wprintf(L"Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
-        if (delta_time_ideal > dt_done)
-        {
-            struct timespec dt_diff, dt_diff_rem;
-            dt_diff.tv_sec = 0;
-            dt_diff.tv_nsec = (delta_time_ideal - dt_done) * 1000;
-            // sleep for the difference
-            //  wprintf(L"sleep for -> [%ld]nanos\n", dt_diff.tv_nsec);
-            nanosleep(&dt_diff, &dt_diff_rem);
-        }
-
-        prev_time = current_time;
-        clock_gettime(CLOCK_MONOTONIC, &current_time);
-        // dt_done = _diff_time_micros(current_time, prev_time);
-        // wprintf(L"After sleep: Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
-
-        // swap canvas
-        cg_swap_canvas();
+        // end the draw
+        cg_end_draw();
     }
 
     // destroy the graphics engine
