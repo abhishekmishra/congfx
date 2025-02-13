@@ -111,15 +111,15 @@ int main(int argc, char *argv[])
 		_b = make_ball();
 		int x = cg_rand_int(0, width);
 		int y = cg_rand_int(0, height);
-		wprintf(L"%d, %d\n", x, y);
+		// wprintf(L"%d, %d\n", x, y);
 		_b->position = cg_make_vec2(x, y);
 		_b->velocity = cg_make_vec2(0.00001 * cg_rand_int(-10, 10), 0.00001 * cg_rand_int(-10, 10));
 		balls[i] = _b;
 	}
-	for (cg_int i = 0; i < NUM_BALLS; i++)
-	{
-		wprintf(L"ball %lu at %Lf, %Lf\n", i, balls[i]->position[0], balls[i]->position[1]);
-	}
+	// for (cg_int i = 0; i < NUM_BALLS; i++)
+	// {
+	// 	wprintf(L"ball %lu at %Lf, %Lf\n", i, balls[i]->position[0], balls[i]->position[1]);
+	// }
 	// setup() is run once at startup
 	cg_frame_rate(60);
 	// cg_no_loop();
