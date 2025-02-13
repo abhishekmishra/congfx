@@ -54,7 +54,6 @@ void dispose_ball(ball *b)
 cg_int NUM_BALLS = 10;
 ball **balls;
 
-
 void ball_update(ball *b, cg_uint dt)
 {
 	vec2 vToAdd = cg_vec2_mult_scalar(b->velocity, dt);
@@ -96,11 +95,10 @@ cg_string calc_fps(cg_uint dt)
 	return fps_str;
 }
 
-
 int main(int argc, char *argv[])
 {
 	ball *_b = NULL;
-	balls = (ball**)calloc(NUM_BALLS, sizeof(ball*));
+	balls = (ball **)calloc(NUM_BALLS, sizeof(ball *));
 	cg_create_canvas(100, 50);
 
 	for (cg_int i = 0; i < NUM_BALLS; i++)
@@ -121,79 +119,76 @@ int main(int argc, char *argv[])
 	cg_frame_rate(60);
 	// cg_no_loop();
 
-	    // create the graphics engine
-		int err = cg_create_graphics_fullscreen();
+	// create the graphics engine
+	int err = cg_create_graphics_fullscreen();
+	if (err != 0)
+	{
+		return err;
+	}
+
+	while (1)
+	{
+		// begin the draw
+		err = cg_begin_draw();
 		if (err != 0)
 		{
-			return err;
+			break;
 		}
-	
-		while (1)
+
+		// clear canvas before every frame
+		cg_clear_canvas();
+
+		cg_text(L"CONGFX: EXPERIMENT IN C ", width / 2 - 12, height / 2);
+
+		// show fps
+		cg_string fps_str = calc_fps(cg_get_deltatime_micros());
+		cg_text(fps_str, 0, 0);
+
+		// show ball pos
+		// cg_string ballpos_str = cg_vec2_to_string(b->position);
+		// cg_text(ballpos_str, 0, 1);
+		// cg_dispose_string(ballpos_str);
+
+		for (cg_int i = 0; i < NUM_BALLS; i++)
 		{
-			// begin the draw
-			err = cg_begin_draw();
-			if (err != 0)
-			{
-				break;
-			}
-	
-	
-	// draw() is run multiple times per second.
+			ball *a = balls[i];
+			ball_show(a);
+			ball_update(a, cg_get_deltatime_micros());
+		}
+		// // set point 0,0 to A
+		// cg_point(0, 0, L'A');
 
-	//set background colour
-	//cg_background(2);
+		// // set point 3,4 to B
+		// cg_point(3, 4, L'B');
 
-	cg_text(L"CONGFX: EXPERIMENT IN C ", width / 2 - 12, height / 2);
+		// // set point x, y to C
+		// cg_point(x, y, L'C');
 
-	// show fps
-	cg_string fps_str = calc_fps(cg_get_deltatime_micros());
-	cg_text(fps_str, 0, 0);
+		// if (y == height)
+		// {
+		// 	y = 0;
+		// }
+		// else
+		// {
+		// 	y += 1;
+		// }
 
-	// show ball pos
-	// cg_string ballpos_str = cg_vec2_to_string(b->position);
-	// cg_text(ballpos_str, 0, 1);
-	// cg_dispose_string(ballpos_str);
+		// // a couple of lines
+		// cg_line(20, 20, 20, 25);
+		// cg_line(10, 10, 20, 20);
 
-	for (cg_int i = 0; i < NUM_BALLS; i++)
-	{
-		ball *a = balls[i];
-		ball_show(a);
-		ball_update(a, cg_get_deltatime_micros());
+		// // a rectangle
+		// cg_rect(5, 5, 10, 10);
+
+		// cg_no_loop(); // cg_no_loop stops the draw loop.
+		cg_dispose_string(fps_str);
+
+		// end the draw
+		cg_end_draw();
 	}
-	// // set point 0,0 to A
-	// cg_point(0, 0, L'A');
 
-	// // set point 3,4 to B
-	// cg_point(3, 4, L'B');
-
-	// // set point x, y to C
-	// cg_point(x, y, L'C');
-
-	// if (y == height)
-	// {
-	// 	y = 0;
-	// }
-	// else
-	// {
-	// 	y += 1;
-	// }
-
-	// // a couple of lines
-	// cg_line(20, 20, 20, 25);
-	// cg_line(10, 10, 20, 20);
-
-	// // a rectangle
-	// cg_rect(5, 5, 10, 10);
-
-	// cg_no_loop(); // cg_no_loop stops the draw loop.
-	cg_dispose_string(fps_str);
-
-        // end the draw
-        cg_end_draw();
-    }
-
-    // destroy the graphics engine
-    cg_destroy_graphics();
+	// destroy the graphics engine
+	cg_destroy_graphics();
 }
 
 void key_pressed(char c)
