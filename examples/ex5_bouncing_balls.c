@@ -99,7 +99,12 @@ int main(int argc, char *argv[])
 {
 	ball *_b = NULL;
 	balls = (ball **)calloc(NUM_BALLS, sizeof(ball *));
-	cg_create_canvas(100, 50);
+	// create the graphics engine
+	int err = cg_create_graphics_fullscreen();
+	if (err != 0)
+	{
+		return err;
+	}
 
 	for (cg_int i = 0; i < NUM_BALLS; i++)
 	{
@@ -118,13 +123,6 @@ int main(int argc, char *argv[])
 	// setup() is run once at startup
 	cg_frame_rate(60);
 	// cg_no_loop();
-
-	// create the graphics engine
-	int err = cg_create_graphics_fullscreen();
-	if (err != 0)
-	{
-		return err;
-	}
 
 	while (1)
 	{
