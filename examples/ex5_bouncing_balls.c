@@ -149,37 +149,9 @@ int main(int argc, char *argv[])
 			ball_show(a);
 			ball_update(a, cg_get_deltatime_micros());
 		}
-		// // set point 0,0 to A
-		// cg_point(0, 0, L'A');
 
-		// // set point 3,4 to B
-		// cg_point(3, 4, L'B');
-
-		// // set point x, y to C
-		// cg_point(x, y, L'C');
-
-		// if (y == height)
-		// {
-		// 	y = 0;
-		// }
-		// else
-		// {
-		// 	y += 1;
-		// }
-
-		// // a couple of lines
-		// cg_line(20, 20, 20, 25);
-		// cg_line(10, 10, 20, 20);
-
-		// // a rectangle
-		// cg_rect(5, 5, 10, 10);
-
-		// cg_no_loop(); // cg_no_loop stops the draw loop.
 		// show fps
 		cg_string fps_str = calc_fps(cg_get_deltatime_micros());
-
-		// TODO: fix missing characters when this is printed to 0, 0
-		// then change it back to 0, 0
 		cg_text(fps_str, 0, 0);
 
 		// end the draw
