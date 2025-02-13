@@ -815,72 +815,22 @@ int main(int argc, char *argv[])
 {
     cg_char read_buf[20];
 
-    // create the command buffer
-    if (_cg_term_create_command_buffer(&_cg_buffer) == -1)
-    {
-        wprintf(L"FATAL Error: Unable to create command buffer.\n");
-        exit(-1);
-    }
-
-    // enable raw mode for terminal
-    _cg_term_enable_raw_mode();
-
-    // get the window size
-    int rows, cols;
-    if (_cg_get_window_size(&rows, &cols) == -1)
-    {
-        wprintf(L"FATAL Error: Unable to get window size.\n");
-        exit(-1);
-    }
-
-    // init locale for terminal, and wide output
-    setlocale(LC_ALL, "");
-    fwide(stdout, 1);
-
-    // init random numbers
-    srand(time(NULL));
-
     struct timespec start_time, prev_time, current_time, after_draw_time;
     clock_gettime(CLOCK_MONOTONIC, &start_time);
     prev_time = start_time;
     current_time = start_time;
 
-    setup();
-
-    // if there is no canvas created, create a default one
-    if (canvas_current == NULL)
-    {
-        cg_create_canvas(cols, rows);
-
-        cg_background(default_bg_colour);
-        cg_set_colour(default_fg_colour);
-
-        // swap out the current canvas,
-        // make the current canvas dirty with a foreground colour so that
-        // it will not match with the previous canvas in the draw call
-        // then draw the initial canvas
-        cg_swap_canvas();
-        cg_background(default_fg_colour);
-        cg_swap_canvas();
-        
-        // now draw the canvas
-        cg_show_canvas();
-
-        // swap out the current canvas, and set the default background and foreground
-        // to restore the initial state in both back and front canvas
-        cg_swap_canvas();
-        cg_background(default_bg_colour);
-        cg_set_colour(default_fg_colour);
-    }
-
     cg_uint delta_time_ideal = 1000000 / _fps; // in microseconds
 
-    // set default background and forground
-    _cg_term_reset();
-    _cg_term_set_foreground_colour(default_fg_colour);
+    setup();
 
-    cg_cls();
-    cg_home();
+    // create the graphics engine
+    int err = cg_create_graphics_fullscreen();
+    if (err != 0)
+    {
+        cg_err_fatal_msg(L"Unable to create graphics system.");
+        exit(err);
+    }
     
     while (_loop == 1)
     {
@@ -936,11 +886,8 @@ int main(int argc, char *argv[])
         cg_swap_canvas();
     }
 
-    // flush the command buffer
-    _cg_term_flush_command_buffer(_cg_buffer);
-
-    // dispose of the command buffer
-    _cg_term_dispose_command_buffer(_cg_buffer);
+    // destroy the graphics engine
+    cg_destroy_graphics();
 }
 
 void cg_err_fatal(cg_string message, cg_uint code)
@@ -1470,6 +1417,177 @@ void cg_text(cg_char *t, cg_uint x, cg_uint y)
             cg_point(x + i, y, t[i]);
         }
     }
+}
+
+typedef struct {
+    cg_char read_buf[20];
+    struct timespec start_time, prev_time, current_time, after_draw_time;
+    cg_uint delta_time_ideal;
+    cg_uint dt;
+} _cg_graphics_context_t;
+
+_cg_graphics_context_t *_cg_gfx_context = NULL;
+
+int cg_create_graphics(cg_uint w, cg_uint h)
+{
+    // allocate the graphics context
+    _cg_gfx_context = (_cg_graphics_context_t *)_CG_CALLOC(1, sizeof(_cg_graphics_context_t));
+
+    if (_cg_gfx_context == NULL)
+    {
+        wprintf(L"FATAL Error: Unable to allocate graphics context.\n");
+        return -1;
+    }
+
+    clock_gettime(CLOCK_MONOTONIC, &(_cg_gfx_context->start_time));
+    _cg_gfx_context->prev_time = _cg_gfx_context->start_time;
+    _cg_gfx_context->current_time = _cg_gfx_context->start_time;
+
+    _cg_gfx_context->delta_time_ideal = 1000000 / _fps; // in microseconds
+
+    // init random numbers
+    srand(time(NULL));
+
+    // create the command buffer
+    if (_cg_term_create_command_buffer(&_cg_buffer) == -1)
+    {
+        wprintf(L"FATAL Error: Unable to create command buffer.\n");
+        return -1;
+    }
+
+    // enable raw mode for terminal
+    _cg_term_enable_raw_mode();
+
+    // get the window size
+    int rows, cols;
+    if (w == 0 || h == 0)
+    {
+        if (_cg_get_window_size(&rows, &cols) == -1)
+        {
+            wprintf(L"FATAL Error: Unable to get window size.\n");
+            return -1;
+        }
+    }
+    else
+    {
+        rows = h;
+        cols = w;
+    }
+
+    // init locale for terminal, and wide output
+    setlocale(LC_ALL, "");
+    fwide(stdout, 1);
+
+    // if there is no canvas created, create a default one
+    if (canvas_current == NULL)
+    {
+        cg_create_canvas(cols, rows);
+
+        cg_background(default_bg_colour);
+        cg_set_colour(default_fg_colour);
+
+        // swap out the current canvas,
+        // make the current canvas dirty with a foreground colour so that
+        // it will not match with the previous canvas in the draw call
+        // then draw the initial canvas
+        cg_swap_canvas();
+        cg_background(default_fg_colour);
+        cg_swap_canvas();
+        
+        // now draw the canvas
+        cg_show_canvas();
+
+        // swap out the current canvas, and set the default background and foreground
+        // to restore the initial state in both back and front canvas
+        cg_swap_canvas();
+        cg_background(default_bg_colour);
+        cg_set_colour(default_fg_colour);
+    }
+
+    // set default background and forground
+    _cg_term_reset();
+    _cg_term_set_foreground_colour(default_fg_colour);
+
+    cg_cls();
+    cg_home();
+
+    return 0;
+}
+
+int cg_create_graphics_fullscreen()
+{
+    return cg_create_graphics(0, 0);
+}
+
+int cg_begin_draw()
+{
+    _cg_gfx_context->dt = _diff_time_micros(_cg_gfx_context->current_time, _cg_gfx_context->prev_time);
+
+    char c = '\0';
+    if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
+    {
+        cg_err_fatal_msg(L"read");
+    }
+    // if (iscntrl(c))
+    // {
+    //     wprintf(L"%d\r\n", c);
+    // }
+    // else
+    // {
+    //     wprintf(L"%d ('%c')\r\n", c, c);
+    // }
+    if (c == 'q')
+    {
+        return -1;
+    }
+    if (c != '\0')
+    {
+        key_pressed(c);
+    }
+
+    // cg_no_loop();
+
+    return 0;
+}
+
+void cg_end_draw()
+{
+    // how much time spent
+    clock_gettime(CLOCK_MONOTONIC, &(_cg_gfx_context->after_draw_time));
+    cg_uint dt_done = _diff_time_micros(_cg_gfx_context->after_draw_time, _cg_gfx_context->current_time);
+    // wprintf(L"Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
+    if (_cg_gfx_context->delta_time_ideal > dt_done)
+    {
+        struct timespec dt_diff, dt_diff_rem;
+        dt_diff.tv_sec = 0;
+        dt_diff.tv_nsec = (_cg_gfx_context->delta_time_ideal - dt_done) * 1000;
+        // sleep for the difference
+        //  wprintf(L"sleep for -> [%ld]nanos\n", dt_diff.tv_nsec);
+        nanosleep(&dt_diff, &dt_diff_rem);
+    }
+
+    _cg_gfx_context->prev_time = _cg_gfx_context->current_time;
+    clock_gettime(CLOCK_MONOTONIC, &(_cg_gfx_context->current_time));
+    // dt_done = _diff_time_micros(current_time, prev_time);
+    // wprintf(L"After sleep: Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
+
+    // swap canvas
+    cg_swap_canvas();
+}
+
+void cg_destroy_graphics()
+{
+    // free the graphics context
+    if (_cg_gfx_context != NULL)
+    {
+        _CG_FREE(_cg_gfx_context);
+    }
+
+    // flush the command buffer
+    _cg_term_flush_command_buffer(_cg_buffer);
+
+    // dispose of the command buffer
+    _cg_term_dispose_command_buffer(_cg_buffer);
 }
 
 #endif //__CONGFX_H__
