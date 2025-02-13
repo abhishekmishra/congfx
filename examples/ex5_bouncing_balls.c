@@ -161,10 +161,6 @@ void ball_update(ball *b, cg_uint dt)
 
 void ball_show(ball *b)
 {
-	// cg_point(
-	// 	(cg_uint)(b->position[0]),
-	// 	(cg_uint)(b->position[1]),
-	// 	L'█');
 	cg_rect(
 		cg_number_to_uinteger(b->position[0] - 2),
 		cg_number_to_uinteger(b->position[1] - 2),
