@@ -421,6 +421,47 @@ void key_pressed(char c);
 
 /*+++++++++ END LIFECYCLE STUB FUNCTIONS +++++++++*/
 
+/*+++++++++ BEGIN LIFECYCLE FUNCTIONS +++++++++*/
+
+/**
+ * Create a graphics system with the given width and height.
+ * 
+ * @param w width
+ * @param h height
+ * @return int error code
+ */
+int cg_create_graphics(cg_uint w, cg_uint h);
+
+/**
+ * Create a graphics system in fullscreen mode.
+ * 
+ * @return int error code
+ */
+int cg_create_graphics_fullscreen();
+
+/**
+ * Begin the drawing process.
+ * Call before running any draw commands, inside the draw loop.
+ * 
+ * @return int error code
+ */
+int cg_begin_draw();
+
+/**
+ * End the drawing process.
+ * Call after running all draw commands, inside the draw loop.
+ * 
+ * @return int error code
+ */
+void cg_end_draw();
+
+/**
+ * Destroy the graphics system.
+ */
+void cg_destroy_graphics();
+
+/*+++++++++ END LIFECYCLE FUNCTIONS +++++++++*/
+
 /*+++++++++ BEGIN Graphics FUNCTIONS +++++++++*/
 
 // Graphics System functions
