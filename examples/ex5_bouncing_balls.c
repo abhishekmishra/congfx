@@ -140,10 +140,6 @@ int main(int argc, char *argv[])
 
 		cg_text(L"CONGFX: EXPERIMENT IN C ", width / 2 - 12, height / 2);
 
-		// show fps
-		cg_string fps_str = calc_fps(cg_get_deltatime_micros());
-		cg_text(fps_str, 0, 0);
-
 		// show ball pos
 		// cg_string ballpos_str = cg_vec2_to_string(b->position);
 		// cg_text(ballpos_str, 0, 1);
@@ -181,6 +177,13 @@ int main(int argc, char *argv[])
 		// cg_rect(5, 5, 10, 10);
 
 		// cg_no_loop(); // cg_no_loop stops the draw loop.
+		// show fps
+		cg_string fps_str = calc_fps(cg_get_deltatime_micros());
+
+		// TODO: fix missing characters when this is printed to 0, 0
+		// then change it back to 0, 0
+		cg_text(fps_str, 2, 2);
+
 		cg_dispose_string(fps_str);
 
 		// end the draw
