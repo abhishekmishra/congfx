@@ -138,11 +138,6 @@ int main(int argc, char *argv[])
 
 		cg_text(L"CONGFX: EXPERIMENT IN C ", width / 2 - 12, height / 2);
 
-		// show ball pos
-		// cg_string ballpos_str = cg_vec2_to_string(b->position);
-		// cg_text(ballpos_str, 0, 1);
-		// cg_dispose_string(ballpos_str);
-
 		for (cg_int i = 0; i < NUM_BALLS; i++)
 		{
 			ball *a = balls[i];
