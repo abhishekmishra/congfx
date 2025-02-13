@@ -895,6 +895,9 @@ int main(int argc, char *argv[])
         cg_swap_canvas();
     }
 
+    // flush the command buffer
+    _cg_term_flush_command_buffer(_cg_buffer);
+
     // dispose of the command buffer
     _cg_term_dispose_command_buffer(_cg_buffer);
 }
