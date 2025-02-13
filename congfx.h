@@ -840,39 +840,6 @@ cg_uint _diff_time_micros(struct timespec time1, struct timespec time2)
     return delta;
 }
 
-int main(int argc, char *argv[])
-{
-    setup();
-
-    // create the graphics engine
-    int err = cg_create_graphics_fullscreen();
-    if (err != 0)
-    {
-        cg_err_fatal_msg(L"Unable to create graphics system.");
-        exit(err);
-    }
-    
-    while (_loop == 1)
-    {
-        // begin the draw
-        err = cg_begin_draw();
-        if (err != 0)
-        {
-            break;
-        }
-
-        // TODO: change all programs to use millis,
-        // then switch to millis here
-        draw(cg_get_deltatime_micros());
-
-        // end the draw
-        cg_end_draw();
-    }
-
-    // destroy the graphics engine
-    cg_destroy_graphics();
-}
-
 void cg_err_fatal(cg_string message, cg_uint code)
 {
     wprintf(L"FATAL: %ls\n", message);

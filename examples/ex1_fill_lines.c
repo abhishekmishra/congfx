@@ -25,65 +25,78 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @brief Example 1: Fill lines on the canvas
  * @version 0.1
  * @date 2025-01-15
- * 
+ *
  * @copyright Copyright (c) 2025
- * 
+ *
  * This example demonstrates a simple animation
  * on the canvas. We slowly fill the canvas with lines
  * starting from the top and moving downwards.
- * 
+ *
  * Each new line is added after a certain time interval.
  * This interval is controlled by the `step_time` variable.
- * 
+ *
  * Once all lines are drawn, the canvas is cleared and the
  * process starts again.
- * 
+ *
  * To exit the program, press `Ctrl+C`.
  */
 
 #include "congfx.h"
 
-cg_uint total_time = 0;
-cg_uint step_time = 50000;
-cg_char total_time_string[1024];
-cg_uint lines_to_draw = 0;
-
-void setup()
+int main(int argc, char *argv[])
 {
-    // does nothing but is required
-}
 
-/**
- * @brief Increment the number of lines to draw
- * everty `step_time` microseconds.
- * 
- * @param dt delta time in microseconds
- */
-void draw(cg_uint dt)
-{
-    // determine the number of lines to draw
-    // based on the total time elapsed
-    // since the last times the number of lines to draw was updated
-    if (total_time > step_time)
+    cg_uint total_time = 0;
+    cg_uint step_time = 50000;
+    cg_char total_time_string[1024];
+    cg_uint lines_to_draw = 0;
+
+    // create the graphics engine
+    int err = cg_create_graphics_fullscreen();
+    if (err != 0)
     {
-        lines_to_draw++;
-        if (lines_to_draw > height)
+        return err;
+    }
+
+    while (1)
+    {
+        // begin the draw
+        err = cg_begin_draw();
+        if (err != 0)
         {
-            lines_to_draw = 0;
+            break;
         }
-        total_time = 0;
+
+        // determine the number of lines to draw
+        // based on the total time elapsed
+        // since the last times the number of lines to draw was updated
+        if (total_time > step_time)
+        {
+            lines_to_draw++;
+            if (lines_to_draw > height)
+            {
+                lines_to_draw = 0;
+            }
+            total_time = 0;
+        }
+
+        // draw the lines
+        for (cg_uint i = 0; i < lines_to_draw; i++)
+        {
+            cg_line(0, i, width, i);
+        }
+
+        // draw the total time in the center of the canvas
+        swprintf(total_time_string, 1024, L"Total time: %5lu", total_time);
+        cg_text(total_time_string, (width - wcslen(total_time_string)) / 2, 10);
+        total_time += cg_get_deltatime_micros();
+
+        // end the draw
+        cg_end_draw();
     }
 
-    // draw the lines
-    for (cg_uint i = 0; i < lines_to_draw; i++)
-    {
-        cg_line(0, i, width, i);
-    }
-
-    // draw the total time in the center of the canvas
-    swprintf(total_time_string, 1024, L"Total time: %5lu", total_time);
-    cg_text(total_time_string, (width - wcslen(total_time_string))/2, 10);
-    total_time += dt;
+    // destroy the graphics engine
+    cg_destroy_graphics();
 }
 
 void key_pressed(char c)

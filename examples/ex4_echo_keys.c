@@ -5,29 +5,48 @@ cg_char *contents = NULL;
 cg_uint char_row = 0;
 cg_uint char_col = 0;
 
-void setup()
+int main(int argc, char *argv[])
 {
-    // does nothing
     contents = cg_make_string((width * height) + 1);
     contents[0] = L'\0';
-}
 
-void draw(cg_uint dt)
-{
-    // loop over the contents and print them
-    int len = char_row * width + char_col;
-    cg_uint cr = 0, cc = 0;
-    for (cg_uint i = 0; i < len; i++)
+    // create the graphics engine
+    int err = cg_create_graphics_fullscreen();
+    if (err != 0)
     {
-        cg_point(cc, cr, contents[i]);
-        cg_point(cc, 10, i+48);
-        cc++;
-        if (cc >= width)
-        {
-            cc = 0;
-            cr++;
-        }
+        return err;
     }
+
+    while (1)
+    {
+        // begin the draw
+        err = cg_begin_draw();
+        if (err != 0)
+        {
+            break;
+        }
+
+        // loop over the contents and print them
+        int len = char_row * width + char_col;
+        cg_uint cr = 0, cc = 0;
+        for (cg_uint i = 0; i < len; i++)
+        {
+            cg_point(cc, cr, contents[i]);
+            cg_point(cc, 10, i + 48);
+            cc++;
+            if (cc >= width)
+            {
+                cc = 0;
+                cr++;
+            }
+        }
+
+        // end the draw
+        cg_end_draw();
+    }
+
+    // destroy the graphics engine
+    cg_destroy_graphics();
 }
 
 void key_pressed(char c)
