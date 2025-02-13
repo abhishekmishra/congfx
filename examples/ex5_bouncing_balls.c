@@ -182,10 +182,10 @@ int main(int argc, char *argv[])
 		// then change it back to 0, 0
 		cg_text(fps_str, 0, 0);
 
-		cg_dispose_string(fps_str);
-
 		// end the draw
 		cg_end_draw();
+
+		cg_dispose_string(fps_str);
 	}
 
 	// destroy the graphics engine
