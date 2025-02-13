@@ -182,7 +182,7 @@ int main(int argc, char *argv[])
 
 		// TODO: fix missing characters when this is printed to 0, 0
 		// then change it back to 0, 0
-		cg_text(fps_str, 2, 2);
+		cg_text(fps_str, 0, 0);
 
 		cg_dispose_string(fps_str);
 

@@ -1126,7 +1126,7 @@ void _cg_term_set_background_colour(cg_rgb_t colour)
 void _cg_term_move_to(cg_uint x, cg_uint y)
 {
     cg_char buffer[20];
-    swprintf(buffer, 20, L"\033[%lu;%luf", y, x);
+    swprintf(buffer, 20, L"\033[%lu;%luf", y+1, x+1);
     _cg_term_buffer_command(_cg_buffer, buffer, 0);
 }
 
