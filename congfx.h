@@ -89,7 +89,7 @@ pictures.
 #define _CG_FREE free
 
 #define _CG_TERM_COMMAND_BUFFER_START_SIZE 1024
-#define _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT 1024
+#define _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT 128
 
 /*--------- BEGIN TYPE DEFINITIONS -----------*/
 
@@ -1076,16 +1076,15 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
     }
 
     size_t new_size = buffer->length + command_length + 1;
-    if (new_size >= buffer->size)
+    if (new_size > buffer->size)
     {
-        if (_cg_term_expand_command_buffer(buffer, command_length + 1) == -1)
+        if (_cg_term_expand_command_buffer(buffer, command_length) == -1)
         {
             return -1;
         }
     }
     wcsncat(buffer->buffer, command, command_length);
-    buffer->buffer[new_size] = L'\0';
-    buffer->length += command_length;
+    buffer->length = wcslen(buffer->buffer);
 
     if (buffer->length >= _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT)
     {
