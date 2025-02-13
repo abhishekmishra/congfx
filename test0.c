@@ -54,30 +54,6 @@ void dispose_ball(ball *b)
 cg_int NUM_BALLS = 10;
 ball **balls;
 
-void setup()
-{
-	ball *_b = NULL;
-	balls = (ball**)calloc(NUM_BALLS, sizeof(ball*));
-	cg_create_canvas(100, 50);
-
-	for (cg_int i = 0; i < NUM_BALLS; i++)
-	{
-		_b = make_ball();
-		int x = cg_rand_int(0, width);
-		int y = cg_rand_int(0, height);
-		wprintf(L"%d, %d\n", x, y);
-		_b->position = cg_make_vec2(x, y);
-		_b->velocity = cg_make_vec2(0.00001 * cg_rand_int(-10, 10), 0.00001 * cg_rand_int(-10, 10));
-		balls[i] = _b;
-	}
-	for (cg_int i = 0; i < NUM_BALLS; i++)
-	{
-		wprintf(L"ball %lu at %Lf, %Lf\n", i, balls[i]->position[0], balls[i]->position[1]);
-	}
-	// setup() is run once at startup
-	cg_frame_rate(60);
-	// cg_no_loop();
-}
 
 void ball_update(ball *b, cg_uint dt)
 {
@@ -120,8 +96,48 @@ cg_string calc_fps(cg_uint dt)
 	return fps_str;
 }
 
-void draw(cg_uint dt)
+
+int main(int argc, char *argv[])
 {
+	ball *_b = NULL;
+	balls = (ball**)calloc(NUM_BALLS, sizeof(ball*));
+	cg_create_canvas(100, 50);
+
+	for (cg_int i = 0; i < NUM_BALLS; i++)
+	{
+		_b = make_ball();
+		int x = cg_rand_int(0, width);
+		int y = cg_rand_int(0, height);
+		wprintf(L"%d, %d\n", x, y);
+		_b->position = cg_make_vec2(x, y);
+		_b->velocity = cg_make_vec2(0.00001 * cg_rand_int(-10, 10), 0.00001 * cg_rand_int(-10, 10));
+		balls[i] = _b;
+	}
+	for (cg_int i = 0; i < NUM_BALLS; i++)
+	{
+		wprintf(L"ball %lu at %Lf, %Lf\n", i, balls[i]->position[0], balls[i]->position[1]);
+	}
+	// setup() is run once at startup
+	cg_frame_rate(60);
+	// cg_no_loop();
+
+	    // create the graphics engine
+		int err = cg_create_graphics_fullscreen();
+		if (err != 0)
+		{
+			return err;
+		}
+	
+		while (1)
+		{
+			// begin the draw
+			err = cg_begin_draw();
+			if (err != 0)
+			{
+				break;
+			}
+	
+	
 	// draw() is run multiple times per second.
 
 	//set background colour
@@ -130,7 +146,7 @@ void draw(cg_uint dt)
 	cg_text(L"CONGFX: EXPERIMENT IN C ", width / 2 - 12, height / 2);
 
 	// show fps
-	cg_string fps_str = calc_fps(dt);
+	cg_string fps_str = calc_fps(cg_get_deltatime_micros());
 	cg_text(fps_str, 0, 0);
 
 	// show ball pos
@@ -142,7 +158,7 @@ void draw(cg_uint dt)
 	{
 		ball *a = balls[i];
 		ball_show(a);
-		ball_update(a, dt);
+		ball_update(a, cg_get_deltatime_micros());
 	}
 	// // set point 0,0 to A
 	// cg_point(0, 0, L'A');
@@ -171,6 +187,13 @@ void draw(cg_uint dt)
 
 	// cg_no_loop(); // cg_no_loop stops the draw loop.
 	cg_dispose_string(fps_str);
+
+        // end the draw
+        cg_end_draw();
+    }
+
+    // destroy the graphics engine
+    cg_destroy_graphics();
 }
 
 void key_pressed(char c)
