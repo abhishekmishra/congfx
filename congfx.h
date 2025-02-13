@@ -533,6 +533,15 @@ cg_uint height;
 
 // system variables
 
+typedef struct {
+    cg_char read_buf[20];
+    struct timespec start_time, prev_time, current_time, after_draw_time;
+    cg_uint delta_time_ideal;
+    cg_uint dt;
+} _cg_graphics_context_t;
+
+_cg_graphics_context_t *_cg_gfx_context = NULL;
+
 int _loop = 1;
 cg_uint _fps = _CG_DEFAULT_FPS;
 cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
@@ -1392,15 +1401,6 @@ void cg_text(cg_char *t, cg_uint x, cg_uint y)
         }
     }
 }
-
-typedef struct {
-    cg_char read_buf[20];
-    struct timespec start_time, prev_time, current_time, after_draw_time;
-    cg_uint delta_time_ideal;
-    cg_uint dt;
-} _cg_graphics_context_t;
-
-_cg_graphics_context_t *_cg_gfx_context = NULL;
 
 int cg_create_graphics(cg_uint w, cg_uint h)
 {
