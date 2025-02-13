@@ -460,6 +460,26 @@ void cg_end_draw();
  */
 void cg_destroy_graphics();
 
+/**
+ * Get the delta time in microseconds.
+ * 
+ * @return cg_uint delta time in microseconds
+ */
+cg_uint cg_get_deltatime_micros();
+
+/**
+ * Get the delta time in milliseconds.
+ * 
+ * @return cg_uint delta time in milliseconds
+ */
+cg_uint cg_get_deltatime_millis();
+
+/**
+ * The default delta time function returns
+ * the delta time in milliseconds.
+ */
+#define cg_get_deltatime cg_get_deltatime_millis
+
 /*+++++++++ END LIFECYCLE FUNCTIONS +++++++++*/
 
 /*+++++++++ BEGIN Graphics FUNCTIONS +++++++++*/
@@ -1588,6 +1608,16 @@ void cg_destroy_graphics()
 
     // dispose of the command buffer
     _cg_term_dispose_command_buffer(_cg_buffer);
+}
+
+cg_uint cg_get_deltatime_micros()
+{
+    return _cg_gfx_context->dt;
+}
+
+cg_uint cg_get_deltatime_millis()
+{
+    return _cg_gfx_context->dt / 1000;
 }
 
 #endif //__CONGFX_H__
