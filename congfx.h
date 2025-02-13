@@ -1572,6 +1572,9 @@ int cg_begin_draw()
 
 void cg_end_draw()
 {
+    // show the canvas
+    cg_show_canvas();
+
     // how much time spent
     clock_gettime(CLOCK_MONOTONIC, &(_cg_gfx_context->after_draw_time));
     cg_uint dt_done = _diff_time_micros(_cg_gfx_context->after_draw_time, _cg_gfx_context->current_time);
