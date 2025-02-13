@@ -23,6 +23,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 cg_uint x = 0;
 cg_uint y = 0;
+cg_char fps_str[100];
 
 typedef struct
 {
@@ -90,7 +91,6 @@ cg_string calc_fps(cg_uint dt)
 {
 	cg_uint dt_millis = dt / 1000;
 	cg_uint fps = (1000.0 / dt_millis);
-	cg_string fps_str = cg_make_string(100);
 	swprintf(fps_str, 100, L"FPS: %lu", fps);
 	return fps_str;
 }
@@ -184,8 +184,6 @@ int main(int argc, char *argv[])
 
 		// end the draw
 		cg_end_draw();
-
-		cg_dispose_string(fps_str);
 	}
 
 	// destroy the graphics engine
