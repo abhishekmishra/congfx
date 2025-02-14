@@ -409,18 +409,6 @@ void cg_err_fatal_msg(cg_string message);
 
 /*+++++++++ END ERROR REPORTING UTILITY FUNCTIONS +++++++++*/
 
-/*+++++++++ BEGIN LIFECYCLE STUB FUNCTIONS +++++++++*/
-
-// Life-cycle functions, to be defined by the main program
-
-void setup();
-
-void draw(cg_uint dt);
-
-void key_pressed(char c);
-
-/*+++++++++ END LIFECYCLE STUB FUNCTIONS +++++++++*/
-
 /*+++++++++ BEGIN LIFECYCLE FUNCTIONS +++++++++*/
 
 /**
@@ -519,6 +507,13 @@ void cg_text(cg_char *t, cg_uint x, cg_uint y);
 /*========= END Graphics Drawing FUNCTIONS =========*/
 
 /*+++++++++ END Graphics FUNCTIONS +++++++++*/
+
+/*+++++++++ BEGIN Input FUNCTIONS +++++++++*/
+
+char cg_get_key_pressed_char();
+int cg_is_key_pressed(char c);
+
+/*+++++++++ END Input FUNCTIONS +++++++++*/
 
 /*--------- END PUBLIC FUNCTION PROTOTYPES -----------*/
 
@@ -1208,8 +1203,11 @@ void _cg_read_key()
     // }
     if (c != '\0')
     {
-        key_pressed(c);
         _cg_gfx_context->key_pressed = c;
+    }
+    else
+    {
+        _cg_gfx_context->key_pressed = 0;
     }
 }
 
@@ -1395,6 +1393,16 @@ void cg_text(cg_char *t, cg_uint x, cg_uint y)
             cg_point(x + i, y, t[i]);
         }
     }
+}
+
+char cg_get_key_pressed_char()
+{
+    return _cg_gfx_context->key_pressed;
+}
+
+int cg_is_key_pressed(char c)
+{
+    return _cg_gfx_context->key_pressed == c;
 }
 
 int cg_create_graphics(cg_uint w, cg_uint h)

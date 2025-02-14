@@ -114,11 +114,6 @@ int main(int argc, char *argv[])
 	cg_destroy_graphics();
 }
 
-void key_pressed(char c)
-{
-	// do nothing
-}
-
 ball *make_ball()
 {
 	ball *b = (ball *)calloc(1, sizeof(ball));

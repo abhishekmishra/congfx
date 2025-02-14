@@ -54,7 +54,3 @@ int main(int argc, char *argv[])
     // destroy the graphics engine
     cg_destroy_graphics();
 }
-
-void key_pressed(char c)
-{
-}

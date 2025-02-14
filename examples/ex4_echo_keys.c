@@ -5,6 +5,8 @@ cg_char *contents = NULL;
 cg_uint char_row = 0;
 cg_uint char_col = 0;
 
+void handle_key_pressed(char c);
+
 int main(int argc, char *argv[])
 {
     contents = cg_make_string((width * height) + 1);
@@ -43,13 +45,20 @@ int main(int argc, char *argv[])
 
         // end the draw
         cg_end_draw();
+
+        // get the key pressed
+        char c = cg_get_key_pressed_char();
+        if (c != 0)
+        {
+            handle_key_pressed(c);
+        }
     }
 
     // destroy the graphics engine
     cg_destroy_graphics();
 }
 
-void key_pressed(char c)
+void handle_key_pressed(char c)
 {
     cg_point(char_col, char_row, c);
 
