@@ -1279,11 +1279,16 @@ void cg_show_canvas()
             for (cg_uint j = 0; j < canvas_current->width; j++)
             {
                 cg_cell_t *current_cell = cg_get_cell(canvas_current, j, i);
-                // cg_cell_t *previous_cell = cg_get_cell(canvas_previous, j, i);
-                // if (cg_compare_cells(current_cell, previous_cell) == 0)
-                // {
-                //     continue;
-                // }
+
+                #ifdef __CYGWIN__
+
+                cg_cell_t *previous_cell = cg_get_cell(canvas_previous, j, i);
+                if (cg_compare_cells(current_cell, previous_cell) == 0)
+                {
+                    continue;
+                }
+
+                #endif
 
                 // wprintf(L"Cells not equal at [%lu, %lu]\n", j, i);
 
