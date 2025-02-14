@@ -538,6 +538,7 @@ typedef struct {
     struct timespec start_time, prev_time, current_time, after_draw_time;
     cg_uint delta_time_ideal;
     cg_uint dt;
+    char key_pressed;
 } _cg_graphics_context_t;
 
 _cg_graphics_context_t *_cg_gfx_context = NULL;
@@ -655,6 +656,11 @@ int _cg_get_cursor_position(int *rows, int *cols);
  * @return 0 if successful, -1 otherwise.
  */
 int _cg_get_window_size(int *rows, int *cols);
+
+/**
+ * Read a key press from the terminal.
+ */
+void _cg_read_key();
 
 // internal functions
 
@@ -1184,6 +1190,29 @@ int _cg_get_window_size(int *rows, int *cols)
     }
 }
 
+void _cg_read_key()
+{
+    // read one character from the terminal
+    char c = '\0';
+    if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
+    {
+        cg_err_fatal_msg(L"read");
+    }
+    // if (iscntrl(c))
+    // {
+    //     wprintf(L"%d\r\n", c);
+    // }
+    // else
+    // {
+    //     wprintf(L"%d ('%c')\r\n", c, c);
+    // }
+    if (c != '\0')
+    {
+        key_pressed(c);
+        _cg_gfx_context->key_pressed = c;
+    }
+}
+
 // canvas functions
 
 void cg_create_canvas(cg_uint w, cg_uint h)
@@ -1463,29 +1492,13 @@ int cg_begin_draw()
 {
     _cg_gfx_context->dt = _diff_time_micros(_cg_gfx_context->current_time, _cg_gfx_context->prev_time);
 
-    char c = '\0';
-    if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
-    {
-        cg_err_fatal_msg(L"read");
-    }
-    // if (iscntrl(c))
-    // {
-    //     wprintf(L"%d\r\n", c);
-    // }
-    // else
-    // {
-    //     wprintf(L"%d ('%c')\r\n", c, c);
-    // }
-    if (c == 'q')
+    _cg_read_key();
+
+    // if the key pressed is ESC, then return -1 to exit
+    if (_cg_gfx_context->key_pressed == 27)
     {
         return -1;
     }
-    if (c != '\0')
-    {
-        key_pressed(c);
-    }
-
-    // cg_no_loop();
 
     return 0;
 }
