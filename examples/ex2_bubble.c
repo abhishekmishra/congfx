@@ -3,11 +3,11 @@
 int main(int argc, char *argv[])
 {
 
-    cg_uint total_time = 0;
-    cg_uint step_time = 100000;
-    cg_uint radius = 1;
-    cg_rgb_t bg_colour = {1, 1, 1};
-    cg_rgb_t col = {255, 255, 255};
+    cg_uint total_time = 0;         // total time in millis
+    cg_uint step_time = 100;        // time to update the number of lines to draw in millis
+    cg_uint radius = 1;             // radius of the circle
+    cg_rgb_t bg_colour = {1, 1, 1}; // background colour
+    cg_rgb_t col = {255, 255, 255}; // stroke colour
 
     cg_frame_rate(60);
 
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
             cg_rect(width / 2 - radius, height / 2 - radius, 2 * radius, 2 * radius);
 
             // increment the total time
-            total_time += cg_get_deltatime_micros();
+            total_time += cg_get_deltatime();
             
             // print press escape to exit
             cg_text(L"Press ESC to exit", 0, height - 1);
