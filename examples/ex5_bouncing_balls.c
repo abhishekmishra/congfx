@@ -82,13 +82,9 @@ int main(int argc, char *argv[])
 		}
 		balls[i] = _b;
 	}
-	// for (cg_int i = 0; i < NUM_BALLS; i++)
-	// {
-	// 	wprintf(L"ball %lu at %Lf, %Lf\n", i, balls[i]->position[0], balls[i]->position[1]);
-	// }
-	// setup() is run once at startup
+
+	// set the frame rate
 	cg_frame_rate(60);
-	// cg_no_loop();
 
 	while (1)
 	{
