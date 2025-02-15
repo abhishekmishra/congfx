@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 {
 
     cg_uint total_time = 0;
-    cg_uint step_time = 50000;
+    cg_uint step_time = 50;
     cg_char total_time_string[1024];
     cg_uint lines_to_draw = 0;
 
@@ -63,29 +63,32 @@ int main(int argc, char *argv[])
 		// begin the draw
 		cg_begin_draw();
 
-        // determine the number of lines to draw
-        // based on the total time elapsed
-        // since the last times the number of lines to draw was updated
-        if (total_time > step_time)
-        {
-            lines_to_draw++;
-            if (lines_to_draw > height)
+            // determine the number of lines to draw
+            // based on the total time elapsed
+            // since the last times the number of lines to draw was updated
+            if (total_time > step_time)
             {
-                lines_to_draw = 0;
+                lines_to_draw++;
+                if (lines_to_draw > height)
+                {
+                    lines_to_draw = 0;
+                }
+                total_time = 0;
             }
-            total_time = 0;
-        }
 
-        // draw the lines
-        for (cg_uint i = 0; i < lines_to_draw; i++)
-        {
-            cg_line(0, i, width, i);
-        }
+            // clear the canvas
+            cg_clear_canvas();
 
-        // draw the total time in the center of the canvas
-        swprintf(total_time_string, 1024, L"Total time: %5lu", total_time);
-        cg_text(total_time_string, (width - wcslen(total_time_string)) / 2, 10);
-        total_time += cg_get_deltatime_micros();
+            // draw the lines
+            for (cg_uint i = 0; i < lines_to_draw; i++)
+            {
+                cg_line(0, i, width, i);
+            }
+
+            // draw the total time in the center of the canvas
+            swprintf(total_time_string, 1024, L"Total time: %5lu", total_time);
+            cg_text(total_time_string, (width - wcslen(total_time_string)) / 2, 10);
+            total_time += cg_get_deltatime();
 
         // end the draw
         cg_end_draw();
