@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 		// wprintf(L"%d, %d\n", x, y);
 		_b->position = cg_make_vec2(x, y);
 		_b->velocity = cg_make_vec2(cg_rand_int(15, 25), cg_rand_int(15, 25));
-		_b->velocity = cg_vec2_mult_scalar(_b->velocity, 0.000001);
+		_b->velocity = cg_vec2_mult_scalar(_b->velocity, 0.001);
 
 		// get a random sign for x and y
 		if (cg_rand_int(0, 1) < 0.5)
@@ -102,11 +102,11 @@ int main(int argc, char *argv[])
 			{
 				ball *a = balls[i];
 				ball_show(a);
-				ball_update(a, cg_get_deltatime_micros());
+				ball_update(a, cg_get_deltatime());
 			}
 
 			// show fps
-			cg_string fps_str = calc_fps(cg_get_deltatime_micros());
+			cg_string fps_str = calc_fps(cg_get_deltatime());
 			cg_text(fps_str, 0, 0);
 
             // print press escape to exit
@@ -168,9 +168,8 @@ void ball_show(ball *b)
 		4, 4);
 }
 
-cg_string calc_fps(cg_uint dt)
+cg_string calc_fps(cg_uint dt_millis)
 {
-	cg_uint dt_millis = dt / 1000;
 	cg_uint fps = (1000.0 / dt_millis);
 	swprintf(fps_str, FPS_STR_LEN, L"FPS: %lu", fps);
 	return fps_str;
