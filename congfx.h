@@ -92,8 +92,20 @@ pictures.
 #define _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT 1023
 
 // Define some useful keys
-#define CG_KEY_ESCAPE 27
-#define CG_KEY_ENTER 10
+typedef enum
+{
+    CG_KEY_NONE = 0,
+    CG_KEY_UNKNOWN,
+    CG_KEY_ALPHANUM,
+    CG_KEY_ESCAPE,
+    CG_KEY_ENTER,
+    CG_KEY_UP,
+    CG_KEY_DOWN,
+    CG_KEY_RIGHT,
+    CG_KEY_LEFT
+} cg_key_type_t;
+
+#define _CG_TERM_KEY_ESCAPE '\x1b'
 
 /*--------- BEGIN TYPE DEFINITIONS -----------*/
 
@@ -502,8 +514,13 @@ void cg_text(cg_char *t, cg_uint x, cg_uint y);
 
 /*+++++++++ BEGIN Input FUNCTIONS +++++++++*/
 
-char cg_get_key_pressed_char();
-int cg_is_key_pressed(char c);
+typedef struct {
+    cg_key_type_t key;
+    cg_char char_value;
+} cg_keyboard_input_t;
+
+cg_keyboard_input_t cg_get_key_pressed();
+int cg_is_key_pressed(cg_key_type_t key);
 
 /*+++++++++ END Input FUNCTIONS +++++++++*/
 
@@ -522,10 +539,11 @@ cg_uint height;
 
 typedef struct {
     cg_char read_buf[20];
+    cg_keyboard_input_t keys_pressed[128];
+    cg_uint key_counter;
     struct timespec start_time, prev_time, current_time, after_draw_time;
     cg_uint delta_time_ideal;
     cg_uint dt;
-    char key_pressed;
     cg_uint should_exit;
 } _cg_graphics_context_t;
 
@@ -1180,27 +1198,62 @@ int _cg_get_window_size(int *rows, int *cols)
 
 void _cg_read_key()
 {
-    // read one character from the terminal
-    char c = '\0';
-    if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
+    _cg_gfx_context->key_counter = 0;
+    for (int i = 0; i < 128; i++)
     {
-        cg_err_fatal_msg(L"read");
+        _cg_gfx_context->keys_pressed[i].key = CG_KEY_NONE;
+        _cg_gfx_context->keys_pressed[i].char_value = '\0';
     }
-    // if (iscntrl(c))
-    // {
-    //     wprintf(L"%d\r\n", c);
-    // }
-    // else
-    // {
-    //     wprintf(L"%d ('%c')\r\n", c, c);
-    // }
-    if (c != '\0')
+
+    int read_count = 0;
+    while(1)
     {
-        _cg_gfx_context->key_pressed = c;
-    }
-    else
-    {
-        _cg_gfx_context->key_pressed = 0;
+        char c = '\0';
+        if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
+        {
+            break;
+        }
+
+        if (c == '\0')
+        {
+            break;
+        }
+        else if (c == _CG_TERM_KEY_ESCAPE) {
+            char seq[3];
+            cg_key_type_t key = CG_KEY_ESCAPE;
+            cg_char char_value = c;
+            if (read(STDIN_FILENO, &seq[0], 1) == 1)
+            {
+                if (read(STDIN_FILENO, &seq[1], 1) == 1)
+                {
+                    if (seq[0] == '[')
+                    {
+                        switch (seq[1]) {
+                            case 'A': key = CG_KEY_UP; break;
+                            case 'B': key = CG_KEY_DOWN; break;
+                            case 'C': key = CG_KEY_RIGHT; break;
+                            case 'D': key = CG_KEY_LEFT; break;
+                        }
+                    }
+                }
+            }
+            _cg_gfx_context->keys_pressed[read_count].key = key;
+            _cg_gfx_context->keys_pressed[read_count].char_value = char_value;
+            read_count++;
+        }
+        else
+        {
+            if (c >= 32 && c <= 126)
+            {
+                _cg_gfx_context->keys_pressed[read_count].key = CG_KEY_ALPHANUM;
+            }
+            else 
+            {
+                _cg_gfx_context->keys_pressed[read_count].key = CG_KEY_UNKNOWN;
+            }
+            _cg_gfx_context->keys_pressed[read_count].char_value = c;
+            read_count++;
+        }
     }
 }
 
@@ -1393,14 +1446,31 @@ void cg_text(cg_char *t, cg_uint x, cg_uint y)
     }
 }
 
-char cg_get_key_pressed_char()
+cg_keyboard_input_t cg_get_key_pressed()
 {
-    return _cg_gfx_context->key_pressed;
+    // get key at the key counter
+    if (_cg_gfx_context->key_counter < 128)
+    {
+        cg_keyboard_input_t inp = _cg_gfx_context->keys_pressed[_cg_gfx_context->key_counter];
+        _cg_gfx_context->key_counter++;
+        return inp;
+    }
 }
 
-int cg_is_key_pressed(char c)
+int cg_is_key_pressed(cg_key_type_t key)
 {
-    return _cg_gfx_context->key_pressed == c;
+    cg_uint count = 0;
+    cg_keyboard_input_t inp;
+    while(inp.key != CG_KEY_NONE && count < 128)
+    {
+        inp = _cg_gfx_context->keys_pressed[count];
+        if (inp.key == key)
+        {
+            return 1;
+        }
+        count++;
+    }
+    return 0;
 }
 
 int cg_create_graphics(cg_uint w, cg_uint h)
@@ -1502,7 +1572,7 @@ void cg_begin_draw()
     _cg_read_key();
 
     // if the key pressed is ESC, then return -1 to exit
-    if (_cg_gfx_context->key_pressed == CG_KEY_ESCAPE)
+    if (cg_is_key_pressed(CG_KEY_ESCAPE))
     {
         cg_exit_graphics();
     }
@@ -1510,6 +1580,17 @@ void cg_begin_draw()
 
 void cg_end_draw()
 {
+    // DEBUG code to show the key pressed
+    // int key_count = 0;
+    // cg_keyboard_input_t inp;
+    // cg_string key_str = cg_make_string(100);
+    // while(inp = cg_get_key_pressed(), inp.key != CG_KEY_NONE)
+    // {
+    //     key_count++;
+    //     swprintf(key_str, 100, L"Key Pressed %d, %c", inp.key, inp.char_value);
+    //     cg_text(key_str, 0, key_count);
+    // }
+
     // show the canvas
     cg_show_canvas();
 

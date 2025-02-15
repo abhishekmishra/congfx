@@ -5,7 +5,7 @@ cg_char *contents = NULL;
 cg_uint char_row = 0;
 cg_uint char_col = 0;
 
-void handle_key_pressed(char c);
+void handle_key_pressed(cg_char c);
 
 int main(int argc, char *argv[])
 {
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         cg_end_draw();
 
         // get the key pressed
-        char c = cg_get_key_pressed_char();
+        cg_char c = cg_get_key_pressed().char_value;
         if (c != 0)
         {
             handle_key_pressed(c);
@@ -57,13 +57,12 @@ int main(int argc, char *argv[])
     cg_destroy_graphics();
 }
 
-void handle_key_pressed(char c)
+void handle_key_pressed(cg_char c)
 {
     cg_point(char_col, char_row, c);
 
     // append to contents
-    cg_char wc = (cg_char)c;
-    contents[char_row * width + char_col] = wc;
+    contents[char_row * width + char_col] = c;
 
     // set the next position
     char_col++;
