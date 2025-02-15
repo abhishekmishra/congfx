@@ -94,9 +94,6 @@ int main(int argc, char *argv[])
 			// clear canvas before every frame
 			cg_clear_canvas();
 
-			// print title
-			cg_text(L"CONGFX: EXAMPLE#5: BOUNCING BALLS ", width / 2 - 17, 0);
-
 			// show and update all the balls
 			for (cg_int i = 0; i < NUM_BALLS; i++)
 			{
@@ -104,6 +101,9 @@ int main(int argc, char *argv[])
 				ball_show(a);
 				ball_update(a, cg_get_deltatime());
 			}
+
+			// print title
+			cg_text(L"CONGFX: EXAMPLE#5: BOUNCING BALLS ", width / 2 - 17, 0);
 
 			// show fps
 			cg_string fps_str = calc_fps(cg_get_deltatime());
