@@ -38,7 +38,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * Once all lines are drawn, the canvas is cleared and the
  * process starts again.
  *
- * To exit the program, press `Ctrl+C`.
+ * To exit the program, press `ESC`.
  */
 
 #include "congfx.h"
@@ -89,6 +89,9 @@ int main(int argc, char *argv[])
             swprintf(total_time_string, 1024, L"Total time: %5lu", total_time);
             cg_text(total_time_string, (width - wcslen(total_time_string)) / 2, 10);
             total_time += cg_get_deltatime();
+
+            // print press escape to exit
+            cg_text(L"Press ESC to exit", 0, height - 1);
 
         // end the draw
         cg_end_draw();
