@@ -23,26 +23,30 @@ int main(int argc, char *argv[])
 		// begin the draw
 		cg_begin_draw();
 
-        cg_clear_canvas();
+            cg_clear_canvas();
 
-        // determine the number of lines to draw
-        // based on the total time elapsed
-        // since the last times the number of lines to draw was updated
-        if (total_time > step_time)
-        {
-            radius++;
-            if (radius > height / 2)
+            // determine the number of lines to draw
+            // based on the total time elapsed
+            // since the last times the number of lines to draw was updated
+            if (total_time > step_time)
             {
-                radius = 1;
+                radius++;
+                if (radius > height / 2)
+                {
+                    radius = 1;
+                }
+                total_time = 0;
             }
-            total_time = 0;
-        }
 
-        // draw the circle of radius `radius`
-        cg_rect(width / 2 - radius, height / 2 - radius, 2 * radius, 2 * radius);
+            // draw the circle of radius `radius`
+            cg_rect(width / 2 - radius, height / 2 - radius, 2 * radius, 2 * radius);
 
-        // increment the total time
-        total_time += cg_get_deltatime_micros();
+            // increment the total time
+            total_time += cg_get_deltatime_micros();
+            
+            // print press escape to exit
+            cg_text(L"Press ESC to exit", 0, height - 1);
+
         // end the draw
         cg_end_draw();
     }

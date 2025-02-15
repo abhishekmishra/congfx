@@ -109,6 +109,9 @@ int main(int argc, char *argv[])
 			cg_string fps_str = calc_fps(cg_get_deltatime_micros());
 			cg_text(fps_str, 0, 0);
 
+            // print press escape to exit
+            cg_text(L"Press ESC to exit", 0, height - 1);
+
 		// end the draw
 		cg_end_draw();
 	}
