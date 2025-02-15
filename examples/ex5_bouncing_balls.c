@@ -68,7 +68,18 @@ int main(int argc, char *argv[])
 		int y = cg_rand_int(0, height);
 		// wprintf(L"%d, %d\n", x, y);
 		_b->position = cg_make_vec2(x, y);
-		_b->velocity = cg_make_vec2(0.00001 * cg_rand_int(-10, 10), 0.00001 * cg_rand_int(-10, 10));
+		_b->velocity = cg_make_vec2(cg_rand_int(15, 25), cg_rand_int(15, 25));
+		_b->velocity = cg_vec2_mult_scalar(_b->velocity, 0.000001);
+
+		// get a random sign for x and y
+		if (cg_rand_int(0, 1) < 0.5)
+		{
+			_b->velocity[0] = _b->velocity[0] * -1.0;
+		}
+		if (cg_rand_int(0, 1) < 0.5)
+		{
+			_b->velocity[1] = _b->velocity[1] * -1.0;
+		}
 		balls[i] = _b;
 	}
 	// for (cg_int i = 0; i < NUM_BALLS; i++)
