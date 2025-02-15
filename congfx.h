@@ -91,6 +91,10 @@ pictures.
 #define _CG_TERM_COMMAND_BUFFER_START_SIZE 1024
 #define _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT 1023
 
+// Define some useful keys
+#define CG_KEY_ESCAPE 27
+#define CG_KEY_ENTER 10
+
 /*--------- BEGIN TYPE DEFINITIONS -----------*/
 
 /**
@@ -1498,7 +1502,7 @@ void cg_begin_draw()
     _cg_read_key();
 
     // if the key pressed is ESC, then return -1 to exit
-    if (_cg_gfx_context->key_pressed == 27)
+    if (_cg_gfx_context->key_pressed == CG_KEY_ESCAPE)
     {
         cg_exit_graphics();
     }
