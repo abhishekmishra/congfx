@@ -404,6 +404,11 @@ int cg_rand_int(int from, int to);
 
 /*+++++++++ END Number TYPE FUNCTIONS +++++++++*/
 
+/*+++++++++ BEGIN math FUNCTIONS +++++++++*/
+
+int cg_clamp(int x, int min, int max); // Clamp a value between a minimum and maximum value
+/*+++++++++ END math FUNCTIONS +++++++++*/
+
 /*+++++++++ BEGIN ERROR REPORTING UTILITY FUNCTIONS +++++++++*/
 
 // Error reporting functions
@@ -951,6 +956,19 @@ int cg_rand_int(int from, int to)
     return num;
 }
 
+int cg_clamp(int x, int min, int max)
+{
+    if (x < min)
+    {
+        return min;
+    }
+    if (x > max)
+    {
+        return max;
+    }
+    return x;
+}
+
 void cg_no_loop()
 {
     _loop = 0;
@@ -1428,6 +1446,11 @@ void cg_line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
 
 void cg_rect(cg_uint x1, cg_uint y1, cg_uint width, cg_uint height)
 {
+    x1 = cg_clamp(x1, 0, canvas_current->width - 1);
+    y1 = cg_clamp(y1, 0, canvas_current->height - 1);
+    width = cg_clamp(width, 0, canvas_current->width - x1);
+    height = cg_clamp(height, 0, canvas_current->height - y1);
+    
     cg_line(x1, y1, x1 + width, y1);
     cg_line(x1 + width, y1, x1 + width, y1 + height);
     cg_line(x1 + width, y1 + height, x1, y1 + height);
