@@ -58,14 +58,10 @@ int main(int argc, char *argv[])
         return err;
     }
 
-    while (1)
-    {
-        // begin the draw
-        err = cg_begin_draw();
-        if (err != 0)
-        {
-            break;
-        }
+	while (!cg_should_exit())
+	{
+		// begin the draw
+		cg_begin_draw();
 
         // determine the number of lines to draw
         // based on the total time elapsed

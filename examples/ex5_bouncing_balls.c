@@ -86,32 +86,28 @@ int main(int argc, char *argv[])
 	// set the frame rate
 	cg_frame_rate(60);
 
-	while (1)
+	while (!cg_should_exit())
 	{
 		// begin the draw
-		err = cg_begin_draw();
-		if (err != 0)
-		{
-			break;
-		}
+		cg_begin_draw();
 
-		// clear canvas before every frame
-		cg_clear_canvas();
+			// clear canvas before every frame
+			cg_clear_canvas();
 
-		// print title
-		cg_text(L"CONGFX: EXAMPLE#5: BOUNCING BALLS ", width / 2 - 17, 0);
+			// print title
+			cg_text(L"CONGFX: EXAMPLE#5: BOUNCING BALLS ", width / 2 - 17, 0);
 
-		// show and update all the balls
-		for (cg_int i = 0; i < NUM_BALLS; i++)
-		{
-			ball *a = balls[i];
-			ball_show(a);
-			ball_update(a, cg_get_deltatime_micros());
-		}
+			// show and update all the balls
+			for (cg_int i = 0; i < NUM_BALLS; i++)
+			{
+				ball *a = balls[i];
+				ball_show(a);
+				ball_update(a, cg_get_deltatime_micros());
+			}
 
-		// show fps
-		cg_string fps_str = calc_fps(cg_get_deltatime_micros());
-		cg_text(fps_str, 0, 0);
+			// show fps
+			cg_string fps_str = calc_fps(cg_get_deltatime_micros());
+			cg_text(fps_str, 0, 0);
 
 		// end the draw
 		cg_end_draw();

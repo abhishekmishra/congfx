@@ -427,26 +427,14 @@ int cg_create_graphics(cg_uint w, cg_uint h);
  */
 int cg_create_graphics_fullscreen();
 
-/**
- * Begin the drawing process.
- * Call before running any draw commands, inside the draw loop.
- * 
- * @return int error code
- */
-int cg_begin_draw();
+void cg_begin_draw();                // Begin the drawing process. Call before running any draw commands, inside the draw loop
 
-/**
- * End the drawing process.
- * Call after running all draw commands, inside the draw loop.
- * 
- * @return int error code
- */
-void cg_end_draw();
+void cg_end_draw();                 // End the drawing process. Call after running all draw commands, inside the draw loop
 
-/**
- * Destroy the graphics system.
- */
-void cg_destroy_graphics();
+void cg_destroy_graphics();         // Destroy the graphics system
+
+void cg_exit_graphics();            // Exit the graphics system
+int cg_should_exit();               // Check if the graphics system should exit
 
 /**
  * Get the delta time in microseconds.
@@ -534,6 +522,7 @@ typedef struct {
     cg_uint delta_time_ideal;
     cg_uint dt;
     char key_pressed;
+    cg_uint should_exit;
 } _cg_graphics_context_t;
 
 _cg_graphics_context_t *_cg_gfx_context = NULL;
@@ -1424,6 +1413,7 @@ int cg_create_graphics(cg_uint w, cg_uint h)
     clock_gettime(CLOCK_MONOTONIC, &(_cg_gfx_context->start_time));
     _cg_gfx_context->prev_time = _cg_gfx_context->start_time;
     _cg_gfx_context->current_time = _cg_gfx_context->start_time;
+    _cg_gfx_context->should_exit = 0;
 
     _cg_gfx_context->delta_time_ideal = 1000000 / _fps; // in microseconds
 
@@ -1501,7 +1491,7 @@ int cg_create_graphics_fullscreen()
     return cg_create_graphics(0, 0);
 }
 
-int cg_begin_draw()
+void cg_begin_draw()
 {
     _cg_gfx_context->dt = _diff_time_micros(_cg_gfx_context->current_time, _cg_gfx_context->prev_time);
 
@@ -1510,10 +1500,8 @@ int cg_begin_draw()
     // if the key pressed is ESC, then return -1 to exit
     if (_cg_gfx_context->key_pressed == 27)
     {
-        return -1;
+        cg_exit_graphics();
     }
-
-    return 0;
 }
 
 void cg_end_draw()
@@ -1557,6 +1545,16 @@ void cg_destroy_graphics()
 
     // dispose of the command buffer
     _cg_term_dispose_command_buffer(_cg_buffer);
+}
+
+void cg_exit_graphics()
+{
+    _cg_gfx_context->should_exit = 1;
+}
+
+int cg_should_exit()
+{
+    return _cg_gfx_context->should_exit;
 }
 
 cg_uint cg_get_deltatime_micros()
