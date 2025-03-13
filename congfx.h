@@ -1478,6 +1478,9 @@ cg_keyboard_input_t cg_get_key_pressed()
         _cg_gfx_context->key_counter++;
         return inp;
     }
+
+    // return a key with none value
+    return (cg_keyboard_input_t){CG_KEY_NONE, '\0'};
 }
 
 int cg_is_key_pressed(cg_key_type_t key)
