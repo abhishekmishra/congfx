@@ -24,7 +24,7 @@ docs-api:
 
 docs-mkdocs:
 	# to install mkdocs and mkdocs-material, run:
-	# pip install mkdocs mkdocs-material
+	# pip install mkdocs mkdocs-material mkdocs-material-extensions mkdocs-git-revision-date-localized-plugin
 	mkdocs build --clean
 
 # clean all object files and executables.
