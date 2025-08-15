@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structcg__keyboard__input__t" kind="struct" language="C++" prot="public">
+    <compoundname>cg_keyboard_input_t</compoundname>
+    <includes refid="congfx_8h" local="no">congfx.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structcg__keyboard__input__t_1aaa93e8437d89ea147aab3f4e2785decb" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbd" kindref="member">cg_key_type_t</ref></type>
+        <definition>cg_key_type_t cg_keyboard_input_t::key</definition>
+        <argsstring></argsstring>
+        <name>key</name>
+        <qualifiedname>cg_keyboard_input_t::key</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="523" column="19" bodyfile="congfx.h" bodystart="523" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcg__keyboard__input__t_1afd0dfa703130aa4bd557d940152b85db" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1afcaeeb559bf6c6f4abe40c50f8832206" kindref="member">cg_char</ref></type>
+        <definition>cg_char cg_keyboard_input_t::char_value</definition>
+        <argsstring></argsstring>
+        <name>char_value</name>
+        <qualifiedname>cg_keyboard_input_t::char_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="524" column="13" bodyfile="congfx.h" bodystart="524" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="congfx.h" line="522" column="1" bodyfile="congfx.h" bodystart="522" bodyend="525"/>
+    <listofallmembers>
+      <member refid="structcg__keyboard__input__t_1afd0dfa703130aa4bd557d940152b85db" prot="public" virt="non-virtual"><scope>cg_keyboard_input_t</scope><name>char_value</name></member>
+      <member refid="structcg__keyboard__input__t_1aaa93e8437d89ea147aab3f4e2785decb" prot="public" virt="non-virtual"><scope>cg_keyboard_input_t</scope><name>key</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

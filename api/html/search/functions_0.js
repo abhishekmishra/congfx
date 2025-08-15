@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['_5fcg_5fget_5fcursor_5fposition_0',['_cg_get_cursor_position',['../congfx_8h.html#a5024d66520d8c10f1359606f24fb598a',1,'congfx.h']]],
+  ['_5fcg_5fget_5fwindow_5fsize_1',['_cg_get_window_size',['../congfx_8h.html#aa02b4d924ebc2e247a7c6fe2cbc77c67',1,'congfx.h']]],
+  ['_5fcg_5fhide_5fcursor_2',['_cg_hide_cursor',['../congfx_8h.html#a4ca8e4035cbc3073a07086be224e0389',1,'congfx.h']]],
+  ['_5fcg_5fread_5fkey_3',['_cg_read_key',['../congfx_8h.html#a8fad8ec4fcb2d480af8a017d7ed61c1a',1,'congfx.h']]],
+  ['_5fcg_5fshow_5fcursor_4',['_cg_show_cursor',['../congfx_8h.html#a5f336d271dc907566a7689a01c5b26d1',1,'congfx.h']]],
+  ['_5fcg_5fterm_5fbuffer_5fcommand_5',['_cg_term_buffer_command',['../congfx_8h.html#a9cfcff248e3442b79c4adc4e65e59091',1,'congfx.h']]],
+  ['_5fcg_5fterm_5fcreate_5fcommand_5fbuffer_6',['_cg_term_create_command_buffer',['../congfx_8h.html#a1525b6a6d47ca3998da1420490d6973a',1,'congfx.h']]],
+  ['_5fcg_5fterm_5fdisable_5fraw_5fmode_7',['_cg_term_disable_raw_mode',['../congfx_8h.html#a171ebb294e01fa3329a5be0d41e5226d',1,'congfx.h']]],
+  ['_5fcg_5fterm_5fdispose_5fcommand_5fbuffer_8',['_cg_term_dispose_command_buffer',['../congfx_8h.html#a394f58703b11eb51cb71c1244a57fa8b',1,'congfx.h']]],
+  ['_5fcg_5fterm_5fenable_5fraw_5fmode_9',['_cg_term_enable_raw_mode',['../congfx_8h.html#ad6c20707d5920689fa9b3fcc2f01bd62',1,'congfx.h']]],
+  ['_5fcg_5fterm_5fexpand_5fcommand_5fbuffer_10',['_cg_term_expand_command_buffer',['../congfx_8h.html#aa2795cabfef938d10ab65319ec555395',1,'congfx.h']]],
+  ['_5fcg_5fterm_5fflush_5fcommand_5fbuffer_11',['_cg_term_flush_command_buffer',['../congfx_8h.html#ad89bb91bf9164bb6377b4f1c12d9fa43',1,'congfx.h']]],
+  ['_5fcg_5fterm_5fmove_5fto_12',['_cg_term_move_to',['../congfx_8h.html#adaae159b2c79682ccfbf9da9f20c22d4',1,'congfx.h']]],
+  ['_5fcg_5fterm_5freset_13',['_cg_term_reset',['../congfx_8h.html#afff4c044ddce9b0c3fc002929f9d7c0b',1,'congfx.h']]],
+  ['_5fcg_5fterm_5fset_5fbackground_5fcolour_14',['_cg_term_set_background_colour',['../congfx_8h.html#aa346cb87dd1070d707b636bc73561851',1,'congfx.h']]],
+  ['_5fcg_5fterm_5fset_5fforeground_5fcolour_15',['_cg_term_set_foreground_colour',['../congfx_8h.html#aab71e1304e3dd5d4fe0e8b2c76be8f20',1,'congfx.h']]],
+  ['_5fcg_5fterm_5fwrite_5fchar_16',['_cg_term_write_char',['../congfx_8h.html#a0d4f528ab875bbf84bf7bd9a4b81ce88',1,'congfx.h']]],
+  ['_5fdiff_5ftime_5fmicros_17',['_diff_time_micros',['../congfx_8h.html#a80d63b5b060b4fa97556fe86b4235939',1,'congfx.h']]]
+];

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="struct__cg__term__command__buffer__t" kind="struct" language="C++" prot="public">
+    <compoundname>_cg_term_command_buffer_t</compoundname>
+    <includes refid="congfx_8h" local="no">congfx.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct__cg__term__command__buffer__t_1a7a4c7e567179836f83ea0bda1bf53f25" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1afcaeeb559bf6c6f4abe40c50f8832206" kindref="member">cg_char</ref> *</type>
+        <definition>cg_char* _cg_term_command_buffer_t::buffer</definition>
+        <argsstring></argsstring>
+        <name>buffer</name>
+        <qualifiedname>_cg_term_command_buffer_t::buffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="185" column="13" bodyfile="congfx.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct__cg__term__command__buffer__t_1a72cbe076d2c2a7a6d66048bdf3dd55cd" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t _cg_term_command_buffer_t::length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <qualifiedname>_cg_term_command_buffer_t::length</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="186" column="12" bodyfile="congfx.h" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct__cg__term__command__buffer__t_1ac66e012d8f701f61cfbe46cba19435ed" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t _cg_term_command_buffer_t::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <qualifiedname>_cg_term_command_buffer_t::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="187" column="12" bodyfile="congfx.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>A structure to hold a command buffer for the terminal. </para>
+    </detaileddescription>
+    <location file="congfx.h" line="183" column="1" bodyfile="congfx.h" bodystart="184" bodyend="188"/>
+    <listofallmembers>
+      <member refid="struct__cg__term__command__buffer__t_1a7a4c7e567179836f83ea0bda1bf53f25" prot="public" virt="non-virtual"><scope>_cg_term_command_buffer_t</scope><name>buffer</name></member>
+      <member refid="struct__cg__term__command__buffer__t_1a72cbe076d2c2a7a6d66048bdf3dd55cd" prot="public" virt="non-virtual"><scope>_cg_term_command_buffer_t</scope><name>length</name></member>
+      <member refid="struct__cg__term__command__buffer__t_1ac66e012d8f701f61cfbe46cba19435ed" prot="public" virt="non-virtual"><scope>_cg_term_command_buffer_t</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

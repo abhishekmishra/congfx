@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structcg__cell__t" kind="struct" language="C++" prot="public">
+    <compoundname>cg_cell_t</compoundname>
+    <includes refid="congfx_8h" local="no">congfx.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structcg__cell__t_1a42e5debabea9af0e1b76c66d66b0dcab" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1afcaeeb559bf6c6f4abe40c50f8832206" kindref="member">cg_char</ref></type>
+        <definition>cg_char cg_cell_t::c</definition>
+        <argsstring></argsstring>
+        <name>c</name>
+        <qualifiedname>cg_cell_t::c</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="157" column="13" bodyfile="congfx.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcg__cell__t_1af012aebfeb5a617931687c20fb5a7d0d" prot="public" static="no" mutable="no">
+        <type><ref refid="structcg__rgb__t" kindref="compound">cg_rgb_t</ref></type>
+        <definition>cg_rgb_t cg_cell_t::bg</definition>
+        <argsstring></argsstring>
+        <name>bg</name>
+        <qualifiedname>cg_cell_t::bg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="158" column="14" bodyfile="congfx.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcg__cell__t_1abed19f080a7b25c1bb81b32050efc747" prot="public" static="no" mutable="no">
+        <type><ref refid="structcg__rgb__t" kindref="compound">cg_rgb_t</ref></type>
+        <definition>cg_rgb_t cg_cell_t::fg</definition>
+        <argsstring></argsstring>
+        <name>fg</name>
+        <qualifiedname>cg_cell_t::fg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="159" column="14" bodyfile="congfx.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Define a cell contents type </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>cg_cell_t</label>
+        <link refid="structcg__cell__t"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>bg</edgelabel>
+          <edgelabel>fg</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cg_rgb_t</label>
+        <link refid="structcg__rgb__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="congfx.h" line="155" column="1" bodyfile="congfx.h" bodystart="156" bodyend="160"/>
+    <listofallmembers>
+      <member refid="structcg__cell__t_1af012aebfeb5a617931687c20fb5a7d0d" prot="public" virt="non-virtual"><scope>cg_cell_t</scope><name>bg</name></member>
+      <member refid="structcg__cell__t_1a42e5debabea9af0e1b76c66d66b0dcab" prot="public" virt="non-virtual"><scope>cg_cell_t</scope><name>c</name></member>
+      <member refid="structcg__cell__t_1abed19f080a7b25c1bb81b32050efc747" prot="public" virt="non-virtual"><scope>cg_cell_t</scope><name>fg</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

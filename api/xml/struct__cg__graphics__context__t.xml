@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="struct__cg__graphics__context__t" kind="struct" language="C++" prot="public">
+    <compoundname>_cg_graphics_context_t</compoundname>
+    <includes refid="congfx_8h" local="no">congfx.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct__cg__graphics__context__t_1a5e9420c320b92b3c7597e60369b54f3a" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1afcaeeb559bf6c6f4abe40c50f8832206" kindref="member">cg_char</ref></type>
+        <definition>cg_char _cg_graphics_context_t::read_buf[20]</definition>
+        <argsstring>[20]</argsstring>
+        <name>read_buf</name>
+        <qualifiedname>_cg_graphics_context_t::read_buf</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="546" column="13" bodyfile="congfx.h" bodystart="546" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct__cg__graphics__context__t_1a7cace5fe2ec55a20511070e3a0117e7e" prot="public" static="no" mutable="no">
+        <type><ref refid="structcg__keyboard__input__t" kindref="compound">cg_keyboard_input_t</ref></type>
+        <definition>cg_keyboard_input_t _cg_graphics_context_t::keys_pressed[128]</definition>
+        <argsstring>[128]</argsstring>
+        <name>keys_pressed</name>
+        <qualifiedname>_cg_graphics_context_t::keys_pressed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="547" column="25" bodyfile="congfx.h" bodystart="547" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct__cg__graphics__context__t_1ab9e5409b9a61ae2eed93987b37da0376" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
+        <definition>cg_uint _cg_graphics_context_t::key_counter</definition>
+        <argsstring></argsstring>
+        <name>key_counter</name>
+        <qualifiedname>_cg_graphics_context_t::key_counter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="548" column="13" bodyfile="congfx.h" bodystart="548" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct__cg__graphics__context__t_1a406ce66255cad01c536017ae8e298193" prot="public" static="no" mutable="no">
+        <type>struct timespec start_time prev_time current_time</type>
+        <definition>struct timespec start_time prev_time current_time _cg_graphics_context_t::after_draw_time</definition>
+        <argsstring></argsstring>
+        <name>after_draw_time</name>
+        <qualifiedname>_cg_graphics_context_t::after_draw_time</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="549" column="19" bodyfile="congfx.h" bodystart="549" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct__cg__graphics__context__t_1a870a8c67cb4c3a8aee59936607d45de6" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
+        <definition>cg_uint _cg_graphics_context_t::delta_time_ideal</definition>
+        <argsstring></argsstring>
+        <name>delta_time_ideal</name>
+        <qualifiedname>_cg_graphics_context_t::delta_time_ideal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="550" column="13" bodyfile="congfx.h" bodystart="550" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct__cg__graphics__context__t_1aee37d147de132428c1489c4429864970" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
+        <definition>cg_uint _cg_graphics_context_t::dt</definition>
+        <argsstring></argsstring>
+        <name>dt</name>
+        <qualifiedname>_cg_graphics_context_t::dt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="551" column="13" bodyfile="congfx.h" bodystart="551" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct__cg__graphics__context__t_1a4332f971a0fbb159cb5cc6660ba0d941" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
+        <definition>cg_uint _cg_graphics_context_t::should_exit</definition>
+        <argsstring></argsstring>
+        <name>should_exit</name>
+        <qualifiedname>_cg_graphics_context_t::should_exit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="552" column="13" bodyfile="congfx.h" bodystart="552" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>_cg_graphics_context_t</label>
+        <link refid="struct__cg__graphics__context__t"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>keys_pressed</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cg_keyboard_input_t</label>
+        <link refid="structcg__keyboard__input__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="congfx.h" line="545" column="1" bodyfile="congfx.h" bodystart="545" bodyend="553"/>
+    <listofallmembers>
+      <member refid="struct__cg__graphics__context__t_1a406ce66255cad01c536017ae8e298193" prot="public" virt="non-virtual"><scope>_cg_graphics_context_t</scope><name>after_draw_time</name></member>
+      <member refid="struct__cg__graphics__context__t_1a870a8c67cb4c3a8aee59936607d45de6" prot="public" virt="non-virtual"><scope>_cg_graphics_context_t</scope><name>delta_time_ideal</name></member>
+      <member refid="struct__cg__graphics__context__t_1aee37d147de132428c1489c4429864970" prot="public" virt="non-virtual"><scope>_cg_graphics_context_t</scope><name>dt</name></member>
+      <member refid="struct__cg__graphics__context__t_1ab9e5409b9a61ae2eed93987b37da0376" prot="public" virt="non-virtual"><scope>_cg_graphics_context_t</scope><name>key_counter</name></member>
+      <member refid="struct__cg__graphics__context__t_1a7cace5fe2ec55a20511070e3a0117e7e" prot="public" virt="non-virtual"><scope>_cg_graphics_context_t</scope><name>keys_pressed</name></member>
+      <member refid="struct__cg__graphics__context__t_1a5e9420c320b92b3c7597e60369b54f3a" prot="public" virt="non-virtual"><scope>_cg_graphics_context_t</scope><name>read_buf</name></member>
+      <member refid="struct__cg__graphics__context__t_1a4332f971a0fbb159cb5cc6660ba0d941" prot="public" virt="non-virtual"><scope>_cg_graphics_context_t</scope><name>should_exit</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structcg__rgb__t" kind="struct" language="C++" prot="public">
+    <compoundname>cg_rgb_t</compoundname>
+    <includes refid="congfx_8h" local="no">congfx.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structcg__rgb__t_1a059313b1452d68a708348111b3314474" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
+        <definition>cg_uint cg_rgb_t::r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <qualifiedname>cg_rgb_t::r</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="147" column="13" bodyfile="congfx.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcg__rgb__t_1af508735d2767b82a31620926f1f65d17" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
+        <definition>cg_uint cg_rgb_t::g</definition>
+        <argsstring></argsstring>
+        <name>g</name>
+        <qualifiedname>cg_rgb_t::g</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="148" column="13" bodyfile="congfx.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcg__rgb__t_1af25eedf9f818e37116790d5706a16d58" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
+        <definition>cg_uint cg_rgb_t::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <qualifiedname>cg_rgb_t::b</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="149" column="13" bodyfile="congfx.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Define a colour type. </para>
+    </detaileddescription>
+    <location file="congfx.h" line="145" column="1" bodyfile="congfx.h" bodystart="146" bodyend="150"/>
+    <listofallmembers>
+      <member refid="structcg__rgb__t_1af25eedf9f818e37116790d5706a16d58" prot="public" virt="non-virtual"><scope>cg_rgb_t</scope><name>b</name></member>
+      <member refid="structcg__rgb__t_1af508735d2767b82a31620926f1f65d17" prot="public" virt="non-virtual"><scope>cg_rgb_t</scope><name>g</name></member>
+      <member refid="structcg__rgb__t_1a059313b1452d68a708348111b3314474" prot="public" virt="non-virtual"><scope>cg_rgb_t</scope><name>r</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

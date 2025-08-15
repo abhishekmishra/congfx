@@ -1,0 +1,1 @@
+{"config":{"lang":["en"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"]},"docs":[{"location":"","title":"ConGfx","text":""},{"location":"api/","title":"API Reference","text":"<p>View the API documentation</p>"}]}
