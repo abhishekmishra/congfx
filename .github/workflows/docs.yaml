@@ -12,7 +12,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y doxygen python3-pip
-          pip install mkdocs mkdocs-material
+          pip install mkdocs mkdocs-material mkdocs-material-extensions mkdocs-git-revision-date-localized-plugin
 
       - name: Build API docs
         run: doxygen Doxyfile
