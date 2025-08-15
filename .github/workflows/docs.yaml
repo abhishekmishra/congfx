@@ -1,0 +1,27 @@
+name: Build and Deploy Docs
+on:
+  push:
+    branches: [ main ]
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen python3-pip
+          pip install mkdocs mkdocs-material
+
+      - name: Build API docs
+        run: doxygen Doxyfile
+
+      - name: Build MkDocs site
+        run: mkdocs build --clean
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site

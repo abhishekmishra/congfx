@@ -4,5 +4,6 @@
         "time.h": "c",
         "wchar.h": "c",
         "_wchar.h": "c"
-    }
+    },
+    "liveServer.settings.port": 5501
 }

@@ -59,4 +59,5 @@ dkms.conf
 test0
 
 # docs directory
-docs/
+docs/api
+site/

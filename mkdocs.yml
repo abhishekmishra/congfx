@@ -1,0 +1,8 @@
+site_name: ConGfx Documentation
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Examples: examples.md
+  - API Reference: api.md
+theme:
+  name: material
