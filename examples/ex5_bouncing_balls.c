@@ -18,7 +18,7 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-
+#define CONGFX_IMPLEMENTATION
 #include "congfx.h"
 
 #define NUM_BALLS 10
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 		wprintf(L"Unable to allocate balls array.\n");
 		exit(-1);
 	}
-	
+
 	for (cg_int i = 0; i < NUM_BALLS; i++)
 	{
 		_b = make_ball();
@@ -91,26 +91,26 @@ int main(int argc, char *argv[])
 		// begin the draw
 		cg_begin_draw();
 
-			// clear canvas before every frame
-			cg_clear_canvas();
+		// clear canvas before every frame
+		cg_clear_canvas();
 
-			// show and update all the balls
-			for (cg_int i = 0; i < NUM_BALLS; i++)
-			{
-				ball *a = balls[i];
-				ball_show(a);
-				ball_update(a, cg_get_deltatime());
-			}
+		// show and update all the balls
+		for (cg_int i = 0; i < NUM_BALLS; i++)
+		{
+			ball *a = balls[i];
+			ball_show(a);
+			ball_update(a, cg_get_deltatime());
+		}
 
-			// print title
-			cg_text(L"CONGFX: EXAMPLE#5: BOUNCING BALLS ", width / 2 - 17, 0);
+		// print title
+		cg_text(L"CONGFX: EXAMPLE#5: BOUNCING BALLS ", width / 2 - 17, 0);
 
-			// show fps
-			cg_string fps_str = calc_fps(cg_get_deltatime());
-			cg_text(fps_str, 0, 0);
+		// show fps
+		cg_string fps_str = calc_fps(cg_get_deltatime());
+		cg_text(fps_str, 0, 0);
 
-            // print press escape to exit
-            cg_text(L"Press ESC to exit", 0, height - 1);
+		// print press escape to exit
+		cg_text(L"Press ESC to exit", 0, height - 1);
 
 		// end the draw
 		cg_end_draw();

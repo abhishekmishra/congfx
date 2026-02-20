@@ -1,3 +1,4 @@
+#define CONGFX_IMPLEMENTATION
 #include "congfx.h"
 
 int main(int argc, char *argv[])
@@ -21,32 +22,32 @@ int main(int argc, char *argv[])
 
     swprintf(block_location_str, 1024, L"Block Location: (%d, %d)", block_x, block_y);
 
-	while (!cg_should_exit())
-	{
-		// begin the draw
-		cg_begin_draw();
+    while (!cg_should_exit())
+    {
+        // begin the draw
+        cg_begin_draw();
 
-            // clear the canvas
-            cg_clear_canvas();
+        // clear the canvas
+        cg_clear_canvas();
 
-            // draw the block
-            cg_rect(block_x, block_y, block_width, block_height);
+        // draw the block
+        cg_rect(block_x, block_y, block_width, block_height);
 
-            // print press escape to exit
-            cg_text(L"Press ESC to exit", 0, height - 1);
+        // print press escape to exit
+        cg_text(L"Press ESC to exit", 0, height - 1);
 
-            // print the block location
-            cg_text(block_location_str, 0, height - 2);
+        // print the block location
+        cg_text(block_location_str, 0, height - 2);
 
-            // show usage message
-            cg_text(L"Use arrow keys to move the block, 'r' to reset.", 0, 0);
+        // show usage message
+        cg_text(L"Use arrow keys to move the block, 'r' to reset.", 0, 0);
 
-            // end the draw
+        // end the draw
         cg_end_draw();
 
         // get the key pressed
         cg_keyboard_input_t inp;
-        
+
         while ((inp = cg_get_key_pressed()).key != CG_KEY_NONE)
         {
             // move the block

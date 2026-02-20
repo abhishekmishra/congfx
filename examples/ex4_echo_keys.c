@@ -1,3 +1,4 @@
+#define CONGFX_IMPLEMENTATION
 #include "congfx.h"
 
 cg_char *contents = NULL;
@@ -19,28 +20,28 @@ int main(int argc, char *argv[])
         return err;
     }
 
-	while (!cg_should_exit())
-	{
-		// begin the draw
-		cg_begin_draw();
+    while (!cg_should_exit())
+    {
+        // begin the draw
+        cg_begin_draw();
 
-            // loop over the contents and print them
-            int len = char_row * width + char_col;
-            cg_uint cr = 0, cc = 0;
-            for (cg_uint i = 0; i < len; i++)
+        // loop over the contents and print them
+        int len = char_row * width + char_col;
+        cg_uint cr = 0, cc = 0;
+        for (cg_uint i = 0; i < len; i++)
+        {
+            cg_point(cc, cr, contents[i]);
+            cg_point(cc, 10, i + 48);
+            cc++;
+            if (cc >= width)
             {
-                cg_point(cc, cr, contents[i]);
-                cg_point(cc, 10, i + 48);
-                cc++;
-                if (cc >= width)
-                {
-                    cc = 0;
-                    cr++;
-                }
+                cc = 0;
+                cr++;
             }
+        }
 
-            // print press escape to exit
-            cg_text(L"Press ESC to exit", 0, height - 1);
+        // print press escape to exit
+        cg_text(L"Press ESC to exit", 0, height - 1);
 
         // end the draw
         cg_end_draw();

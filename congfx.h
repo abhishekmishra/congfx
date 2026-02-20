@@ -434,7 +434,7 @@ void cg_err_fatal_msg(cg_string message);
 
 /**
  * Create a graphics system with the given width and height.
- * 
+ *
  * @param w width
  * @param h height
  * @return int error code
@@ -443,30 +443,30 @@ int cg_create_graphics(cg_uint w, cg_uint h);
 
 /**
  * Create a graphics system in fullscreen mode.
- * 
+ *
  * @return int error code
  */
 int cg_create_graphics_fullscreen();
 
-void cg_begin_draw();                // Begin the drawing process. Call before running any draw commands, inside the draw loop
+void cg_begin_draw(); // Begin the drawing process. Call before running any draw commands, inside the draw loop
 
-void cg_end_draw();                 // End the drawing process. Call after running all draw commands, inside the draw loop
+void cg_end_draw(); // End the drawing process. Call after running all draw commands, inside the draw loop
 
-void cg_destroy_graphics();         // Destroy the graphics system
+void cg_destroy_graphics(); // Destroy the graphics system
 
-void cg_exit_graphics();            // Exit the graphics system
-int cg_should_exit();               // Check if the graphics system should exit
+void cg_exit_graphics(); // Exit the graphics system
+int cg_should_exit();    // Check if the graphics system should exit
 
 /**
  * Get the delta time in microseconds.
- * 
+ *
  * @return cg_uint delta time in microseconds
  */
 cg_uint cg_get_deltatime_micros();
 
 /**
  * Get the delta time in milliseconds.
- * 
+ *
  * @return cg_uint delta time in milliseconds
  */
 cg_uint cg_get_deltatime_millis();
@@ -519,7 +519,8 @@ void cg_text(cg_char *t, cg_uint x, cg_uint y);
 
 /*+++++++++ BEGIN Input FUNCTIONS +++++++++*/
 
-typedef struct {
+typedef struct
+{
     cg_key_type_t key;
     cg_char char_value;
 } cg_keyboard_input_t;
@@ -542,7 +543,8 @@ cg_uint height;
 
 // system variables
 
-typedef struct {
+typedef struct
+{
     cg_char read_buf[20];
     cg_keyboard_input_t keys_pressed[128];
     cg_uint key_counter;
@@ -686,11 +688,11 @@ cg_uint _diff_time_micros(struct timespec time1, struct timespec time2);
 
 /*--------- END INTERNAL FUNCTION PROTOTYPES -----------*/
 
+#ifdef CONGFX_IMPLEMENTATION
+
 int cg_compare_colour(cg_rgb_t colour1, cg_rgb_t colour2)
 {
-    if (colour1.r != colour2.r
-        || colour1.g != colour2.g
-        || colour1.b != colour2.b)
+    if (colour1.r != colour2.r || colour1.g != colour2.g || colour1.b != colour2.b)
     {
         return -1;
     }
@@ -1143,20 +1145,20 @@ void _cg_term_set_foreground_colour(cg_rgb_t colour)
 {
     cg_char buffer[25];
     swprintf(buffer, 25, L"\033[38;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
-    _cg_term_buffer_command(_cg_buffer, buffer, 0);// 22);
+    _cg_term_buffer_command(_cg_buffer, buffer, 0); // 22);
 }
 
 void _cg_term_set_background_colour(cg_rgb_t colour)
 {
     cg_char buffer[25];
     swprintf(buffer, 25, L"\033[48;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
-    _cg_term_buffer_command(_cg_buffer, buffer, 0);// 22);
+    _cg_term_buffer_command(_cg_buffer, buffer, 0); // 22);
 }
 
 void _cg_term_move_to(cg_uint x, cg_uint y)
 {
     cg_char buffer[20];
-    swprintf(buffer, 20, L"\033[%lu;%luf", y+1, x+1);
+    swprintf(buffer, 20, L"\033[%lu;%luf", y + 1, x + 1);
     _cg_term_buffer_command(_cg_buffer, buffer, 0);
 }
 
@@ -1224,7 +1226,7 @@ void _cg_read_key()
     }
 
     int read_count = 0;
-    while(1)
+    while (1)
     {
         char c = '\0';
         if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
@@ -1236,7 +1238,8 @@ void _cg_read_key()
         {
             break;
         }
-        else if (c == _CG_TERM_KEY_ESCAPE) {
+        else if (c == _CG_TERM_KEY_ESCAPE)
+        {
             char seq[3];
             cg_key_type_t key = CG_KEY_ESCAPE;
             cg_char char_value = c;
@@ -1246,11 +1249,20 @@ void _cg_read_key()
                 {
                     if (seq[0] == '[')
                     {
-                        switch (seq[1]) {
-                            case 'A': key = CG_KEY_UP; break;
-                            case 'B': key = CG_KEY_DOWN; break;
-                            case 'C': key = CG_KEY_RIGHT; break;
-                            case 'D': key = CG_KEY_LEFT; break;
+                        switch (seq[1])
+                        {
+                        case 'A':
+                            key = CG_KEY_UP;
+                            break;
+                        case 'B':
+                            key = CG_KEY_DOWN;
+                            break;
+                        case 'C':
+                            key = CG_KEY_RIGHT;
+                            break;
+                        case 'D':
+                            key = CG_KEY_LEFT;
+                            break;
                         }
                     }
                 }
@@ -1265,7 +1277,7 @@ void _cg_read_key()
             {
                 _cg_gfx_context->keys_pressed[read_count].key = CG_KEY_ALPHANUM;
             }
-            else 
+            else
             {
                 _cg_gfx_context->keys_pressed[read_count].key = CG_KEY_UNKNOWN;
             }
@@ -1344,7 +1356,7 @@ void cg_show_canvas()
             {
                 cg_cell_t *current_cell = cg_get_cell(canvas_current, j, i);
 
-                #ifdef __CYGWIN__
+#ifdef __CYGWIN__
 
                 cg_cell_t *previous_cell = cg_get_cell(canvas_previous, j, i);
                 if (cg_compare_cells(current_cell, previous_cell) == 0)
@@ -1352,7 +1364,7 @@ void cg_show_canvas()
                     continue;
                 }
 
-                #endif
+#endif
 
                 // wprintf(L"Cells not equal at [%lu, %lu]\n", j, i);
 
@@ -1450,7 +1462,7 @@ void cg_rect(cg_uint x1, cg_uint y1, cg_uint width, cg_uint height)
     y1 = cg_clamp(y1, 0, canvas_current->height - 1);
     width = cg_clamp(width, 0, canvas_current->width - x1);
     height = cg_clamp(height, 0, canvas_current->height - y1);
-    
+
     cg_line(x1, y1, x1 + width, y1);
     cg_line(x1 + width, y1, x1 + width, y1 + height);
     cg_line(x1 + width, y1 + height, x1, y1 + height);
@@ -1487,7 +1499,7 @@ int cg_is_key_pressed(cg_key_type_t key)
 {
     cg_uint count = 0;
     cg_keyboard_input_t inp;
-    while(inp.key != CG_KEY_NONE && count < 128)
+    while (inp.key != CG_KEY_NONE && count < 128)
     {
         inp = _cg_gfx_context->keys_pressed[count];
         if (inp.key == key)
@@ -1565,7 +1577,7 @@ int cg_create_graphics(cg_uint w, cg_uint h)
         cg_swap_canvas();
         cg_background(default_fg_colour);
         cg_swap_canvas();
-        
+
         // now draw the canvas
         cg_show_canvas();
 
@@ -1677,5 +1689,7 @@ cg_uint cg_get_deltatime_millis()
 {
     return _cg_gfx_context->dt / 1000;
 }
+
+#endif // CONGFX_IMPLEMENTATION
 
 #endif //__CONGFX_H__
