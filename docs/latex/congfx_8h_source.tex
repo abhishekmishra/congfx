@@ -1,0 +1,883 @@
+\doxysection{congfx.\+h}
+\hypertarget{congfx_8h_source}{}\label{congfx_8h_source}\mbox{\hyperlink{congfx_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ 2021-\/25\ Abhishek\ Mishra\ <neolateral.in>}}
+\DoxyCodeLine{00003\ \textcolor{comment}{}}
+\DoxyCodeLine{00004\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{00005\ \textcolor{comment}{this\ software\ and\ associated\ documentation\ files\ (the\ “Software”),\ to\ deal\ in}}
+\DoxyCodeLine{00006\ \textcolor{comment}{the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{00007\ \textcolor{comment}{use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{00008\ \textcolor{comment}{the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{00009\ \textcolor{comment}{subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00010\ \textcolor{comment}{}}
+\DoxyCodeLine{00011\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{00012\ \textcolor{comment}{copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ “AS\ IS”,\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{00015\ \textcolor{comment}{IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{00016\ \textcolor{comment}{FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{00017\ \textcolor{comment}{COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{00018\ \textcolor{comment}{IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{00019\ \textcolor{comment}{CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#ifndef\ \_\_CONGFX\_H\_\_}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ \_\_CONGFX\_H\_\_}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <termios.h>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <time.h>}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ <wchar.h>}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ <wctype.h>}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#include\ <locale.h>}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#include\ <fcntl.h>}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#include\ <ctype.h>}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ TODO:\ removed\ for\ now,\ check\ if\ needed\ later}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ defaults}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ \_CG\_DEFAULT\_FPS\ 30\ }\textcolor{comment}{//\ times\ per\ second}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ \_CG\_DEFAULT\_BACKGROUND\_CHAR\ L'\ '}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ \_CG\_CALLOC\ calloc}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ \_CG\_FREE\ free}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/\ BEGIN\ TYPE\ DEFINITIONS\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{wchar\_t}\ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ *\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{congfx_8h_a1b3c9b6e4c70fcf844f5210436e8dcbb}{cg\_int}};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\_number}};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00090\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ r;}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ g;}
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ b;}
+\DoxyCodeLine{00094\ \}\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00099\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00100\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ c;}
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ bg;}
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ fg;}
+\DoxyCodeLine{00104\ \}\ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00110\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ width;}
+\DoxyCodeLine{00112\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ height;}
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cells;}
+\DoxyCodeLine{00114\ \}\ \mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{comment}{//\ Vector\ type}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00122\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\_number}}\ *\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}};}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/\ END\ TYPE\ DEFINITIONS\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/\ BEGIN\ PUBLIC\ FUNCTION\ PROTOTYPES\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{comment}{/*+++++++++\ BEGIN\ Cell\ TYPE\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00138\ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *\mbox{\hyperlink{congfx_8h_ae325bc4b693092688b929a4aaed305ae}{make\_cell}}(\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ c,\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ bg,\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ fg);}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00146\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ \mbox{\hyperlink{congfx_8h_a8669c046e722684a354783ba25ee5efa}{get\_cell\_bg}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell);}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00155\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ \mbox{\hyperlink{congfx_8h_a719ef41712ab054b9946c8a4b1882140}{get\_cell\_fg}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00163\ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ \mbox{\hyperlink{congfx_8h_a3223488ed255c27450a2798511f5fcc9}{get\_cell\_char}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell);}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00171\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a26c4b75843f8ee5690b01eca45860aa2}{set\_cell\_bg}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell,\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ bg);}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00179\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a1c44ec62c49620d79367b671082786b4}{set\_cell\_fg}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell,\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ fg);}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00187\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a3b50bc56f1e32c55bd51b90ec90c1f2c}{set\_cell\_char}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell,\ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ c);}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00194\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a7700d25ac2f0f1e5de956c46ae831a9a}{dispose\_cell}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell);}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00203\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{congfx_8h_ad0c35b0efc0a46e263eec89dd1c996aa}{compare\_cells}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell1,\ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell2);}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \textcolor{comment}{/*+++++++++\ END\ Cell\ TYPE\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \textcolor{comment}{/*+++++++++\ BEGIN\ Canvas\ TYPE\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00216\ \mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}\ *\mbox{\hyperlink{congfx_8h_af4ce13f9c5f644c77d221b16952370c4}{make\_canvas}}(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ w,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ h);}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00226\ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *\mbox{\hyperlink{congfx_8h_a5d34efe257105f90dc8844bec4ec531b}{get\_cell}}(\mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}\ *canvas,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y);}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00233\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_af1b64be50f67ddb6836acb9ee907f653}{dispose\_canvas}}(\mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}\ *canvas);}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \textcolor{comment}{/*+++++++++\ END\ Canvas\ TYPE\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \textcolor{comment}{/*+++++++++\ BEGIN\ Vec2\ TYPE\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00246\ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ \mbox{\hyperlink{congfx_8h_a3c276a46290c36eb28f5699388787106}{make\_vec2}}(\mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\_number}}\ v1,\ \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\_number}}\ v2);}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00254\ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ \mbox{\hyperlink{congfx_8h_a91df250370e2e1b044bc84f8227edaba}{make\_vec2\_from}}(\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ other);}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00263\ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ \mbox{\hyperlink{congfx_8h_ae91ba7509e158852be87e51e2e5e564d}{vec2\_add}}(\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ v1,\ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ v2);}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00272\ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ \mbox{\hyperlink{congfx_8h_a242eed08addfe32b593ac462e323f115}{vec2\_mult\_scalar}}(\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ vin,\ \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\_number}}\ x);}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00280\ \mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ \mbox{\hyperlink{congfx_8h_a2dac804788f78998b5b03af6453646d2}{vec2\_to\_string}}(\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ v);}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00287\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a0b6f8a3eb0c151c3f5028c9e69cb985d}{dispose\_vec2}}(\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ v);}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \textcolor{comment}{/*+++++++++\ END\ Vec2\ TYPE\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \textcolor{comment}{/*+++++++++\ BEGIN\ String\ TYPE\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00299\ \mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ \mbox{\hyperlink{congfx_8h_a68569bf28d5bd5c619ecbc80f5ead297}{make\_string}}(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ length);}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00306\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_aba0dad86aaf53c7aa0b4d9d1c8d901a6}{dispose\_string}}(\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ s);}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \textcolor{comment}{/*+++++++++\ END\ String\ TYPE\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00310\ \textcolor{comment}{/*+++++++++\ BEGIN\ Number\ TYPE\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00318\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ \mbox{\hyperlink{congfx_8h_a1cc383f7e06da77af6033e574dd9d09d}{number\_to\_uinteger}}(\mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\_number}}\ x);}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \textcolor{comment}{//\ number\ utility\ functions}}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00329\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{congfx_8h_a44f946f0acdf231b56827f14760e731a}{rand\_int}}(\textcolor{keywordtype}{int}\ from,\ \textcolor{keywordtype}{int}\ to);}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \textcolor{comment}{/*+++++++++\ END\ Number\ TYPE\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ \textcolor{comment}{/*+++++++++\ BEGIN\ ERROR\ REPORTING\ UTILITY\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00335\ \textcolor{comment}{//\ Error\ reporting\ functions}}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00343\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a4858ea5373b4c9f3762e53b57a2bed9f}{cg\_err\_fatal}}(\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ message,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ code);}
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00350\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a491617bd68364cdf1a71166c370dabaa}{cg\_err\_fatal\_msg}}(\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ message);}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00352\ \textcolor{comment}{/*+++++++++\ END\ ERROR\ REPORTING\ UTILITY\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \textcolor{comment}{/*+++++++++\ BEGIN\ LIFECYCLE\ STUB\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00356\ \textcolor{comment}{//\ Life-\/cycle\ functions,\ to\ be\ defined\ by\ the\ main\ program}}
+\DoxyCodeLine{00357\ }
+\DoxyCodeLine{00358\ \textcolor{keywordtype}{void}\ setup();}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \textcolor{keywordtype}{void}\ draw(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ dt);}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \textcolor{keywordtype}{void}\ key\_pressed(\textcolor{keywordtype}{char}\ c);}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00364\ \textcolor{comment}{/*+++++++++\ END\ LIFECYCLE\ STUB\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00366\ \textcolor{comment}{/*+++++++++\ BEGIN\ Graphics\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \textcolor{comment}{//\ Graphics\ System\ functions}}
+\DoxyCodeLine{00369\ \textcolor{keywordtype}{void}\ no\_loop();}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \textcolor{keywordtype}{void}\ loop();}
+\DoxyCodeLine{00372\ }
+\DoxyCodeLine{00373\ \textcolor{keywordtype}{void}\ frame\_rate(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ fps);}
+\DoxyCodeLine{00374\ }
+\DoxyCodeLine{00375\ \textcolor{comment}{//\ Terminal\ utility\ functions}}
+\DoxyCodeLine{00376\ \textcolor{keywordtype}{void}\ cls();}
+\DoxyCodeLine{00377\ }
+\DoxyCodeLine{00378\ \textcolor{keywordtype}{void}\ home();}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00380\ \textcolor{comment}{/*=========\ BEGIN\ Graphics\ Canvas\ FUNCTIONS\ =========*/}}
+\DoxyCodeLine{00381\ \textcolor{comment}{//\ Canvas\ functions}}
+\DoxyCodeLine{00382\ \textcolor{keywordtype}{void}\ create\_canvas(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ w,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ h);}
+\DoxyCodeLine{00383\ \textcolor{keywordtype}{void}\ background(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ c);}
+\DoxyCodeLine{00384\ \textcolor{keywordtype}{void}\ stroke(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ c);}
+\DoxyCodeLine{00385\ \textcolor{keywordtype}{void}\ fill(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ c);}
+\DoxyCodeLine{00386\ \textcolor{keywordtype}{void}\ set\_colour(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ c);}
+\DoxyCodeLine{00387\ \textcolor{keywordtype}{void}\ show\_canvas();}
+\DoxyCodeLine{00388\ \textcolor{keywordtype}{void}\ swap\_canvas();}
+\DoxyCodeLine{00389\ \textcolor{comment}{/*=========\ END\ Graphics\ Canvas\ FUNCTIONS\ =========*/}}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \textcolor{comment}{/*=========\ BEGIN\ Graphics\ Drawing\ FUNCTIONS\ =========*/}}
+\DoxyCodeLine{00392\ }
+\DoxyCodeLine{00393\ \textcolor{comment}{//\ drawing\ functions}}
+\DoxyCodeLine{00394\ \textcolor{keywordtype}{void}\ point(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x1,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y1,\ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ c);}
+\DoxyCodeLine{00395\ \textcolor{keywordtype}{void}\ line(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x1,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y1,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x2,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y2);}
+\DoxyCodeLine{00396\ \textcolor{keywordtype}{void}\ rect(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x1,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y1,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ width,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ height);}
+\DoxyCodeLine{00397\ \textcolor{keywordtype}{void}\ text(\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ *t,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y);}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \textcolor{comment}{/*=========\ END\ Graphics\ Drawing\ FUNCTIONS\ =========*/}}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \textcolor{comment}{/*+++++++++\ END\ Graphics\ FUNCTIONS\ +++++++++*/}}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00403\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/\ BEGIN\ PUBLIC\ FUNCTION\ PROTOTYPES\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00405\ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *\mbox{\hyperlink{congfx_8h_ae325bc4b693092688b929a4aaed305ae}{make\_cell}}(\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ c,\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ bg,\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ fg)}
+\DoxyCodeLine{00406\ \{}
+\DoxyCodeLine{00407\ \ \ \ \ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell\ =\ (\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *)\_CG\_CALLOC(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}));}
+\DoxyCodeLine{00408\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell\ ==\ NULL)}
+\DoxyCodeLine{00409\ \ \ \ \ \{}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ wprintf(L\textcolor{stringliteral}{"{}FATAL\ Error:\ Unable\ to\ allocate\ cg\_cell\_t.\(\backslash\)n"{}});}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ exit(-\/1);}
+\DoxyCodeLine{00412\ \ \ \ \ \}}
+\DoxyCodeLine{00413\ \ \ \ \ cell-\/>c\ =\ c;}
+\DoxyCodeLine{00414\ \ \ \ \ cell-\/>bg\ =\ bg;}
+\DoxyCodeLine{00415\ \ \ \ \ cell-\/>fg\ =\ fg;}
+\DoxyCodeLine{00416\ \ \ \ \ \textcolor{keywordflow}{return}\ cell;}
+\DoxyCodeLine{00417\ \}}
+\DoxyCodeLine{00418\ }
+\DoxyCodeLine{00419\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ \mbox{\hyperlink{congfx_8h_a8669c046e722684a354783ba25ee5efa}{get\_cell\_bg}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell)}
+\DoxyCodeLine{00420\ \{}
+\DoxyCodeLine{00421\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell\ !=\ NULL)}
+\DoxyCodeLine{00422\ \ \ \ \ \{}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cell-\/>bg;}
+\DoxyCodeLine{00424\ \ \ \ \ \}}
+\DoxyCodeLine{00425\ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}})\{0,\ 0,\ 0\};}
+\DoxyCodeLine{00426\ \}}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ }
+\DoxyCodeLine{00429\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ \mbox{\hyperlink{congfx_8h_a719ef41712ab054b9946c8a4b1882140}{get\_cell\_fg}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell)}
+\DoxyCodeLine{00430\ \{}
+\DoxyCodeLine{00431\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell\ !=\ NULL)}
+\DoxyCodeLine{00432\ \ \ \ \ \{}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cell-\/>fg;}
+\DoxyCodeLine{00434\ \ \ \ \ \}}
+\DoxyCodeLine{00435\ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}})\{255,\ 255,\ 255\};}
+\DoxyCodeLine{00436\ \}}
+\DoxyCodeLine{00437\ }
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ \mbox{\hyperlink{congfx_8h_a3223488ed255c27450a2798511f5fcc9}{get\_cell\_char}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell)}
+\DoxyCodeLine{00440\ \{}
+\DoxyCodeLine{00441\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell\ !=\ NULL)}
+\DoxyCodeLine{00442\ \ \ \ \ \{}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cell-\/>c;}
+\DoxyCodeLine{00444\ \ \ \ \ \}}
+\DoxyCodeLine{00445\ \ \ \ \ \textcolor{keywordflow}{return}\ L\textcolor{charliteral}{'\ '};}
+\DoxyCodeLine{00446\ \}}
+\DoxyCodeLine{00447\ }
+\DoxyCodeLine{00448\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a26c4b75843f8ee5690b01eca45860aa2}{set\_cell\_bg}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell,\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ bg)}
+\DoxyCodeLine{00449\ \{}
+\DoxyCodeLine{00450\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell\ !=\ NULL)}
+\DoxyCodeLine{00451\ \ \ \ \ \{}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ cell-\/>bg\ =\ bg;}
+\DoxyCodeLine{00453\ \ \ \ \ \}}
+\DoxyCodeLine{00454\ \}}
+\DoxyCodeLine{00455\ }
+\DoxyCodeLine{00456\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a1c44ec62c49620d79367b671082786b4}{set\_cell\_fg}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell,\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ fg)}
+\DoxyCodeLine{00457\ \{}
+\DoxyCodeLine{00458\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell\ !=\ NULL)}
+\DoxyCodeLine{00459\ \ \ \ \ \{}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ cell-\/>fg\ =\ fg;}
+\DoxyCodeLine{00461\ \ \ \ \ \}}
+\DoxyCodeLine{00462\ \}}
+\DoxyCodeLine{00463\ }
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00465\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a3b50bc56f1e32c55bd51b90ec90c1f2c}{set\_cell\_char}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell,\ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ c)}
+\DoxyCodeLine{00466\ \{}
+\DoxyCodeLine{00467\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell\ !=\ NULL)}
+\DoxyCodeLine{00468\ \ \ \ \ \{}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ cell-\/>c\ =\ c;}
+\DoxyCodeLine{00470\ \ \ \ \ \}}
+\DoxyCodeLine{00471\ \}}
+\DoxyCodeLine{00472\ }
+\DoxyCodeLine{00473\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a7700d25ac2f0f1e5de956c46ae831a9a}{dispose\_cell}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell)}
+\DoxyCodeLine{00474\ \{}
+\DoxyCodeLine{00475\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell\ !=\ NULL)}
+\DoxyCodeLine{00476\ \ \ \ \ \{}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \_CG\_FREE(cell);}
+\DoxyCodeLine{00478\ \ \ \ \ \}}
+\DoxyCodeLine{00479\ \}}
+\DoxyCodeLine{00480\ }
+\DoxyCodeLine{00481\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{congfx_8h_ad0c35b0efc0a46e263eec89dd1c996aa}{compare\_cells}}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell1,\ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell2)}
+\DoxyCodeLine{00482\ \{}
+\DoxyCodeLine{00483\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell1\ ==\ NULL\ \&\&\ cell2\ ==\ NULL)}
+\DoxyCodeLine{00484\ \ \ \ \ \{}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00486\ \ \ \ \ \}}
+\DoxyCodeLine{00487\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell1\ ==\ NULL\ ||\ cell2\ ==\ NULL)}
+\DoxyCodeLine{00488\ \ \ \ \ \{}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00490\ \ \ \ \ \}}
+\DoxyCodeLine{00491\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell1-\/>c\ !=\ cell2-\/>c)}
+\DoxyCodeLine{00492\ \ \ \ \ \{}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00494\ \ \ \ \ \}}
+\DoxyCodeLine{00495\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell1-\/>bg.r\ !=\ cell2-\/>bg.r\ ||\ cell1-\/>bg.g\ !=\ cell2-\/>bg.g\ ||\ cell1-\/>bg.b\ !=\ cell2-\/>bg.b)}
+\DoxyCodeLine{00496\ \ \ \ \ \{}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00498\ \ \ \ \ \}}
+\DoxyCodeLine{00499\ \ \ \ \ \textcolor{keywordflow}{if}\ (cell1-\/>fg.r\ !=\ cell2-\/>fg.r\ ||\ cell1-\/>fg.g\ !=\ cell2-\/>fg.g\ ||\ cell1-\/>fg.b\ !=\ cell2-\/>fg.b)}
+\DoxyCodeLine{00500\ \ \ \ \ \{}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00502\ \ \ \ \ \}}
+\DoxyCodeLine{00503\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00504\ \}}
+\DoxyCodeLine{00505\ }
+\DoxyCodeLine{00506\ \textcolor{comment}{//\ system\ variables}}
+\DoxyCodeLine{00507\ }
+\DoxyCodeLine{00508\ \textcolor{keywordtype}{int}\ \_loop\ =\ 1;}
+\DoxyCodeLine{00509\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ \_fps\ =\ \_CG\_DEFAULT\_FPS;}
+\DoxyCodeLine{00510\ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ background\_char\ =\ \_CG\_DEFAULT\_BACKGROUND\_CHAR;}
+\DoxyCodeLine{00511\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ default\_bg\_colour\ =\ \{0,\ 0,\ 0\};}
+\DoxyCodeLine{00512\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ default\_fg\_colour\ =\ \{255,\ 255,\ 255\};}
+\DoxyCodeLine{00513\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ background\_colour\ =\ \{0,\ 0,\ 0\};}
+\DoxyCodeLine{00514\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ stroke\_colour\ =\ \{255,\ 255,\ 255\};}
+\DoxyCodeLine{00515\ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ fill\_colour\ =\ \{255,\ 255,\ 255\};}
+\DoxyCodeLine{00516\ \textcolor{keyword}{struct\ }termios\ orig\_termios;}
+\DoxyCodeLine{00517\ \textcolor{keywordtype}{int}\ \_cg\_term\_orig\_flags;}
+\DoxyCodeLine{00518\ }
+\DoxyCodeLine{00519\ \textcolor{comment}{//\ canvas\ variables\ for\ the\ current\ and\ previous\ canvas}}
+\DoxyCodeLine{00520\ \mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}\ *canvas\_previous\ =\ NULL;}
+\DoxyCodeLine{00521\ \mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}\ *canvas\_current\ =\ NULL;}
+\DoxyCodeLine{00522\ }
+\DoxyCodeLine{00523\ \textcolor{comment}{//\ canvas\ state\ variables}}
+\DoxyCodeLine{00524\ \textcolor{comment}{//\ cg\_char\ *canvas\_contents\ =\ NULL;}}
+\DoxyCodeLine{00525\ \textcolor{comment}{//\ cg\_rgb\_t\ *canvas\_background\_colour;}}
+\DoxyCodeLine{00526\ \textcolor{comment}{//\ cg\_rgb\_t\ *canvas\_foreground\_colour;}}
+\DoxyCodeLine{00527\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ width;}
+\DoxyCodeLine{00528\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ height;}
+\DoxyCodeLine{00529\ }
+\DoxyCodeLine{00530\ \mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}\ *\mbox{\hyperlink{congfx_8h_af4ce13f9c5f644c77d221b16952370c4}{make\_canvas}}(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ w,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ h)}
+\DoxyCodeLine{00531\ \{}
+\DoxyCodeLine{00532\ \ \ \ \ \mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}\ *canvas\ =\ (\mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}\ *)\_CG\_CALLOC(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}));}
+\DoxyCodeLine{00533\ \ \ \ \ \textcolor{keywordflow}{if}\ (canvas\ ==\ NULL)}
+\DoxyCodeLine{00534\ \ \ \ \ \{}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ wprintf(L\textcolor{stringliteral}{"{}FATAL\ Error:\ Unable\ to\ allocate\ cg\_canvas\_t.\(\backslash\)n"{}});}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ exit(-\/1);}
+\DoxyCodeLine{00537\ \ \ \ \ \}}
+\DoxyCodeLine{00538\ \ \ \ \ canvas-\/>width\ =\ w;}
+\DoxyCodeLine{00539\ \ \ \ \ canvas-\/>height\ =\ h;}
+\DoxyCodeLine{00540\ \ \ \ \ canvas-\/>cells\ =\ (\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *)\_CG\_CALLOC(w\ *\ h,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}));}
+\DoxyCodeLine{00541\ \ \ \ \ \textcolor{keywordflow}{if}\ (canvas-\/>cells\ ==\ NULL)}
+\DoxyCodeLine{00542\ \ \ \ \ \{}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ wprintf(L\textcolor{stringliteral}{"{}FATAL\ Error:\ Unable\ to\ allocate\ cg\_cell\_t\ array.\(\backslash\)n"{}});}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ exit(-\/1);}
+\DoxyCodeLine{00545\ \ \ \ \ \}}
+\DoxyCodeLine{00546\ }
+\DoxyCodeLine{00547\ \ \ \ \ \textcolor{comment}{//\ allocate\ cells}}
+\DoxyCodeLine{00548\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ i\ =\ 0;\ i\ <\ h;\ i++)}
+\DoxyCodeLine{00549\ \ \ \ \ \{}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ j\ =\ 0;\ j\ <\ w;\ j++)}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ canvas-\/>cells[(i\ *\ w)\ +\ j]\ =\ *\mbox{\hyperlink{congfx_8h_ae325bc4b693092688b929a4aaed305ae}{make\_cell}}(\_CG\_DEFAULT\_BACKGROUND\_CHAR,\ default\_bg\_colour,\ default\_fg\_colour);}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00554\ \ \ \ \ \}}
+\DoxyCodeLine{00555\ \ \ \ \ \textcolor{keywordflow}{return}\ canvas;}
+\DoxyCodeLine{00556\ \}}
+\DoxyCodeLine{00557\ }
+\DoxyCodeLine{00558\ }
+\DoxyCodeLine{00559\ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *\mbox{\hyperlink{congfx_8h_a5d34efe257105f90dc8844bec4ec531b}{get\_cell}}(\mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}\ *canvas,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y)}
+\DoxyCodeLine{00560\ \{}
+\DoxyCodeLine{00561\ \ \ \ \ \textcolor{keywordflow}{if}\ (canvas\ ==\ NULL)}
+\DoxyCodeLine{00562\ \ \ \ \ \{}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00564\ \ \ \ \ \}}
+\DoxyCodeLine{00565\ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ >=\ canvas-\/>width\ ||\ y\ >=\ canvas-\/>height)}
+\DoxyCodeLine{00566\ \ \ \ \ \{}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00568\ \ \ \ \ \}}
+\DoxyCodeLine{00569\ \ \ \ \ \textcolor{keywordflow}{return}\ \&(canvas-\/>cells[(y\ *\ canvas-\/>width)\ +\ x]);}
+\DoxyCodeLine{00570\ \}}
+\DoxyCodeLine{00571\ }
+\DoxyCodeLine{00572\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_af1b64be50f67ddb6836acb9ee907f653}{dispose\_canvas}}(\mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}\ *canvas)}
+\DoxyCodeLine{00573\ \{}
+\DoxyCodeLine{00574\ \ \ \ \ \textcolor{keywordflow}{if}\ (canvas\ !=\ NULL)}
+\DoxyCodeLine{00575\ \ \ \ \ \{}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (canvas-\/>cells\ !=\ NULL)}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ \_CG\_FREE(canvas-\/>cells);}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \_CG\_FREE(canvas);}
+\DoxyCodeLine{00581\ \ \ \ \ \}}
+\DoxyCodeLine{00582\ \}}
+\DoxyCodeLine{00583\ }
+\DoxyCodeLine{00584\ \textcolor{comment}{//\ Internal\ terminal\ utility\ functions}}
+\DoxyCodeLine{00589\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_ad6c20707d5920689fa9b3fcc2f01bd62}{\_cg\_term\_enable\_raw\_mode}}();}
+\DoxyCodeLine{00590\ }
+\DoxyCodeLine{00595\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a171ebb294e01fa3329a5be0d41e5226d}{\_cg\_term\_disable\_raw\_mode}}();}
+\DoxyCodeLine{00596\ }
+\DoxyCodeLine{00600\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_afff4c044ddce9b0c3fc002929f9d7c0b}{\_cg\_term\_reset}}();}
+\DoxyCodeLine{00601\ }
+\DoxyCodeLine{00602\ \textcolor{keywordtype}{void}\ \_cg\_term\_set\_foreground\_colour(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ colour);}
+\DoxyCodeLine{00603\ }
+\DoxyCodeLine{00604\ \textcolor{keywordtype}{void}\ \_cg\_term\_set\_background\_colour(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ colour);}
+\DoxyCodeLine{00605\ }
+\DoxyCodeLine{00606\ \textcolor{comment}{//\ internal\ functions}}
+\DoxyCodeLine{00607\ }
+\DoxyCodeLine{00615\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ \mbox{\hyperlink{congfx_8h_a80d63b5b060b4fa97556fe86b4235939}{\_diff\_time\_micros}}(\textcolor{keyword}{struct}\ timespec\ time1,\ \textcolor{keyword}{struct}\ timespec\ time2);}
+\DoxyCodeLine{00616\ }
+\DoxyCodeLine{00617\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ \mbox{\hyperlink{congfx_8h_a80d63b5b060b4fa97556fe86b4235939}{\_diff\_time\_micros}}(\textcolor{keyword}{struct}\ timespec\ time1,\ \textcolor{keyword}{struct}\ timespec\ time2)}
+\DoxyCodeLine{00618\ \{}
+\DoxyCodeLine{00619\ \ \ \ \ \textcolor{comment}{//\ wprintf(L"{}time1\ [\%ld,\ \%ld],\ time2[\%ld,\ \%ld]\(\backslash\)n"{},\ time1.tv\_sec,\ time1.tv\_nsec,\ time2.tv\_sec,\ time2.tv\_nsec);}}
+\DoxyCodeLine{00620\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ seconds\_delta\ =\ (time1.tv\_sec\ -\/\ time2.tv\_sec);}
+\DoxyCodeLine{00621\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a1b3c9b6e4c70fcf844f5210436e8dcbb}{cg\_int}}\ nanos\_delta\ =\ (time1.tv\_nsec\ -\/\ time2.tv\_nsec);}
+\DoxyCodeLine{00622\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ delta\ =\ (seconds\_delta\ *\ 1000000)\ +\ (nanos\_delta\ /\ 1000);}
+\DoxyCodeLine{00623\ \ \ \ \ \textcolor{comment}{//\ wprintf(L"{}seconds\_delta\ =\ \%lu,\ nanos\_delta\ =\ \%ld,\ delta\ =\ \%lu\(\backslash\)n"{},\ seconds\_delta,\ nanos\_delta,\ delta);}}
+\DoxyCodeLine{00624\ \ \ \ \ \textcolor{keywordflow}{return}\ delta;}
+\DoxyCodeLine{00625\ \}}
+\DoxyCodeLine{00626\ }
+\DoxyCodeLine{00627\ \textcolor{keywordtype}{int}\ main(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ *argv[])}
+\DoxyCodeLine{00628\ \{}
+\DoxyCodeLine{00629\ \ \ \ \ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ read\_buf[20];}
+\DoxyCodeLine{00630\ }
+\DoxyCodeLine{00631\ \ \ \ \ \textcolor{comment}{//\ enable\ raw\ mode\ for\ terminal}}
+\DoxyCodeLine{00632\ \ \ \ \ \mbox{\hyperlink{congfx_8h_ad6c20707d5920689fa9b3fcc2f01bd62}{\_cg\_term\_enable\_raw\_mode}}();}
+\DoxyCodeLine{00633\ }
+\DoxyCodeLine{00634\ \ \ \ \ \textcolor{comment}{//\ init\ locale\ for\ terminal,\ and\ wide\ output}}
+\DoxyCodeLine{00635\ \ \ \ \ setlocale(LC\_ALL,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00636\ \ \ \ \ fwide(stdout,\ 1);}
+\DoxyCodeLine{00637\ }
+\DoxyCodeLine{00638\ \ \ \ \ \textcolor{comment}{//\ init\ random\ numbers}}
+\DoxyCodeLine{00639\ \ \ \ \ srand(time(NULL));}
+\DoxyCodeLine{00640\ }
+\DoxyCodeLine{00641\ \ \ \ \ \textcolor{keyword}{struct\ }timespec\ start\_time,\ prev\_time,\ current\_time,\ after\_draw\_time;}
+\DoxyCodeLine{00642\ \ \ \ \ clock\_gettime(CLOCK\_MONOTONIC,\ \&start\_time);}
+\DoxyCodeLine{00643\ \ \ \ \ prev\_time\ =\ start\_time;}
+\DoxyCodeLine{00644\ \ \ \ \ current\_time\ =\ start\_time;}
+\DoxyCodeLine{00645\ }
+\DoxyCodeLine{00646\ \ \ \ \ setup();}
+\DoxyCodeLine{00647\ }
+\DoxyCodeLine{00648\ \ \ \ \ \textcolor{comment}{//\ if\ there\ is\ no\ canvas\ created,\ create\ a\ default\ one}}
+\DoxyCodeLine{00649\ \ \ \ \ \textcolor{keywordflow}{if}\ (canvas\_current\ ==\ NULL)}
+\DoxyCodeLine{00650\ \ \ \ \ \{}
+\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ create\_canvas(100,\ 25);}
+\DoxyCodeLine{00652\ \ \ \ \ \}}
+\DoxyCodeLine{00653\ }
+\DoxyCodeLine{00654\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ delta\_time\_ideal\ =\ 1000000\ /\ \_fps;\ \textcolor{comment}{//\ in\ microseconds}}
+\DoxyCodeLine{00655\ }
+\DoxyCodeLine{00656\ \ \ \ \ \textcolor{keywordflow}{while}\ (\_loop\ ==\ 1)}
+\DoxyCodeLine{00657\ \ \ \ \ \{}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ dt\ =\ \mbox{\hyperlink{congfx_8h_a80d63b5b060b4fa97556fe86b4235939}{\_diff\_time\_micros}}(current\_time,\ prev\_time);}
+\DoxyCodeLine{00659\ }
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ c\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (read(STDIN\_FILENO,\ \&c,\ 1)\ ==\ -\/1\ \&\&\ errno\ !=\ EAGAIN)}
+\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a491617bd68364cdf1a71166c370dabaa}{cg\_err\_fatal\_msg}}(L\textcolor{stringliteral}{"{}read"{}});}
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ (iscntrl(c))}}
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00667\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ wprintf(L"{}\%d\(\backslash\)r\(\backslash\)n"{},\ c);}}
+\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ else}}
+\DoxyCodeLine{00670\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ wprintf(L"{}\%d\ ('\%c')\(\backslash\)r\(\backslash\)n"{},\ c,\ c);}}
+\DoxyCodeLine{00672\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (c\ ==\ \textcolor{charliteral}{'q'})}
+\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00676\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00677\ \ \ \ \ \ \ \ \ key\_pressed(c);}
+\DoxyCodeLine{00678\ }
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ no\_loop();}}
+\DoxyCodeLine{00680\ }
+\DoxyCodeLine{00681\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ set\ default\ background\ and\ forground}}
+\DoxyCodeLine{00682\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_afff4c044ddce9b0c3fc002929f9d7c0b}{\_cg\_term\_reset}}();}
+\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ \_cg\_term\_set\_foreground\_colour(default\_fg\_colour);}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ background(default\_bg\_colour);}
+\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ set\_colour(default\_fg\_colour);}
+\DoxyCodeLine{00686\ }
+\DoxyCodeLine{00687\ \ \ \ \ \ \ \ \ cls();}
+\DoxyCodeLine{00688\ \ \ \ \ \ \ \ \ home();}
+\DoxyCodeLine{00689\ }
+\DoxyCodeLine{00690\ \ \ \ \ \ \ \ \ draw(dt);}
+\DoxyCodeLine{00691\ \ \ \ \ \ \ \ \ show\_canvas();}
+\DoxyCodeLine{00692\ }
+\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ how\ much\ time\ spent}}
+\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ clock\_gettime(CLOCK\_MONOTONIC,\ \&after\_draw\_time);}
+\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ dt\_done\ =\ \mbox{\hyperlink{congfx_8h_a80d63b5b060b4fa97556fe86b4235939}{\_diff\_time\_micros}}(after\_draw\_time,\ current\_time);}
+\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ wprintf(L"{}Delta\ ideal\ \%lu,\ Delta\ done\ \%lu\(\backslash\)n"{},\ delta\_time\_ideal,\ dt\_done);}}
+\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (delta\_time\_ideal\ >\ dt\_done)}
+\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00699\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }timespec\ dt\_diff,\ dt\_diff\_rem;}
+\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \ \ \ \ \ dt\_diff.tv\_sec\ =\ 0;}
+\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ \ \ \ \ dt\_diff.tv\_nsec\ =\ (delta\_time\_ideal\ -\/\ dt\_done)\ *\ 1000;}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sleep\ for\ the\ difference}}
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ wprintf(L"{}sleep\ for\ -\/>\ [\%ld]nanos\(\backslash\)n"{},\ dt\_diff.tv\_nsec);}}
+\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \ \ \ \ nanosleep(\&dt\_diff,\ \&dt\_diff\_rem);}
+\DoxyCodeLine{00705\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00706\ }
+\DoxyCodeLine{00707\ \ \ \ \ \ \ \ \ prev\_time\ =\ current\_time;}
+\DoxyCodeLine{00708\ \ \ \ \ \ \ \ \ clock\_gettime(CLOCK\_MONOTONIC,\ \&current\_time);}
+\DoxyCodeLine{00709\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ dt\_done\ =\ \_diff\_time\_micros(current\_time,\ prev\_time);}}
+\DoxyCodeLine{00710\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ wprintf(L"{}After\ sleep:\ Delta\ ideal\ \%lu,\ Delta\ done\ \%lu\(\backslash\)n"{},\ delta\_time\_ideal,\ dt\_done);}}
+\DoxyCodeLine{00711\ }
+\DoxyCodeLine{00712\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ swap\ canvas}}
+\DoxyCodeLine{00713\ \ \ \ \ \ \ \ \ swap\_canvas();}
+\DoxyCodeLine{00714\ \ \ \ \ \}}
+\DoxyCodeLine{00715\ \}}
+\DoxyCodeLine{00716\ }
+\DoxyCodeLine{00717\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a4858ea5373b4c9f3762e53b57a2bed9f}{cg\_err\_fatal}}(\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ message,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ code)}
+\DoxyCodeLine{00718\ \{}
+\DoxyCodeLine{00719\ \ \ \ \ wprintf(L\textcolor{stringliteral}{"{}FATAL:\ \%ls\(\backslash\)n"{}},\ message);}
+\DoxyCodeLine{00720\ \ \ \ \ exit(code);}
+\DoxyCodeLine{00721\ \}}
+\DoxyCodeLine{00722\ }
+\DoxyCodeLine{00723\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a491617bd68364cdf1a71166c370dabaa}{cg\_err\_fatal\_msg}}(\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ message)}
+\DoxyCodeLine{00724\ \{}
+\DoxyCodeLine{00725\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a4858ea5373b4c9f3762e53b57a2bed9f}{cg\_err\_fatal}}(message,\ -\/1);}
+\DoxyCodeLine{00726\ \}}
+\DoxyCodeLine{00727\ }
+\DoxyCodeLine{00728\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ \mbox{\hyperlink{congfx_8h_a1cc383f7e06da77af6033e574dd9d09d}{number\_to\_uinteger}}(\mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\_number}}\ x)}
+\DoxyCodeLine{00729\ \{}
+\DoxyCodeLine{00730\ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ <\ 0)}
+\DoxyCodeLine{00731\ \ \ \ \ \{}
+\DoxyCodeLine{00732\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00733\ \ \ \ \ \}}
+\DoxyCodeLine{00734\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00735\ \ \ \ \ \{}
+\DoxyCodeLine{00736\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}})x;}
+\DoxyCodeLine{00737\ \ \ \ \ \}}
+\DoxyCodeLine{00738\ \}}
+\DoxyCodeLine{00739\ }
+\DoxyCodeLine{00740\ \textcolor{comment}{//\ type\ utility\ functions}}
+\DoxyCodeLine{00741\ \mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ \mbox{\hyperlink{congfx_8h_a68569bf28d5bd5c619ecbc80f5ead297}{make\_string}}(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ length)}
+\DoxyCodeLine{00742\ \{}
+\DoxyCodeLine{00743\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ s\ =\ (\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}})\_CG\_CALLOC(length\ +\ 1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}));}
+\DoxyCodeLine{00744\ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ ==\ NULL)}
+\DoxyCodeLine{00745\ \ \ \ \ \{}
+\DoxyCodeLine{00746\ \ \ \ \ \ \ \ \ wprintf(L\textcolor{stringliteral}{"{}FATAL\ Error:\ Unable\ to\ allocate\ cg\_string.\(\backslash\)n"{}});}
+\DoxyCodeLine{00747\ \ \ \ \ \ \ \ \ exit(-\/1);}
+\DoxyCodeLine{00748\ \ \ \ \ \}}
+\DoxyCodeLine{00749\ \ \ \ \ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{00750\ \}}
+\DoxyCodeLine{00751\ }
+\DoxyCodeLine{00752\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_aba0dad86aaf53c7aa0b4d9d1c8d901a6}{dispose\_string}}(\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ s)}
+\DoxyCodeLine{00753\ \{}
+\DoxyCodeLine{00754\ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ !=\ NULL)}
+\DoxyCodeLine{00755\ \ \ \ \ \{}
+\DoxyCodeLine{00756\ \ \ \ \ \ \ \ \ \_CG\_FREE(s);}
+\DoxyCodeLine{00757\ \ \ \ \ \}}
+\DoxyCodeLine{00758\ \}}
+\DoxyCodeLine{00759\ }
+\DoxyCodeLine{00760\ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ \mbox{\hyperlink{congfx_8h_a3c276a46290c36eb28f5699388787106}{make\_vec2}}(\mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\_number}}\ v0,\ \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\_number}}\ v1)}
+\DoxyCodeLine{00761\ \{}
+\DoxyCodeLine{00762\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ v\ =\ (\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}})\_CG\_CALLOC(2,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\_number}}));}
+\DoxyCodeLine{00763\ \ \ \ \ \textcolor{keywordflow}{if}\ (v\ ==\ NULL)}
+\DoxyCodeLine{00764\ \ \ \ \ \{}
+\DoxyCodeLine{00765\ \ \ \ \ \ \ \ \ wprintf(L\textcolor{stringliteral}{"{}FATAL\ Error:\ Unable\ to\ allocate\ vec2.\(\backslash\)n"{}});}
+\DoxyCodeLine{00766\ \ \ \ \ \ \ \ \ exit(-\/1);}
+\DoxyCodeLine{00767\ \ \ \ \ \}}
+\DoxyCodeLine{00768\ \ \ \ \ v[0]\ =\ v0;}
+\DoxyCodeLine{00769\ \ \ \ \ v[1]\ =\ v1;}
+\DoxyCodeLine{00770\ \ \ \ \ \textcolor{keywordflow}{return}\ v;}
+\DoxyCodeLine{00771\ \}}
+\DoxyCodeLine{00772\ }
+\DoxyCodeLine{00773\ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ \mbox{\hyperlink{congfx_8h_a91df250370e2e1b044bc84f8227edaba}{make\_vec2\_from}}(\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ other)}
+\DoxyCodeLine{00774\ \{}
+\DoxyCodeLine{00775\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ v\ =\ \mbox{\hyperlink{congfx_8h_a3c276a46290c36eb28f5699388787106}{make\_vec2}}(other[0],\ other[1]);}
+\DoxyCodeLine{00776\ \ \ \ \ \textcolor{keywordflow}{return}\ v;}
+\DoxyCodeLine{00777\ \}}
+\DoxyCodeLine{00778\ }
+\DoxyCodeLine{00779\ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ \mbox{\hyperlink{congfx_8h_ae91ba7509e158852be87e51e2e5e564d}{vec2\_add}}(\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ v1,\ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ v2)}
+\DoxyCodeLine{00780\ \{}
+\DoxyCodeLine{00781\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ res\ =\ \mbox{\hyperlink{congfx_8h_a91df250370e2e1b044bc84f8227edaba}{make\_vec2\_from}}(v1);}
+\DoxyCodeLine{00782\ \ \ \ \ res[0]\ =\ res[0]\ +\ v2[0];}
+\DoxyCodeLine{00783\ \ \ \ \ res[1]\ =\ res[1]\ +\ v2[1];}
+\DoxyCodeLine{00784\ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00785\ \}}
+\DoxyCodeLine{00786\ }
+\DoxyCodeLine{00787\ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ \mbox{\hyperlink{congfx_8h_a242eed08addfe32b593ac462e323f115}{vec2\_mult\_scalar}}(\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ vin,\ \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\_number}}\ x)}
+\DoxyCodeLine{00788\ \{}
+\DoxyCodeLine{00789\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ v\ =\ \mbox{\hyperlink{congfx_8h_a91df250370e2e1b044bc84f8227edaba}{make\_vec2\_from}}(vin);}
+\DoxyCodeLine{00790\ \ \ \ \ v[0]\ =\ v[0]\ *\ x;}
+\DoxyCodeLine{00791\ \ \ \ \ v[1]\ =\ v[1]\ *\ x;}
+\DoxyCodeLine{00792\ \ \ \ \ \textcolor{keywordflow}{return}\ v;}
+\DoxyCodeLine{00793\ \}}
+\DoxyCodeLine{00794\ }
+\DoxyCodeLine{00795\ \mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ \mbox{\hyperlink{congfx_8h_a2dac804788f78998b5b03af6453646d2}{vec2\_to\_string}}(\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ v)}
+\DoxyCodeLine{00796\ \{}
+\DoxyCodeLine{00797\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\_string}}\ s\ =\ \mbox{\hyperlink{congfx_8h_a68569bf28d5bd5c619ecbc80f5ead297}{make\_string}}(100);}
+\DoxyCodeLine{00798\ \ \ \ \ swprintf(s,\ 100,\ L\textcolor{stringliteral}{"{}\%.2Lf,\ \%.2Lf"{}},\ v[0],\ v[1]);}
+\DoxyCodeLine{00799\ \ \ \ \ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{00800\ \}}
+\DoxyCodeLine{00801\ }
+\DoxyCodeLine{00802\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a0b6f8a3eb0c151c3f5028c9e69cb985d}{dispose\_vec2}}(\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}\ v)}
+\DoxyCodeLine{00803\ \{}
+\DoxyCodeLine{00804\ \ \ \ \ \textcolor{keywordflow}{if}\ (v\ !=\ NULL)}
+\DoxyCodeLine{00805\ \ \ \ \ \{}
+\DoxyCodeLine{00806\ \ \ \ \ \ \ \ \ \_CG\_FREE(v);}
+\DoxyCodeLine{00807\ \ \ \ \ \}}
+\DoxyCodeLine{00808\ \}}
+\DoxyCodeLine{00809\ }
+\DoxyCodeLine{00810\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{congfx_8h_a44f946f0acdf231b56827f14760e731a}{rand\_int}}(\textcolor{keywordtype}{int}\ from,\ \textcolor{keywordtype}{int}\ to)}
+\DoxyCodeLine{00811\ \{}
+\DoxyCodeLine{00812\ \ \ \ \ \textcolor{keywordtype}{int}\ num\ =\ (rand()\ \%\ (to\ -\/\ from\ +\ 1))\ +\ from;}
+\DoxyCodeLine{00813\ \ \ \ \ \textcolor{keywordflow}{return}\ num;}
+\DoxyCodeLine{00814\ \}}
+\DoxyCodeLine{00815\ }
+\DoxyCodeLine{00816\ \textcolor{keywordtype}{void}\ no\_loop()}
+\DoxyCodeLine{00817\ \{}
+\DoxyCodeLine{00818\ \ \ \ \ \_loop\ =\ 0;}
+\DoxyCodeLine{00819\ \}}
+\DoxyCodeLine{00820\ }
+\DoxyCodeLine{00821\ \textcolor{keywordtype}{void}\ loop()}
+\DoxyCodeLine{00822\ \{}
+\DoxyCodeLine{00823\ \ \ \ \ \_loop\ =\ 1;}
+\DoxyCodeLine{00824\ \}}
+\DoxyCodeLine{00825\ }
+\DoxyCodeLine{00826\ \textcolor{keywordtype}{void}\ frame\_rate(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ fps)}
+\DoxyCodeLine{00827\ \{}
+\DoxyCodeLine{00828\ \ \ \ \ \textcolor{keywordflow}{if}\ (fps\ >\ 0\ \&\&\ fps\ <\ 100)}
+\DoxyCodeLine{00829\ \ \ \ \ \{}
+\DoxyCodeLine{00830\ \ \ \ \ \ \ \ \ \_fps\ =\ fps;}
+\DoxyCodeLine{00831\ \ \ \ \ \}}
+\DoxyCodeLine{00832\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00833\ \ \ \ \ \{}
+\DoxyCodeLine{00834\ \ \ \ \ \ \ \ \ wprintf(L\textcolor{stringliteral}{"{}FATAL:\ Invalid\ fps\ [\%lu],\ should\ be\ in\ range\ (0,\ 100).\ \(\backslash\)n"{}},\ fps);}
+\DoxyCodeLine{00835\ \ \ \ \ \ \ \ \ exit(-\/1);}
+\DoxyCodeLine{00836\ \ \ \ \ \}}
+\DoxyCodeLine{00837\ \}}
+\DoxyCodeLine{00838\ }
+\DoxyCodeLine{00839\ \textcolor{comment}{//\ terminal\ utility\ functions}}
+\DoxyCodeLine{00840\ \textcolor{keywordtype}{void}\ cls()}
+\DoxyCodeLine{00841\ \{}
+\DoxyCodeLine{00842\ \ \ \ \ wprintf(L\textcolor{stringliteral}{"{}\(\backslash\)033[2J"{}});}
+\DoxyCodeLine{00843\ \}}
+\DoxyCodeLine{00844\ }
+\DoxyCodeLine{00845\ \textcolor{keywordtype}{void}\ home()}
+\DoxyCodeLine{00846\ \{}
+\DoxyCodeLine{00847\ \ \ \ \ wprintf(L\textcolor{stringliteral}{"{}\(\backslash\)033[H"{}});}
+\DoxyCodeLine{00848\ \}}
+\DoxyCodeLine{00849\ }
+\DoxyCodeLine{00850\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_ad6c20707d5920689fa9b3fcc2f01bd62}{\_cg\_term\_enable\_raw\_mode}}()}
+\DoxyCodeLine{00851\ \{}
+\DoxyCodeLine{00852\ \ \ \ \ \textcolor{keywordflow}{if}\ (tcgetattr(STDIN\_FILENO,\ \&orig\_termios)\ ==\ -\/1)}
+\DoxyCodeLine{00853\ \ \ \ \ \{}
+\DoxyCodeLine{00854\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a491617bd68364cdf1a71166c370dabaa}{cg\_err\_fatal\_msg}}(L\textcolor{stringliteral}{"{}tcgetattr"{}});}
+\DoxyCodeLine{00855\ \ \ \ \ \}}
+\DoxyCodeLine{00856\ }
+\DoxyCodeLine{00857\ \ \ \ \ atexit(\mbox{\hyperlink{congfx_8h_a171ebb294e01fa3329a5be0d41e5226d}{\_cg\_term\_disable\_raw\_mode}});}
+\DoxyCodeLine{00858\ \ \ \ \ \textcolor{keyword}{struct\ }termios\ raw\ =\ orig\_termios;}
+\DoxyCodeLine{00859\ \ \ \ \ raw.c\_iflag\ \&=\ \string~(BRKINT\ |\ ICRNL\ |\ INPCK\ |\ ISTRIP\ |\ IXON);}
+\DoxyCodeLine{00860\ \ \ \ \ raw.c\_oflag\ \&=\ \string~(OPOST);}
+\DoxyCodeLine{00861\ \ \ \ \ raw.c\_cflag\ |=\ (CS8);}
+\DoxyCodeLine{00862\ \ \ \ \ raw.c\_lflag\ \&=\ \string~(ECHO\ |\ ICANON\ |\ IEXTEN\ |\ ISIG);}
+\DoxyCodeLine{00863\ }
+\DoxyCodeLine{00864\ \ \ \ \ raw.c\_cc[VMIN]\ =\ 0;}
+\DoxyCodeLine{00865\ \ \ \ \ raw.c\_cc[VTIME]\ =\ 1;}
+\DoxyCodeLine{00866\ }
+\DoxyCodeLine{00867\ \ \ \ \ \textcolor{keywordflow}{if}\ (tcsetattr(STDIN\_FILENO,\ TCSAFLUSH,\ \&raw)\ ==\ -\/1)}
+\DoxyCodeLine{00868\ \ \ \ \ \{}
+\DoxyCodeLine{00869\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a491617bd68364cdf1a71166c370dabaa}{cg\_err\_fatal\_msg}}(L\textcolor{stringliteral}{"{}tcsetattr"{}});}
+\DoxyCodeLine{00870\ \ \ \ \ \}}
+\DoxyCodeLine{00871\ }
+\DoxyCodeLine{00872\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ current\ flags}}
+\DoxyCodeLine{00873\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\_cg\_term\_orig\_flags\ =\ fcntl(STDIN\_FILENO,\ F\_GETFL,\ 0))\ ==\ -\/1)}
+\DoxyCodeLine{00874\ \ \ \ \ \{}
+\DoxyCodeLine{00875\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a491617bd68364cdf1a71166c370dabaa}{cg\_err\_fatal\_msg}}(L\textcolor{stringliteral}{"{}fcntl\ error\ getting\ flags"{}});}
+\DoxyCodeLine{00876\ \ \ \ \ \}}
+\DoxyCodeLine{00877\ }
+\DoxyCodeLine{00878\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ flags\ to\ be\ non-\/blocking}}
+\DoxyCodeLine{00879\ \ \ \ \ \textcolor{keywordflow}{if}\ ((fcntl(STDIN\_FILENO,\ F\_SETFL,\ \_cg\_term\_orig\_flags\ |\ O\_NONBLOCK)\ ==\ -\/1))}
+\DoxyCodeLine{00880\ \ \ \ \ \{}
+\DoxyCodeLine{00881\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a491617bd68364cdf1a71166c370dabaa}{cg\_err\_fatal\_msg}}(L\textcolor{stringliteral}{"{}fcntl\ error\ setting\ flags"{}});}
+\DoxyCodeLine{00882\ \ \ \ \ \}}
+\DoxyCodeLine{00883\ \}}
+\DoxyCodeLine{00884\ }
+\DoxyCodeLine{00885\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_a171ebb294e01fa3329a5be0d41e5226d}{\_cg\_term\_disable\_raw\_mode}}()}
+\DoxyCodeLine{00886\ \{}
+\DoxyCodeLine{00887\ \ \ \ \ \textcolor{keywordflow}{if}\ (tcsetattr(STDIN\_FILENO,\ TCSAFLUSH,\ \&orig\_termios)\ ==\ -\/1)}
+\DoxyCodeLine{00888\ \ \ \ \ \{}
+\DoxyCodeLine{00889\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a491617bd68364cdf1a71166c370dabaa}{cg\_err\_fatal\_msg}}(L\textcolor{stringliteral}{"{}tcsetattr"{}});}
+\DoxyCodeLine{00890\ \ \ \ \ \}}
+\DoxyCodeLine{00891\ }
+\DoxyCodeLine{00892\ \ \ \ \ \textcolor{comment}{//\ Reset\ the\ flags}}
+\DoxyCodeLine{00893\ \ \ \ \ \textcolor{keywordflow}{if}\ (fcntl(STDIN\_FILENO,\ F\_SETFL,\ \_cg\_term\_orig\_flags)\ ==\ -\/1)}
+\DoxyCodeLine{00894\ \ \ \ \ \{}
+\DoxyCodeLine{00895\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a491617bd68364cdf1a71166c370dabaa}{cg\_err\_fatal\_msg}}(L\textcolor{stringliteral}{"{}fcntl\ error\ resetting\ flags"{}});}
+\DoxyCodeLine{00896\ \ \ \ \ \}}
+\DoxyCodeLine{00897\ \}}
+\DoxyCodeLine{00898\ }
+\DoxyCodeLine{00899\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{congfx_8h_afff4c044ddce9b0c3fc002929f9d7c0b}{\_cg\_term\_reset}}()}
+\DoxyCodeLine{00900\ \{}
+\DoxyCodeLine{00901\ \ \ \ \ \textcolor{comment}{//\ the\ [0m\ code\ resets\ all\ terminal\ attributes}}
+\DoxyCodeLine{00902\ \ \ \ \ fputws(L\textcolor{stringliteral}{"{}\(\backslash\)033[0m"{}},\ stdout);}
+\DoxyCodeLine{00903\ \}}
+\DoxyCodeLine{00904\ }
+\DoxyCodeLine{00905\ \textcolor{keywordtype}{void}\ \_cg\_term\_set\_foreground\_colour(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ colour)}
+\DoxyCodeLine{00906\ \{}
+\DoxyCodeLine{00907\ \ \ \ \ wprintf(L\textcolor{stringliteral}{"{}\(\backslash\)033[38;2;\%lu;\%lu;\%lum"{}},\ colour.r,\ colour.g,\ colour.b);}
+\DoxyCodeLine{00908\ \}}
+\DoxyCodeLine{00909\ }
+\DoxyCodeLine{00910\ \textcolor{keywordtype}{void}\ \_cg\_term\_set\_background\_colour(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ colour)}
+\DoxyCodeLine{00911\ \{}
+\DoxyCodeLine{00912\ \ \ \ \ wprintf(L\textcolor{stringliteral}{"{}\(\backslash\)033[48;2;\%lu;\%lu;\%lum"{}},\ colour.r,\ colour.g,\ colour.b);}
+\DoxyCodeLine{00913\ \}}
+\DoxyCodeLine{00914\ }
+\DoxyCodeLine{00915\ \textcolor{comment}{//\ canvas\ functions}}
+\DoxyCodeLine{00916\ }
+\DoxyCodeLine{00917\ \textcolor{keywordtype}{void}\ create\_canvas(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ w,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ h)}
+\DoxyCodeLine{00918\ \{}
+\DoxyCodeLine{00919\ \ \ \ \ \textcolor{keywordflow}{if}\ (canvas\_current\ !=\ NULL)}
+\DoxyCodeLine{00920\ \ \ \ \ \{}
+\DoxyCodeLine{00921\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_af1b64be50f67ddb6836acb9ee907f653}{dispose\_canvas}}(canvas\_current);}
+\DoxyCodeLine{00922\ \ \ \ \ \}}
+\DoxyCodeLine{00923\ \ \ \ \ canvas\_current\ =\ \mbox{\hyperlink{congfx_8h_af4ce13f9c5f644c77d221b16952370c4}{make\_canvas}}(w,\ h);}
+\DoxyCodeLine{00924\ \ \ \ \ \textcolor{keywordflow}{if}\ (canvas\_previous\ !=\ NULL)}
+\DoxyCodeLine{00925\ \ \ \ \ \{}
+\DoxyCodeLine{00926\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_af1b64be50f67ddb6836acb9ee907f653}{dispose\_canvas}}(canvas\_previous);}
+\DoxyCodeLine{00927\ \ \ \ \ \}}
+\DoxyCodeLine{00928\ \ \ \ \ canvas\_previous\ =\ \mbox{\hyperlink{congfx_8h_af4ce13f9c5f644c77d221b16952370c4}{make\_canvas}}(w,\ h);}
+\DoxyCodeLine{00929\ }
+\DoxyCodeLine{00930\ \ \ \ \ width\ =\ w;}
+\DoxyCodeLine{00931\ \ \ \ \ height\ =\ h;}
+\DoxyCodeLine{00932\ \}}
+\DoxyCodeLine{00933\ }
+\DoxyCodeLine{00934\ \textcolor{keywordtype}{void}\ swap\_canvas()}
+\DoxyCodeLine{00935\ \{}
+\DoxyCodeLine{00936\ \ \ \ \ \mbox{\hyperlink{structcg__canvas__t}{cg\_canvas\_t}}\ *temp\ =\ canvas\_current;}
+\DoxyCodeLine{00937\ \ \ \ \ canvas\_current\ =\ canvas\_previous;}
+\DoxyCodeLine{00938\ \ \ \ \ canvas\_previous\ =\ temp;}
+\DoxyCodeLine{00939\ \}}
+\DoxyCodeLine{00940\ }
+\DoxyCodeLine{00941\ \textcolor{keywordtype}{void}\ background(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ col)}
+\DoxyCodeLine{00942\ \{}
+\DoxyCodeLine{00943\ \ \ \ \ background\_colour\ =\ col;}
+\DoxyCodeLine{00944\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x\ =\ 0;\ x\ <\ canvas\_current-\/>width;\ x++)}
+\DoxyCodeLine{00945\ \ \ \ \ \{}
+\DoxyCodeLine{00946\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y\ =\ 0;\ y\ <\ canvas\_current-\/>height;\ y++)}
+\DoxyCodeLine{00947\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00948\ \ \ \ \ \ \ \ \ \ \ \ \ point(x,\ y,\ background\_char);}
+\DoxyCodeLine{00949\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00950\ \ \ \ \ \}}
+\DoxyCodeLine{00951\ \}}
+\DoxyCodeLine{00952\ }
+\DoxyCodeLine{00953\ \textcolor{keywordtype}{void}\ stroke(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ col)}
+\DoxyCodeLine{00954\ \{}
+\DoxyCodeLine{00955\ \ \ \ \ stroke\_colour\ =\ col;}
+\DoxyCodeLine{00956\ \}}
+\DoxyCodeLine{00957\ }
+\DoxyCodeLine{00958\ \textcolor{keywordtype}{void}\ fill(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ col)}
+\DoxyCodeLine{00959\ \{}
+\DoxyCodeLine{00960\ \ \ \ \ fill\_colour\ =\ col;}
+\DoxyCodeLine{00961\ \}}
+\DoxyCodeLine{00962\ }
+\DoxyCodeLine{00963\ \textcolor{keywordtype}{void}\ set\_colour(\mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ col)}
+\DoxyCodeLine{00964\ \{}
+\DoxyCodeLine{00965\ \ \ \ \ stroke(col);}
+\DoxyCodeLine{00966\ \ \ \ \ fill(col);}
+\DoxyCodeLine{00967\ \}}
+\DoxyCodeLine{00968\ }
+\DoxyCodeLine{00969\ \textcolor{keywordtype}{void}\ show\_canvas()}
+\DoxyCodeLine{00970\ \{}
+\DoxyCodeLine{00971\ \ \ \ \ \textcolor{keywordflow}{if}\ (canvas\_current\ !=\ NULL)}
+\DoxyCodeLine{00972\ \ \ \ \ \{}
+\DoxyCodeLine{00973\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ current\_fg\ =\ \{255,\ 255,\ 255\};}
+\DoxyCodeLine{00974\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ current\_bg\ =\ \{0,\ 0,\ 0\};}
+\DoxyCodeLine{00975\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ wprintf(L"{}\%ls"{},\ canvas\_contents);}}
+\DoxyCodeLine{00976\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ idx\ =\ 0;}
+\DoxyCodeLine{00977\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ i\ =\ 0;\ i\ <\ canvas\_current-\/>height;\ i++)}
+\DoxyCodeLine{00978\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00979\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ j\ =\ 0;\ j\ <\ canvas\_current-\/>width;\ j++)}
+\DoxyCodeLine{00980\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00981\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *current\_cell\ =\ \mbox{\hyperlink{congfx_8h_a5d34efe257105f90dc8844bec4ec531b}{get\_cell}}(canvas\_current,\ j,\ i);}
+\DoxyCodeLine{00982\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *previous\_cell\ =\ \mbox{\hyperlink{congfx_8h_a5d34efe257105f90dc8844bec4ec531b}{get\_cell}}(canvas\_previous,\ j,\ i);}
+\DoxyCodeLine{00983\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ (compare\_cells(current\_cell,\ previous\_cell)\ ==\ 0)}}
+\DoxyCodeLine{00984\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00985\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ continue;}}
+\DoxyCodeLine{00986\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00987\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ cell\_fg\ =\ \mbox{\hyperlink{congfx_8h_a719ef41712ab054b9946c8a4b1882140}{get\_cell\_fg}}(current\_cell);}
+\DoxyCodeLine{00988\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structcg__rgb__t}{cg\_rgb\_t}}\ cell\_bg\ =\ \mbox{\hyperlink{congfx_8h_a8669c046e722684a354783ba25ee5efa}{get\_cell\_bg}}(current\_cell);}
+\DoxyCodeLine{00989\ }
+\DoxyCodeLine{00990\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cell\_fg.r\ !=\ current\_fg.r\ ||\ cell\_fg.g\ !=\ current\_fg.g\ ||\ cell\_fg.b\ !=\ current\_fg.b)}
+\DoxyCodeLine{00991\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00992\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_cg\_term\_set\_foreground\_colour(cell\_fg);}
+\DoxyCodeLine{00993\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_fg\ =\ cell\_fg;}
+\DoxyCodeLine{00994\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00995\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cell\_bg.r\ !=\ current\_bg.r\ ||\ cell\_bg.g\ !=\ current\_bg.g\ ||\ cell\_bg.b\ !=\ current\_bg.b)}
+\DoxyCodeLine{00996\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00997\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_cg\_term\_set\_background\_colour(cell\_bg);}
+\DoxyCodeLine{00998\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_bg\ =\ cell\_bg;}
+\DoxyCodeLine{00999\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \_cg\_term\_set\_foreground\_colour(canvas\_foreground\_colour[(i\ *\ width)\ +\ j]);}}
+\DoxyCodeLine{01001\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \_cg\_term\_set\_background\_colour(canvas\_background\_colour[(i\ *\ width)\ +\ j]);}}
+\DoxyCodeLine{01002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ c\ =\ \mbox{\hyperlink{congfx_8h_a3223488ed255c27450a2798511f5fcc9}{get\_cell\_char}}(current\_cell);}
+\DoxyCodeLine{01003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ putwchar(c);}
+\DoxyCodeLine{01004\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ idx\ +=\ 1;}}
+\DoxyCodeLine{01005\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01006\ }
+\DoxyCodeLine{01007\ \ \ \ \ \ \ \ \ \ \ \ \ putwchar(L\textcolor{charliteral}{'\(\backslash\)r'});}
+\DoxyCodeLine{01008\ \ \ \ \ \ \ \ \ \ \ \ \ putwchar(L\textcolor{charliteral}{'\(\backslash\)n'});}
+\DoxyCodeLine{01009\ }
+\DoxyCodeLine{01010\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ idx\ +=\ 1;}}
+\DoxyCodeLine{01011\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01012\ \ \ \ \ \}}
+\DoxyCodeLine{01013\ \}}
+\DoxyCodeLine{01014\ }
+\DoxyCodeLine{01015\ \textcolor{keywordtype}{void}\ point(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x1,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y1,\ \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ c)}
+\DoxyCodeLine{01016\ \{}
+\DoxyCodeLine{01017\ \ \ \ \ \textcolor{keywordflow}{if}\ (x1\ >=\ canvas\_current-\/>width\ ||\ y1\ >=\ canvas\_current-\/>height\ ||\ x1\ <\ 0\ ||\ y1\ <\ 0)}
+\DoxyCodeLine{01018\ \ \ \ \ \{}
+\DoxyCodeLine{01019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{01020\ \ \ \ \ \}}
+\DoxyCodeLine{01021\ \ \ \ \ \mbox{\hyperlink{structcg__cell__t}{cg\_cell\_t}}\ *cell\ =\ \mbox{\hyperlink{congfx_8h_a5d34efe257105f90dc8844bec4ec531b}{get\_cell}}(canvas\_current,\ x1,\ y1);}
+\DoxyCodeLine{01022\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a3b50bc56f1e32c55bd51b90ec90c1f2c}{set\_cell\_char}}(cell,\ c);}
+\DoxyCodeLine{01023\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a26c4b75843f8ee5690b01eca45860aa2}{set\_cell\_bg}}(cell,\ background\_colour);}
+\DoxyCodeLine{01024\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a1c44ec62c49620d79367b671082786b4}{set\_cell\_fg}}(cell,\ stroke\_colour);}
+\DoxyCodeLine{01025\ \ \ \ \ \textcolor{comment}{//\ wprintf(L"{}\(\backslash\)033[\%lu;\%luf"{},\ y1,\ x1);}}
+\DoxyCodeLine{01026\ \ \ \ \ \textcolor{comment}{//\ wprintf(L"{}\%c"{},\ c);}}
+\DoxyCodeLine{01027\ \}}
+\DoxyCodeLine{01028\ }
+\DoxyCodeLine{01029\ \textcolor{keywordtype}{void}\ line(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x1,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y1,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x2,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y2)}
+\DoxyCodeLine{01030\ \{}
+\DoxyCodeLine{01031\ \ \ \ \ \textcolor{comment}{//\ wprintf(L"{}line\ [\%lu,\%lu]\ -\/>\ [\%lu,\ \%lu]"{},\ x1,\ y1,\ x2,\ y2);}}
+\DoxyCodeLine{01032\ }
+\DoxyCodeLine{01033\ \ \ \ \ \textcolor{comment}{//\ swap\ coordinates\ if\ y1\ is\ lower}}
+\DoxyCodeLine{01034\ \ \ \ \ \textcolor{keywordflow}{if}\ (x1\ >\ x2)}
+\DoxyCodeLine{01035\ \ \ \ \ \{}
+\DoxyCodeLine{01036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ tx,\ ty;}
+\DoxyCodeLine{01037\ \ \ \ \ \ \ \ \ tx\ =\ x2;}
+\DoxyCodeLine{01038\ \ \ \ \ \ \ \ \ ty\ =\ y2;}
+\DoxyCodeLine{01039\ \ \ \ \ \ \ \ \ x2\ =\ x1;}
+\DoxyCodeLine{01040\ \ \ \ \ \ \ \ \ y2\ =\ y1;}
+\DoxyCodeLine{01041\ \ \ \ \ \ \ \ \ x1\ =\ tx;}
+\DoxyCodeLine{01042\ \ \ \ \ \ \ \ \ y1\ =\ ty;}
+\DoxyCodeLine{01043\ \ \ \ \ \}}
+\DoxyCodeLine{01044\ }
+\DoxyCodeLine{01045\ \ \ \ \ \textcolor{keywordflow}{if}\ (x1\ ==\ x2)}
+\DoxyCodeLine{01046\ \ \ \ \ \{}
+\DoxyCodeLine{01047\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ slope\ is\ infinite}}
+\DoxyCodeLine{01048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y\ =\ y1;\ y\ <=\ y2;\ y++)}
+\DoxyCodeLine{01049\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01050\ \ \ \ \ \ \ \ \ \ \ \ \ point(x1,\ y,\ L\textcolor{stringliteral}{'█'});}
+\DoxyCodeLine{01051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01052\ \ \ \ \ \}}
+\DoxyCodeLine{01053\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01054\ \ \ \ \ \{}
+\DoxyCodeLine{01055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ slope\ =\ (y2\ -\/\ y1)\ /\ (x2\ -\/\ x1);}
+\DoxyCodeLine{01056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x\ =\ x1;\ x\ <=\ x2;\ x++)}
+\DoxyCodeLine{01057\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01058\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y\ =\ y1\ +\ (slope\ *\ x);}
+\DoxyCodeLine{01059\ \ \ \ \ \ \ \ \ \ \ \ \ point(x,\ y,\ L\textcolor{stringliteral}{'█'});}
+\DoxyCodeLine{01060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01061\ \ \ \ \ \}}
+\DoxyCodeLine{01062\ \}}
+\DoxyCodeLine{01063\ }
+\DoxyCodeLine{01064\ \textcolor{keywordtype}{void}\ rect(\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x1,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y1,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ width,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ height)}
+\DoxyCodeLine{01065\ \{}
+\DoxyCodeLine{01066\ \ \ \ \ line(x1,\ y1,\ x1\ +\ width,\ y1);}
+\DoxyCodeLine{01067\ \ \ \ \ line(x1\ +\ width,\ y1,\ x1\ +\ width,\ y1\ +\ height);}
+\DoxyCodeLine{01068\ \ \ \ \ line(x1\ +\ width,\ y1\ +\ height,\ x1,\ y1\ +\ height);}
+\DoxyCodeLine{01069\ \ \ \ \ line(x1,\ y1,\ x1,\ y1\ +\ height);}
+\DoxyCodeLine{01070\ \}}
+\DoxyCodeLine{01071\ }
+\DoxyCodeLine{01072\ \textcolor{keywordtype}{void}\ text(\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\_char}}\ *t,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ x,\ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ y)}
+\DoxyCodeLine{01073\ \{}
+\DoxyCodeLine{01074\ \ \ \ \ \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ len\ =\ wcslen(t);}
+\DoxyCodeLine{01075\ \ \ \ \ \textcolor{keywordflow}{if}\ (len\ >\ 0)}
+\DoxyCodeLine{01076\ \ \ \ \ \{}
+\DoxyCodeLine{01077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\_uint}}\ i\ =\ 0;\ i\ <\ len;\ i++)}
+\DoxyCodeLine{01078\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01079\ \ \ \ \ \ \ \ \ \ \ \ \ point(x\ +\ i,\ y,\ t[i]);}
+\DoxyCodeLine{01080\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01081\ \ \ \ \ \}}
+\DoxyCodeLine{01082\ \}}
+\DoxyCodeLine{01083\ }
+\DoxyCodeLine{01084\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\_\_CONGFX\_H\_\_}}
+
+\end{DoxyCode}

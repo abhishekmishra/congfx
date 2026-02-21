@@ -1121,10 +1121,13 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
     buffer->length += n;
     buffer->buffer[buffer->length] = '\0';
 
-    if (buffer->length >= _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT)
-    {
+    // FIXME: flushing every command; otherwise commands
+    // get witten incomplete sometimes on iterm/macos term
+    // which is strange, can't figure it out
+    //if (buffer->length >= _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT)
+    //{
         return _cg_term_flush_command_buffer(buffer);
-    }
+    //}
 
     return 0;
 }

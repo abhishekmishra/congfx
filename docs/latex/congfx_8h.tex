@@ -1,0 +1,696 @@
+\doxysection{congfx.\+h File Reference}
+\hypertarget{congfx_8h}{}\label{congfx_8h}\index{congfx.h@{congfx.h}}
+
+
+A simple graphics library for the terminal.  
+
+
+{\ttfamily \#include $<$termios.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$wchar.\+h$>$}\newline
+{\ttfamily \#include $<$wctype.\+h$>$}\newline
+{\ttfamily \#include $<$locale.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structcg__canvas__t}{cg\+\_\+canvas\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{congfx_8h_ad5e8bd4e87683a87ba4fd4fa405af824}\label{congfx_8h_ad5e8bd4e87683a87ba4fd4fa405af824} 
+\#define {\bfseries \+\_\+\+CG\+\_\+\+DEFAULT\+\_\+\+FPS}~30
+\item 
+\Hypertarget{congfx_8h_a70e585039d26b88e84a5e1cac1db1d00}\label{congfx_8h_a70e585039d26b88e84a5e1cac1db1d00} 
+\#define {\bfseries \+\_\+\+CG\+\_\+\+DEFAULT\+\_\+\+BACKGROUND\+\_\+\+CHAR}~L\textquotesingle{} \textquotesingle{}
+\item 
+\Hypertarget{congfx_8h_ada5c282ee4dc3f71d374241eba71427c}\label{congfx_8h_ada5c282ee4dc3f71d374241eba71427c} 
+\#define {\bfseries \+\_\+\+CG\+\_\+\+CALLOC}~calloc
+\item 
+\Hypertarget{congfx_8h_a5b36444620b2f4677a745b861acd1249}\label{congfx_8h_a5b36444620b2f4677a745b861acd1249} 
+\#define {\bfseries \+\_\+\+CG\+\_\+\+FREE}~free
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef wchar\+\_\+t \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}}
+\item 
+typedef \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}}
+\item 
+typedef long \mbox{\hyperlink{congfx_8h_a1b3c9b6e4c70fcf844f5210436e8dcbb}{cg\+\_\+int}}
+\item 
+typedef unsigned long \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}}
+\item 
+typedef long double \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}}
+\item 
+typedef \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{congfx_8h_ae325bc4b693092688b929a4aaed305ae}{make\+\_\+cell}} (\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}} c, \mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} bg, \mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} fg)
+\item 
+\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} \mbox{\hyperlink{congfx_8h_a8669c046e722684a354783ba25ee5efa}{get\+\_\+cell\+\_\+bg}} (\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}cell)
+\item 
+\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} \mbox{\hyperlink{congfx_8h_a719ef41712ab054b9946c8a4b1882140}{get\+\_\+cell\+\_\+fg}} (\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}cell)
+\item 
+\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}} \mbox{\hyperlink{congfx_8h_a3223488ed255c27450a2798511f5fcc9}{get\+\_\+cell\+\_\+char}} (\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}cell)
+\item 
+void \mbox{\hyperlink{congfx_8h_a26c4b75843f8ee5690b01eca45860aa2}{set\+\_\+cell\+\_\+bg}} (\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}cell, \mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} bg)
+\item 
+void \mbox{\hyperlink{congfx_8h_a1c44ec62c49620d79367b671082786b4}{set\+\_\+cell\+\_\+fg}} (\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}cell, \mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} fg)
+\item 
+void \mbox{\hyperlink{congfx_8h_a3b50bc56f1e32c55bd51b90ec90c1f2c}{set\+\_\+cell\+\_\+char}} (\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}cell, \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}} c)
+\item 
+void \mbox{\hyperlink{congfx_8h_a7700d25ac2f0f1e5de956c46ae831a9a}{dispose\+\_\+cell}} (\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}cell)
+\item 
+int \mbox{\hyperlink{congfx_8h_ad0c35b0efc0a46e263eec89dd1c996aa}{compare\+\_\+cells}} (\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}cell1, \mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}cell2)
+\item 
+\mbox{\hyperlink{structcg__canvas__t}{cg\+\_\+canvas\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{congfx_8h_af4ce13f9c5f644c77d221b16952370c4}{make\+\_\+canvas}} (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} w, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} h)
+\item 
+\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{congfx_8h_a5d34efe257105f90dc8844bec4ec531b}{get\+\_\+cell}} (\mbox{\hyperlink{structcg__canvas__t}{cg\+\_\+canvas\+\_\+t}} \texorpdfstring{$\ast$}{*}canvas, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} x, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} y)
+\item 
+void \mbox{\hyperlink{congfx_8h_af1b64be50f67ddb6836acb9ee907f653}{dispose\+\_\+canvas}} (\mbox{\hyperlink{structcg__canvas__t}{cg\+\_\+canvas\+\_\+t}} \texorpdfstring{$\ast$}{*}canvas)
+\item 
+\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} \mbox{\hyperlink{congfx_8h_a3c276a46290c36eb28f5699388787106}{make\+\_\+vec2}} (\mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}} v1, \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}} v2)
+\item 
+\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} \mbox{\hyperlink{congfx_8h_a91df250370e2e1b044bc84f8227edaba}{make\+\_\+vec2\+\_\+from}} (\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} other)
+\item 
+\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} \mbox{\hyperlink{congfx_8h_ae91ba7509e158852be87e51e2e5e564d}{vec2\+\_\+add}} (\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} v1, \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} v2)
+\item 
+\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} \mbox{\hyperlink{congfx_8h_a242eed08addfe32b593ac462e323f115}{vec2\+\_\+mult\+\_\+scalar}} (\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} vin, \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}} x)
+\item 
+\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}} \mbox{\hyperlink{congfx_8h_a2dac804788f78998b5b03af6453646d2}{vec2\+\_\+to\+\_\+string}} (\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} v)
+\item 
+void \mbox{\hyperlink{congfx_8h_a0b6f8a3eb0c151c3f5028c9e69cb985d}{dispose\+\_\+vec2}} (\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} v)
+\item 
+\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}} \mbox{\hyperlink{congfx_8h_a68569bf28d5bd5c619ecbc80f5ead297}{make\+\_\+string}} (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} length)
+\item 
+void \mbox{\hyperlink{congfx_8h_aba0dad86aaf53c7aa0b4d9d1c8d901a6}{dispose\+\_\+string}} (\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}} s)
+\item 
+\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} \mbox{\hyperlink{congfx_8h_a1cc383f7e06da77af6033e574dd9d09d}{number\+\_\+to\+\_\+uinteger}} (\mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}} x)
+\item 
+int \mbox{\hyperlink{congfx_8h_a44f946f0acdf231b56827f14760e731a}{rand\+\_\+int}} (int from, int to)
+\item 
+void \mbox{\hyperlink{congfx_8h_a4858ea5373b4c9f3762e53b57a2bed9f}{cg\+\_\+err\+\_\+fatal}} (\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}} message, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} code)
+\item 
+void \mbox{\hyperlink{congfx_8h_a491617bd68364cdf1a71166c370dabaa}{cg\+\_\+err\+\_\+fatal\+\_\+msg}} (\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}} message)
+\item 
+\Hypertarget{congfx_8h_a4fc01d736fe50cf5b977f755b675f11d}\label{congfx_8h_a4fc01d736fe50cf5b977f755b675f11d} 
+void {\bfseries setup} ()
+\item 
+\Hypertarget{congfx_8h_a6c16bc6a5580253603339cbe1184907b}\label{congfx_8h_a6c16bc6a5580253603339cbe1184907b} 
+void {\bfseries draw} (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} dt)
+\item 
+\Hypertarget{congfx_8h_a950401a6f06cad782471c7bc9c496a27}\label{congfx_8h_a950401a6f06cad782471c7bc9c496a27} 
+void {\bfseries key\+\_\+pressed} (char c)
+\item 
+\Hypertarget{congfx_8h_a4bf087059c85711466774f26463efc66}\label{congfx_8h_a4bf087059c85711466774f26463efc66} 
+void {\bfseries no\+\_\+loop} ()
+\item 
+\Hypertarget{congfx_8h_afe461d27b9c48d5921c00d521181f12f}\label{congfx_8h_afe461d27b9c48d5921c00d521181f12f} 
+void {\bfseries loop} ()
+\item 
+\Hypertarget{congfx_8h_a2a15c1330a2f8e87eada7be1a4b796e4}\label{congfx_8h_a2a15c1330a2f8e87eada7be1a4b796e4} 
+void {\bfseries frame\+\_\+rate} (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} fps)
+\item 
+\Hypertarget{congfx_8h_a4826277cc150ddc0f4de4bd464a34909}\label{congfx_8h_a4826277cc150ddc0f4de4bd464a34909} 
+void {\bfseries cls} ()
+\item 
+\Hypertarget{congfx_8h_a0da5d9617e961b8c9430815ce7dba80f}\label{congfx_8h_a0da5d9617e961b8c9430815ce7dba80f} 
+void {\bfseries home} ()
+\item 
+\Hypertarget{congfx_8h_a7321860084c317e024810960520e9ed1}\label{congfx_8h_a7321860084c317e024810960520e9ed1} 
+void {\bfseries create\+\_\+canvas} (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} w, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} h)
+\item 
+\Hypertarget{congfx_8h_aa22cedc950690b0cf2e070d760390e66}\label{congfx_8h_aa22cedc950690b0cf2e070d760390e66} 
+void {\bfseries background} (\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} c)
+\item 
+\Hypertarget{congfx_8h_a464cf3b68eebe0c07b0bbe92a98d6fe3}\label{congfx_8h_a464cf3b68eebe0c07b0bbe92a98d6fe3} 
+void {\bfseries stroke} (\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} c)
+\item 
+\Hypertarget{congfx_8h_ad348e8604a9cdeb10f4047daf644e39b}\label{congfx_8h_ad348e8604a9cdeb10f4047daf644e39b} 
+void {\bfseries fill} (\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} c)
+\item 
+\Hypertarget{congfx_8h_a574bd4b5fd3a3f248220ba06a7ff33f5}\label{congfx_8h_a574bd4b5fd3a3f248220ba06a7ff33f5} 
+void {\bfseries set\+\_\+colour} (\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} c)
+\item 
+\Hypertarget{congfx_8h_a0760fc0e9ecc4869945ca851b695dd23}\label{congfx_8h_a0760fc0e9ecc4869945ca851b695dd23} 
+void {\bfseries show\+\_\+canvas} ()
+\item 
+\Hypertarget{congfx_8h_ad7603d4385126492cfbcc2599ffff436}\label{congfx_8h_ad7603d4385126492cfbcc2599ffff436} 
+void {\bfseries swap\+\_\+canvas} ()
+\item 
+\Hypertarget{congfx_8h_a4ada8fde0368ea6476d9a2743e786259}\label{congfx_8h_a4ada8fde0368ea6476d9a2743e786259} 
+void {\bfseries point} (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} x1, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} y1, \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}} c)
+\item 
+\Hypertarget{congfx_8h_a07a0b71e916d10286fc213e6803d84bc}\label{congfx_8h_a07a0b71e916d10286fc213e6803d84bc} 
+void {\bfseries line} (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} x1, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} y1, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} x2, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} y2)
+\item 
+\Hypertarget{congfx_8h_a1e456a419ea1b0e19404ac2ec2b262c7}\label{congfx_8h_a1e456a419ea1b0e19404ac2ec2b262c7} 
+void {\bfseries rect} (\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} x1, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} y1, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} width, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} height)
+\item 
+\Hypertarget{congfx_8h_a2410a8d95ddfdab9878e34d4d7c301c8}\label{congfx_8h_a2410a8d95ddfdab9878e34d4d7c301c8} 
+void {\bfseries text} (\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}} \texorpdfstring{$\ast$}{*}t, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} x, \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} y)
+\item 
+void \mbox{\hyperlink{congfx_8h_ad6c20707d5920689fa9b3fcc2f01bd62}{\+\_\+cg\+\_\+term\+\_\+enable\+\_\+raw\+\_\+mode}} ()
+\item 
+void \mbox{\hyperlink{congfx_8h_a171ebb294e01fa3329a5be0d41e5226d}{\+\_\+cg\+\_\+term\+\_\+disable\+\_\+raw\+\_\+mode}} ()
+\item 
+void \mbox{\hyperlink{congfx_8h_afff4c044ddce9b0c3fc002929f9d7c0b}{\+\_\+cg\+\_\+term\+\_\+reset}} ()
+\item 
+\Hypertarget{congfx_8h_aab71e1304e3dd5d4fe0e8b2c76be8f20}\label{congfx_8h_aab71e1304e3dd5d4fe0e8b2c76be8f20} 
+void {\bfseries \+\_\+cg\+\_\+term\+\_\+set\+\_\+foreground\+\_\+colour} (\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} colour)
+\item 
+\Hypertarget{congfx_8h_aa346cb87dd1070d707b636bc73561851}\label{congfx_8h_aa346cb87dd1070d707b636bc73561851} 
+void {\bfseries \+\_\+cg\+\_\+term\+\_\+set\+\_\+background\+\_\+colour} (\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} colour)
+\item 
+\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} \mbox{\hyperlink{congfx_8h_a80d63b5b060b4fa97556fe86b4235939}{\+\_\+diff\+\_\+time\+\_\+micros}} (struct timespec time1, struct timespec time2)
+\item 
+\Hypertarget{congfx_8h_a0ddf1224851353fc92bfbff6f499fa97}\label{congfx_8h_a0ddf1224851353fc92bfbff6f499fa97} 
+int {\bfseries main} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{congfx_8h_a995c9fb51beb7d97e3fc4724e08b8556}\label{congfx_8h_a995c9fb51beb7d97e3fc4724e08b8556} 
+int {\bfseries \+\_\+loop} = 1
+\item 
+\Hypertarget{congfx_8h_a003cae3fe20e851df481e460aa51056c}\label{congfx_8h_a003cae3fe20e851df481e460aa51056c} 
+\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} {\bfseries \+\_\+fps} = \+\_\+\+CG\+\_\+\+DEFAULT\+\_\+\+FPS
+\item 
+\Hypertarget{congfx_8h_a74860be7d8aa0da816c91724545e8fe5}\label{congfx_8h_a74860be7d8aa0da816c91724545e8fe5} 
+\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}} {\bfseries background\+\_\+char} = \+\_\+\+CG\+\_\+\+DEFAULT\+\_\+\+BACKGROUND\+\_\+\+CHAR
+\item 
+\Hypertarget{congfx_8h_a1ea997d31e6b9b1760d24c55cde4eb82}\label{congfx_8h_a1ea997d31e6b9b1760d24c55cde4eb82} 
+\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} {\bfseries default\+\_\+bg\+\_\+colour} = \{0, 0, 0\}
+\item 
+\Hypertarget{congfx_8h_a95bcdd7c4a79261cdad325f409a1e277}\label{congfx_8h_a95bcdd7c4a79261cdad325f409a1e277} 
+\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} {\bfseries default\+\_\+fg\+\_\+colour} = \{255, 255, 255\}
+\item 
+\Hypertarget{congfx_8h_ac8eba571e0f3d7529f563044c8931070}\label{congfx_8h_ac8eba571e0f3d7529f563044c8931070} 
+\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} {\bfseries background\+\_\+colour} = \{0, 0, 0\}
+\item 
+\Hypertarget{congfx_8h_a1ab73073a0e30f7179fe079229bcb06a}\label{congfx_8h_a1ab73073a0e30f7179fe079229bcb06a} 
+\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} {\bfseries stroke\+\_\+colour} = \{255, 255, 255\}
+\item 
+\Hypertarget{congfx_8h_a6e5769bec0d2ba6c713b653e71c9502b}\label{congfx_8h_a6e5769bec0d2ba6c713b653e71c9502b} 
+\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} {\bfseries fill\+\_\+colour} = \{255, 255, 255\}
+\item 
+\Hypertarget{congfx_8h_a1705dee0e4e822859804bec377506fb5}\label{congfx_8h_a1705dee0e4e822859804bec377506fb5} 
+struct termios {\bfseries orig\+\_\+termios}
+\item 
+\Hypertarget{congfx_8h_a02629fa624fabe8832e2b40a21041265}\label{congfx_8h_a02629fa624fabe8832e2b40a21041265} 
+int {\bfseries \+\_\+cg\+\_\+term\+\_\+orig\+\_\+flags}
+\item 
+\Hypertarget{congfx_8h_a69fad18ecfb9d2f3c91f2a343b33feff}\label{congfx_8h_a69fad18ecfb9d2f3c91f2a343b33feff} 
+\mbox{\hyperlink{structcg__canvas__t}{cg\+\_\+canvas\+\_\+t}} \texorpdfstring{$\ast$}{*} {\bfseries canvas\+\_\+previous} = NULL
+\item 
+\Hypertarget{congfx_8h_a87912191b23d298616001f3210b9d0a2}\label{congfx_8h_a87912191b23d298616001f3210b9d0a2} 
+\mbox{\hyperlink{structcg__canvas__t}{cg\+\_\+canvas\+\_\+t}} \texorpdfstring{$\ast$}{*} {\bfseries canvas\+\_\+current} = NULL
+\item 
+\Hypertarget{congfx_8h_a6743e39fe1011cdcec74cc73781ee991}\label{congfx_8h_a6743e39fe1011cdcec74cc73781ee991} 
+\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} {\bfseries width}
+\item 
+\Hypertarget{congfx_8h_ac54559565a8a06a0d6ab0f9caeb66c0f}\label{congfx_8h_ac54559565a8a06a0d6ab0f9caeb66c0f} 
+\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} {\bfseries height}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A simple graphics library for the terminal. 
+
+This library provides a simple graphics library for the terminal. 
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}\index{congfx.h@{congfx.h}!cg\_char@{cg\_char}}
+\index{cg\_char@{cg\_char}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{cg\_char}{cg\_char}}
+{\footnotesize\ttfamily \label{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206} 
+typedef wchar\+\_\+t \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}}}
+
+The default character type used in the congfx programs are wide characters (wchar\+\_\+t). \Hypertarget{congfx_8h_a1b3c9b6e4c70fcf844f5210436e8dcbb}\index{congfx.h@{congfx.h}!cg\_int@{cg\_int}}
+\index{cg\_int@{cg\_int}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{cg\_int}{cg\_int}}
+{\footnotesize\ttfamily \label{congfx_8h_a1b3c9b6e4c70fcf844f5210436e8dcbb} 
+typedef long \mbox{\hyperlink{congfx_8h_a1b3c9b6e4c70fcf844f5210436e8dcbb}{cg\+\_\+int}}}
+
+The default integer type used in the congfx programs are long integers (long). \Hypertarget{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}\index{congfx.h@{congfx.h}!cg\_number@{cg\_number}}
+\index{cg\_number@{cg\_number}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{cg\_number}{cg\_number}}
+{\footnotesize\ttfamily \label{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c} 
+typedef long double \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}}}
+
+The default number type used in the congfx programs are long double (long double). \Hypertarget{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}\index{congfx.h@{congfx.h}!cg\_string@{cg\_string}}
+\index{cg\_string@{cg\_string}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{cg\_string}{cg\_string}}
+{\footnotesize\ttfamily \label{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75} 
+typedef \mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}}}
+
+The default string type used in the congfx programs are wide strings (wchar\+\_\+t). \Hypertarget{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}\index{congfx.h@{congfx.h}!cg\_uint@{cg\_uint}}
+\index{cg\_uint@{cg\_uint}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{cg\_uint}{cg\_uint}}
+{\footnotesize\ttfamily \label{congfx_8h_a6d9d6ff7737f67375e5209f1510902da} 
+typedef unsigned long \mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}}}
+
+The default unsigned integer type used in the congfx programs are unsigned long integers (unsigned long). \Hypertarget{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}\index{congfx.h@{congfx.h}!vec2@{vec2}}
+\index{vec2@{vec2}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{vec2}{vec2}}
+{\footnotesize\ttfamily \label{congfx_8h_a9b5a233bcef5643052765478e1bc68ca} 
+typedef \mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}}
+
+The default vector type used in the congfx programs are arrays of long double (long double \texorpdfstring{$\ast$}{*}). 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{congfx_8h_a171ebb294e01fa3329a5be0d41e5226d}\index{congfx.h@{congfx.h}!\_cg\_term\_disable\_raw\_mode@{\_cg\_term\_disable\_raw\_mode}}
+\index{\_cg\_term\_disable\_raw\_mode@{\_cg\_term\_disable\_raw\_mode}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{\_cg\_term\_disable\_raw\_mode()}{\_cg\_term\_disable\_raw\_mode()}}
+{\footnotesize\ttfamily \label{congfx_8h_a171ebb294e01fa3329a5be0d41e5226d} 
+void \+\_\+cg\+\_\+term\+\_\+disable\+\_\+raw\+\_\+mode (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Disable raw mode for the terminal. see \href{https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html}{\texttt{ https\+://viewsourcecode.\+org/snaptoken/kilo/02.\+entering\+Raw\+Mode.\+html}} \Hypertarget{congfx_8h_ad6c20707d5920689fa9b3fcc2f01bd62}\index{congfx.h@{congfx.h}!\_cg\_term\_enable\_raw\_mode@{\_cg\_term\_enable\_raw\_mode}}
+\index{\_cg\_term\_enable\_raw\_mode@{\_cg\_term\_enable\_raw\_mode}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{\_cg\_term\_enable\_raw\_mode()}{\_cg\_term\_enable\_raw\_mode()}}
+{\footnotesize\ttfamily \label{congfx_8h_ad6c20707d5920689fa9b3fcc2f01bd62} 
+void \+\_\+cg\+\_\+term\+\_\+enable\+\_\+raw\+\_\+mode (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Enable raw mode for the terminal. see \href{https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html}{\texttt{ https\+://viewsourcecode.\+org/snaptoken/kilo/02.\+entering\+Raw\+Mode.\+html}} \Hypertarget{congfx_8h_afff4c044ddce9b0c3fc002929f9d7c0b}\index{congfx.h@{congfx.h}!\_cg\_term\_reset@{\_cg\_term\_reset}}
+\index{\_cg\_term\_reset@{\_cg\_term\_reset}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{\_cg\_term\_reset()}{\_cg\_term\_reset()}}
+{\footnotesize\ttfamily \label{congfx_8h_afff4c044ddce9b0c3fc002929f9d7c0b} 
+void \+\_\+cg\+\_\+term\+\_\+reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Reset the terminal to its default state. \Hypertarget{congfx_8h_a80d63b5b060b4fa97556fe86b4235939}\index{congfx.h@{congfx.h}!\_diff\_time\_micros@{\_diff\_time\_micros}}
+\index{\_diff\_time\_micros@{\_diff\_time\_micros}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{\_diff\_time\_micros()}{\_diff\_time\_micros()}}
+{\footnotesize\ttfamily \label{congfx_8h_a80d63b5b060b4fa97556fe86b4235939} 
+\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} \+\_\+diff\+\_\+time\+\_\+micros (\begin{DoxyParamCaption}\item[{struct timespec}]{time1}{, }\item[{struct timespec}]{time2}{}\end{DoxyParamCaption})}
+
+Calculate the difference in time between two timespec structures.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time1} & The first time. \\
+\hline
+{\em time2} & The second time. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The difference in time in microseconds. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a4858ea5373b4c9f3762e53b57a2bed9f}\index{congfx.h@{congfx.h}!cg\_err\_fatal@{cg\_err\_fatal}}
+\index{cg\_err\_fatal@{cg\_err\_fatal}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{cg\_err\_fatal()}{cg\_err\_fatal()}}
+{\footnotesize\ttfamily \label{congfx_8h_a4858ea5373b4c9f3762e53b57a2bed9f} 
+void cg\+\_\+err\+\_\+fatal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}}}]{message}{, }\item[{\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}}}]{code}{}\end{DoxyParamCaption})}
+
+Print an error message and exit the program.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The error message to print. \\
+\hline
+{\em code} & The error code to exit with. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{congfx_8h_a491617bd68364cdf1a71166c370dabaa}\index{congfx.h@{congfx.h}!cg\_err\_fatal\_msg@{cg\_err\_fatal\_msg}}
+\index{cg\_err\_fatal\_msg@{cg\_err\_fatal\_msg}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{cg\_err\_fatal\_msg()}{cg\_err\_fatal\_msg()}}
+{\footnotesize\ttfamily \label{congfx_8h_a491617bd68364cdf1a71166c370dabaa} 
+void cg\+\_\+err\+\_\+fatal\+\_\+msg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}}}]{message}{}\end{DoxyParamCaption})}
+
+Print an error message and exit the program with a default error code.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The error message to print. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{congfx_8h_ad0c35b0efc0a46e263eec89dd1c996aa}\index{congfx.h@{congfx.h}!compare\_cells@{compare\_cells}}
+\index{compare\_cells@{compare\_cells}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{compare\_cells()}{compare\_cells()}}
+{\footnotesize\ttfamily \label{congfx_8h_ad0c35b0efc0a46e263eec89dd1c996aa} 
+int compare\+\_\+cells (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cell1}{, }\item[{\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cell2}{}\end{DoxyParamCaption})}
+
+Compare two cells.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell1} & The first cell to compare. \\
+\hline
+{\em cell2} & The second cell to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the cells are equal, -\/1 otherwise. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_af1b64be50f67ddb6836acb9ee907f653}\index{congfx.h@{congfx.h}!dispose\_canvas@{dispose\_canvas}}
+\index{dispose\_canvas@{dispose\_canvas}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{dispose\_canvas()}{dispose\_canvas()}}
+{\footnotesize\ttfamily \label{congfx_8h_af1b64be50f67ddb6836acb9ee907f653} 
+void dispose\+\_\+canvas (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcg__canvas__t}{cg\+\_\+canvas\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{canvas}{}\end{DoxyParamCaption})}
+
+Dispose of a canvas.
+
+
+\begin{DoxyParams}{Parameters}
+{\em canvas} & The canvas to dispose of. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{congfx_8h_a7700d25ac2f0f1e5de956c46ae831a9a}\index{congfx.h@{congfx.h}!dispose\_cell@{dispose\_cell}}
+\index{dispose\_cell@{dispose\_cell}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{dispose\_cell()}{dispose\_cell()}}
+{\footnotesize\ttfamily \label{congfx_8h_a7700d25ac2f0f1e5de956c46ae831a9a} 
+void dispose\+\_\+cell (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cell}{}\end{DoxyParamCaption})}
+
+Dispose of a cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & The cell to dispose of. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{congfx_8h_aba0dad86aaf53c7aa0b4d9d1c8d901a6}\index{congfx.h@{congfx.h}!dispose\_string@{dispose\_string}}
+\index{dispose\_string@{dispose\_string}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{dispose\_string()}{dispose\_string()}}
+{\footnotesize\ttfamily \label{congfx_8h_aba0dad86aaf53c7aa0b4d9d1c8d901a6} 
+void dispose\+\_\+string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}}}]{s}{}\end{DoxyParamCaption})}
+
+Dispose of a string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The string to dispose of. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{congfx_8h_a0b6f8a3eb0c151c3f5028c9e69cb985d}\index{congfx.h@{congfx.h}!dispose\_vec2@{dispose\_vec2}}
+\index{dispose\_vec2@{dispose\_vec2}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{dispose\_vec2()}{dispose\_vec2()}}
+{\footnotesize\ttfamily \label{congfx_8h_a0b6f8a3eb0c151c3f5028c9e69cb985d} 
+void dispose\+\_\+vec2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}}]{v}{}\end{DoxyParamCaption})}
+
+Dispose of a vector.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & The vector to dispose of. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{congfx_8h_a5d34efe257105f90dc8844bec4ec531b}\index{congfx.h@{congfx.h}!get\_cell@{get\_cell}}
+\index{get\_cell@{get\_cell}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{get\_cell()}{get\_cell()}}
+{\footnotesize\ttfamily \label{congfx_8h_a5d34efe257105f90dc8844bec4ec531b} 
+\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*} get\+\_\+cell (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcg__canvas__t}{cg\+\_\+canvas\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{canvas}{, }\item[{\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}}}]{x}{, }\item[{\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}}}]{y}{}\end{DoxyParamCaption})}
+
+Get the cell at the given coordinates in the canvas.
+
+
+\begin{DoxyParams}{Parameters}
+{\em canvas} & The canvas to get the cell from. \\
+\hline
+{\em x} & The x-\/coordinate of the cell. \\
+\hline
+{\em y} & The y-\/coordinate of the cell. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cell at the given coordinates. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a8669c046e722684a354783ba25ee5efa}\index{congfx.h@{congfx.h}!get\_cell\_bg@{get\_cell\_bg}}
+\index{get\_cell\_bg@{get\_cell\_bg}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{get\_cell\_bg()}{get\_cell\_bg()}}
+{\footnotesize\ttfamily \label{congfx_8h_a8669c046e722684a354783ba25ee5efa} 
+\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} get\+\_\+cell\+\_\+bg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cell}{}\end{DoxyParamCaption})}
+
+Get the background colour of a cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & The cell to get the background colour of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The background colour of the cell. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a3223488ed255c27450a2798511f5fcc9}\index{congfx.h@{congfx.h}!get\_cell\_char@{get\_cell\_char}}
+\index{get\_cell\_char@{get\_cell\_char}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{get\_cell\_char()}{get\_cell\_char()}}
+{\footnotesize\ttfamily \label{congfx_8h_a3223488ed255c27450a2798511f5fcc9} 
+\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}} get\+\_\+cell\+\_\+char (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cell}{}\end{DoxyParamCaption})}
+
+Get the character of a cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & The cell to get the character of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The character of the cell. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a719ef41712ab054b9946c8a4b1882140}\index{congfx.h@{congfx.h}!get\_cell\_fg@{get\_cell\_fg}}
+\index{get\_cell\_fg@{get\_cell\_fg}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{get\_cell\_fg()}{get\_cell\_fg()}}
+{\footnotesize\ttfamily \label{congfx_8h_a719ef41712ab054b9946c8a4b1882140} 
+\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}} get\+\_\+cell\+\_\+fg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cell}{}\end{DoxyParamCaption})}
+
+Get the foreground colour of a cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & The cell to get the foreground colour of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The foreground colour of the cell. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_af4ce13f9c5f644c77d221b16952370c4}\index{congfx.h@{congfx.h}!make\_canvas@{make\_canvas}}
+\index{make\_canvas@{make\_canvas}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{make\_canvas()}{make\_canvas()}}
+{\footnotesize\ttfamily \label{congfx_8h_af4ce13f9c5f644c77d221b16952370c4} 
+\mbox{\hyperlink{structcg__canvas__t}{cg\+\_\+canvas\+\_\+t}} \texorpdfstring{$\ast$}{*} make\+\_\+canvas (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}}}]{w}{, }\item[{\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}}}]{h}{}\end{DoxyParamCaption})}
+
+Create a new canvas with the given width and height.
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & The width of the canvas. \\
+\hline
+{\em h} & The height of the canvas. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new canvas. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_ae325bc4b693092688b929a4aaed305ae}\index{congfx.h@{congfx.h}!make\_cell@{make\_cell}}
+\index{make\_cell@{make\_cell}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{make\_cell()}{make\_cell()}}
+{\footnotesize\ttfamily \label{congfx_8h_ae325bc4b693092688b929a4aaed305ae} 
+\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*} make\+\_\+cell (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}}}]{c}{, }\item[{\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}}}]{bg}{, }\item[{\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}}}]{fg}{}\end{DoxyParamCaption})}
+
+Create a new cell with the given character and colours.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & The character to display in the cell. \\
+\hline
+{\em bg} & The background colour of the cell. \\
+\hline
+{\em fg} & The foreground colour of the cell. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new cell. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a68569bf28d5bd5c619ecbc80f5ead297}\index{congfx.h@{congfx.h}!make\_string@{make\_string}}
+\index{make\_string@{make\_string}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{make\_string()}{make\_string()}}
+{\footnotesize\ttfamily \label{congfx_8h_a68569bf28d5bd5c619ecbc80f5ead297} 
+\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}} make\+\_\+string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}}}]{length}{}\end{DoxyParamCaption})}
+
+Create a new string of a given length.
+
+
+\begin{DoxyParams}{Parameters}
+{\em length} & The length of the string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new string. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a3c276a46290c36eb28f5699388787106}\index{congfx.h@{congfx.h}!make\_vec2@{make\_vec2}}
+\index{make\_vec2@{make\_vec2}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{make\_vec2()}{make\_vec2()}}
+{\footnotesize\ttfamily \label{congfx_8h_a3c276a46290c36eb28f5699388787106} 
+\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} make\+\_\+vec2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}}}]{v1}{, }\item[{\mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}}}]{v2}{}\end{DoxyParamCaption})}
+
+Create a new vector of 2 elements.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & The first element of the vector. \\
+\hline
+{\em v2} & The second element of the vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new vector. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a91df250370e2e1b044bc84f8227edaba}\index{congfx.h@{congfx.h}!make\_vec2\_from@{make\_vec2\_from}}
+\index{make\_vec2\_from@{make\_vec2\_from}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{make\_vec2\_from()}{make\_vec2\_from()}}
+{\footnotesize\ttfamily \label{congfx_8h_a91df250370e2e1b044bc84f8227edaba} 
+\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} make\+\_\+vec2\+\_\+from (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}}]{other}{}\end{DoxyParamCaption})}
+
+Create a new vector of 2 elements from another vector.
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The vector to copy from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new vector. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a1cc383f7e06da77af6033e574dd9d09d}\index{congfx.h@{congfx.h}!number\_to\_uinteger@{number\_to\_uinteger}}
+\index{number\_to\_uinteger@{number\_to\_uinteger}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{number\_to\_uinteger()}{number\_to\_uinteger()}}
+{\footnotesize\ttfamily \label{congfx_8h_a1cc383f7e06da77af6033e574dd9d09d} 
+\mbox{\hyperlink{congfx_8h_a6d9d6ff7737f67375e5209f1510902da}{cg\+\_\+uint}} number\+\_\+to\+\_\+uinteger (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}}}]{x}{}\end{DoxyParamCaption})}
+
+Convert a number to an unsigned integer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The number to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The unsigned integer value of the number. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a44f946f0acdf231b56827f14760e731a}\index{congfx.h@{congfx.h}!rand\_int@{rand\_int}}
+\index{rand\_int@{rand\_int}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{rand\_int()}{rand\_int()}}
+{\footnotesize\ttfamily \label{congfx_8h_a44f946f0acdf231b56827f14760e731a} 
+int rand\+\_\+int (\begin{DoxyParamCaption}\item[{int}]{from}{, }\item[{int}]{to}{}\end{DoxyParamCaption})}
+
+Generate a random integer between two values.
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & The lower bound of the random integer. \\
+\hline
+{\em to} & The upper bound of the random integer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The random integer. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a26c4b75843f8ee5690b01eca45860aa2}\index{congfx.h@{congfx.h}!set\_cell\_bg@{set\_cell\_bg}}
+\index{set\_cell\_bg@{set\_cell\_bg}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{set\_cell\_bg()}{set\_cell\_bg()}}
+{\footnotesize\ttfamily \label{congfx_8h_a26c4b75843f8ee5690b01eca45860aa2} 
+void set\+\_\+cell\+\_\+bg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cell}{, }\item[{\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}}}]{bg}{}\end{DoxyParamCaption})}
+
+Set the background colour of a cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & The cell to set the background colour of. \\
+\hline
+{\em bg} & The background colour to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{congfx_8h_a3b50bc56f1e32c55bd51b90ec90c1f2c}\index{congfx.h@{congfx.h}!set\_cell\_char@{set\_cell\_char}}
+\index{set\_cell\_char@{set\_cell\_char}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{set\_cell\_char()}{set\_cell\_char()}}
+{\footnotesize\ttfamily \label{congfx_8h_a3b50bc56f1e32c55bd51b90ec90c1f2c} 
+void set\+\_\+cell\+\_\+char (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cell}{, }\item[{\mbox{\hyperlink{congfx_8h_afcaeeb559bf6c6f4abe40c50f8832206}{cg\+\_\+char}}}]{c}{}\end{DoxyParamCaption})}
+
+Set the character of a cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & The cell to set the character of. \\
+\hline
+{\em c} & The character to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{congfx_8h_a1c44ec62c49620d79367b671082786b4}\index{congfx.h@{congfx.h}!set\_cell\_fg@{set\_cell\_fg}}
+\index{set\_cell\_fg@{set\_cell\_fg}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{set\_cell\_fg()}{set\_cell\_fg()}}
+{\footnotesize\ttfamily \label{congfx_8h_a1c44ec62c49620d79367b671082786b4} 
+void set\+\_\+cell\+\_\+fg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcg__cell__t}{cg\+\_\+cell\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cell}{, }\item[{\mbox{\hyperlink{structcg__rgb__t}{cg\+\_\+rgb\+\_\+t}}}]{fg}{}\end{DoxyParamCaption})}
+
+Set the foreground colour of a cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & The cell to set the foreground colour of. \\
+\hline
+{\em fg} & The foreground colour to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{congfx_8h_ae91ba7509e158852be87e51e2e5e564d}\index{congfx.h@{congfx.h}!vec2\_add@{vec2\_add}}
+\index{vec2\_add@{vec2\_add}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_add()}{vec2\_add()}}
+{\footnotesize\ttfamily \label{congfx_8h_ae91ba7509e158852be87e51e2e5e564d} 
+\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} vec2\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}}]{v1}{, }\item[{\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}}]{v2}{}\end{DoxyParamCaption})}
+
+Add two vectors.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & The first vector. \\
+\hline
+{\em v2} & The second vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The sum of the two vectors. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a242eed08addfe32b593ac462e323f115}\index{congfx.h@{congfx.h}!vec2\_mult\_scalar@{vec2\_mult\_scalar}}
+\index{vec2\_mult\_scalar@{vec2\_mult\_scalar}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_mult\_scalar()}{vec2\_mult\_scalar()}}
+{\footnotesize\ttfamily \label{congfx_8h_a242eed08addfe32b593ac462e323f115} 
+\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}} vec2\+\_\+mult\+\_\+scalar (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}}]{vin}{, }\item[{\mbox{\hyperlink{congfx_8h_ac186fd5fcc61f0de3c1e597a08c0ec2c}{cg\+\_\+number}}}]{x}{}\end{DoxyParamCaption})}
+
+Multiply a vector by a scalar.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vin} & The vector to multiply. \\
+\hline
+{\em x} & The scalar to multiply by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The product of the vector and the scalar. 
+\end{DoxyReturn}
+\Hypertarget{congfx_8h_a2dac804788f78998b5b03af6453646d2}\index{congfx.h@{congfx.h}!vec2\_to\_string@{vec2\_to\_string}}
+\index{vec2\_to\_string@{vec2\_to\_string}!congfx.h@{congfx.h}}
+\doxysubsubsection{\texorpdfstring{vec2\_to\_string()}{vec2\_to\_string()}}
+{\footnotesize\ttfamily \label{congfx_8h_a2dac804788f78998b5b03af6453646d2} 
+\mbox{\hyperlink{congfx_8h_a34b1263869cfbcec892dc3890c2a1e75}{cg\+\_\+string}} vec2\+\_\+to\+\_\+string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{congfx_8h_a9b5a233bcef5643052765478e1bc68ca}{vec2}}}]{v}{}\end{DoxyParamCaption})}
+
+Convert a vector to a string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & The vector to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string representation of the vector. 
+\end{DoxyReturn}
