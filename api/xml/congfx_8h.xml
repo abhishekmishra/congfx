@@ -4244,7 +4244,7 @@
 <codeline lineno="2039"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>sleep<sp/>for<sp/>the<sp/>difference</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2040"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>printf(&quot;sleep<sp/>for<sp/>-&gt;<sp/>[%ld]nanos\n&quot;,<sp/>dt_diff.tv_nsec);</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2041"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CG_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2042"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_cg_win_nanosleep(&amp;dt_diff,<sp/>&amp;dt_diff_rem);</highlight></codeline>
+<codeline lineno="2042"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>_cg_win_nanosleep(&amp;dt_diff,<sp/>&amp;dt_diff_rem);</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2043"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CG_PLATFORM_POSIX</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2044"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nanosleep(&amp;dt_diff,<sp/>&amp;dt_diff_rem);</highlight></codeline>
 <codeline lineno="2045"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
