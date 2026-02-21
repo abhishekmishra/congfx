@@ -1289,10 +1289,12 @@ int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer)
     }
 
     // use simple fwrite instead of expensive puts and flush
-    // fwrite(buffer->buffer, 1, buffer->length, stdout);
+#if CG_PLATFORM_WINDOWS
+    fwrite(buffer->buffer, 1, buffer->length, stdout);
+#elif CG_PLATFORM_POSIX
     fputs(buffer->buffer, stdout);
     fflush(stdout);
-
+#endif
     buffer->length = 0;
     buffer->buffer[0] = '\0';
     return 0;
@@ -1689,6 +1691,15 @@ void cg_show_canvas()
                     continue;
                 }
 
+#endif
+
+#if CG_PLATFORM_WINDOWS
+                cg_cell_t *previous_cell = cg_get_cell(canvas_previous, j, i);
+                if (cg_compare_cells(current_cell, previous_cell) == 0)
+                {
+                    cursor_valid = false;
+                    continue;
+                }
 #endif
 
                 // printf("Cells not equal at [%lu, %lu]\n", j, i);
