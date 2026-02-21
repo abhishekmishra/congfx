@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="185" column="13" bodyfile="congfx.h" bodystart="185" bodyend="-1"/>
+        <location file="congfx.h" line="207" column="13" bodyfile="congfx.h" bodystart="207" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="struct__cg__term__command__buffer__t_1a72cbe076d2c2a7a6d66048bdf3dd55cd" prot="public" static="no" mutable="no">
         <type>size_t</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="186" column="12" bodyfile="congfx.h" bodystart="186" bodyend="-1"/>
+        <location file="congfx.h" line="208" column="12" bodyfile="congfx.h" bodystart="208" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="struct__cg__term__command__buffer__t_1ac66e012d8f701f61cfbe46cba19435ed" prot="public" static="no" mutable="no">
         <type>size_t</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="187" column="12" bodyfile="congfx.h" bodystart="187" bodyend="-1"/>
+        <location file="congfx.h" line="209" column="12" bodyfile="congfx.h" bodystart="209" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -52,7 +52,7 @@
     <detaileddescription>
 <para>A structure to hold a command buffer for the terminal. </para>
     </detaileddescription>
-    <location file="congfx.h" line="183" column="1" bodyfile="congfx.h" bodystart="184" bodyend="188"/>
+    <location file="congfx.h" line="205" column="1" bodyfile="congfx.h" bodystart="206" bodyend="210"/>
     <listofallmembers>
       <member refid="struct__cg__term__command__buffer__t_1a7a4c7e567179836f83ea0bda1bf53f25" prot="public" virt="non-virtual"><scope>_cg_term_command_buffer_t</scope><name>buffer</name></member>
       <member refid="struct__cg__term__command__buffer__t_1a72cbe076d2c2a7a6d66048bdf3dd55cd" prot="public" virt="non-virtual"><scope>_cg_term_command_buffer_t</scope><name>length</name></member>

@@ -108,19 +108,15 @@ $(document).ready(function(){initNavTree('congfx_8h.html',''); initResizable(); 
 
 <p>A simple graphics library for the terminal.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;termios.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;locale.h&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
-<code>#include &lt;fcntl.h&gt;</code><br />
 <code>#include &lt;errno.h&gt;</code><br />
 <code>#include &lt;ctype.h&gt;</code><br />
-<code>#include &lt;sys/ioctl.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
 </div>
 <p><a href="congfx_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -141,6 +137,10 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:aab3c2e26ef4acbd67a4dbc5883074799" id="r_aab3c2e26ef4acbd67a4dbc5883074799"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#aab3c2e26ef4acbd67a4dbc5883074799">CG_PLATFORM_WINDOWS</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:aab3c2e26ef4acbd67a4dbc5883074799"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f719d05b11aeeb95439916a9421aa43" id="r_a7f719d05b11aeeb95439916a9421aa43"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a7f719d05b11aeeb95439916a9421aa43">CG_PLATFORM_POSIX</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a7f719d05b11aeeb95439916a9421aa43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5e8bd4e87683a87ba4fd4fa405af824" id="r_ad5e8bd4e87683a87ba4fd4fa405af824"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#ad5e8bd4e87683a87ba4fd4fa405af824">_CG_DEFAULT_FPS</a>&#160;&#160;&#160;30</td></tr>
 <tr class="separator:ad5e8bd4e87683a87ba4fd4fa405af824"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70e585039d26b88e84a5e1cac1db1d00" id="r_a70e585039d26b88e84a5e1cac1db1d00"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a70e585039d26b88e84a5e1cac1db1d00">_CG_DEFAULT_BACKGROUND_CHAR</a>&#160;&#160;&#160;' '</td></tr>
@@ -503,6 +503,34 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>The default delta time function returns the delta time in milliseconds. </p>
+
+</div>
+</div>
+<a id="a7f719d05b11aeeb95439916a9421aa43" name="a7f719d05b11aeeb95439916a9421aa43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f719d05b11aeeb95439916a9421aa43">&#9670;&#160;</a></span>CG_PLATFORM_POSIX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CG_PLATFORM_POSIX&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aab3c2e26ef4acbd67a4dbc5883074799" name="aab3c2e26ef4acbd67a4dbc5883074799"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab3c2e26ef4acbd67a4dbc5883074799">&#9670;&#160;</a></span>CG_PLATFORM_WINDOWS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CG_PLATFORM_WINDOWS&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

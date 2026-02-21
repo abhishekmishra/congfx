@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="167" column="13" bodyfile="congfx.h" bodystart="167" bodyend="-1"/>
+        <location file="congfx.h" line="189" column="13" bodyfile="congfx.h" bodystart="189" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structcg__canvas__t_1a852e709778968cd042330f602f5eca90" prot="public" static="no" mutable="no">
         <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="168" column="13" bodyfile="congfx.h" bodystart="168" bodyend="-1"/>
+        <location file="congfx.h" line="190" column="13" bodyfile="congfx.h" bodystart="190" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structcg__canvas__t_1a17d27a4499c546576a0e76a6aaeef81e" prot="public" static="no" mutable="no">
         <type><ref refid="structcg__cell__t" kindref="compound">cg_cell_t</ref> *</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="169" column="15" bodyfile="congfx.h" bodystart="169" bodyend="-1"/>
+        <location file="congfx.h" line="191" column="15" bodyfile="congfx.h" bodystart="191" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -73,7 +73,7 @@
         <link refid="structcg__rgb__t"/>
       </node>
     </collaborationgraph>
-    <location file="congfx.h" line="165" column="1" bodyfile="congfx.h" bodystart="166" bodyend="170"/>
+    <location file="congfx.h" line="187" column="1" bodyfile="congfx.h" bodystart="188" bodyend="192"/>
     <listofallmembers>
       <member refid="structcg__canvas__t_1a17d27a4499c546576a0e76a6aaeef81e" prot="public" virt="non-virtual"><scope>cg_canvas_t</scope><name>cells</name></member>
       <member refid="structcg__canvas__t_1a852e709778968cd042330f602f5eca90" prot="public" virt="non-virtual"><scope>cg_canvas_t</scope><name>height</name></member>

@@ -34,6 +34,8 @@
     <member refid="structcg__rgb__t_1af25eedf9f818e37116790d5706a16d58" kind="variable"><name>b</name></member>
   </compound>
   <compound refid="congfx_8h" kind="file"><name>congfx.h</name>
+    <member refid="congfx_8h_1aab3c2e26ef4acbd67a4dbc5883074799" kind="define"><name>CG_PLATFORM_WINDOWS</name></member>
+    <member refid="congfx_8h_1a7f719d05b11aeeb95439916a9421aa43" kind="define"><name>CG_PLATFORM_POSIX</name></member>
     <member refid="congfx_8h_1ad5e8bd4e87683a87ba4fd4fa405af824" kind="define"><name>_CG_DEFAULT_FPS</name></member>
     <member refid="congfx_8h_1a70e585039d26b88e84a5e1cac1db1d00" kind="define"><name>_CG_DEFAULT_BACKGROUND_CHAR</name></member>
     <member refid="congfx_8h_1ada5c282ee4dc3f71d374241eba71427c" kind="define"><name>_CG_CALLOC</name></member>
