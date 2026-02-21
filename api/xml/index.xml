@@ -53,7 +53,7 @@
     <member refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbda87ece06ce7937ab2e9566de84caf4a8f" kind="enumvalue"><name>CG_KEY_DOWN</name></member>
     <member refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbda0b6741b960d20bd538d85eb0a8efc4f3" kind="enumvalue"><name>CG_KEY_RIGHT</name></member>
     <member refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbda3b4e637c195369881a6e886809344056" kind="enumvalue"><name>CG_KEY_LEFT</name></member>
-    <member refid="congfx_8h_1afcaeeb559bf6c6f4abe40c50f8832206" kind="typedef"><name>cg_char</name></member>
+    <member refid="congfx_8h_1a294b3b3a8e11a477f60c8d1007d212ce" kind="typedef"><name>cg_char</name></member>
     <member refid="congfx_8h_1a34b1263869cfbcec892dc3890c2a1e75" kind="typedef"><name>cg_string</name></member>
     <member refid="congfx_8h_1a1b3c9b6e4c70fcf844f5210436e8dcbb" kind="typedef"><name>cg_int</name></member>
     <member refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kind="typedef"><name>cg_uint</name></member>

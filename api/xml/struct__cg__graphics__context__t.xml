@@ -5,7 +5,7 @@
     <includes refid="congfx_8h" local="no">congfx.h</includes>
     <sectiondef kind="public-attrib">
       <memberdef kind="variable" id="struct__cg__graphics__context__t_1a5e9420c320b92b3c7597e60369b54f3a" prot="public" static="no" mutable="no">
-        <type><ref refid="congfx_8h_1afcaeeb559bf6c6f4abe40c50f8832206" kindref="member">cg_char</ref></type>
+        <type><ref refid="congfx_8h_1a294b3b3a8e11a477f60c8d1007d212ce" kindref="member">cg_char</ref></type>
         <definition>cg_char _cg_graphics_context_t::read_buf[20]</definition>
         <argsstring>[20]</argsstring>
         <name>read_buf</name>

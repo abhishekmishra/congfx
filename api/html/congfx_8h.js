@@ -15,7 +15,7 @@ var congfx_8h =
     [ "_CG_TERM_COMMAND_BUFFER_START_SIZE", "congfx_8h.html#ac918ab95a46b5b799bfcb9bde06e9fd5", null ],
     [ "_CG_TERM_KEY_ESCAPE", "congfx_8h.html#a440eac80cc1b89a7a5a97bb375f3edab", null ],
     [ "cg_get_deltatime", "congfx_8h.html#a92c647e3e45b2ade6968c600079c644d", null ],
-    [ "cg_char", "congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206", null ],
+    [ "cg_char", "congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce", null ],
     [ "cg_int", "congfx_8h.html#a1b3c9b6e4c70fcf844f5210436e8dcbb", null ],
     [ "cg_number", "congfx_8h.html#ac186fd5fcc61f0de3c1e597a08c0ec2c", null ],
     [ "cg_string", "congfx_8h.html#a34b1263869cfbcec892dc3890c2a1e75", null ],

@@ -8,7 +8,7 @@ var searchData=
   ['cg_5fbegin_5fdraw_5',['cg_begin_draw',['../congfx_8h.html#a677ad02c40ccbfbb1e18be09d499f887',1,'congfx.h']]],
   ['cg_5fcanvas_5ft_6',['cg_canvas_t',['../structcg__canvas__t.html',1,'']]],
   ['cg_5fcell_5ft_7',['cg_cell_t',['../structcg__cell__t.html',1,'']]],
-  ['cg_5fchar_8',['cg_char',['../congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206',1,'congfx.h']]],
+  ['cg_5fchar_8',['cg_char',['../congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce',1,'congfx.h']]],
   ['cg_5fclamp_9',['cg_clamp',['../congfx_8h.html#a7bec0ad05cc5bb2eef0abb079223c1f2',1,'congfx.h']]],
   ['cg_5fclear_5fcanvas_10',['cg_clear_canvas',['../congfx_8h.html#a172468dd9f7ca5deae42714200baccdc',1,'congfx.h']]],
   ['cg_5fcls_11',['cg_cls',['../congfx_8h.html#ae0df00abe0adf0554f6ab446d5207aee',1,'congfx.h']]],

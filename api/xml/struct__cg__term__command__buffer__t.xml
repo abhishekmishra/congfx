@@ -5,7 +5,7 @@
     <includes refid="congfx_8h" local="no">congfx.h</includes>
     <sectiondef kind="public-attrib">
       <memberdef kind="variable" id="struct__cg__term__command__buffer__t_1a7a4c7e567179836f83ea0bda1bf53f25" prot="public" static="no" mutable="no">
-        <type><ref refid="congfx_8h_1afcaeeb559bf6c6f4abe40c50f8832206" kindref="member">cg_char</ref> *</type>
+        <type><ref refid="congfx_8h_1a294b3b3a8e11a477f60c8d1007d212ce" kindref="member">cg_char</ref> *</type>
         <definition>cg_char* _cg_term_command_buffer_t::buffer</definition>
         <argsstring></argsstring>
         <name>buffer</name>

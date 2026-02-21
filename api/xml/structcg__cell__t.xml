@@ -5,7 +5,7 @@
     <includes refid="congfx_8h" local="no">congfx.h</includes>
     <sectiondef kind="public-attrib">
       <memberdef kind="variable" id="structcg__cell__t_1a42e5debabea9af0e1b76c66d66b0dcab" prot="public" static="no" mutable="no">
-        <type><ref refid="congfx_8h_1afcaeeb559bf6c6f4abe40c50f8832206" kindref="member">cg_char</ref></type>
+        <type><ref refid="congfx_8h_1a294b3b3a8e11a477f60c8d1007d212ce" kindref="member">cg_char</ref></type>
         <definition>cg_char cg_cell_t::c</definition>
         <argsstring></argsstring>
         <name>c</name>

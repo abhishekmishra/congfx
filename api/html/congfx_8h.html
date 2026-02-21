@@ -111,9 +111,9 @@ $(document).ready(function(){initNavTree('congfx_8h.html',''); initResizable(); 
 <div class="textblock"><code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
-<code>#include &lt;wchar.h&gt;</code><br />
-<code>#include &lt;wctype.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;locale.h&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
 <code>#include &lt;fcntl.h&gt;</code><br />
@@ -143,7 +143,7 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:ad5e8bd4e87683a87ba4fd4fa405af824" id="r_ad5e8bd4e87683a87ba4fd4fa405af824"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#ad5e8bd4e87683a87ba4fd4fa405af824">_CG_DEFAULT_FPS</a>&#160;&#160;&#160;30</td></tr>
 <tr class="separator:ad5e8bd4e87683a87ba4fd4fa405af824"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70e585039d26b88e84a5e1cac1db1d00" id="r_a70e585039d26b88e84a5e1cac1db1d00"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a70e585039d26b88e84a5e1cac1db1d00">_CG_DEFAULT_BACKGROUND_CHAR</a>&#160;&#160;&#160;L' '</td></tr>
+<tr class="memitem:a70e585039d26b88e84a5e1cac1db1d00" id="r_a70e585039d26b88e84a5e1cac1db1d00"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a70e585039d26b88e84a5e1cac1db1d00">_CG_DEFAULT_BACKGROUND_CHAR</a>&#160;&#160;&#160;' '</td></tr>
 <tr class="separator:a70e585039d26b88e84a5e1cac1db1d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada5c282ee4dc3f71d374241eba71427c" id="r_ada5c282ee4dc3f71d374241eba71427c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#ada5c282ee4dc3f71d374241eba71427c">_CG_CALLOC</a>&#160;&#160;&#160;calloc</td></tr>
 <tr class="separator:ada5c282ee4dc3f71d374241eba71427c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,9 +162,9 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:afcaeeb559bf6c6f4abe40c50f8832206" id="r_afcaeeb559bf6c6f4abe40c50f8832206"><td class="memItemLeft" align="right" valign="top">typedef wchar_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a></td></tr>
-<tr class="separator:afcaeeb559bf6c6f4abe40c50f8832206"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34b1263869cfbcec892dc3890c2a1e75" id="r_a34b1263869cfbcec892dc3890c2a1e75"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a34b1263869cfbcec892dc3890c2a1e75">cg_string</a></td></tr>
+<tr class="memitem:a294b3b3a8e11a477f60c8d1007d212ce" id="r_a294b3b3a8e11a477f60c8d1007d212ce"><td class="memItemLeft" align="right" valign="top">typedef char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a></td></tr>
+<tr class="separator:a294b3b3a8e11a477f60c8d1007d212ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34b1263869cfbcec892dc3890c2a1e75" id="r_a34b1263869cfbcec892dc3890c2a1e75"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a34b1263869cfbcec892dc3890c2a1e75">cg_string</a></td></tr>
 <tr class="separator:a34b1263869cfbcec892dc3890c2a1e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b3c9b6e4c70fcf844f5210436e8dcbb" id="r_a1b3c9b6e4c70fcf844f5210436e8dcbb"><td class="memItemLeft" align="right" valign="top">typedef long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a1b3c9b6e4c70fcf844f5210436e8dcbb">cg_int</a></td></tr>
 <tr class="separator:a1b3c9b6e4c70fcf844f5210436e8dcbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,19 +197,19 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a11c01857c5f8e50265b9c33394296fbc" id="r_a11c01857c5f8e50265b9c33394296fbc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a11c01857c5f8e50265b9c33394296fbc">cg_compare_colour</a> (<a class="el" href="structcg__rgb__t.html">cg_rgb_t</a> colour1, <a class="el" href="structcg__rgb__t.html">cg_rgb_t</a> colour2)</td></tr>
 <tr class="separator:a11c01857c5f8e50265b9c33394296fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48c97ace8a51bb01a5330a3440beec5b" id="r_a48c97ace8a51bb01a5330a3440beec5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcg__cell__t.html">cg_cell_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a48c97ace8a51bb01a5330a3440beec5b">cg_make_cell</a> (<a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a> c, <a class="el" href="structcg__rgb__t.html">cg_rgb_t</a> bg, <a class="el" href="structcg__rgb__t.html">cg_rgb_t</a> fg)</td></tr>
+<tr class="memitem:a48c97ace8a51bb01a5330a3440beec5b" id="r_a48c97ace8a51bb01a5330a3440beec5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcg__cell__t.html">cg_cell_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a48c97ace8a51bb01a5330a3440beec5b">cg_make_cell</a> (<a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a> c, <a class="el" href="structcg__rgb__t.html">cg_rgb_t</a> bg, <a class="el" href="structcg__rgb__t.html">cg_rgb_t</a> fg)</td></tr>
 <tr class="separator:a48c97ace8a51bb01a5330a3440beec5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a462ede9ca05eda4eca9c83b2dcadb950" id="r_a462ede9ca05eda4eca9c83b2dcadb950"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcg__rgb__t.html">cg_rgb_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a462ede9ca05eda4eca9c83b2dcadb950">cg_get_cell_bg</a> (<a class="el" href="structcg__cell__t.html">cg_cell_t</a> *cell)</td></tr>
 <tr class="separator:a462ede9ca05eda4eca9c83b2dcadb950"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d124eba1085f2e8595241eef924e788" id="r_a2d124eba1085f2e8595241eef924e788"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcg__rgb__t.html">cg_rgb_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a2d124eba1085f2e8595241eef924e788">cg_get_cell_fg</a> (<a class="el" href="structcg__cell__t.html">cg_cell_t</a> *cell)</td></tr>
 <tr class="separator:a2d124eba1085f2e8595241eef924e788"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43935d330aeedf96e37fa1d9f12d3e95" id="r_a43935d330aeedf96e37fa1d9f12d3e95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a43935d330aeedf96e37fa1d9f12d3e95">cg_get_cell_char</a> (<a class="el" href="structcg__cell__t.html">cg_cell_t</a> *cell)</td></tr>
+<tr class="memitem:a43935d330aeedf96e37fa1d9f12d3e95" id="r_a43935d330aeedf96e37fa1d9f12d3e95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a43935d330aeedf96e37fa1d9f12d3e95">cg_get_cell_char</a> (<a class="el" href="structcg__cell__t.html">cg_cell_t</a> *cell)</td></tr>
 <tr class="separator:a43935d330aeedf96e37fa1d9f12d3e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3671ab9d7ba07f567f3979a10074be1f" id="r_a3671ab9d7ba07f567f3979a10074be1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a3671ab9d7ba07f567f3979a10074be1f">cg_set_cell_bg</a> (<a class="el" href="structcg__cell__t.html">cg_cell_t</a> *cell, <a class="el" href="structcg__rgb__t.html">cg_rgb_t</a> bg)</td></tr>
 <tr class="separator:a3671ab9d7ba07f567f3979a10074be1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af39830b7d9ff3ac5f96f415997c45289" id="r_af39830b7d9ff3ac5f96f415997c45289"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#af39830b7d9ff3ac5f96f415997c45289">cg_set_cell_fg</a> (<a class="el" href="structcg__cell__t.html">cg_cell_t</a> *cell, <a class="el" href="structcg__rgb__t.html">cg_rgb_t</a> fg)</td></tr>
 <tr class="separator:af39830b7d9ff3ac5f96f415997c45289"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f3137e964756efaf1650f3a9877435c" id="r_a8f3137e964756efaf1650f3a9877435c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a8f3137e964756efaf1650f3a9877435c">cg_set_cell_char</a> (<a class="el" href="structcg__cell__t.html">cg_cell_t</a> *cell, <a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a> c)</td></tr>
+<tr class="memitem:a8f3137e964756efaf1650f3a9877435c" id="r_a8f3137e964756efaf1650f3a9877435c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a8f3137e964756efaf1650f3a9877435c">cg_set_cell_char</a> (<a class="el" href="structcg__cell__t.html">cg_cell_t</a> *cell, <a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a> c)</td></tr>
 <tr class="separator:a8f3137e964756efaf1650f3a9877435c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a425890f52c57daef15433596301d25d3" id="r_a425890f52c57daef15433596301d25d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a425890f52c57daef15433596301d25d3">cg_dispose_cell</a> (<a class="el" href="structcg__cell__t.html">cg_cell_t</a> *cell)</td></tr>
 <tr class="separator:a425890f52c57daef15433596301d25d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -291,13 +291,13 @@ Functions</h2></td></tr>
 <tr class="separator:acfb36c7099306701bccec1eac4d61245"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a172468dd9f7ca5deae42714200baccdc" id="r_a172468dd9f7ca5deae42714200baccdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a172468dd9f7ca5deae42714200baccdc">cg_clear_canvas</a> ()</td></tr>
 <tr class="separator:a172468dd9f7ca5deae42714200baccdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8dab2fda7e2b7ad26db6fcbccc8f692" id="r_ae8dab2fda7e2b7ad26db6fcbccc8f692"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#ae8dab2fda7e2b7ad26db6fcbccc8f692">cg_point</a> (<a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> x1, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> y1, <a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a> c)</td></tr>
+<tr class="memitem:ae8dab2fda7e2b7ad26db6fcbccc8f692" id="r_ae8dab2fda7e2b7ad26db6fcbccc8f692"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#ae8dab2fda7e2b7ad26db6fcbccc8f692">cg_point</a> (<a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> x1, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> y1, <a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a> c)</td></tr>
 <tr class="separator:ae8dab2fda7e2b7ad26db6fcbccc8f692"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e35ac0f2b751b21cafdf1648374c535" id="r_a7e35ac0f2b751b21cafdf1648374c535"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a7e35ac0f2b751b21cafdf1648374c535">cg_line</a> (<a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> x1, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> y1, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> x2, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> y2)</td></tr>
 <tr class="separator:a7e35ac0f2b751b21cafdf1648374c535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83ad7a726f176c714e1c755164abd0d0" id="r_a83ad7a726f176c714e1c755164abd0d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a83ad7a726f176c714e1c755164abd0d0">cg_rect</a> (<a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> x1, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> y1, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> <a class="el" href="congfx_8h.html#a6743e39fe1011cdcec74cc73781ee991">width</a>, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> <a class="el" href="congfx_8h.html#ac54559565a8a06a0d6ab0f9caeb66c0f">height</a>)</td></tr>
 <tr class="separator:a83ad7a726f176c714e1c755164abd0d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81f7c9ba9fd0bb8a883721e5d48bcf39" id="r_a81f7c9ba9fd0bb8a883721e5d48bcf39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a81f7c9ba9fd0bb8a883721e5d48bcf39">cg_text</a> (<a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a> *t, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> x, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> y)</td></tr>
+<tr class="memitem:a81f7c9ba9fd0bb8a883721e5d48bcf39" id="r_a81f7c9ba9fd0bb8a883721e5d48bcf39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a81f7c9ba9fd0bb8a883721e5d48bcf39">cg_text</a> (<a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a> *t, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> x, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> y)</td></tr>
 <tr class="separator:a81f7c9ba9fd0bb8a883721e5d48bcf39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d63e1f3bd2fd2c66a8a0d62ba94a32b" id="r_a6d63e1f3bd2fd2c66a8a0d62ba94a32b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcg__keyboard__input__t.html">cg_keyboard_input_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a6d63e1f3bd2fd2c66a8a0d62ba94a32b">cg_get_key_pressed</a> ()</td></tr>
 <tr class="separator:a6d63e1f3bd2fd2c66a8a0d62ba94a32b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -325,7 +325,7 @@ Functions</h2></td></tr>
 <tr class="separator:aa346cb87dd1070d707b636bc73561851"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaae159b2c79682ccfbf9da9f20c22d4" id="r_adaae159b2c79682ccfbf9da9f20c22d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#adaae159b2c79682ccfbf9da9f20c22d4">_cg_term_move_to</a> (<a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> x, <a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> y)</td></tr>
 <tr class="separator:adaae159b2c79682ccfbf9da9f20c22d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d4f528ab875bbf84bf7bd9a4b81ce88" id="r_a0d4f528ab875bbf84bf7bd9a4b81ce88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a0d4f528ab875bbf84bf7bd9a4b81ce88">_cg_term_write_char</a> (<a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a> c)</td></tr>
+<tr class="memitem:a0d4f528ab875bbf84bf7bd9a4b81ce88" id="r_a0d4f528ab875bbf84bf7bd9a4b81ce88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a0d4f528ab875bbf84bf7bd9a4b81ce88">_cg_term_write_char</a> (<a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a> c)</td></tr>
 <tr class="separator:a0d4f528ab875bbf84bf7bd9a4b81ce88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ca8e4035cbc3073a07086be224e0389" id="r_a4ca8e4035cbc3073a07086be224e0389"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a4ca8e4035cbc3073a07086be224e0389">_cg_hide_cursor</a> ()</td></tr>
 <tr class="separator:a4ca8e4035cbc3073a07086be224e0389"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -352,7 +352,7 @@ Variables</h2></td></tr>
 <tr class="separator:a995c9fb51beb7d97e3fc4724e08b8556"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a003cae3fe20e851df481e460aa51056c" id="r_a003cae3fe20e851df481e460aa51056c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a003cae3fe20e851df481e460aa51056c">_fps</a> = <a class="el" href="congfx_8h.html#ad5e8bd4e87683a87ba4fd4fa405af824">_CG_DEFAULT_FPS</a></td></tr>
 <tr class="separator:a003cae3fe20e851df481e460aa51056c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74860be7d8aa0da816c91724545e8fe5" id="r_a74860be7d8aa0da816c91724545e8fe5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a74860be7d8aa0da816c91724545e8fe5">background_char</a> = <a class="el" href="congfx_8h.html#a70e585039d26b88e84a5e1cac1db1d00">_CG_DEFAULT_BACKGROUND_CHAR</a></td></tr>
+<tr class="memitem:a74860be7d8aa0da816c91724545e8fe5" id="r_a74860be7d8aa0da816c91724545e8fe5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a74860be7d8aa0da816c91724545e8fe5">background_char</a> = <a class="el" href="congfx_8h.html#a70e585039d26b88e84a5e1cac1db1d00">_CG_DEFAULT_BACKGROUND_CHAR</a></td></tr>
 <tr class="separator:a74860be7d8aa0da816c91724545e8fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ea997d31e6b9b1760d24c55cde4eb82" id="r_a1ea997d31e6b9b1760d24c55cde4eb82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcg__rgb__t.html">cg_rgb_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a1ea997d31e6b9b1760d24c55cde4eb82">default_bg_colour</a> = {0, 0, 0}</td></tr>
 <tr class="separator:a1ea997d31e6b9b1760d24c55cde4eb82"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -400,7 +400,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define _CG_DEFAULT_BACKGROUND_CHAR&#160;&#160;&#160;L' '</td>
+          <td class="memname">#define _CG_DEFAULT_BACKGROUND_CHAR&#160;&#160;&#160;' '</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -507,18 +507,18 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="afcaeeb559bf6c6f4abe40c50f8832206" name="afcaeeb559bf6c6f4abe40c50f8832206"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcaeeb559bf6c6f4abe40c50f8832206">&#9670;&#160;</a></span>cg_char</h2>
+<a id="a294b3b3a8e11a477f60c8d1007d212ce" name="a294b3b3a8e11a477f60c8d1007d212ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a294b3b3a8e11a477f60c8d1007d212ce">&#9670;&#160;</a></span>cg_char</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef wchar_t <a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a></td>
+          <td class="memname">typedef char <a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The default character type used in the congfx programs are wide characters (wchar_t). </p>
+<p>The default character type used in the congfx programs are wide characters (char). </p>
 
 </div>
 </div>
@@ -559,11 +559,11 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a>* <a class="el" href="congfx_8h.html#a34b1263869cfbcec892dc3890c2a1e75">cg_string</a></td>
+          <td class="memname">typedef <a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a>* <a class="el" href="congfx_8h.html#a34b1263869cfbcec892dc3890c2a1e75">cg_string</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The default string type used in the congfx programs are wide strings (wchar_t). </p>
+<p>The default string type used in the congfx programs are wide strings (char). </p>
 
 </div>
 </div>
@@ -1033,7 +1033,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void _cg_term_write_char </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a>&#160;</td>
           <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1665,7 +1665,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a> cg_get_cell_char </td>
+          <td class="memname"><a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a> cg_get_cell_char </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structcg__cell__t.html">cg_cell_t</a> *&#160;</td>
           <td class="paramname"><em>cell</em></td><td>)</td>
@@ -1903,7 +1903,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structcg__cell__t.html">cg_cell_t</a> * cg_make_cell </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a>&#160;</td>
           <td class="paramname"><em>c</em>, </td>
         </tr>
         <tr>
@@ -2091,7 +2091,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a>&#160;</td>
           <td class="paramname"><em>c</em>&#160;</td>
         </tr>
         <tr>
@@ -2232,7 +2232,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a>&#160;</td>
           <td class="paramname"><em>c</em>&#160;</td>
         </tr>
         <tr>
@@ -2385,7 +2385,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void cg_text </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a> *&#160;</td>
           <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
@@ -2588,7 +2588,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="congfx_8h.html#afcaeeb559bf6c6f4abe40c50f8832206">cg_char</a> background_char = <a class="el" href="congfx_8h.html#a70e585039d26b88e84a5e1cac1db1d00">_CG_DEFAULT_BACKGROUND_CHAR</a></td>
+          <td class="memname"><a class="el" href="congfx_8h.html#a294b3b3a8e11a477f60c8d1007d212ce">cg_char</a> background_char = <a class="el" href="congfx_8h.html#a70e585039d26b88e84a5e1cac1db1d00">_CG_DEFAULT_BACKGROUND_CHAR</a></td>
         </tr>
       </table>
 </div><div class="memdoc">

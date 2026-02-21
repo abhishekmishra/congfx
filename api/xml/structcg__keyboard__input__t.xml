@@ -19,7 +19,7 @@
         <location file="congfx.h" line="524" column="19" bodyfile="congfx.h" bodystart="524" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structcg__keyboard__input__t_1afd0dfa703130aa4bd557d940152b85db" prot="public" static="no" mutable="no">
-        <type><ref refid="congfx_8h_1afcaeeb559bf6c6f4abe40c50f8832206" kindref="member">cg_char</ref></type>
+        <type><ref refid="congfx_8h_1a294b3b3a8e11a477f60c8d1007d212ce" kindref="member">cg_char</ref></type>
         <definition>cg_char cg_keyboard_input_t::char_value</definition>
         <argsstring></argsstring>
         <name>char_value</name>
