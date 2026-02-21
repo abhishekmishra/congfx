@@ -67,6 +67,7 @@ pictures.
 #include <termios.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <time.h>
 #include <string.h>
 #include <locale.h>
@@ -1347,8 +1348,16 @@ void cg_show_canvas()
     cg_rgb_t current_bg = {300, 300, 300};
     cg_rgb_t current_fg = {300, 300, 300};
 
+    cg_uint cursor_x, cursor_y;
+    bool cursor_valid;
+
     if (canvas_current != NULL)
     {
+        cursor_x = 0;
+        cursor_y = 0;
+        _cg_term_move_to(cursor_x, cursor_y);
+        cursor_valid = true;
+
         for (cg_uint i = 0; i < canvas_current->height; i++)
         {
             for (cg_uint j = 0; j < canvas_current->width; j++)
@@ -1360,6 +1369,7 @@ void cg_show_canvas()
                 cg_cell_t *previous_cell = cg_get_cell(canvas_previous, j, i);
                 if (cg_compare_cells(current_cell, previous_cell) == 0)
                 {
+                    cursor_valid = false;
                     continue;
                 }
 
@@ -1375,8 +1385,14 @@ void cg_show_canvas()
                 // get the cell character
                 cg_char c = cg_get_cell_char(current_cell);
 
-                // move to the cell position
-                _cg_term_move_to(j, i);
+                // move to the cell position if cursor not valid
+                if (!cursor_valid)
+                {
+                    cursor_x = j;
+                    cursor_y = i;
+                    cursor_valid = true;
+                    _cg_term_move_to(cursor_x, cursor_y);
+                }
 
                 // set the colours
                 if (cg_compare_colour(cell_fg, current_fg) != 0)
