@@ -3676,7 +3676,7 @@
 <codeline lineno="1471"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CG_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="1472"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_cg_win_get_window_size(rows,<sp/>cols);</highlight></codeline>
 <codeline lineno="1473"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CG_PLATFORM_POSIX</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1474"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_cg_posixget_window_size(rows,<sp/>cols);</highlight></codeline>
+<codeline lineno="1474"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_cg_posix_get_window_size(rows,<sp/>cols);</highlight></codeline>
 <codeline lineno="1475"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="1476"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="1477"><highlight class="normal"></highlight></codeline>
