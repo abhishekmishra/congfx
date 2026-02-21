@@ -68,8 +68,7 @@ pictures.
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <wchar.h>
-#include <wctype.h>
+#include <string.h>
 #include <locale.h>
 #include <math.h>
 #include <fcntl.h>
@@ -82,7 +81,7 @@ pictures.
 
 // defaults
 #define _CG_DEFAULT_FPS 30 // times per second
-#define _CG_DEFAULT_BACKGROUND_CHAR L' '
+#define _CG_DEFAULT_BACKGROUND_CHAR ' '
 
 #define _CG_CALLOC calloc
 #define _CG_REALLOC realloc
@@ -111,13 +110,13 @@ typedef enum
 
 /**
  * The default character type used in the congfx programs
- * are wide characters (wchar_t).
+ * are wide characters (char).
  */
-typedef wchar_t cg_char;
+typedef char cg_char;
 
 /**
  * The default string type used in the congfx programs
- * are wide strings (wchar_t).
+ * are wide strings (char).
  */
 typedef cg_char *cg_string;
 
@@ -704,7 +703,7 @@ cg_cell_t *cg_make_cell(cg_char c, cg_rgb_t bg, cg_rgb_t fg)
     cg_cell_t *cell = (cg_cell_t *)_CG_CALLOC(1, sizeof(cg_cell_t));
     if (cell == NULL)
     {
-        wprintf(L"FATAL Error: Unable to allocate cg_cell_t.\n");
+        printf("FATAL Error: Unable to allocate cg_cell_t.\n");
         exit(-1);
     }
     cell->c = c;
@@ -737,7 +736,7 @@ cg_char cg_get_cell_char(cg_cell_t *cell)
     {
         return cell->c;
     }
-    return L' ';
+    return ' ';
 }
 
 void cg_set_cell_bg(cg_cell_t *cell, cg_rgb_t bg)
@@ -802,7 +801,7 @@ cg_canvas_t *cg_make_canvas(cg_uint w, cg_uint h)
     cg_canvas_t *canvas = (cg_canvas_t *)_CG_CALLOC(1, sizeof(cg_canvas_t));
     if (canvas == NULL)
     {
-        wprintf(L"FATAL Error: Unable to allocate cg_canvas_t.\n");
+        printf("FATAL Error: Unable to allocate cg_canvas_t.\n");
         exit(-1);
     }
     canvas->width = w;
@@ -810,7 +809,7 @@ cg_canvas_t *cg_make_canvas(cg_uint w, cg_uint h)
     canvas->cells = (cg_cell_t *)_CG_CALLOC(w * h, sizeof(cg_cell_t));
     if (canvas->cells == NULL)
     {
-        wprintf(L"FATAL Error: Unable to allocate cg_cell_t array.\n");
+        printf("FATAL Error: Unable to allocate cg_cell_t array.\n");
         exit(-1);
     }
 
@@ -851,17 +850,17 @@ void cg_dispose_canvas(cg_canvas_t *canvas)
 }
 cg_uint _diff_time_micros(struct timespec time1, struct timespec time2)
 {
-    // wprintf(L"time1 [%ld, %ld], time2[%ld, %ld]\n", time1.tv_sec, time1.tv_nsec, time2.tv_sec, time2.tv_nsec);
+    // printf("time1 [%ld, %ld], time2[%ld, %ld]\n", time1.tv_sec, time1.tv_nsec, time2.tv_sec, time2.tv_nsec);
     cg_uint seconds_delta = (time1.tv_sec - time2.tv_sec);
     cg_int nanos_delta = (time1.tv_nsec - time2.tv_nsec);
     cg_uint delta = (seconds_delta * 1000000) + (nanos_delta / 1000);
-    // wprintf(L"seconds_delta = %lu, nanos_delta = %ld, delta = %lu\n", seconds_delta, nanos_delta, delta);
+    // printf("seconds_delta = %lu, nanos_delta = %ld, delta = %lu\n", seconds_delta, nanos_delta, delta);
     return delta;
 }
 
 void cg_err_fatal(cg_string message, cg_uint code)
 {
-    wprintf(L"FATAL: %ls\n", message);
+    printf("FATAL: %ls\n", message);
     exit(code);
 }
 
@@ -888,7 +887,7 @@ cg_string cg_make_string(cg_uint length)
     cg_string s = (cg_string)_CG_CALLOC(length + 1, sizeof(cg_char));
     if (s == NULL)
     {
-        wprintf(L"FATAL Error: Unable to allocate cg_string.\n");
+        printf("FATAL Error: Unable to allocate cg_string.\n");
         exit(-1);
     }
     return s;
@@ -907,7 +906,7 @@ vec2 cg_make_vec2(cg_number v0, cg_number v1)
     vec2 v = (vec2)_CG_CALLOC(2, sizeof(cg_number));
     if (v == NULL)
     {
-        wprintf(L"FATAL Error: Unable to allocate vec2.\n");
+        printf("FATAL Error: Unable to allocate vec2.\n");
         exit(-1);
     }
     v[0] = v0;
@@ -940,7 +939,7 @@ vec2 cg_vec2_mult_scalar(vec2 vin, cg_number x)
 cg_string cg_vec2_to_string(vec2 v)
 {
     cg_string s = cg_make_string(100);
-    swprintf(s, 100, L"%.2Lf, %.2Lf", v[0], v[1]);
+    snprintf(s, 100, "%.2Lf, %.2Lf", v[0], v[1]);
     return s;
 }
 
@@ -989,7 +988,7 @@ void cg_frame_rate(cg_uint fps)
     }
     else
     {
-        wprintf(L"FATAL: Invalid fps [%lu], should be in range (0, 100). \n", fps);
+        printf("FATAL: Invalid fps [%lu], should be in range (0, 100). \n", fps);
         exit(-1);
     }
 }
@@ -997,19 +996,19 @@ void cg_frame_rate(cg_uint fps)
 // terminal utility functions
 void cg_cls()
 {
-    wprintf(L"\033[2J");
+    printf("\033[2J");
 }
 
 void cg_home()
 {
-    wprintf(L"\033[H");
+    printf("\033[H");
 }
 
 void _cg_term_enable_raw_mode()
 {
     if (tcgetattr(STDIN_FILENO, &orig_termios) == -1)
     {
-        cg_err_fatal_msg(L"tcgetattr");
+        cg_err_fatal_msg("tcgetattr");
     }
 
     atexit(_cg_term_disable_raw_mode);
@@ -1024,19 +1023,19 @@ void _cg_term_enable_raw_mode()
 
     if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
     {
-        cg_err_fatal_msg(L"tcsetattr");
+        cg_err_fatal_msg("tcsetattr");
     }
 
     // Get the current flags
     if ((_cg_term_orig_flags = fcntl(STDIN_FILENO, F_GETFL, 0)) == -1)
     {
-        cg_err_fatal_msg(L"fcntl error getting flags");
+        cg_err_fatal_msg("fcntl error getting flags");
     }
 
     // Set the flags to be non-blocking
     if ((fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags | O_NONBLOCK) == -1))
     {
-        cg_err_fatal_msg(L"fcntl error setting flags");
+        cg_err_fatal_msg("fcntl error setting flags");
     }
 }
 
@@ -1044,13 +1043,13 @@ void _cg_term_disable_raw_mode()
 {
     if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios) == -1)
     {
-        cg_err_fatal_msg(L"tcsetattr");
+        cg_err_fatal_msg("tcsetattr");
     }
 
     // Reset the flags
     if (fcntl(STDIN_FILENO, F_SETFL, _cg_term_orig_flags) == -1)
     {
-        cg_err_fatal_msg(L"fcntl error resetting flags");
+        cg_err_fatal_msg("fcntl error resetting flags");
     }
 }
 
@@ -1068,7 +1067,7 @@ int _cg_term_create_command_buffer(_cg_term_command_buffer_t **buffer)
     }
     (*buffer)->length = 0;
     // Mark the first character as the null terminator
-    (*buffer)->buffer[0] = L'\0';
+    (*buffer)->buffer[0] = '\0';
     (*buffer)->size = _CG_TERM_COMMAND_BUFFER_START_SIZE;
     return 0;
 }
@@ -1104,7 +1103,7 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
     size_t command_length = length;
     if (command_length == 0)
     {
-        command_length = wcslen(command);
+        command_length = strlen(command);
     }
 
     size_t new_size = buffer->length + command_length + 1;
@@ -1115,8 +1114,8 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
             return -1;
         }
     }
-    wcsncat(buffer->buffer, command, command_length);
-    buffer->length = wcslen(buffer->buffer);
+    strncat(buffer->buffer, command, command_length);
+    buffer->length = strlen(buffer->buffer);
 
     if (buffer->length >= _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT)
     {
@@ -1128,37 +1127,37 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
 
 int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer)
 {
-    fputws(buffer->buffer, stdout);
+    fputs(buffer->buffer, stdout);
     fflush(stdout);
     buffer->length = 0;
-    buffer->buffer[0] = L'\0';
+    buffer->buffer[0] = '\0';
     return 0;
 }
 
 void _cg_term_reset()
 {
     // the [0m code resets all terminal attributes
-    _cg_term_buffer_command(_cg_buffer, L"\033[0m", 4);
+    _cg_term_buffer_command(_cg_buffer, "\033[0m", 4);
 }
 
 void _cg_term_set_foreground_colour(cg_rgb_t colour)
 {
     cg_char buffer[25];
-    swprintf(buffer, 25, L"\033[38;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
+    snprintf(buffer, 25, "\033[38;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
     _cg_term_buffer_command(_cg_buffer, buffer, 0); // 22);
 }
 
 void _cg_term_set_background_colour(cg_rgb_t colour)
 {
     cg_char buffer[25];
-    swprintf(buffer, 25, L"\033[48;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
+    snprintf(buffer, 25, "\033[48;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
     _cg_term_buffer_command(_cg_buffer, buffer, 0); // 22);
 }
 
 void _cg_term_move_to(cg_uint x, cg_uint y)
 {
     cg_char buffer[20];
-    swprintf(buffer, 20, L"\033[%lu;%luf", y + 1, x + 1);
+    snprintf(buffer, 20, "\033[%lu;%luf", y + 1, x + 1);
     _cg_term_buffer_command(_cg_buffer, buffer, 0);
 }
 
@@ -1169,12 +1168,12 @@ void _cg_term_write_char(cg_char c)
 
 void _cg_hide_cursor()
 {
-    _cg_term_buffer_command(_cg_buffer, L"\033[?25l", 6);
+    _cg_term_buffer_command(_cg_buffer, "\033[?25l", 6);
 }
 
 void _cg_show_cursor()
 {
-    _cg_term_buffer_command(_cg_buffer, L"\033[?25h", 6);
+    _cg_term_buffer_command(_cg_buffer, "\033[?25h", 6);
 }
 
 int _cg_get_cursor_position(int *rows, int *cols)
@@ -1366,7 +1365,7 @@ void cg_show_canvas()
 
 #endif
 
-                // wprintf(L"Cells not equal at [%lu, %lu]\n", j, i);
+                // printf("Cells not equal at [%lu, %lu]\n", j, i);
 
                 // cg_no_loop();
 
@@ -1417,13 +1416,13 @@ void cg_point(cg_uint x1, cg_uint y1, cg_char c)
     cg_set_cell_char(cell, c);
     cg_set_cell_bg(cell, background_colour);
     cg_set_cell_fg(cell, stroke_colour);
-    // wprintf(L"\033[%lu;%luf", y1, x1);
-    // wprintf(L"%c", c);
+    // printf("\033[%lu;%luf", y1, x1);
+    // printf("%c", c);
 }
 
 void cg_line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
 {
-    // wprintf(L"line [%lu,%lu] -> [%lu, %lu]", x1, y1, x2, y2);
+    // printf("line [%lu,%lu] -> [%lu, %lu]", x1, y1, x2, y2);
 
     // swap coordinates if y1 is lower
     if (x1 > x2)
@@ -1442,7 +1441,7 @@ void cg_line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
         // slope is infinite
         for (cg_uint y = y1; y <= y2; y++)
         {
-            cg_point(x1, y, L'█');
+            cg_point(x1, y, '#');
         }
     }
     else
@@ -1451,7 +1450,7 @@ void cg_line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
         for (cg_uint x = x1; x <= x2; x++)
         {
             cg_uint y = y1 + (slope * x);
-            cg_point(x, y, L'█');
+            cg_point(x, y, '#');
         }
     }
 }
@@ -1471,7 +1470,7 @@ void cg_rect(cg_uint x1, cg_uint y1, cg_uint width, cg_uint height)
 
 void cg_text(cg_char *t, cg_uint x, cg_uint y)
 {
-    cg_uint len = wcslen(t);
+    cg_uint len = strlen(t);
     if (len > 0)
     {
         for (cg_uint i = 0; i < len; i++)
@@ -1518,7 +1517,7 @@ int cg_create_graphics(cg_uint w, cg_uint h)
 
     if (_cg_gfx_context == NULL)
     {
-        wprintf(L"FATAL Error: Unable to allocate graphics context.\n");
+        printf("FATAL Error: Unable to allocate graphics context.\n");
         return -1;
     }
 
@@ -1535,7 +1534,7 @@ int cg_create_graphics(cg_uint w, cg_uint h)
     // create the command buffer
     if (_cg_term_create_command_buffer(&_cg_buffer) == -1)
     {
-        wprintf(L"FATAL Error: Unable to create command buffer.\n");
+        printf("FATAL Error: Unable to create command buffer.\n");
         return -1;
     }
 
@@ -1548,7 +1547,7 @@ int cg_create_graphics(cg_uint w, cg_uint h)
     {
         if (_cg_get_window_size(&rows, &cols) == -1)
         {
-            wprintf(L"FATAL Error: Unable to get window size.\n");
+            printf("FATAL Error: Unable to get window size.\n");
             return -1;
         }
     }
@@ -1560,7 +1559,7 @@ int cg_create_graphics(cg_uint w, cg_uint h)
 
     // init locale for terminal, and wide output
     setlocale(LC_ALL, "");
-    fwide(stdout, 1);
+    // fwide(stdout, 1);
 
     // if there is no canvas created, create a default one
     if (canvas_current == NULL)
@@ -1625,7 +1624,7 @@ void cg_end_draw()
     // while(inp = cg_get_key_pressed(), inp.key != CG_KEY_NONE)
     // {
     //     key_count++;
-    //     swprintf(key_str, 100, L"Key Pressed %d, %c", inp.key, inp.char_value);
+    //     snprintf(key_str, 100, "Key Pressed %d, %c", inp.key, inp.char_value);
     //     cg_text(key_str, 0, key_count);
     // }
 
@@ -1635,21 +1634,21 @@ void cg_end_draw()
     // how much time spent
     clock_gettime(CLOCK_MONOTONIC, &(_cg_gfx_context->after_draw_time));
     cg_uint dt_done = _diff_time_micros(_cg_gfx_context->after_draw_time, _cg_gfx_context->current_time);
-    // wprintf(L"Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
+    // printf("Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
     if (_cg_gfx_context->delta_time_ideal > dt_done)
     {
         struct timespec dt_diff, dt_diff_rem;
         dt_diff.tv_sec = 0;
         dt_diff.tv_nsec = (_cg_gfx_context->delta_time_ideal - dt_done) * 1000;
         // sleep for the difference
-        //  wprintf(L"sleep for -> [%ld]nanos\n", dt_diff.tv_nsec);
+        //  printf("sleep for -> [%ld]nanos\n", dt_diff.tv_nsec);
         nanosleep(&dt_diff, &dt_diff_rem);
     }
 
     _cg_gfx_context->prev_time = _cg_gfx_context->current_time;
     clock_gettime(CLOCK_MONOTONIC, &(_cg_gfx_context->current_time));
     // dt_done = _diff_time_micros(current_time, prev_time);
-    // wprintf(L"After sleep: Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
+    // printf("After sleep: Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
 
     // swap canvas
     cg_swap_canvas();

@@ -86,12 +86,12 @@ int main(int argc, char *argv[])
         }
 
         // draw the total time in the center of the canvas
-        swprintf(total_time_string, 1024, L"Total time: %5lu", total_time);
-        cg_text(total_time_string, (width - wcslen(total_time_string)) / 2, 10);
+        snprintf(total_time_string, 1024, "Total time: %5lu", total_time);
+        cg_text(total_time_string, (width - strlen(total_time_string)) / 2, 10);
         total_time += cg_get_deltatime();
 
         // print press escape to exit
-        cg_text(L"Press ESC to exit", 0, height - 1);
+        cg_text("Press ESC to exit", 0, height - 1);
 
         // end the draw
         cg_end_draw();

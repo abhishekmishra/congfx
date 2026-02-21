@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 	balls = (ball **)calloc(NUM_BALLS, sizeof(ball *));
 	if (balls == NULL)
 	{
-		wprintf(L"Unable to allocate balls array.\n");
+		printf("Unable to allocate balls array.\n");
 		exit(-1);
 	}
 
@@ -103,14 +103,14 @@ int main(int argc, char *argv[])
 		}
 
 		// print title
-		cg_text(L"CONGFX: EXAMPLE#5: BOUNCING BALLS ", width / 2 - 17, 0);
+		cg_text("CONGFX: EXAMPLE#5: BOUNCING BALLS ", width / 2 - 17, 0);
 
 		// show fps
 		cg_string fps_str = calc_fps(cg_get_deltatime());
 		cg_text(fps_str, 0, 0);
 
 		// print press escape to exit
-		cg_text(L"Press ESC to exit", 0, height - 1);
+		cg_text("Press ESC to exit", 0, height - 1);
 
 		// end the draw
 		cg_end_draw();
@@ -125,7 +125,7 @@ ball *make_ball()
 	ball *b = (ball *)calloc(1, sizeof(ball));
 	if (b == NULL)
 	{
-		wprintf(L"Unable to allocate ball struct.\n");
+		printf("Unable to allocate ball struct.\n");
 		exit(-1);
 	}
 	b->colour = 15;
@@ -171,6 +171,6 @@ void ball_show(ball *b)
 cg_string calc_fps(cg_uint dt_millis)
 {
 	cg_uint fps = (1000.0 / dt_millis);
-	swprintf(fps_str, FPS_STR_LEN, L"FPS: %lu", fps);
+	snprintf(fps_str, FPS_STR_LEN, "FPS: %lu", fps);
 	return fps_str;
 }

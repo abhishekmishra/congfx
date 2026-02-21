@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         total_time += cg_get_deltatime();
 
         // print press escape to exit
-        cg_text(L"Press ESC to exit", 0, height - 1);
+        cg_text("Press ESC to exit", 0, height - 1);
 
         // end the draw
         cg_end_draw();

@@ -11,7 +11,7 @@ void handle_key_pressed(cg_char c);
 int main(int argc, char *argv[])
 {
     contents = cg_make_string((width * height) + 1);
-    contents[0] = L'\0';
+    contents[0] = '\0';
 
     // create the graphics engine
     int err = cg_create_graphics_fullscreen();
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
         }
 
         // print press escape to exit
-        cg_text(L"Press ESC to exit", 0, height - 1);
+        cg_text("Press ESC to exit", 0, height - 1);
 
         // end the draw
         cg_end_draw();

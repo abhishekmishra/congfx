@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
             for (int j = 0; j < height; j++)
             {
                 cg_stroke((cg_rgb_t){rand_between(0, 255), rand_between(0, 255), rand_between(0, 255)});
-                cg_point(i, j, L'█');
+                cg_point(i, j, '#');
             }
         }
 
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
         cg_stroke((cg_rgb_t){255, 255, 255});
 
         // print press escape to exit
-        cg_text(L"Press ESC to exit", 0, height - 1);
+        cg_text("Press ESC to exit", 0, height - 1);
 
         // end the draw
         cg_end_draw();

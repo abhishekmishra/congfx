@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     cg_uint block_width = 5;
     cg_uint block_height = 5;
     cg_string block_location_str = cg_make_string(1024);
-    block_location_str[0] = L'\0';
+    block_location_str[0] = '\0';
 
     // create the graphics engine
     int err = cg_create_graphics_fullscreen();
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     block_x = width / 2 - block_width / 2;
     block_y = height / 2 - block_height / 2;
 
-    swprintf(block_location_str, 1024, L"Block Location: (%d, %d)", block_x, block_y);
+    snprintf(block_location_str, 1024, "Block Location: (%lu, %lu)", block_x, block_y);
 
     while (!cg_should_exit())
     {
@@ -34,13 +34,13 @@ int main(int argc, char *argv[])
         cg_rect(block_x, block_y, block_width, block_height);
 
         // print press escape to exit
-        cg_text(L"Press ESC to exit", 0, height - 1);
+        cg_text("Press ESC to exit", 0, height - 1);
 
         // print the block location
         cg_text(block_location_str, 0, height - 2);
 
         // show usage message
-        cg_text(L"Use arrow keys to move the block, 'r' to reset.", 0, 0);
+        cg_text("Use arrow keys to move the block, 'r' to reset.", 0, 0);
 
         // end the draw
         cg_end_draw();
@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
             }
 
             // print the block location
-            swprintf(block_location_str, 1024, L"Block Location: (%d, %d)", block_x, block_y);
+            snprintf(block_location_str, 1024, "Block Location: (%lu, %lu)", block_x, block_y);
         }
     }
 
