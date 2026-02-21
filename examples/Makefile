@@ -15,7 +15,7 @@ else
 endif
 
 # Variables
-CC = cc
+CC = clang
 INC = -I..
 CFLAGS = -c $(INC)
 # All files that start with 'ex' and end with '.c'

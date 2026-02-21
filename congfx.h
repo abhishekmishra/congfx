@@ -64,7 +64,22 @@ pictures.
 #ifndef __CONGFX_H__
 #define __CONGFX_H__
 
-#include <termios.h>
+#if defined(_WIN32)
+#define CG_PLATFORM_WINDOWS 1
+#else
+#define CG_PLATFORM_WINDOWS 0
+#endif
+
+#if defined(__unix__) || defined(__APPLE__)
+#define CG_PLATFORM_POSIX 1
+#else
+#define CG_PLATFORM_POSIX 0
+#endif
+
+#if !CG_PLATFORM_WINDOWS && !CG_PLATFORM_POSIX
+#error Unsupported platform
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -72,13 +87,20 @@ pictures.
 #include <string.h>
 #include <locale.h>
 #include <math.h>
-#include <fcntl.h>
 #include <errno.h>
 #include <ctype.h>
-#include <sys/ioctl.h>
 
-// TODO: removed for now, check if needed later
+#if CG_PLATFORM_WINDOWS
+#include <windows.h>
+#define sscanf sscanf_s
+#elif CG_PLATFORM_POSIX
 #include <unistd.h>
+#include <termios.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>
+#else
+#error Unsupported platform
+#endif
 
 // defaults
 #define _CG_DEFAULT_FPS 30 // times per second
@@ -591,6 +613,17 @@ void _cg_term_enable_raw_mode();
  */
 void _cg_term_disable_raw_mode();
 
+// Platform specific versions
+#if CG_PLATFORM_WINDOWS
+void _cg_win_term_enable_raw_mode();
+void _cg_win_term_disable_raw_mode();
+#endif
+
+#if CG_PLATFORM_POSIX
+void _cg_posix_term_enable_raw_mode();
+void _cg_posix_term_disable_raw_mode();
+#endif
+
 /**
  * Create a new command buffer for the terminal.
  *
@@ -1007,6 +1040,35 @@ void cg_home()
 
 void _cg_term_enable_raw_mode()
 {
+#if CG_PLATFORM_WINDOWS
+    _cg_win_term_enable_raw_mode();
+#elif CG_PLATFORM_POSIX
+    _cg_posix_term_enable_raw_mode();
+#endif
+}
+
+void _cg_term_disable_raw_mode()
+{
+#if CG_PLATFORM_WINDOWS
+    _cg_win_term_disable_raw_mode();
+#elif CG_PLATFORM_POSIX
+    _cg_posix_term_disable_raw_mode();
+#endif
+}
+
+#if CG_PLATFORM_WINDOWS
+void _cg_win_term_enable_raw_mode()
+{
+}
+
+void _cg_win_term_disable_raw_mode()
+{
+}
+#endif
+
+#if CG_PLATFORM_POSIX
+void _cg_posix_term_enable_raw_mode()
+{
     if (tcgetattr(STDIN_FILENO, &orig_termios) == -1)
     {
         cg_err_fatal_msg("tcgetattr");
@@ -1040,7 +1102,7 @@ void _cg_term_enable_raw_mode()
     }
 }
 
-void _cg_term_disable_raw_mode()
+void _cg_posix_term_disable_raw_mode()
 {
     if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios) == -1)
     {
@@ -1053,6 +1115,7 @@ void _cg_term_disable_raw_mode()
         cg_err_fatal_msg("fcntl error resetting flags");
     }
 }
+#endif
 
 int _cg_term_create_command_buffer(_cg_term_command_buffer_t **buffer)
 {
@@ -1124,9 +1187,9 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
     // FIXME: flushing every command; otherwise commands
     // get witten incomplete sometimes on iterm/macos term
     // which is strange, can't figure it out
-    //if (buffer->length >= _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT)
+    // if (buffer->length >= _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT)
     //{
-        return _cg_term_flush_command_buffer(buffer);
+    return _cg_term_flush_command_buffer(buffer);
     //}
 
     return 0;
