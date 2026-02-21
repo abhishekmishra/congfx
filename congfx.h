@@ -574,6 +574,11 @@ typedef struct
     cg_uint delta_time_ideal;
     cg_uint dt;
     cg_uint should_exit;
+#if CG_PLATFORM_WINDOWS
+    DWORD _cg_orig_in_mode;
+    HANDLE _cg_hin;
+    LARGE_INTEGER _cg_qpc_freq;
+#endif
 } _cg_graphics_context_t;
 
 _cg_graphics_context_t *_cg_gfx_context = NULL;
@@ -586,9 +591,6 @@ cg_rgb_t default_fg_colour = {255, 255, 255};
 cg_rgb_t background_colour = {0, 0, 0};
 cg_rgb_t stroke_colour = {255, 255, 255};
 cg_rgb_t fill_colour = {255, 255, 255};
-struct termios orig_termios;
-int _cg_term_orig_flags;
-
 // canvas variables for the current and previous canvas
 cg_canvas_t *canvas_previous = NULL;
 cg_canvas_t *canvas_current = NULL;
@@ -617,11 +619,51 @@ void _cg_term_disable_raw_mode();
 #if CG_PLATFORM_WINDOWS
 void _cg_win_term_enable_raw_mode();
 void _cg_win_term_disable_raw_mode();
+int _cg_win_get_cursor_position(int *rows, int *cols);
+int _cg_win_get_window_size(int *rows, int *cols);
+void _cg_win_read_key();
+
+void _cg_win_time_init(void)
+{
+    QueryPerformanceFrequency(&(_cg_gfx_context->_cg_qpc_freq));
+}
+
+void _cg_win_clock_gettime(struct timespec *ts)
+{
+    LARGE_INTEGER counter;
+    QueryPerformanceCounter(&counter);
+
+    double seconds = (double)counter.QuadPart /
+                     (double)((_cg_gfx_context->_cg_qpc_freq).QuadPart);
+
+    ts->tv_sec = (time_t)seconds;
+    ts->tv_nsec = (long)((seconds - ts->tv_sec) * 1e9);
+}
+
+int _cg_win_nanosleep(const struct timespec *req, struct timespec *rem)
+{
+    (void)rem; // Windows Sleep has no remaining-time reporting
+
+    DWORD ms =
+        (DWORD)(req->tv_sec * 1000 +
+                req->tv_nsec / 1000000);
+
+    Sleep(ms);
+    return 0;
+}
+
 #endif
 
 #if CG_PLATFORM_POSIX
 void _cg_posix_term_enable_raw_mode();
 void _cg_posix_term_disable_raw_mode();
+int _cg_posix_get_cursor_position(int *rows, int *cols);
+int _cg_posix_get_window_size(int *rows, int *cols);
+void _cg_posix_read_key();
+
+struct termios orig_termios;
+int _cg_term_orig_flags;
+
 #endif
 
 /**
@@ -718,6 +760,8 @@ void _cg_read_key();
  * @return The difference in time in microseconds.
  */
 cg_uint _diff_time_micros(struct timespec time1, struct timespec time2);
+
+void _cg_clock_get_time(struct timespec *t);
 
 /*--------- END INTERNAL FUNCTION PROTOTYPES -----------*/
 
@@ -1059,10 +1103,52 @@ void _cg_term_disable_raw_mode()
 #if CG_PLATFORM_WINDOWS
 void _cg_win_term_enable_raw_mode()
 {
+    _cg_gfx_context->_cg_hin = GetStdHandle(STD_INPUT_HANDLE);
+    if (_cg_gfx_context->_cg_hin == INVALID_HANDLE_VALUE)
+    {
+        cg_err_fatal_msg("GetStdHandle");
+    }
+
+    if (!GetConsoleMode(_cg_gfx_context->_cg_hin, &_cg_gfx_context->_cg_orig_in_mode))
+    {
+        cg_err_fatal_msg("GetConsoleMode");
+    }
+
+    DWORD raw = _cg_gfx_context->_cg_orig_in_mode;
+
+    raw &= ~(ENABLE_ECHO_INPUT);
+    raw &= ~(ENABLE_LINE_INPUT);
+    raw &= ~(ENABLE_PROCESSED_INPUT);
+    raw &= ~(ENABLE_WINDOW_INPUT);
+    raw &= ~(ENABLE_MOUSE_INPUT);
+
+    // Optional: disable Ctrl+C handling
+    raw &= ~(ENABLE_PROCESSED_INPUT);
+
+    if (!SetConsoleMode(_cg_gfx_context->_cg_hin, raw))
+    {
+        cg_err_fatal_msg("SetConsoleMode");
+    }
+
+    atexit(_cg_term_disable_raw_mode);
+
+    // Enable vt100
+    HANDLE hout = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    DWORD out_mode;
+    GetConsoleMode(hout, &out_mode);
+
+    out_mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+
+    SetConsoleMode(hout, out_mode);
+
+    // Enable UTF8 in Windows
+    SetConsoleOutputCP(CP_UTF8);
 }
 
 void _cg_win_term_disable_raw_mode()
 {
+    SetConsoleMode(_cg_gfx_context->_cg_hin, _cg_gfx_context->_cg_orig_in_mode);
 }
 #endif
 
@@ -1254,7 +1340,31 @@ void _cg_show_cursor()
     _cg_term_buffer_command(_cg_buffer, "\033[?25h", 6);
 }
 
-int _cg_get_cursor_position(int *rows, int *cols)
+#if CG_PLATFORM_WINDOWS
+int _cg_win_get_cursor_position(int *rows, int *cols)
+{
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (h == INVALID_HANDLE_VALUE)
+    {
+        return -1;
+    }
+
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    if (!GetConsoleScreenBufferInfo(h, &csbi))
+    {
+        return -1;
+    }
+
+    // Windows is 0-based
+    *rows = csbi.dwCursorPosition.Y + 1;
+    *cols = csbi.dwCursorPosition.X + 1;
+
+    return 0;
+}
+#endif
+
+#if CG_PLATFORM_POSIX
+int _cg_posix_get_cursor_position(int *rows, int *cols)
 {
     char buf[32];
     unsigned int i = 0;
@@ -1275,8 +1385,43 @@ int _cg_get_cursor_position(int *rows, int *cols)
         return -1;
     return 0;
 }
+#endif
 
-int _cg_get_window_size(int *rows, int *cols)
+int _cg_get_cursor_position(int *rows, int *cols)
+{
+#if CG_PLATFORM_WINDOWS
+    return _cg_win_get_cursor_position(rows, cols);
+#elif CG_PLATFORM_POSIX
+    return _cg_posix_get_cursor_position(rows, cols);
+#endif
+}
+
+#if CG_PLATFORM_WINDOWS
+int _cg_win_get_window_size(int *rows, int *cols)
+{
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (h == INVALID_HANDLE_VALUE)
+    {
+        return -1;
+    }
+
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    if (!GetConsoleScreenBufferInfo(h, &csbi))
+    {
+        return -1;
+    }
+
+    SMALL_RECT win = csbi.srWindow;
+
+    *cols = win.Right - win.Left + 1;
+    *rows = win.Bottom - win.Top + 1;
+
+    return 0;
+}
+#endif
+
+#if CG_PLATFORM_POSIX
+int _cg_posix_get_window_size(int *rows, int *cols)
 {
     struct winsize ws;
     if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1 || ws.ws_col == 0)
@@ -1292,8 +1437,92 @@ int _cg_get_window_size(int *rows, int *cols)
         return 0;
     }
 }
+#endif
 
-void _cg_read_key()
+int _cg_get_window_size(int *rows, int *cols)
+{
+#if CG_PLATFORM_WINDOWS
+    return _cg_win_get_window_size(rows, cols);
+#elif CG_PLATFORM_POSIX
+    return _cg_posixget_window_size(rows, cols);
+#endif
+}
+
+#if CG_PLATFORM_WINDOWS
+void _cg_win_read_key()
+{
+    _cg_gfx_context->key_counter = 0;
+    for (int i = 0; i < 128; i++)
+    {
+        _cg_gfx_context->keys_pressed[i].key = CG_KEY_NONE;
+        _cg_gfx_context->keys_pressed[i].char_value = '\0';
+    }
+
+    DWORD events = 0;
+    GetNumberOfConsoleInputEvents(_cg_gfx_context->_cg_hin, &events);
+
+    if (events > 0)
+    {
+        cg_uint read_count = 0;
+
+        while (events > 0 && read_count < 128)
+        {
+            INPUT_RECORD record;
+            DWORD read = 0;
+            ReadConsoleInput(_cg_gfx_context->_cg_hin, &record, 1, &read);
+            if (read == 0)
+            {
+                break;
+            }
+
+            events--;
+            if (record.EventType != KEY_EVENT || !record.Event.KeyEvent.bKeyDown)
+            {
+                continue;
+            }
+
+            cg_key_type_t key = CG_KEY_UNKNOWN;
+            cg_char char_value = record.Event.KeyEvent.uChar.AsciiChar;
+            WORD vk = record.Event.KeyEvent.wVirtualKeyCode;
+
+            switch (vk)
+            {
+            case VK_ESCAPE:
+                key = CG_KEY_ESCAPE;
+                break;
+            case VK_RETURN:
+                key = CG_KEY_ENTER;
+                break;
+            case VK_UP:
+                key = CG_KEY_UP;
+                break;
+            case VK_DOWN:
+                key = CG_KEY_DOWN;
+                break;
+            case VK_RIGHT:
+                key = CG_KEY_RIGHT;
+                break;
+            case VK_LEFT:
+                key = CG_KEY_LEFT;
+                break;
+            default:
+                if (char_value >= 32 && char_value <= 126)
+                {
+                    key = CG_KEY_ALPHANUM;
+                }
+                break;
+            }
+
+            _cg_gfx_context->keys_pressed[read_count].key = key;
+            _cg_gfx_context->keys_pressed[read_count].char_value = char_value;
+            read_count++;
+        }
+    }
+}
+#endif
+
+#if CG_PLATFORM_POSIX
+void _cg_posix_read_key()
 {
     _cg_gfx_context->key_counter = 0;
     for (int i = 0; i < 128; i++)
@@ -1362,6 +1591,16 @@ void _cg_read_key()
             read_count++;
         }
     }
+}
+#endif
+
+void _cg_read_key()
+{
+#if CG_PLATFORM_WINDOWS
+    _cg_win_read_key();
+#elif CG_PLATFORM_POSIX
+    _cg_posix_read_key();
+#endif
 }
 
 // canvas functions
@@ -1590,10 +1829,13 @@ cg_keyboard_input_t cg_get_key_pressed()
 int cg_is_key_pressed(cg_key_type_t key)
 {
     cg_uint count = 0;
-    cg_keyboard_input_t inp;
-    while (inp.key != CG_KEY_NONE && count < 128)
+    while (count < 128)
     {
-        inp = _cg_gfx_context->keys_pressed[count];
+        cg_keyboard_input_t inp = _cg_gfx_context->keys_pressed[count];
+        if (inp.key == CG_KEY_NONE)
+        {
+            break;
+        }
         if (inp.key == key)
         {
             return 1;
@@ -1603,10 +1845,24 @@ int cg_is_key_pressed(cg_key_type_t key)
     return 0;
 }
 
+void _cg_clock_get_time(struct timespec *t)
+{
+#if CG_PLATFORM_WINDOWS
+    _cg_win_clock_gettime(t);
+#elif CG_PLATFORM_POSIX
+    clock_gettime(CLOCK_MONOTONIC, t);
+#endif
+}
+
 int cg_create_graphics(cg_uint w, cg_uint h)
 {
     // allocate the graphics context
     _cg_gfx_context = (_cg_graphics_context_t *)_CG_CALLOC(1, sizeof(_cg_graphics_context_t));
+
+#if CG_PLATFORM_WINDOWS
+    // if windows init time
+    _cg_win_time_init();
+#endif
 
     if (_cg_gfx_context == NULL)
     {
@@ -1614,7 +1870,7 @@ int cg_create_graphics(cg_uint w, cg_uint h)
         return -1;
     }
 
-    clock_gettime(CLOCK_MONOTONIC, &(_cg_gfx_context->start_time));
+    _cg_clock_get_time(&(_cg_gfx_context->start_time));
     _cg_gfx_context->prev_time = _cg_gfx_context->start_time;
     _cg_gfx_context->current_time = _cg_gfx_context->start_time;
     _cg_gfx_context->should_exit = 0;
@@ -1725,7 +1981,7 @@ void cg_end_draw()
     cg_show_canvas();
 
     // how much time spent
-    clock_gettime(CLOCK_MONOTONIC, &(_cg_gfx_context->after_draw_time));
+    _cg_clock_get_time(&(_cg_gfx_context->after_draw_time));
     cg_uint dt_done = _diff_time_micros(_cg_gfx_context->after_draw_time, _cg_gfx_context->current_time);
     // printf("Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
     if (_cg_gfx_context->delta_time_ideal > dt_done)
@@ -1735,11 +1991,15 @@ void cg_end_draw()
         dt_diff.tv_nsec = (_cg_gfx_context->delta_time_ideal - dt_done) * 1000;
         // sleep for the difference
         //  printf("sleep for -> [%ld]nanos\n", dt_diff.tv_nsec);
+#if CG_PLATFORM_WINDOWS
+        _cg_win_nanosleep(&dt_diff, &dt_diff_rem);
+#elif CG_PLATFORM_POSIX
         nanosleep(&dt_diff, &dt_diff_rem);
+#endif
     }
 
     _cg_gfx_context->prev_time = _cg_gfx_context->current_time;
-    clock_gettime(CLOCK_MONOTONIC, &(_cg_gfx_context->current_time));
+    _cg_clock_get_time(&(_cg_gfx_context->current_time));
     // dt_done = _diff_time_micros(current_time, prev_time);
     // printf("After sleep: Delta ideal %lu, Delta done %lu\n", delta_time_ideal, dt_done);
 
