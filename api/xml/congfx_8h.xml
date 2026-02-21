@@ -149,7 +149,7 @@
       </memberdef>
       <memberdef kind="define" id="congfx_8h_1ac918ab95a46b5b799bfcb9bde06e9fd5" prot="public" static="no">
         <name>_CG_TERM_COMMAND_BUFFER_START_SIZE</name>
-        <initializer>1024</initializer>
+        <initializer>10 * 1024</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -160,7 +160,7 @@
       </memberdef>
       <memberdef kind="define" id="congfx_8h_1adb8dc0db35bb35e827046eead29de41c" prot="public" static="no">
         <name>_CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT</name>
-        <initializer>1023</initializer>
+        <initializer>(<ref refid="congfx_8h_1ac918ab95a46b5b799bfcb9bde06e9fd5" kindref="member">_CG_TERM_COMMAND_BUFFER_START_SIZE</ref> - 1)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -2601,8 +2601,8 @@
 <codeline lineno="110" refid="congfx_8h_1a1c5bebaf8a9e0a8ee12f50c3ed91deeb" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_CG_REALLOC<sp/>realloc</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="111" refid="congfx_8h_1a5b36444620b2f4677a745b861acd1249" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_CG_FREE<sp/>free</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="112"><highlight class="normal"></highlight></codeline>
-<codeline lineno="113" refid="congfx_8h_1ac918ab95a46b5b799bfcb9bde06e9fd5" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_CG_TERM_COMMAND_BUFFER_START_SIZE<sp/>1024</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="114" refid="congfx_8h_1adb8dc0db35bb35e827046eead29de41c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT<sp/>1023</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="congfx_8h_1ac918ab95a46b5b799bfcb9bde06e9fd5" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_CG_TERM_COMMAND_BUFFER_START_SIZE<sp/>10<sp/>*<sp/>1024</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114" refid="congfx_8h_1adb8dc0db35bb35e827046eead29de41c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT<sp/>(_CG_TERM_COMMAND_BUFFER_START_SIZE<sp/>-<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="115"><highlight class="normal"></highlight></codeline>
 <codeline lineno="116"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Define<sp/>some<sp/>useful<sp/>keys</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="117" refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbd" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>

@@ -153,9 +153,9 @@ Macros</h2></td></tr>
 <tr class="separator:a1c5bebaf8a9e0a8ee12f50c3ed91deeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b36444620b2f4677a745b861acd1249" id="r_a5b36444620b2f4677a745b861acd1249"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a5b36444620b2f4677a745b861acd1249">_CG_FREE</a>&#160;&#160;&#160;free</td></tr>
 <tr class="separator:a5b36444620b2f4677a745b861acd1249"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac918ab95a46b5b799bfcb9bde06e9fd5" id="r_ac918ab95a46b5b799bfcb9bde06e9fd5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#ac918ab95a46b5b799bfcb9bde06e9fd5">_CG_TERM_COMMAND_BUFFER_START_SIZE</a>&#160;&#160;&#160;1024</td></tr>
+<tr class="memitem:ac918ab95a46b5b799bfcb9bde06e9fd5" id="r_ac918ab95a46b5b799bfcb9bde06e9fd5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#ac918ab95a46b5b799bfcb9bde06e9fd5">_CG_TERM_COMMAND_BUFFER_START_SIZE</a>&#160;&#160;&#160;10 * 1024</td></tr>
 <tr class="separator:ac918ab95a46b5b799bfcb9bde06e9fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb8dc0db35bb35e827046eead29de41c" id="r_adb8dc0db35bb35e827046eead29de41c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#adb8dc0db35bb35e827046eead29de41c">_CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT</a>&#160;&#160;&#160;1023</td></tr>
+<tr class="memitem:adb8dc0db35bb35e827046eead29de41c" id="r_adb8dc0db35bb35e827046eead29de41c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#adb8dc0db35bb35e827046eead29de41c">_CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT</a>&#160;&#160;&#160;(<a class="el" href="congfx_8h.html#ac918ab95a46b5b799bfcb9bde06e9fd5">_CG_TERM_COMMAND_BUFFER_START_SIZE</a> - 1)</td></tr>
 <tr class="separator:adb8dc0db35bb35e827046eead29de41c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a440eac80cc1b89a7a5a97bb375f3edab" id="r_a440eac80cc1b89a7a5a97bb375f3edab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a440eac80cc1b89a7a5a97bb375f3edab">_CG_TERM_KEY_ESCAPE</a>&#160;&#160;&#160;'\x1b'</td></tr>
 <tr class="separator:a440eac80cc1b89a7a5a97bb375f3edab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -460,7 +460,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT&#160;&#160;&#160;1023</td>
+          <td class="memname">#define _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT&#160;&#160;&#160;(<a class="el" href="congfx_8h.html#ac918ab95a46b5b799bfcb9bde06e9fd5">_CG_TERM_COMMAND_BUFFER_START_SIZE</a> - 1)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -474,7 +474,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define _CG_TERM_COMMAND_BUFFER_START_SIZE&#160;&#160;&#160;1024</td>
+          <td class="memname">#define _CG_TERM_COMMAND_BUFFER_START_SIZE&#160;&#160;&#160;10 * 1024</td>
         </tr>
       </table>
 </div><div class="memdoc">
