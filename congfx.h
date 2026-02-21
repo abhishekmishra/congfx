@@ -2039,7 +2039,7 @@ void cg_end_draw()
         // sleep for the difference
         //  printf("sleep for -> [%ld]nanos\n", dt_diff.tv_nsec);
 #if CG_PLATFORM_WINDOWS
-        _cg_win_nanosleep(&dt_diff, &dt_diff_rem);
+        // _cg_win_nanosleep(&dt_diff, &dt_diff_rem);
 #elif CG_PLATFORM_POSIX
         nanosleep(&dt_diff, &dt_diff_rem);
 #endif
