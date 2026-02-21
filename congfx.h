@@ -110,8 +110,8 @@ pictures.
 #define _CG_REALLOC realloc
 #define _CG_FREE free
 
-#define _CG_TERM_COMMAND_BUFFER_START_SIZE 1024
-#define _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT 1023
+#define _CG_TERM_COMMAND_BUFFER_START_SIZE 10 * 1024
+#define _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT (_CG_TERM_COMMAND_BUFFER_START_SIZE - 1)
 
 // Define some useful keys
 typedef enum
