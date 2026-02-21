@@ -60,4 +60,6 @@ test0
 
 # docs directory
 docs/api
+docs/latex
+docs/html
 site/
