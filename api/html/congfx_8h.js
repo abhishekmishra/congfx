@@ -34,6 +34,7 @@ var congfx_8h =
       [ "CG_KEY_RIGHT", "congfx_8h.html#a3843a6c50a39c330b814a0de0469cfbda0b6741b960d20bd538d85eb0a8efc4f3", null ],
       [ "CG_KEY_LEFT", "congfx_8h.html#a3843a6c50a39c330b814a0de0469cfbda3b4e637c195369881a6e886809344056", null ]
     ] ],
+    [ "_cg_clock_get_time", "congfx_8h.html#ae8e2508c5a807c038e27f78ebc4ad1a4", null ],
     [ "_cg_get_cursor_position", "congfx_8h.html#a5024d66520d8c10f1359606f24fb598a", null ],
     [ "_cg_get_window_size", "congfx_8h.html#aa02b4d924ebc2e247a7c6fe2cbc77c67", null ],
     [ "_cg_hide_cursor", "congfx_8h.html#a4ca8e4035cbc3073a07086be224e0389", null ],
@@ -108,7 +109,6 @@ var congfx_8h =
     [ "cg_vec2_to_string", "congfx_8h.html#a1412258140dda5a49b3dd335e53e476c", null ],
     [ "_cg_buffer", "congfx_8h.html#a6e83f975a54e5dcc3f7f21c02d38027f", null ],
     [ "_cg_gfx_context", "congfx_8h.html#ac0c57ac6c0dbc39bc6900c97d2450bb9", null ],
-    [ "_cg_term_orig_flags", "congfx_8h.html#a02629fa624fabe8832e2b40a21041265", null ],
     [ "_fps", "congfx_8h.html#a003cae3fe20e851df481e460aa51056c", null ],
     [ "_loop", "congfx_8h.html#a995c9fb51beb7d97e3fc4724e08b8556", null ],
     [ "background_char", "congfx_8h.html#a74860be7d8aa0da816c91724545e8fe5", null ],
@@ -119,7 +119,6 @@ var congfx_8h =
     [ "default_fg_colour", "congfx_8h.html#a95bcdd7c4a79261cdad325f409a1e277", null ],
     [ "fill_colour", "congfx_8h.html#a6e5769bec0d2ba6c713b653e71c9502b", null ],
     [ "height", "congfx_8h.html#ac54559565a8a06a0d6ab0f9caeb66c0f", null ],
-    [ "orig_termios", "congfx_8h.html#a1705dee0e4e822859804bec377506fb5", null ],
     [ "stroke_colour", "congfx_8h.html#a1ab73073a0e30f7179fe079229bcb06a", null ],
     [ "width", "congfx_8h.html#a6743e39fe1011cdcec74cc73781ee991", null ]
 ];

@@ -72,8 +72,6 @@
     <member refid="congfx_8h_1ac8eba571e0f3d7529f563044c8931070" kind="variable"><name>background_colour</name></member>
     <member refid="congfx_8h_1a1ab73073a0e30f7179fe079229bcb06a" kind="variable"><name>stroke_colour</name></member>
     <member refid="congfx_8h_1a6e5769bec0d2ba6c713b653e71c9502b" kind="variable"><name>fill_colour</name></member>
-    <member refid="congfx_8h_1a1705dee0e4e822859804bec377506fb5" kind="variable"><name>orig_termios</name></member>
-    <member refid="congfx_8h_1a02629fa624fabe8832e2b40a21041265" kind="variable"><name>_cg_term_orig_flags</name></member>
     <member refid="congfx_8h_1a69fad18ecfb9d2f3c91f2a343b33feff" kind="variable"><name>canvas_previous</name></member>
     <member refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kind="variable"><name>canvas_current</name></member>
     <member refid="congfx_8h_1a6e83f975a54e5dcc3f7f21c02d38027f" kind="variable"><name>_cg_buffer</name></member>
@@ -149,5 +147,6 @@
     <member refid="congfx_8h_1aa02b4d924ebc2e247a7c6fe2cbc77c67" kind="function"><name>_cg_get_window_size</name></member>
     <member refid="congfx_8h_1a8fad8ec4fcb2d480af8a017d7ed61c1a" kind="function"><name>_cg_read_key</name></member>
     <member refid="congfx_8h_1a80d63b5b060b4fa97556fe86b4235939" kind="function"><name>_diff_time_micros</name></member>
+    <member refid="congfx_8h_1ae8e2508c5a807c038e27f78ebc4ad1a4" kind="function"><name>_cg_clock_get_time</name></member>
   </compound>
 </doxygenindex>

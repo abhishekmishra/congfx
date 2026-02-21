@@ -339,6 +339,8 @@ Functions</h2></td></tr>
 <tr class="separator:a8fad8ec4fcb2d480af8a017d7ed61c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80d63b5b060b4fa97556fe86b4235939" id="r_a80d63b5b060b4fa97556fe86b4235939"><td class="memItemLeft" align="right" valign="top"><a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a80d63b5b060b4fa97556fe86b4235939">_diff_time_micros</a> (struct timespec time1, struct timespec time2)</td></tr>
 <tr class="separator:a80d63b5b060b4fa97556fe86b4235939"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8e2508c5a807c038e27f78ebc4ad1a4" id="r_ae8e2508c5a807c038e27f78ebc4ad1a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#ae8e2508c5a807c038e27f78ebc4ad1a4">_cg_clock_get_time</a> (struct timespec *t)</td></tr>
+<tr class="separator:ae8e2508c5a807c038e27f78ebc4ad1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -364,10 +366,6 @@ Variables</h2></td></tr>
 <tr class="separator:a1ab73073a0e30f7179fe079229bcb06a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e5769bec0d2ba6c713b653e71c9502b" id="r_a6e5769bec0d2ba6c713b653e71c9502b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcg__rgb__t.html">cg_rgb_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a6e5769bec0d2ba6c713b653e71c9502b">fill_colour</a> = {255, 255, 255}</td></tr>
 <tr class="separator:a6e5769bec0d2ba6c713b653e71c9502b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1705dee0e4e822859804bec377506fb5" id="r_a1705dee0e4e822859804bec377506fb5"><td class="memItemLeft" align="right" valign="top">struct termios&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a1705dee0e4e822859804bec377506fb5">orig_termios</a></td></tr>
-<tr class="separator:a1705dee0e4e822859804bec377506fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02629fa624fabe8832e2b40a21041265" id="r_a02629fa624fabe8832e2b40a21041265"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a02629fa624fabe8832e2b40a21041265">_cg_term_orig_flags</a></td></tr>
-<tr class="separator:a02629fa624fabe8832e2b40a21041265"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69fad18ecfb9d2f3c91f2a343b33feff" id="r_a69fad18ecfb9d2f3c91f2a343b33feff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcg__canvas__t.html">cg_canvas_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a69fad18ecfb9d2f3c91f2a343b33feff">canvas_previous</a> = NULL</td></tr>
 <tr class="separator:a69fad18ecfb9d2f3c91f2a343b33feff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87912191b23d298616001f3210b9d0a2" id="r_a87912191b23d298616001f3210b9d0a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcg__canvas__t.html">cg_canvas_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a87912191b23d298616001f3210b9d0a2">canvas_current</a> = NULL</td></tr>
@@ -652,6 +650,24 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ae8e2508c5a807c038e27f78ebc4ad1a4" name="ae8e2508c5a807c038e27f78ebc4ad1a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8e2508c5a807c038e27f78ebc4ad1a4">&#9670;&#160;</a></span>_cg_clock_get_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void _cg_clock_get_time </td>
+          <td>(</td>
+          <td class="paramtype">struct timespec *&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5024d66520d8c10f1359606f24fb598a" name="a5024d66520d8c10f1359606f24fb598a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5024d66520d8c10f1359606f24fb598a">&#9670;&#160;</a></span>_cg_get_cursor_position()</h2>
 
@@ -2567,20 +2583,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a02629fa624fabe8832e2b40a21041265" name="a02629fa624fabe8832e2b40a21041265"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02629fa624fabe8832e2b40a21041265">&#9670;&#160;</a></span>_cg_term_orig_flags</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int _cg_term_orig_flags</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a003cae3fe20e851df481e460aa51056c" name="a003cae3fe20e851df481e460aa51056c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a003cae3fe20e851df481e460aa51056c">&#9670;&#160;</a></span>_fps</h2>
 
@@ -2715,20 +2717,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="congfx_8h.html#a6d9d6ff7737f67375e5209f1510902da">cg_uint</a> height</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1705dee0e4e822859804bec377506fb5" name="a1705dee0e4e822859804bec377506fb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1705dee0e4e822859804bec377506fb5">&#9670;&#160;</a></span>orig_termios</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct termios orig_termios</td>
         </tr>
       </table>
 </div><div class="memdoc">
