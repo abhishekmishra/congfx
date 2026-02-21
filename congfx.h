@@ -1471,7 +1471,7 @@ int _cg_get_window_size(int *rows, int *cols)
 #if CG_PLATFORM_WINDOWS
     return _cg_win_get_window_size(rows, cols);
 #elif CG_PLATFORM_POSIX
-    return _cg_posixget_window_size(rows, cols);
+    return _cg_posix_get_window_size(rows, cols);
 #endif
 }
 
