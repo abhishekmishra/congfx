@@ -1101,22 +1101,25 @@ void _cg_term_dispose_command_buffer(_cg_term_command_buffer_t *buffer)
 
 int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command, size_t length)
 {
-    size_t command_length = length;
-    if (command_length == 0)
+    if (buffer == NULL || command == NULL)
     {
-        command_length = strlen(command);
+        return -1;
     }
 
-    size_t new_size = buffer->length + command_length + 1;
+    size_t n = (length == 0) ? strlen(command) : length;
+
+    size_t new_size = buffer->length + n + 1;
     if (new_size > buffer->size)
     {
-        if (_cg_term_expand_command_buffer(buffer, command_length) == -1)
+        if (_cg_term_expand_command_buffer(buffer, n) == -1)
         {
             return -1;
         }
     }
-    strncat(buffer->buffer, command, command_length);
-    buffer->length = strlen(buffer->buffer);
+
+    memcpy(buffer->buffer + buffer->length, command, n);
+    buffer->length += n;
+    buffer->buffer[buffer->length] = '\0';
 
     if (buffer->length >= _CG_TERM_COMMAND_BUFFER_FLUSH_LIMIT)
     {
