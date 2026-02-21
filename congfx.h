@@ -860,7 +860,7 @@ cg_uint _diff_time_micros(struct timespec time1, struct timespec time2)
 
 void cg_err_fatal(cg_string message, cg_uint code)
 {
-    printf("FATAL: %ls\n", message);
+    printf("FATAL: %s\n", message);
     exit(code);
 }
 
