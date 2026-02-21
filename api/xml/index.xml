@@ -9,6 +9,10 @@
     <member refid="struct__cg__graphics__context__t_1aee37d147de132428c1489c4429864970" kind="variable"><name>dt</name></member>
     <member refid="struct__cg__graphics__context__t_1a4332f971a0fbb159cb5cc6660ba0d941" kind="variable"><name>should_exit</name></member>
   </compound>
+  <compound refid="struct__cg__num__str__t" kind="struct"><name>_cg_num_str_t</name>
+    <member refid="struct__cg__num__str__t_1a1b33de388df70ac8497cb4c25fbbbd14" kind="variable"><name>str</name></member>
+    <member refid="struct__cg__num__str__t_1a65b2e2cfd4691fc8e77d60325a729ccc" kind="variable"><name>len</name></member>
+  </compound>
   <compound refid="struct__cg__term__command__buffer__t" kind="struct"><name>_cg_term_command_buffer_t</name>
     <member refid="struct__cg__term__command__buffer__t_1a7a4c7e567179836f83ea0bda1bf53f25" kind="variable"><name>buffer</name></member>
     <member refid="struct__cg__term__command__buffer__t_1a72cbe076d2c2a7a6d66048bdf3dd55cd" kind="variable"><name>length</name></member>
@@ -75,6 +79,7 @@
     <member refid="congfx_8h_1a69fad18ecfb9d2f3c91f2a343b33feff" kind="variable"><name>canvas_previous</name></member>
     <member refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kind="variable"><name>canvas_current</name></member>
     <member refid="congfx_8h_1a6e83f975a54e5dcc3f7f21c02d38027f" kind="variable"><name>_cg_buffer</name></member>
+    <member refid="congfx_8h_1a7058ddeaf49e9013a4565ff762cd75e9" kind="variable"><name>_cg_num_lookup</name></member>
     <member refid="congfx_8h_1a11c01857c5f8e50265b9c33394296fbc" kind="function"><name>cg_compare_colour</name></member>
     <member refid="congfx_8h_1a48c97ace8a51bb01a5330a3440beec5b" kind="function"><name>cg_make_cell</name></member>
     <member refid="congfx_8h_1a462ede9ca05eda4eca9c83b2dcadb950" kind="function"><name>cg_get_cell_bg</name></member>
@@ -148,5 +153,6 @@
     <member refid="congfx_8h_1a8fad8ec4fcb2d480af8a017d7ed61c1a" kind="function"><name>_cg_read_key</name></member>
     <member refid="congfx_8h_1a80d63b5b060b4fa97556fe86b4235939" kind="function"><name>_diff_time_micros</name></member>
     <member refid="congfx_8h_1ae8e2508c5a807c038e27f78ebc4ad1a4" kind="function"><name>_cg_clock_get_time</name></member>
+    <member refid="congfx_8h_1a03361f9fd32fab46291b1a48e90743b5" kind="function"><name>_cg_init_num_lookup</name></member>
   </compound>
 </doxygenindex>

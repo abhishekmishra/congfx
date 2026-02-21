@@ -1,6 +1,7 @@
 var annotated_dup =
 [
     [ "_cg_graphics_context_t", "struct__cg__graphics__context__t.html", "struct__cg__graphics__context__t" ],
+    [ "_cg_num_str_t", "struct__cg__num__str__t.html", "struct__cg__num__str__t" ],
     [ "_cg_term_command_buffer_t", "struct__cg__term__command__buffer__t.html", "struct__cg__term__command__buffer__t" ],
     [ "cg_canvas_t", "structcg__canvas__t.html", "structcg__canvas__t" ],
     [ "cg_cell_t", "structcg__cell__t.html", "structcg__cell__t" ],

@@ -134,6 +134,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__cg__graphics__context__t.html">_cg_graphics_context_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__cg__num__str__t.html">_cg_num_str_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -341,6 +343,8 @@ Functions</h2></td></tr>
 <tr class="separator:a80d63b5b060b4fa97556fe86b4235939"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8e2508c5a807c038e27f78ebc4ad1a4" id="r_ae8e2508c5a807c038e27f78ebc4ad1a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#ae8e2508c5a807c038e27f78ebc4ad1a4">_cg_clock_get_time</a> (struct timespec *t)</td></tr>
 <tr class="separator:ae8e2508c5a807c038e27f78ebc4ad1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03361f9fd32fab46291b1a48e90743b5" id="r_a03361f9fd32fab46291b1a48e90743b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a03361f9fd32fab46291b1a48e90743b5">_cg_init_num_lookup</a> ()</td></tr>
+<tr class="separator:a03361f9fd32fab46291b1a48e90743b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -372,6 +376,8 @@ Variables</h2></td></tr>
 <tr class="separator:a87912191b23d298616001f3210b9d0a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e83f975a54e5dcc3f7f21c02d38027f" id="r_a6e83f975a54e5dcc3f7f21c02d38027f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct__cg__term__command__buffer__t.html">_cg_term_command_buffer_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a6e83f975a54e5dcc3f7f21c02d38027f">_cg_buffer</a> = NULL</td></tr>
 <tr class="separator:a6e83f975a54e5dcc3f7f21c02d38027f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7058ddeaf49e9013a4565ff762cd75e9" id="r_a7058ddeaf49e9013a4565ff762cd75e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct__cg__num__str__t.html">_cg_num_str_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="congfx_8h.html#a7058ddeaf49e9013a4565ff762cd75e9">_cg_num_lookup</a> [256]</td></tr>
+<tr class="separator:a7058ddeaf49e9013a4565ff762cd75e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A simple graphics library for the terminal. </p>
@@ -748,6 +754,23 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void _cg_hide_cursor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a03361f9fd32fab46291b1a48e90743b5" name="a03361f9fd32fab46291b1a48e90743b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03361f9fd32fab46291b1a48e90743b5">&#9670;&#160;</a></span>_cg_init_num_lookup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void _cg_init_num_lookup </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2577,6 +2600,20 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="struct__cg__graphics__context__t.html">_cg_graphics_context_t</a>* _cg_gfx_context = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7058ddeaf49e9013a4565ff762cd75e9" name="a7058ddeaf49e9013a4565ff762cd75e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7058ddeaf49e9013a4565ff762cd75e9">&#9670;&#160;</a></span>_cg_num_lookup</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct__cg__num__str__t.html">_cg_num_str_t</a> _cg_num_lookup[256]</td>
         </tr>
       </table>
 </div><div class="memdoc">

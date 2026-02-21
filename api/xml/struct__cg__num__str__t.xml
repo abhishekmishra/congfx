@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="struct__cg__num__str__t" kind="struct" language="C++" prot="public">
+    <compoundname>_cg_num_str_t</compoundname>
+    <includes refid="congfx_8h" local="no">congfx.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct__cg__num__str__t_1a1b33de388df70ac8497cb4c25fbbbd14" prot="public" static="no" mutable="no">
+        <type><ref refid="congfx_8h_1a294b3b3a8e11a477f60c8d1007d212ce" kindref="member">cg_char</ref></type>
+        <definition>cg_char _cg_num_str_t::str[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>str</name>
+        <qualifiedname>_cg_num_str_t::str</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="603" column="13" bodyfile="congfx.h" bodystart="603" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct__cg__num__str__t_1a65b2e2cfd4691fc8e77d60325a729ccc" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t _cg_num_str_t::len</definition>
+        <argsstring></argsstring>
+        <name>len</name>
+        <qualifiedname>_cg_num_str_t::len</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="congfx.h" line="604" column="12" bodyfile="congfx.h" bodystart="604" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="congfx.h" line="601" column="1" bodyfile="congfx.h" bodystart="602" bodyend="605"/>
+    <listofallmembers>
+      <member refid="struct__cg__num__str__t_1a65b2e2cfd4691fc8e77d60325a729ccc" prot="public" virt="non-virtual"><scope>_cg_num_str_t</scope><name>len</name></member>
+      <member refid="struct__cg__num__str__t_1a1b33de388df70ac8497cb4c25fbbbd14" prot="public" virt="non-virtual"><scope>_cg_num_str_t</scope><name>str</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
