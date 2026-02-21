@@ -17,7 +17,7 @@ endif
 # Variables
 CC = clang
 INC = -I..
-CFLAGS = -c $(INC)
+CFLAGS = -c $(INC) -O3
 # All files that start with 'ex' and end with '.c'
 EXE = $(patsubst %.c,%,$(wildcard ex*.c))
 
