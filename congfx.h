@@ -598,6 +598,14 @@ cg_canvas_t *canvas_current = NULL;
 // command buffer for the terminal
 _cg_term_command_buffer_t *_cg_buffer = NULL;
 
+typedef struct
+{
+    cg_char str[4];
+    size_t len;
+} _cg_num_str_t;
+
+_cg_num_str_t _cg_num_lookup[256];
+
 /*--------- END PRIVATE VARIABLES -----------*/
 
 /*--------- BEGIN INTERNAL FUNCTION PROTOTYPES -----------*/
@@ -762,6 +770,8 @@ void _cg_read_key();
 cg_uint _diff_time_micros(struct timespec time1, struct timespec time2);
 
 void _cg_clock_get_time(struct timespec *t);
+
+void _cg_init_num_lookup();
 
 /*--------- END INTERNAL FUNCTION PROTOTYPES -----------*/
 
@@ -1315,16 +1325,24 @@ void _cg_term_reset()
 
 void _cg_term_set_foreground_colour(cg_rgb_t colour)
 {
-    cg_char buffer[25];
-    snprintf(buffer, 25, "\033[38;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
-    _cg_term_buffer_command(_cg_buffer, buffer, 0); // 22);
+    _cg_term_buffer_command(_cg_buffer, "\033[38;2;", 7);
+    _cg_term_buffer_command(_cg_buffer, _cg_num_lookup[colour.r & 0xFF].str, _cg_num_lookup[colour.r & 0xFF].len);
+    _cg_term_buffer_command(_cg_buffer, ";", 1);
+    _cg_term_buffer_command(_cg_buffer, _cg_num_lookup[colour.g & 0xFF].str, _cg_num_lookup[colour.g & 0xFF].len);
+    _cg_term_buffer_command(_cg_buffer, ";", 1);
+    _cg_term_buffer_command(_cg_buffer, _cg_num_lookup[colour.b & 0xFF].str, _cg_num_lookup[colour.b & 0xFF].len);
+    _cg_term_buffer_command(_cg_buffer, "m", 1);
 }
 
 void _cg_term_set_background_colour(cg_rgb_t colour)
 {
-    cg_char buffer[25];
-    snprintf(buffer, 25, "\033[48;2;%lu;%lu;%lum", colour.r, colour.g, colour.b);
-    _cg_term_buffer_command(_cg_buffer, buffer, 0); // 22);
+    _cg_term_buffer_command(_cg_buffer, "\033[48;2;", 7);
+    _cg_term_buffer_command(_cg_buffer, _cg_num_lookup[colour.r & 0xFF].str, _cg_num_lookup[colour.r & 0xFF].len);
+    _cg_term_buffer_command(_cg_buffer, ";", 1);
+    _cg_term_buffer_command(_cg_buffer, _cg_num_lookup[colour.g & 0xFF].str, _cg_num_lookup[colour.g & 0xFF].len);
+    _cg_term_buffer_command(_cg_buffer, ";", 1);
+    _cg_term_buffer_command(_cg_buffer, _cg_num_lookup[colour.b & 0xFF].str, _cg_num_lookup[colour.b & 0xFF].len);
+    _cg_term_buffer_command(_cg_buffer, "m", 1);
 }
 
 void _cg_term_move_to(cg_uint x, cg_uint y)
@@ -1872,8 +1890,19 @@ void _cg_clock_get_time(struct timespec *t)
 #endif
 }
 
+void _cg_init_num_lookup()
+{
+    for (int i = 0; i < 256; i++)
+    {
+        _cg_num_lookup[i].len = sprintf(_cg_num_lookup[i].str, "%d", i);
+    }
+}
+
 int cg_create_graphics(cg_uint w, cg_uint h)
 {
+    // initialize number to string lookup table
+    _cg_init_num_lookup();
+
     // allocate the graphics context
     _cg_gfx_context = (_cg_graphics_context_t *)_CG_CALLOC(1, sizeof(_cg_graphics_context_t));
 
