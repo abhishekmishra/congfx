@@ -1137,9 +1137,9 @@ int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer)
     }
 
     // use simple fwrite instead of expensive puts and flush
-    fwrite(buffer->buffer, 1, buffer->length, stdout);
-    // fputs(buffer->buffer, stdout);
-    // fflush(stdout);
+    // fwrite(buffer->buffer, 1, buffer->length, stdout);
+    fputs(buffer->buffer, stdout);
+    fflush(stdout);
 
     buffer->length = 0;
     buffer->buffer[0] = '\0';
@@ -1679,6 +1679,9 @@ void cg_end_draw()
 
     // swap canvas
     cg_swap_canvas();
+
+    // flush the command buffer
+    _cg_term_flush_command_buffer(_cg_buffer);
 }
 
 void cg_destroy_graphics()
