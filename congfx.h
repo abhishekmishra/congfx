@@ -1131,8 +1131,16 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
 
 int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer)
 {
-    fputs(buffer->buffer, stdout);
-    fflush(stdout);
+    if (buffer->length == 0)
+    {
+        return 0;
+    }
+
+    // use simple fwrite instead of expensive puts and flush
+    fwrite(buffer->buffer, 1, buffer->length, stdout);
+    // fputs(buffer->buffer, stdout);
+    // fflush(stdout);
+
     buffer->length = 0;
     buffer->buffer[0] = '\0';
     return 0;
