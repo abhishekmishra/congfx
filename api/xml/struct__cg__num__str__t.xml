@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="603" column="13" bodyfile="congfx.h" bodystart="603" bodyend="-1"/>
+        <location file="congfx.h" line="604" column="13" bodyfile="congfx.h" bodystart="604" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="struct__cg__num__str__t_1a65b2e2cfd4691fc8e77d60325a729ccc" prot="public" static="no" mutable="no">
         <type>size_t</type>
@@ -30,14 +30,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="604" column="12" bodyfile="congfx.h" bodystart="604" bodyend="-1"/>
+        <location file="congfx.h" line="605" column="12" bodyfile="congfx.h" bodystart="605" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="congfx.h" line="601" column="1" bodyfile="congfx.h" bodystart="602" bodyend="605"/>
+    <location file="congfx.h" line="602" column="1" bodyfile="congfx.h" bodystart="603" bodyend="606"/>
     <listofallmembers>
       <member refid="struct__cg__num__str__t_1a65b2e2cfd4691fc8e77d60325a729ccc" prot="public" virt="non-virtual"><scope>_cg_num_str_t</scope><name>len</name></member>
       <member refid="struct__cg__num__str__t_1a1b33de388df70ac8497cb4c25fbbbd14" prot="public" virt="non-virtual"><scope>_cg_num_str_t</scope><name>str</name></member>
