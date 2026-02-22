@@ -577,6 +577,7 @@ typedef struct
 #if CG_PLATFORM_WINDOWS
     DWORD _cg_orig_in_mode;
     HANDLE _cg_hin;
+    HANDLE _cg_hout;
     LARGE_INTEGER _cg_qpc_freq;
 #endif
 } _cg_graphics_context_t;
@@ -1143,14 +1144,14 @@ void _cg_win_term_enable_raw_mode()
     atexit(_cg_term_disable_raw_mode);
 
     // Enable vt100
-    HANDLE hout = GetStdHandle(STD_OUTPUT_HANDLE);
+    _cg_gfx_context->_cg_hout = GetStdHandle(STD_OUTPUT_HANDLE);
 
     DWORD out_mode;
-    GetConsoleMode(hout, &out_mode);
+    GetConsoleMode(_cg_gfx_context->_cg_hout, &out_mode);
 
     out_mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
 
-    SetConsoleMode(hout, out_mode);
+    SetConsoleMode(_cg_gfx_context->_cg_hout, out_mode);
 
     // Enable UTF8 in Windows
     SetConsoleOutputCP(CP_UTF8);
@@ -1307,7 +1308,26 @@ int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer)
 
     // use simple fwrite instead of expensive puts and flush
 #if CG_PLATFORM_WINDOWS
-    fwrite(buffer->buffer, 1, buffer->length, stdout);
+    // fwrite(buffer->buffer, 1, buffer->length, stdout);
+    DWORD written = 0;
+    BOOL ok = FALSE;
+    DWORD mode = 0;
+
+    if (GetConsoleMode(_cg_gfx_context->_cg_hout, &mode))
+    {
+        // Real console: explicit ANSI variant avoids UNICODE macro issues
+        ok = WriteConsoleA(_cg_gfx_context->_cg_hout, buffer->buffer, (DWORD)buffer->length, &written, NULL);
+    }
+    else
+    {
+        // Redirected/pipe/pseudoconsole path
+        ok = WriteFile(_cg_gfx_context->_cg_hout, buffer->buffer, (DWORD)buffer->length, &written, NULL);
+    }
+
+    if (!ok || written != (DWORD)buffer->length)
+    {
+        return -1; // don't clear buffer on failure
+    }
 #elif CG_PLATFORM_POSIX
     fputs(buffer->buffer, stdout);
     fflush(stdout);
@@ -2039,7 +2059,7 @@ void cg_end_draw()
         // sleep for the difference
         //  printf("sleep for -> [%ld]nanos\n", dt_diff.tv_nsec);
 #if CG_PLATFORM_WINDOWS
-        // _cg_win_nanosleep(&dt_diff, &dt_diff_rem);
+        _cg_win_nanosleep(&dt_diff, &dt_diff_rem);
 #elif CG_PLATFORM_POSIX
         nanosleep(&dt_diff, &dt_diff_rem);
 #endif
