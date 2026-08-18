@@ -416,14 +416,33 @@ int cg_create_graphics(cg_uint w, cg_uint h);
  */
 int cg_create_graphics_fullscreen();
 
-void cg_begin_draw(); // Begin the drawing process. Call before running any draw commands, inside the draw loop
+/**
+ * Begin the drawing process. Call before running any draw commands, inside the draw loop
+ */
+void cg_begin_draw();
 
-void cg_end_draw(); // End the drawing process. Call after running all draw commands, inside the draw loop
+/**
+ * End the drawing process. Call after running all draw commands, inside the draw loop
+ */
+void cg_end_draw();
 
-void cg_destroy_graphics(); // Destroy the graphics system
+/**
+ * Destroy the graphics system
+ */
+void cg_destroy_graphics();
 
-void cg_exit_graphics(); // Exit the graphics system
-int cg_should_exit();    // Check if the graphics system should exit
+/**
+ * Exit the graphics system
+ */
+void cg_exit_graphics();
+
+/**
+ *
+ * Check if the graphics system should exit
+ *
+ * @return int (1 if should exit, 0 otherwise)
+ */
+int cg_should_exit();
 
 /**
  * Get the delta time in microseconds.
