@@ -71,6 +71,7 @@
     <member refid="congfx_8h_1a995c9fb51beb7d97e3fc4724e08b8556" kind="variable"><name>_loop</name></member>
     <member refid="congfx_8h_1a003cae3fe20e851df481e460aa51056c" kind="variable"><name>_fps</name></member>
     <member refid="congfx_8h_1a74860be7d8aa0da816c91724545e8fe5" kind="variable"><name>background_char</name></member>
+    <member refid="congfx_8h_1ad0dbc5ab8e41b6101faa76ba4e10aa8a" kind="variable"><name>draw_char</name></member>
     <member refid="congfx_8h_1a1ea997d31e6b9b1760d24c55cde4eb82" kind="variable"><name>default_bg_colour</name></member>
     <member refid="congfx_8h_1a95bcdd7c4a79261cdad325f409a1e277" kind="variable"><name>default_fg_colour</name></member>
     <member refid="congfx_8h_1ac8eba571e0f3d7529f563044c8931070" kind="variable"><name>background_colour</name></member>
@@ -122,10 +123,14 @@
     <member refid="congfx_8h_1a0bba1782ad49e0131e2983bd0652ee02" kind="function"><name>cg_show_canvas</name></member>
     <member refid="congfx_8h_1acfb36c7099306701bccec1eac4d61245" kind="function"><name>cg_swap_canvas</name></member>
     <member refid="congfx_8h_1a172468dd9f7ca5deae42714200baccdc" kind="function"><name>cg_clear_canvas</name></member>
-    <member refid="congfx_8h_1ae8dab2fda7e2b7ad26db6fcbccc8f692" kind="function"><name>cg_point</name></member>
+    <member refid="congfx_8h_1a6d0de4d587529fea91aeaf2f7a96fcdb" kind="function"><name>cg_point</name></member>
+    <member refid="congfx_8h_1af08ee0282cf14942beae11a919129433" kind="function"><name>cg_point_char</name></member>
     <member refid="congfx_8h_1a7e35ac0f2b751b21cafdf1648374c535" kind="function"><name>cg_line</name></member>
     <member refid="congfx_8h_1a83ad7a726f176c714e1c755164abd0d0" kind="function"><name>cg_rect</name></member>
     <member refid="congfx_8h_1a81f7c9ba9fd0bb8a883721e5d48bcf39" kind="function"><name>cg_text</name></member>
+    <member refid="congfx_8h_1a0b61e9f143deb1a0de68497d0a608fc0" kind="function"><name>cg_set_draw_char</name></member>
+    <member refid="congfx_8h_1a82d10ebec89fb4ded960311fda2c8598" kind="function"><name>cg_get_draw_char</name></member>
+    <member refid="congfx_8h_1a1eb0fde0e33776a67ddc830b31509913" kind="function"><name>_cg_point_impl</name></member>
     <member refid="congfx_8h_1a6d63e1f3bd2fd2c66a8a0d62ba94a32b" kind="function"><name>cg_get_key_pressed</name></member>
     <member refid="congfx_8h_1a018e934fdeb850e954c541f37ef6bad9" kind="function"><name>cg_is_key_pressed</name></member>
     <member refid="congfx_8h_1ad6c20707d5920689fa9b3fcc2f01bd62" kind="function"><name>_cg_term_enable_raw_mode</name></member>

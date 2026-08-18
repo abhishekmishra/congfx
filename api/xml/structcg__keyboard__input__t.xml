@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="511" column="19" bodyfile="congfx.h" bodystart="511" bodyend="-1"/>
+        <location file="congfx.h" line="540" column="19" bodyfile="congfx.h" bodystart="540" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structcg__keyboard__input__t_1afd0dfa703130aa4bd557d940152b85db" prot="public" static="no" mutable="no">
         <type><ref refid="congfx_8h_1a294b3b3a8e11a477f60c8d1007d212ce" kindref="member">cg_char</ref></type>
@@ -30,14 +30,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="512" column="13" bodyfile="congfx.h" bodystart="512" bodyend="-1"/>
+        <location file="congfx.h" line="541" column="13" bodyfile="congfx.h" bodystart="541" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="congfx.h" line="509" column="1" bodyfile="congfx.h" bodystart="510" bodyend="513"/>
+    <location file="congfx.h" line="538" column="1" bodyfile="congfx.h" bodystart="539" bodyend="542"/>
     <listofallmembers>
       <member refid="structcg__keyboard__input__t_1afd0dfa703130aa4bd557d940152b85db" prot="public" virt="non-virtual"><scope>cg_keyboard_input_t</scope><name>char_value</name></member>
       <member refid="structcg__keyboard__input__t_1aaa93e8437d89ea147aab3f4e2785decb" prot="public" virt="non-virtual"><scope>cg_keyboard_input_t</scope><name>key</name></member>
