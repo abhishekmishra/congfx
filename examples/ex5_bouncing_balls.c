@@ -21,6 +21,110 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define CONGFX_IMPLEMENTATION
 #include "congfx.h"
 
+/*+++++++++ BEGIN Vec2 TYPE FUNCTIONS +++++++++*/
+
+/**
+ * Create a new vector of 2 elements.
+ *
+ * @param v1 The first element of the vector.
+ * @param v2 The second element of the vector.
+ * @return The new vector.
+ */
+vec2 cg_make_vec2(cg_number v1, cg_number v2);
+
+/**
+ * Create a new vector of 2 elements from another vector.
+ *
+ * @param other The vector to copy from.
+ * @return The new vector.
+ */
+vec2 cg_make_vec2_from(vec2 other);
+
+/**
+ * Add two vectors.
+ *
+ * @param v1 The first vector.
+ * @param v2 The second vector.
+ * @return The sum of the two vectors.
+ */
+vec2 cg_vec2_add(vec2 v1, vec2 v2);
+
+/**
+ * Multiply a vector by a scalar.
+ *
+ * @param vin The vector to multiply.
+ * @param x The scalar to multiply by.
+ * @return The product of the vector and the scalar.
+ */
+vec2 cg_vec2_mult_scalar(vec2 vin, cg_number x);
+
+/**
+ * Convert a vector to a string.
+ *
+ * @param v The vector to convert.
+ * @return The string representation of the vector.
+ */
+cg_string cg_vec2_to_string(vec2 v);
+
+/**
+ * Dispose of a vector.
+ *
+ * @param v The vector to dispose of.
+ */
+void cg_dispose_vec2(vec2 v);
+
+vec2 cg_make_vec2(cg_number v0, cg_number v1)
+{
+	vec2 v = (vec2)_CG_CALLOC(2, sizeof(cg_number));
+	if (v == NULL)
+	{
+		printf("FATAL Error: Unable to allocate vec2.\n");
+		exit(-1);
+	}
+	v[0] = v0;
+	v[1] = v1;
+	return v;
+}
+
+vec2 cg_make_vec2_from(vec2 other)
+{
+	vec2 v = cg_make_vec2(other[0], other[1]);
+	return v;
+}
+
+vec2 cg_vec2_add(vec2 v1, vec2 v2)
+{
+	vec2 res = cg_make_vec2_from(v1);
+	res[0] = res[0] + v2[0];
+	res[1] = res[1] + v2[1];
+	return res;
+}
+
+vec2 cg_vec2_mult_scalar(vec2 vin, cg_number x)
+{
+	vec2 v = cg_make_vec2_from(vin);
+	v[0] = v[0] * x;
+	v[1] = v[1] * x;
+	return v;
+}
+
+cg_string cg_vec2_to_string(vec2 v)
+{
+	cg_string s = cg_make_string(100);
+	snprintf(s, 100, "%.2Lf, %.2Lf", v[0], v[1]);
+	return s;
+}
+
+void cg_dispose_vec2(vec2 v)
+{
+	if (v != NULL)
+	{
+		_CG_FREE(v);
+	}
+}
+
+/*+++++++++ END Vec2 TYPE FUNCTIONS +++++++++*/
+
 #define NUM_BALLS 10
 #define FPS_STR_LEN 100
 
