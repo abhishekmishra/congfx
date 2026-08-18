@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="516" column="13" bodyfile="congfx.h" bodystart="516" bodyend="-1"/>
+        <location file="congfx.h" line="535" column="13" bodyfile="congfx.h" bodystart="535" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="struct__cg__graphics__context__t_1a7cace5fe2ec55a20511070e3a0117e7e" prot="public" static="no" mutable="no">
         <type><ref refid="structcg__keyboard__input__t" kindref="compound">cg_keyboard_input_t</ref></type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="517" column="25" bodyfile="congfx.h" bodystart="517" bodyend="-1"/>
+        <location file="congfx.h" line="536" column="25" bodyfile="congfx.h" bodystart="536" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="struct__cg__graphics__context__t_1ab9e5409b9a61ae2eed93987b37da0376" prot="public" static="no" mutable="no">
         <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="518" column="13" bodyfile="congfx.h" bodystart="518" bodyend="-1"/>
+        <location file="congfx.h" line="537" column="13" bodyfile="congfx.h" bodystart="537" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="struct__cg__graphics__context__t_1a406ce66255cad01c536017ae8e298193" prot="public" static="no" mutable="no">
         <type>struct timespec start_time prev_time current_time</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="519" column="19" bodyfile="congfx.h" bodystart="519" bodyend="-1"/>
+        <location file="congfx.h" line="538" column="19" bodyfile="congfx.h" bodystart="538" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="struct__cg__graphics__context__t_1a870a8c67cb4c3a8aee59936607d45de6" prot="public" static="no" mutable="no">
         <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="520" column="13" bodyfile="congfx.h" bodystart="520" bodyend="-1"/>
+        <location file="congfx.h" line="539" column="13" bodyfile="congfx.h" bodystart="539" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="struct__cg__graphics__context__t_1aee37d147de132428c1489c4429864970" prot="public" static="no" mutable="no">
         <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="521" column="13" bodyfile="congfx.h" bodystart="521" bodyend="-1"/>
+        <location file="congfx.h" line="540" column="13" bodyfile="congfx.h" bodystart="540" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="struct__cg__graphics__context__t_1a4332f971a0fbb159cb5cc6660ba0d941" prot="public" static="no" mutable="no">
         <type><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref></type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="congfx.h" line="522" column="13" bodyfile="congfx.h" bodystart="522" bodyend="-1"/>
+        <location file="congfx.h" line="541" column="13" bodyfile="congfx.h" bodystart="541" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -120,7 +120,7 @@
         <link refid="structcg__keyboard__input__t"/>
       </node>
     </collaborationgraph>
-    <location file="congfx.h" line="514" column="1" bodyfile="congfx.h" bodystart="515" bodyend="529"/>
+    <location file="congfx.h" line="533" column="1" bodyfile="congfx.h" bodystart="534" bodyend="548"/>
     <listofallmembers>
       <member refid="struct__cg__graphics__context__t_1a406ce66255cad01c536017ae8e298193" prot="public" virt="non-virtual"><scope>_cg_graphics_context_t</scope><name>after_draw_time</name></member>
       <member refid="struct__cg__graphics__context__t_1a870a8c67cb4c3a8aee59936607d45de6" prot="public" virt="non-virtual"><scope>_cg_graphics_context_t</scope><name>delta_time_ideal</name></member>
