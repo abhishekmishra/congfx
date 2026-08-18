@@ -495,12 +495,41 @@ void cg_clear_canvas();
 /*========= BEGIN Graphics Drawing FUNCTIONS =========*/
 
 // drawing functions
-void cg_point(cg_uint x1, cg_uint y1, cg_char c);
+void cg_point(cg_uint x1, cg_uint y1);
+void cg_point_char(cg_uint x1, cg_uint y1, cg_char c);
 void cg_line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2);
 void cg_rect(cg_uint x1, cg_uint y1, cg_uint width, cg_uint height);
 void cg_text(cg_char *t, cg_uint x, cg_uint y);
 
+/**
+ * Set the draw character used by drawing functions.
+ *
+ * @param c The character to use for drawing
+ */
+void cg_set_draw_char(cg_char c);
+
+/**
+ * Get the current draw character.
+ *
+ * @return The current draw character
+ */
+cg_char cg_get_draw_char();
+
 /*========= END Graphics Drawing FUNCTIONS =========*/
+
+/*+++++++++ BEGIN Internal Drawing FUNCTIONS +++++++++*/
+
+/**
+ * Internal implementation of point drawing.
+ * If c is NULL, uses the current draw_char; otherwise uses the provided character.
+ *
+ * @param x1 The x-coordinate
+ * @param y1 The y-coordinate
+ * @param c Pointer to character to draw, or NULL to use draw_char
+ */
+void _cg_point_impl(cg_uint x1, cg_uint y1, const cg_char *c);
+
+/*+++++++++ END Internal Drawing FUNCTIONS +++++++++++*/
 
 /*+++++++++ END Graphics FUNCTIONS +++++++++*/
 
@@ -552,6 +581,7 @@ _cg_graphics_context_t *_cg_gfx_context = NULL;
 int _loop = 1;
 cg_uint _fps = _CG_DEFAULT_FPS;
 cg_char background_char = _CG_DEFAULT_BACKGROUND_CHAR;
+cg_char draw_char = '#';
 cg_rgb_t default_bg_colour = {0, 0, 0};
 cg_rgb_t default_fg_colour = {255, 255, 255};
 cg_rgb_t background_colour = {0, 0, 0};
@@ -1602,7 +1632,7 @@ void cg_background(cg_rgb_t col)
     {
         for (cg_uint y = 0; y < canvas_current->height; y++)
         {
-            cg_point(x, y, background_char);
+            cg_point_char(x, y, background_char);
         }
     }
 }
@@ -1713,7 +1743,7 @@ void cg_clear_canvas()
     cg_background(default_bg_colour);
 }
 
-void cg_point(cg_uint x1, cg_uint y1, cg_char c)
+void _cg_point_impl(cg_uint x1, cg_uint y1, const cg_char *c)
 {
     if (canvas_current == NULL)
     {
@@ -1724,11 +1754,32 @@ void cg_point(cg_uint x1, cg_uint y1, cg_char c)
         return;
     }
     cg_cell_t *cell = cg_get_cell(canvas_current, x1, y1);
-    cg_set_cell_char(cell, c);
+    cg_char ch = (c != NULL) ? *c : draw_char;
+    cg_set_cell_char(cell, ch);
     cg_set_cell_bg(cell, background_colour);
     cg_set_cell_fg(cell, stroke_colour);
     // printf("\033[%lu;%luf", y1, x1);
-    // printf("%c", c);
+    // printf("%c", ch);
+}
+
+void cg_point(cg_uint x1, cg_uint y1)
+{
+    _cg_point_impl(x1, y1, NULL);
+}
+
+void cg_point_char(cg_uint x1, cg_uint y1, cg_char c)
+{
+    _cg_point_impl(x1, y1, &c);
+}
+
+void cg_set_draw_char(cg_char c)
+{
+    draw_char = c;
+}
+
+cg_char cg_get_draw_char()
+{
+    return draw_char;
 }
 
 void cg_line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
@@ -1746,7 +1797,7 @@ void cg_line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
 
     for (;;)
     {
-        cg_point(x1, y1, '#');
+        cg_point(x1, y1);
 
         if (x1 == x2 && y1 == y2)
             break;
@@ -1787,7 +1838,7 @@ void cg_text(cg_char *t, cg_uint x, cg_uint y)
     {
         for (cg_uint i = 0; i < len; i++)
         {
-            cg_point(x + i, y, t[i]);
+            _cg_point_impl(x + i, y, &t[i]);
         }
     }
 }

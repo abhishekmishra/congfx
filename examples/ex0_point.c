@@ -24,7 +24,8 @@ int main(int argc, char *argv[])
         cg_stroke(fg_colour);
 
         // draw a point at the center of the canvas
-        cg_point(width / 2, height / 2, 'X');
+        cg_set_draw_char('X');
+        cg_point(width / 2, height / 2);
 
         // print press escape to exit
         cg_text("Press ESC to exit", 0, height - 1);

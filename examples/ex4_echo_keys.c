@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
         cg_uint cr = 0, cc = 0;
         for (cg_uint i = 0; i < len; i++)
         {
-            cg_point(cc, cr, contents[i]);
-            cg_point(cc, 10, i + 48);
+            cg_point_char(cc, cr, contents[i]);
+            cg_point_char(cc, 10, (cg_char)(i + 48));
             cc++;
             if (cc >= width)
             {
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 
 void handle_key_pressed(cg_char c)
 {
-    cg_point(char_col, char_row, c);
+    cg_point_char(char_col, char_row, c);
 
     // append to contents
     contents[char_row * width + char_col] = c;
