@@ -1733,35 +1733,36 @@ void cg_point(cg_uint x1, cg_uint y1, cg_char c)
 
 void cg_line(cg_uint x1, cg_uint y1, cg_uint x2, cg_uint y2)
 {
-    // printf("line [%lu,%lu] -> [%lu, %lu]", x1, y1, x2, y2);
+    // use bresenham's algorithm to draw the line
+    // will have to use integer values to ensure
+    // negative gradients are handled correctly
+    int dx = abs((int)x2 - (int)x1);
+    int sx = x1 < x2 ? 1 : -1;
 
-    // swap coordinates if y1 is lower
-    if (x1 > x2)
-    {
-        cg_uint tx, ty;
-        tx = x2;
-        ty = y2;
-        x2 = x1;
-        y2 = y1;
-        x1 = tx;
-        y1 = ty;
-    }
+    int dy = -abs((int)y2 - (int)y1);
+    int sy = y1 < y2 ? 1 : -1;
 
-    if (x1 == x2)
+    int error = dx + dy;
+
+    for (;;)
     {
-        // slope is infinite
-        for (cg_uint y = y1; y <= y2; y++)
+        cg_point(x1, y1, '#');
+
+        if (x1 == x2 && y1 == y2)
+            break;
+
+        int e2 = 2 * error;
+
+        if (e2 >= dy)
         {
-            cg_point(x1, y, '#');
+            error += dy;
+            x1 += sx;
         }
-    }
-    else
-    {
-        double slope = (y2 - y1) / (x2 - x1);
-        for (cg_uint x = x1; x <= x2; x++)
+
+        if (e2 <= dx)
         {
-            cg_uint y = y1 + (slope * x);
-            cg_point(x, y, '#');
+            error += dx;
+            y1 += sy;
         }
     }
 }
