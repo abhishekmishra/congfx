@@ -93,12 +93,6 @@
     <member refid="congfx_8h_1ade8cdd6352955d7b81ba216f35b90324" kind="function"><name>cg_make_canvas</name></member>
     <member refid="congfx_8h_1adb63bb66f341d7d16e237a4181a8c8b5" kind="function"><name>cg_get_cell</name></member>
     <member refid="congfx_8h_1ad0d399a987768bfea20cf7a20b7f0d7d" kind="function"><name>cg_dispose_canvas</name></member>
-    <member refid="congfx_8h_1a5fe9963ca75d2780a669bd2260fded6a" kind="function"><name>cg_make_vec2</name></member>
-    <member refid="congfx_8h_1a01886eeb8ad45140e241010abfdb0ffb" kind="function"><name>cg_make_vec2_from</name></member>
-    <member refid="congfx_8h_1a380a15043506e56bbd35e65710cc09ef" kind="function"><name>cg_vec2_add</name></member>
-    <member refid="congfx_8h_1ad3ccd1beb9fbd5d1225ae35c6699cc1f" kind="function"><name>cg_vec2_mult_scalar</name></member>
-    <member refid="congfx_8h_1a1412258140dda5a49b3dd335e53e476c" kind="function"><name>cg_vec2_to_string</name></member>
-    <member refid="congfx_8h_1a7f128d8d4ad334583aa1bfec1238df75" kind="function"><name>cg_dispose_vec2</name></member>
     <member refid="congfx_8h_1aa9e34395e601bce37800c5d6d2fe9be2" kind="function"><name>cg_make_string</name></member>
     <member refid="congfx_8h_1afd4a3d47f14a12eeae738d421fb845f4" kind="function"><name>cg_dispose_string</name></member>
     <member refid="congfx_8h_1a9d419c5f30746f07018fe5229442d950" kind="function"><name>cg_number_to_uinteger</name></member>
