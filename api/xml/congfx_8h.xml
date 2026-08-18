@@ -3752,319 +3752,320 @@
 <codeline lineno="1733"><highlight class="normal"></highlight></codeline>
 <codeline lineno="1734"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a7e35ac0f2b751b21cafdf1648374c535" kindref="member">cg_line</ref>(<ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>x1,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>y1,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>x2,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>y2)</highlight></codeline>
 <codeline lineno="1735"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="1736"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>printf(&quot;line<sp/>[%lu,%lu]<sp/>-&gt;<sp/>[%lu,<sp/>%lu]&quot;,<sp/>x1,<sp/>y1,<sp/>x2,<sp/>y2);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1737"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1738"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>swap<sp/>coordinates<sp/>if<sp/>y1<sp/>is<sp/>lower</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1739"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(x1<sp/>&gt;<sp/>x2)</highlight></codeline>
-<codeline lineno="1740"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1741"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>tx,<sp/>ty;</highlight></codeline>
-<codeline lineno="1742"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tx<sp/>=<sp/>x2;</highlight></codeline>
-<codeline lineno="1743"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ty<sp/>=<sp/>y2;</highlight></codeline>
-<codeline lineno="1744"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x2<sp/>=<sp/>x1;</highlight></codeline>
-<codeline lineno="1745"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>y2<sp/>=<sp/>y1;</highlight></codeline>
-<codeline lineno="1746"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x1<sp/>=<sp/>tx;</highlight></codeline>
-<codeline lineno="1747"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>y1<sp/>=<sp/>ty;</highlight></codeline>
-<codeline lineno="1748"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1749"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1750"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(x1<sp/>==<sp/>x2)</highlight></codeline>
-<codeline lineno="1751"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1752"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>slope<sp/>is<sp/>infinite</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1753"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>y<sp/>=<sp/>y1;<sp/>y<sp/>&lt;=<sp/>y2;<sp/>y++)</highlight></codeline>
-<codeline lineno="1754"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1755"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae8dab2fda7e2b7ad26db6fcbccc8f692" kindref="member">cg_point</ref>(x1,<sp/>y,<sp/></highlight><highlight class="charliteral">&apos;#&apos;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="1756"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1757"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1758"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1759"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1760"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>slope<sp/>=<sp/>(y2<sp/>-<sp/>y1)<sp/>/<sp/>(x2<sp/>-<sp/>x1);</highlight></codeline>
-<codeline lineno="1761"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>x<sp/>=<sp/>x1;<sp/>x<sp/>&lt;=<sp/>x2;<sp/>x++)</highlight></codeline>
-<codeline lineno="1762"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1763"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>y<sp/>=<sp/>y1<sp/>+<sp/>(slope<sp/>*<sp/>x);</highlight></codeline>
-<codeline lineno="1764"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae8dab2fda7e2b7ad26db6fcbccc8f692" kindref="member">cg_point</ref>(x,<sp/>y,<sp/></highlight><highlight class="charliteral">&apos;#&apos;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="1765"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1766"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1767"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="1768"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1769"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a83ad7a726f176c714e1c755164abd0d0" kindref="member">cg_rect</ref>(<ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>x1,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>y1,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>)</highlight></codeline>
-<codeline lineno="1770"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="1771"><highlight class="normal"><sp/><sp/><sp/><sp/>x1<sp/>=<sp/><ref refid="congfx_8h_1a7bec0ad05cc5bb2eef0abb079223c1f2" kindref="member">cg_clamp</ref>(x1,<sp/>0,<sp/><ref refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kindref="member">canvas_current</ref>-&gt;<ref refid="structcg__canvas__t_1a83e8ff626baa465bb00278e13e0333f6" kindref="member">width</ref><sp/>-<sp/>1);</highlight></codeline>
-<codeline lineno="1772"><highlight class="normal"><sp/><sp/><sp/><sp/>y1<sp/>=<sp/><ref refid="congfx_8h_1a7bec0ad05cc5bb2eef0abb079223c1f2" kindref="member">cg_clamp</ref>(y1,<sp/>0,<sp/><ref refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kindref="member">canvas_current</ref>-&gt;<ref refid="structcg__canvas__t_1a852e709778968cd042330f602f5eca90" kindref="member">height</ref><sp/>-<sp/>1);</highlight></codeline>
-<codeline lineno="1773"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref><sp/>=<sp/><ref refid="congfx_8h_1a7bec0ad05cc5bb2eef0abb079223c1f2" kindref="member">cg_clamp</ref>(<ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/>0,<sp/><ref refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kindref="member">canvas_current</ref>-&gt;<ref refid="structcg__canvas__t_1a83e8ff626baa465bb00278e13e0333f6" kindref="member">width</ref><sp/>-<sp/>x1);</highlight></codeline>
-<codeline lineno="1774"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref><sp/>=<sp/><ref refid="congfx_8h_1a7bec0ad05cc5bb2eef0abb079223c1f2" kindref="member">cg_clamp</ref>(<ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>,<sp/>0,<sp/><ref refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kindref="member">canvas_current</ref>-&gt;<ref refid="structcg__canvas__t_1a852e709778968cd042330f602f5eca90" kindref="member">height</ref><sp/>-<sp/>y1);</highlight></codeline>
-<codeline lineno="1775"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1776"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a7e35ac0f2b751b21cafdf1648374c535" kindref="member">cg_line</ref>(x1,<sp/>y1,<sp/>x1<sp/>+<sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/>y1);</highlight></codeline>
-<codeline lineno="1777"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a7e35ac0f2b751b21cafdf1648374c535" kindref="member">cg_line</ref>(x1<sp/>+<sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/>y1,<sp/>x1<sp/>+<sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/>y1<sp/>+<sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>);</highlight></codeline>
-<codeline lineno="1778"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a7e35ac0f2b751b21cafdf1648374c535" kindref="member">cg_line</ref>(x1<sp/>+<sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/>y1<sp/>+<sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>,<sp/>x1,<sp/>y1<sp/>+<sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>);</highlight></codeline>
-<codeline lineno="1779"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a7e35ac0f2b751b21cafdf1648374c535" kindref="member">cg_line</ref>(x1,<sp/>y1,<sp/>x1,<sp/>y1<sp/>+<sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>);</highlight></codeline>
-<codeline lineno="1780"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="1781"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1782"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a81f7c9ba9fd0bb8a883721e5d48bcf39" kindref="member">cg_text</ref>(<ref refid="congfx_8h_1a294b3b3a8e11a477f60c8d1007d212ce" kindref="member">cg_char</ref><sp/>*t,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>x,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>y)</highlight></codeline>
-<codeline lineno="1783"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="1784"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>len<sp/>=<sp/>strlen(t);</highlight></codeline>
-<codeline lineno="1785"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(len<sp/>&gt;<sp/>0)</highlight></codeline>
-<codeline lineno="1786"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1787"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>len;<sp/>i++)</highlight></codeline>
-<codeline lineno="1788"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1789"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae8dab2fda7e2b7ad26db6fcbccc8f692" kindref="member">cg_point</ref>(x<sp/>+<sp/>i,<sp/>y,<sp/>t[i]);</highlight></codeline>
-<codeline lineno="1790"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1791"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1792"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="1793"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1794"><highlight class="normal"><ref refid="structcg__keyboard__input__t" kindref="compound">cg_keyboard_input_t</ref><sp/><ref refid="congfx_8h_1a6d63e1f3bd2fd2c66a8a0d62ba94a32b" kindref="member">cg_get_key_pressed</ref>()</highlight></codeline>
-<codeline lineno="1795"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="1796"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>get<sp/>key<sp/>at<sp/>the<sp/>key<sp/>counter</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1797"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1ab9e5409b9a61ae2eed93987b37da0376" kindref="member">key_counter</ref><sp/>&lt;<sp/>128)</highlight></codeline>
-<codeline lineno="1798"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1799"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structcg__keyboard__input__t" kindref="compound">cg_keyboard_input_t</ref><sp/>inp<sp/>=<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a7cace5fe2ec55a20511070e3a0117e7e" kindref="member">keys_pressed</ref>[<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1ab9e5409b9a61ae2eed93987b37da0376" kindref="member">key_counter</ref>];</highlight></codeline>
-<codeline lineno="1800"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1ab9e5409b9a61ae2eed93987b37da0376" kindref="member">key_counter</ref>++;</highlight></codeline>
-<codeline lineno="1801"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inp;</highlight></codeline>
-<codeline lineno="1802"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1803"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1804"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>return<sp/>a<sp/>key<sp/>with<sp/>none<sp/>value</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1805"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<ref refid="structcg__keyboard__input__t" kindref="compound">cg_keyboard_input_t</ref>){<ref refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbda4ed2e18b6ffb8ee5ae9f14e8999f824b" kindref="member">CG_KEY_NONE</ref>,<sp/></highlight><highlight class="charliteral">&apos;\0&apos;</highlight><highlight class="normal">};</highlight></codeline>
-<codeline lineno="1806"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="1807"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1808"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a018e934fdeb850e954c541f37ef6bad9" kindref="member">cg_is_key_pressed</ref>(<ref refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbd" kindref="member">cg_key_type_t</ref><sp/>key)</highlight></codeline>
-<codeline lineno="1809"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="1810"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref><sp/>==<sp/>NULL)</highlight></codeline>
-<codeline lineno="1811"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1812"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
-<codeline lineno="1813"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1814"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>count<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="1815"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(count<sp/>&lt;<sp/>128)</highlight></codeline>
-<codeline lineno="1816"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1817"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structcg__keyboard__input__t" kindref="compound">cg_keyboard_input_t</ref><sp/>inp<sp/>=<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a7cace5fe2ec55a20511070e3a0117e7e" kindref="member">keys_pressed</ref>[count];</highlight></codeline>
-<codeline lineno="1818"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(inp.<ref refid="structcg__keyboard__input__t_1aaa93e8437d89ea147aab3f4e2785decb" kindref="member">key</ref><sp/>==<sp/><ref refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbda4ed2e18b6ffb8ee5ae9f14e8999f824b" kindref="member">CG_KEY_NONE</ref>)</highlight></codeline>
-<codeline lineno="1819"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1820"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="1821"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1822"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(inp.<ref refid="structcg__keyboard__input__t_1aaa93e8437d89ea147aab3f4e2785decb" kindref="member">key</ref><sp/>==<sp/>key)</highlight></codeline>
-<codeline lineno="1823"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1824"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
-<codeline lineno="1825"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1826"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>count++;</highlight></codeline>
-<codeline lineno="1827"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1828"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
-<codeline lineno="1829"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="1830"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1831"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1ae8e2508c5a807c038e27f78ebc4ad1a4" kindref="member">_cg_clock_get_time</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>timespec<sp/>*t)</highlight></codeline>
-<codeline lineno="1832"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="1833"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CG_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1834"><highlight class="normal"><sp/><sp/><sp/><sp/>_cg_win_clock_gettime(t);</highlight></codeline>
-<codeline lineno="1835"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CG_PLATFORM_POSIX</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1836"><highlight class="normal"><sp/><sp/><sp/><sp/>clock_gettime(CLOCK_MONOTONIC,<sp/>t);</highlight></codeline>
-<codeline lineno="1837"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1838"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="1839"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1840"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a03361f9fd32fab46291b1a48e90743b5" kindref="member">_cg_init_num_lookup</ref>()</highlight></codeline>
-<codeline lineno="1841"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="1842"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>256;<sp/>i++)</highlight></codeline>
-<codeline lineno="1843"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1844"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a7058ddeaf49e9013a4565ff762cd75e9" kindref="member">_cg_num_lookup</ref>[i].<ref refid="struct__cg__num__str__t_1a65b2e2cfd4691fc8e77d60325a729ccc" kindref="member">len</ref><sp/>=<sp/>sprintf(<ref refid="congfx_8h_1a7058ddeaf49e9013a4565ff762cd75e9" kindref="member">_cg_num_lookup</ref>[i].str,<sp/></highlight><highlight class="stringliteral">&quot;%d&quot;</highlight><highlight class="normal">,<sp/>i);</highlight></codeline>
-<codeline lineno="1845"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1846"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="1847"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1848"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a74f52ae7ce7cf4eee0aeecf34fa09d0f" kindref="member">cg_create_graphics</ref>(<ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>w,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>h)</highlight></codeline>
-<codeline lineno="1849"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="1850"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>initialize<sp/>number<sp/>to<sp/>string<sp/>lookup<sp/>table</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1851"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a03361f9fd32fab46291b1a48e90743b5" kindref="member">_cg_init_num_lookup</ref>();</highlight></codeline>
-<codeline lineno="1852"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1853"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>allocate<sp/>the<sp/>graphics<sp/>context</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1854"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref><sp/>=<sp/>(<ref refid="struct__cg__graphics__context__t" kindref="compound">_cg_graphics_context_t</ref><sp/>*)<ref refid="congfx_8h_1ada5c282ee4dc3f71d374241eba71427c" kindref="member">_CG_CALLOC</ref>(1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct__cg__graphics__context__t" kindref="compound">_cg_graphics_context_t</ref>));</highlight></codeline>
-<codeline lineno="1855"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1856"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CG_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1857"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>windows<sp/>init<sp/>time</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1858"><highlight class="normal"><sp/><sp/><sp/><sp/>_cg_win_time_init();</highlight></codeline>
-<codeline lineno="1859"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1860"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1861"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref><sp/>==<sp/>NULL)</highlight></codeline>
-<codeline lineno="1862"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1863"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;FATAL<sp/>Error:<sp/>Unable<sp/>to<sp/>allocate<sp/>graphics<sp/>context.\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="1864"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1;</highlight></codeline>
-<codeline lineno="1865"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1866"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1867"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae8e2508c5a807c038e27f78ebc4ad1a4" kindref="member">_cg_clock_get_time</ref>(&amp;(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;start_time));</highlight></codeline>
-<codeline lineno="1868"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;prev_time<sp/>=<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;start_time;</highlight></codeline>
-<codeline lineno="1869"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;current_time<sp/>=<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;start_time;</highlight></codeline>
-<codeline lineno="1870"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a4332f971a0fbb159cb5cc6660ba0d941" kindref="member">should_exit</ref><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="1871"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1872"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a870a8c67cb4c3a8aee59936607d45de6" kindref="member">delta_time_ideal</ref><sp/>=<sp/>1000000<sp/>/<sp/><ref refid="congfx_8h_1a003cae3fe20e851df481e460aa51056c" kindref="member">_fps</ref>;<sp/></highlight><highlight class="comment">//<sp/>in<sp/>microseconds</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1873"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1874"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>init<sp/>random<sp/>numbers</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1875"><highlight class="normal"><sp/><sp/><sp/><sp/>srand(time(NULL));</highlight></codeline>
-<codeline lineno="1876"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1877"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>create<sp/>the<sp/>command<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1878"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1a1525b6a6d47ca3998da1420490d6973a" kindref="member">_cg_term_create_command_buffer</ref>(&amp;<ref refid="congfx_8h_1a6e83f975a54e5dcc3f7f21c02d38027f" kindref="member">_cg_buffer</ref>)<sp/>==<sp/>-1)</highlight></codeline>
-<codeline lineno="1879"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1880"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;FATAL<sp/>Error:<sp/>Unable<sp/>to<sp/>create<sp/>command<sp/>buffer.\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="1881"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1;</highlight></codeline>
-<codeline lineno="1882"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1883"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1884"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>enable<sp/>raw<sp/>mode<sp/>for<sp/>terminal</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1885"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad6c20707d5920689fa9b3fcc2f01bd62" kindref="member">_cg_term_enable_raw_mode</ref>();</highlight></codeline>
-<codeline lineno="1886"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1887"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>get<sp/>the<sp/>window<sp/>size</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1888"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rows,<sp/>cols;</highlight></codeline>
-<codeline lineno="1889"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(w<sp/>==<sp/>0<sp/>||<sp/>h<sp/>==<sp/>0)</highlight></codeline>
-<codeline lineno="1890"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1891"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1aa02b4d924ebc2e247a7c6fe2cbc77c67" kindref="member">_cg_get_window_size</ref>(&amp;rows,<sp/>&amp;cols)<sp/>==<sp/>-1)</highlight></codeline>
-<codeline lineno="1892"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1893"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;FATAL<sp/>Error:<sp/>Unable<sp/>to<sp/>get<sp/>window<sp/>size.\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="1894"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1;</highlight></codeline>
-<codeline lineno="1895"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1896"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1897"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1898"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1899"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rows<sp/>=<sp/>h;</highlight></codeline>
-<codeline lineno="1900"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cols<sp/>=<sp/>w;</highlight></codeline>
-<codeline lineno="1901"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1902"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1903"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>init<sp/>locale<sp/>for<sp/>terminal,<sp/>and<sp/>wide<sp/>output</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1904"><highlight class="normal"><sp/><sp/><sp/><sp/>setlocale(LC_ALL,<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="1905"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>fwide(stdout,<sp/>1);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1906"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1907"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>there<sp/>is<sp/>no<sp/>canvas<sp/>created,<sp/>create<sp/>a<sp/>default<sp/>one</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1908"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kindref="member">canvas_current</ref><sp/>==<sp/>NULL)</highlight></codeline>
-<codeline lineno="1909"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1910"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a8e26cc4d0c7e75eb225bfa5bec45a4b7" kindref="member">cg_create_canvas</ref>(cols,<sp/>rows);</highlight></codeline>
-<codeline lineno="1911"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1912"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad552fd9237d2694ef179e504e96499eb" kindref="member">cg_background</ref>(<ref refid="congfx_8h_1a1ea997d31e6b9b1760d24c55cde4eb82" kindref="member">default_bg_colour</ref>);</highlight></codeline>
-<codeline lineno="1913"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a4c9331ed66f6b72a2a4747e722fcace5" kindref="member">cg_set_colour</ref>(<ref refid="congfx_8h_1a95bcdd7c4a79261cdad325f409a1e277" kindref="member">default_fg_colour</ref>);</highlight></codeline>
-<codeline lineno="1914"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1915"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>swap<sp/>out<sp/>the<sp/>current<sp/>canvas,</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1916"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>make<sp/>the<sp/>current<sp/>canvas<sp/>dirty<sp/>with<sp/>a<sp/>foreground<sp/>colour<sp/>so<sp/>that</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1917"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>it<sp/>will<sp/>not<sp/>match<sp/>with<sp/>the<sp/>previous<sp/>canvas<sp/>in<sp/>the<sp/>draw<sp/>call</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1918"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>then<sp/>draw<sp/>the<sp/>initial<sp/>canvas</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1919"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1acfb36c7099306701bccec1eac4d61245" kindref="member">cg_swap_canvas</ref>();</highlight></codeline>
-<codeline lineno="1920"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad552fd9237d2694ef179e504e96499eb" kindref="member">cg_background</ref>(<ref refid="congfx_8h_1a95bcdd7c4a79261cdad325f409a1e277" kindref="member">default_fg_colour</ref>);</highlight></codeline>
-<codeline lineno="1921"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1acfb36c7099306701bccec1eac4d61245" kindref="member">cg_swap_canvas</ref>();</highlight></codeline>
-<codeline lineno="1922"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1923"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>now<sp/>draw<sp/>the<sp/>canvas</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1924"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a0bba1782ad49e0131e2983bd0652ee02" kindref="member">cg_show_canvas</ref>();</highlight></codeline>
-<codeline lineno="1925"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1926"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>swap<sp/>out<sp/>the<sp/>current<sp/>canvas,<sp/>and<sp/>set<sp/>the<sp/>default<sp/>background<sp/>and<sp/>foreground</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1927"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>to<sp/>restore<sp/>the<sp/>initial<sp/>state<sp/>in<sp/>both<sp/>back<sp/>and<sp/>front<sp/>canvas</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1928"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1acfb36c7099306701bccec1eac4d61245" kindref="member">cg_swap_canvas</ref>();</highlight></codeline>
-<codeline lineno="1929"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad552fd9237d2694ef179e504e96499eb" kindref="member">cg_background</ref>(<ref refid="congfx_8h_1a1ea997d31e6b9b1760d24c55cde4eb82" kindref="member">default_bg_colour</ref>);</highlight></codeline>
-<codeline lineno="1930"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a4c9331ed66f6b72a2a4747e722fcace5" kindref="member">cg_set_colour</ref>(<ref refid="congfx_8h_1a95bcdd7c4a79261cdad325f409a1e277" kindref="member">default_fg_colour</ref>);</highlight></codeline>
-<codeline lineno="1931"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1932"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1933"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>set<sp/>default<sp/>background<sp/>and<sp/>forground</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1934"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1afff4c044ddce9b0c3fc002929f9d7c0b" kindref="member">_cg_term_reset</ref>();</highlight></codeline>
-<codeline lineno="1935"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1aab71e1304e3dd5d4fe0e8b2c76be8f20" kindref="member">_cg_term_set_foreground_colour</ref>(<ref refid="congfx_8h_1a95bcdd7c4a79261cdad325f409a1e277" kindref="member">default_fg_colour</ref>);</highlight></codeline>
-<codeline lineno="1936"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1937"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae0df00abe0adf0554f6ab446d5207aee" kindref="member">cg_cls</ref>();</highlight></codeline>
-<codeline lineno="1938"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a4a6d5781a371fe269d8c2bb61d45945a" kindref="member">cg_home</ref>();</highlight></codeline>
-<codeline lineno="1939"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1940"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
-<codeline lineno="1941"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="1942"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1943"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1adad8b0c22b2f9819a948e25d72f8373c" kindref="member">cg_create_graphics_fullscreen</ref>()</highlight></codeline>
-<codeline lineno="1944"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="1945"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a74f52ae7ce7cf4eee0aeecf34fa09d0f" kindref="member">cg_create_graphics</ref>(0,<sp/>0);</highlight></codeline>
-<codeline lineno="1946"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="1947"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1948"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a677ad02c40ccbfbb1e18be09d499f887" kindref="member">cg_begin_draw</ref>()</highlight></codeline>
-<codeline lineno="1949"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="1950"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1aee37d147de132428c1489c4429864970" kindref="member">dt</ref><sp/>=<sp/><ref refid="congfx_8h_1a80d63b5b060b4fa97556fe86b4235939" kindref="member">_diff_time_micros</ref>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;current_time,<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;prev_time);</highlight></codeline>
-<codeline lineno="1951"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1952"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a8fad8ec4fcb2d480af8a017d7ed61c1a" kindref="member">_cg_read_key</ref>();</highlight></codeline>
-<codeline lineno="1953"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1954"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>the<sp/>key<sp/>pressed<sp/>is<sp/>ESC,<sp/>then<sp/>return<sp/>-1<sp/>to<sp/>exit</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1955"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1a018e934fdeb850e954c541f37ef6bad9" kindref="member">cg_is_key_pressed</ref>(<ref refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbda6dfe2b713ff7209771729287b3d968a2" kindref="member">CG_KEY_ESCAPE</ref>))</highlight></codeline>
-<codeline lineno="1956"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1957"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad7d84e4c6eb1649f2a52e79a53ee1ea2" kindref="member">cg_exit_graphics</ref>();</highlight></codeline>
-<codeline lineno="1958"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1959"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="1960"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1961"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1af76a416b029637c96792ad2e3a7c7979" kindref="member">cg_end_draw</ref>()</highlight></codeline>
-<codeline lineno="1962"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="1963"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>DEBUG<sp/>code<sp/>to<sp/>show<sp/>the<sp/>key<sp/>pressed</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1964"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>int<sp/>key_count<sp/>=<sp/>0;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1965"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>cg_keyboard_input_t<sp/>inp;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1966"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>cg_string<sp/>key_str<sp/>=<sp/>cg_make_string(100);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1967"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>while(inp<sp/>=<sp/>cg_get_key_pressed(),<sp/>inp.key<sp/>!=<sp/>CG_KEY_NONE)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1968"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1969"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>key_count++;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1970"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>snprintf(key_str,<sp/>100,<sp/>&quot;Key<sp/>Pressed<sp/>%d,<sp/>%c&quot;,<sp/>inp.key,<sp/>inp.char_value);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1971"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>cg_text(key_str,<sp/>0,<sp/>key_count);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1972"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1973"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1974"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>show<sp/>the<sp/>canvas</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1975"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a0bba1782ad49e0131e2983bd0652ee02" kindref="member">cg_show_canvas</ref>();</highlight></codeline>
-<codeline lineno="1976"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1977"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>how<sp/>much<sp/>time<sp/>spent</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1978"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae8e2508c5a807c038e27f78ebc4ad1a4" kindref="member">_cg_clock_get_time</ref>(&amp;(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a406ce66255cad01c536017ae8e298193" kindref="member">after_draw_time</ref>));</highlight></codeline>
-<codeline lineno="1979"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>dt_done<sp/>=<sp/><ref refid="congfx_8h_1a80d63b5b060b4fa97556fe86b4235939" kindref="member">_diff_time_micros</ref>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a406ce66255cad01c536017ae8e298193" kindref="member">after_draw_time</ref>,<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;current_time);</highlight></codeline>
-<codeline lineno="1980"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>printf(&quot;Delta<sp/>ideal<sp/>%lu,<sp/>Delta<sp/>done<sp/>%lu\n&quot;,<sp/>delta_time_ideal,<sp/>dt_done);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1981"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a870a8c67cb4c3a8aee59936607d45de6" kindref="member">delta_time_ideal</ref><sp/>&gt;<sp/>dt_done)</highlight></codeline>
-<codeline lineno="1982"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="1983"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">timespec<sp/>dt_diff,<sp/>dt_diff_rem;</highlight></codeline>
-<codeline lineno="1984"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dt_diff.tv_sec<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="1985"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dt_diff.tv_nsec<sp/>=<sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a870a8c67cb4c3a8aee59936607d45de6" kindref="member">delta_time_ideal</ref><sp/>-<sp/>dt_done)<sp/>*<sp/>1000;</highlight></codeline>
-<codeline lineno="1986"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>sleep<sp/>for<sp/>the<sp/>difference</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1987"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>printf(&quot;sleep<sp/>for<sp/>-&gt;<sp/>[%ld]nanos\n&quot;,<sp/>dt_diff.tv_nsec);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1988"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CG_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1989"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_cg_win_nanosleep(&amp;dt_diff,<sp/>&amp;dt_diff_rem);</highlight></codeline>
-<codeline lineno="1990"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CG_PLATFORM_POSIX</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1991"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nanosleep(&amp;dt_diff,<sp/>&amp;dt_diff_rem);</highlight></codeline>
-<codeline lineno="1992"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1993"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="1994"><highlight class="normal"></highlight></codeline>
-<codeline lineno="1995"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;prev_time<sp/>=<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;current_time;</highlight></codeline>
-<codeline lineno="1996"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae8e2508c5a807c038e27f78ebc4ad1a4" kindref="member">_cg_clock_get_time</ref>(&amp;(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;current_time));</highlight></codeline>
-<codeline lineno="1997"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>dt_done<sp/>=<sp/>_diff_time_micros(current_time,<sp/>prev_time);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1998"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>printf(&quot;After<sp/>sleep:<sp/>Delta<sp/>ideal<sp/>%lu,<sp/>Delta<sp/>done<sp/>%lu\n&quot;,<sp/>delta_time_ideal,<sp/>dt_done);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1999"><highlight class="normal"></highlight></codeline>
-<codeline lineno="2000"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>swap<sp/>canvas</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2001"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1acfb36c7099306701bccec1eac4d61245" kindref="member">cg_swap_canvas</ref>();</highlight></codeline>
-<codeline lineno="2002"><highlight class="normal"></highlight></codeline>
-<codeline lineno="2003"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>flush<sp/>the<sp/>command<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2004"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad89bb91bf9164bb6377b4f1c12d9fa43" kindref="member">_cg_term_flush_command_buffer</ref>(<ref refid="congfx_8h_1a6e83f975a54e5dcc3f7f21c02d38027f" kindref="member">_cg_buffer</ref>);</highlight></codeline>
-<codeline lineno="2005"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="2006"><highlight class="normal"></highlight></codeline>
-<codeline lineno="2007"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a09496b0dcd3a6391d15866ccf20ca345" kindref="member">cg_destroy_graphics</ref>()</highlight></codeline>
-<codeline lineno="2008"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="2009"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>free<sp/>the<sp/>graphics<sp/>context</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2010"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref><sp/>!=<sp/>NULL)</highlight></codeline>
-<codeline lineno="2011"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="2012"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a5b36444620b2f4677a745b861acd1249" kindref="member">_CG_FREE</ref>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>);</highlight></codeline>
-<codeline lineno="2013"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="2014"><highlight class="normal"></highlight></codeline>
-<codeline lineno="2015"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>flush<sp/>the<sp/>command<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2016"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad89bb91bf9164bb6377b4f1c12d9fa43" kindref="member">_cg_term_flush_command_buffer</ref>(<ref refid="congfx_8h_1a6e83f975a54e5dcc3f7f21c02d38027f" kindref="member">_cg_buffer</ref>);</highlight></codeline>
-<codeline lineno="2017"><highlight class="normal"></highlight></codeline>
-<codeline lineno="2018"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>dispose<sp/>of<sp/>the<sp/>command<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2019"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a394f58703b11eb51cb71c1244a57fa8b" kindref="member">_cg_term_dispose_command_buffer</ref>(<ref refid="congfx_8h_1a6e83f975a54e5dcc3f7f21c02d38027f" kindref="member">_cg_buffer</ref>);</highlight></codeline>
-<codeline lineno="2020"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="2021"><highlight class="normal"></highlight></codeline>
-<codeline lineno="2022"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1ad7d84e4c6eb1649f2a52e79a53ee1ea2" kindref="member">cg_exit_graphics</ref>()</highlight></codeline>
-<codeline lineno="2023"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="2024"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a4332f971a0fbb159cb5cc6660ba0d941" kindref="member">should_exit</ref><sp/>=<sp/>1;</highlight></codeline>
-<codeline lineno="2025"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="2026"><highlight class="normal"></highlight></codeline>
-<codeline lineno="2027"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a42a1913288e86a3319fe4cd3cdee81f3" kindref="member">cg_should_exit</ref>()</highlight></codeline>
-<codeline lineno="2028"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="2029"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref><sp/>==<sp/>NULL)</highlight></codeline>
-<codeline lineno="2030"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="2031"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
-<codeline lineno="2032"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="2033"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a4332f971a0fbb159cb5cc6660ba0d941" kindref="member">should_exit</ref>;</highlight></codeline>
-<codeline lineno="2034"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="2035"><highlight class="normal"></highlight></codeline>
-<codeline lineno="2036"><highlight class="normal"><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/><ref refid="congfx_8h_1a27968e74b249ed71cc5b06e75ce654f9" kindref="member">cg_get_deltatime_micros</ref>()</highlight></codeline>
-<codeline lineno="2037"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="2038"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1aee37d147de132428c1489c4429864970" kindref="member">dt</ref>;</highlight></codeline>
-<codeline lineno="2039"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="2040"><highlight class="normal"></highlight></codeline>
-<codeline lineno="2041"><highlight class="normal"><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/><ref refid="congfx_8h_1a81a7b666a5604f14d7017b2317f36c58" kindref="member">cg_get_deltatime_millis</ref>()</highlight></codeline>
-<codeline lineno="2042"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="2043"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1aee37d147de132428c1489c4429864970" kindref="member">dt</ref><sp/>/<sp/>1000;</highlight></codeline>
-<codeline lineno="2044"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="2045"><highlight class="normal"></highlight></codeline>
-<codeline lineno="2046"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>CONGFX_IMPLEMENTATION</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2047"><highlight class="normal"></highlight></codeline>
-<codeline lineno="2048"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//__CONGFX_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1736"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>use<sp/>bresenham&apos;s<sp/>algorithm<sp/>to<sp/>draw<sp/>the<sp/>line</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1737"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>will<sp/>have<sp/>to<sp/>use<sp/>integer<sp/>values<sp/>to<sp/>ensure</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1738"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>negative<sp/>gradients<sp/>are<sp/>handled<sp/>correctly</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1739"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dx<sp/>=<sp/>abs((</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)x2<sp/>-<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)x1);</highlight></codeline>
+<codeline lineno="1740"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sx<sp/>=<sp/>x1<sp/>&lt;<sp/>x2<sp/>?<sp/>1<sp/>:<sp/>-1;</highlight></codeline>
+<codeline lineno="1741"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1742"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dy<sp/>=<sp/>-abs((</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)y2<sp/>-<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)y1);</highlight></codeline>
+<codeline lineno="1743"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sy<sp/>=<sp/>y1<sp/>&lt;<sp/>y2<sp/>?<sp/>1<sp/>:<sp/>-1;</highlight></codeline>
+<codeline lineno="1744"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1745"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>error<sp/>=<sp/>dx<sp/>+<sp/>dy;</highlight></codeline>
+<codeline lineno="1746"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1747"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(;;)</highlight></codeline>
+<codeline lineno="1748"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1749"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae8dab2fda7e2b7ad26db6fcbccc8f692" kindref="member">cg_point</ref>(x1,<sp/>y1,<sp/></highlight><highlight class="charliteral">&apos;#&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="1750"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1751"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(x1<sp/>==<sp/>x2<sp/>&amp;&amp;<sp/>y1<sp/>==<sp/>y2)</highlight></codeline>
+<codeline lineno="1752"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="1753"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1754"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>e2<sp/>=<sp/>2<sp/>*<sp/>error;</highlight></codeline>
+<codeline lineno="1755"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1756"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(e2<sp/>&gt;=<sp/>dy)</highlight></codeline>
+<codeline lineno="1757"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1758"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>error<sp/>+=<sp/>dy;</highlight></codeline>
+<codeline lineno="1759"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x1<sp/>+=<sp/>sx;</highlight></codeline>
+<codeline lineno="1760"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1761"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1762"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(e2<sp/>&lt;=<sp/>dx)</highlight></codeline>
+<codeline lineno="1763"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1764"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>error<sp/>+=<sp/>dx;</highlight></codeline>
+<codeline lineno="1765"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>y1<sp/>+=<sp/>sy;</highlight></codeline>
+<codeline lineno="1766"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1767"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1768"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1769"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1770"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a83ad7a726f176c714e1c755164abd0d0" kindref="member">cg_rect</ref>(<ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>x1,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>y1,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>)</highlight></codeline>
+<codeline lineno="1771"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="1772"><highlight class="normal"><sp/><sp/><sp/><sp/>x1<sp/>=<sp/><ref refid="congfx_8h_1a7bec0ad05cc5bb2eef0abb079223c1f2" kindref="member">cg_clamp</ref>(x1,<sp/>0,<sp/><ref refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kindref="member">canvas_current</ref>-&gt;<ref refid="structcg__canvas__t_1a83e8ff626baa465bb00278e13e0333f6" kindref="member">width</ref><sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="1773"><highlight class="normal"><sp/><sp/><sp/><sp/>y1<sp/>=<sp/><ref refid="congfx_8h_1a7bec0ad05cc5bb2eef0abb079223c1f2" kindref="member">cg_clamp</ref>(y1,<sp/>0,<sp/><ref refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kindref="member">canvas_current</ref>-&gt;<ref refid="structcg__canvas__t_1a852e709778968cd042330f602f5eca90" kindref="member">height</ref><sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="1774"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref><sp/>=<sp/><ref refid="congfx_8h_1a7bec0ad05cc5bb2eef0abb079223c1f2" kindref="member">cg_clamp</ref>(<ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/>0,<sp/><ref refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kindref="member">canvas_current</ref>-&gt;<ref refid="structcg__canvas__t_1a83e8ff626baa465bb00278e13e0333f6" kindref="member">width</ref><sp/>-<sp/>x1);</highlight></codeline>
+<codeline lineno="1775"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref><sp/>=<sp/><ref refid="congfx_8h_1a7bec0ad05cc5bb2eef0abb079223c1f2" kindref="member">cg_clamp</ref>(<ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>,<sp/>0,<sp/><ref refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kindref="member">canvas_current</ref>-&gt;<ref refid="structcg__canvas__t_1a852e709778968cd042330f602f5eca90" kindref="member">height</ref><sp/>-<sp/>y1);</highlight></codeline>
+<codeline lineno="1776"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1777"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a7e35ac0f2b751b21cafdf1648374c535" kindref="member">cg_line</ref>(x1,<sp/>y1,<sp/>x1<sp/>+<sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/>y1);</highlight></codeline>
+<codeline lineno="1778"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a7e35ac0f2b751b21cafdf1648374c535" kindref="member">cg_line</ref>(x1<sp/>+<sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/>y1,<sp/>x1<sp/>+<sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/>y1<sp/>+<sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>);</highlight></codeline>
+<codeline lineno="1779"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a7e35ac0f2b751b21cafdf1648374c535" kindref="member">cg_line</ref>(x1<sp/>+<sp/><ref refid="congfx_8h_1a6743e39fe1011cdcec74cc73781ee991" kindref="member">width</ref>,<sp/>y1<sp/>+<sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>,<sp/>x1,<sp/>y1<sp/>+<sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>);</highlight></codeline>
+<codeline lineno="1780"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a7e35ac0f2b751b21cafdf1648374c535" kindref="member">cg_line</ref>(x1,<sp/>y1,<sp/>x1,<sp/>y1<sp/>+<sp/><ref refid="congfx_8h_1ac54559565a8a06a0d6ab0f9caeb66c0f" kindref="member">height</ref>);</highlight></codeline>
+<codeline lineno="1781"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1782"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1783"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a81f7c9ba9fd0bb8a883721e5d48bcf39" kindref="member">cg_text</ref>(<ref refid="congfx_8h_1a294b3b3a8e11a477f60c8d1007d212ce" kindref="member">cg_char</ref><sp/>*t,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>x,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>y)</highlight></codeline>
+<codeline lineno="1784"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="1785"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>len<sp/>=<sp/>strlen(t);</highlight></codeline>
+<codeline lineno="1786"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(len<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="1787"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1788"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>len;<sp/>i++)</highlight></codeline>
+<codeline lineno="1789"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1790"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae8dab2fda7e2b7ad26db6fcbccc8f692" kindref="member">cg_point</ref>(x<sp/>+<sp/>i,<sp/>y,<sp/>t[i]);</highlight></codeline>
+<codeline lineno="1791"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1792"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1793"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1794"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1795"><highlight class="normal"><ref refid="structcg__keyboard__input__t" kindref="compound">cg_keyboard_input_t</ref><sp/><ref refid="congfx_8h_1a6d63e1f3bd2fd2c66a8a0d62ba94a32b" kindref="member">cg_get_key_pressed</ref>()</highlight></codeline>
+<codeline lineno="1796"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="1797"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>get<sp/>key<sp/>at<sp/>the<sp/>key<sp/>counter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1798"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1ab9e5409b9a61ae2eed93987b37da0376" kindref="member">key_counter</ref><sp/>&lt;<sp/>128)</highlight></codeline>
+<codeline lineno="1799"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1800"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structcg__keyboard__input__t" kindref="compound">cg_keyboard_input_t</ref><sp/>inp<sp/>=<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a7cace5fe2ec55a20511070e3a0117e7e" kindref="member">keys_pressed</ref>[<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1ab9e5409b9a61ae2eed93987b37da0376" kindref="member">key_counter</ref>];</highlight></codeline>
+<codeline lineno="1801"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1ab9e5409b9a61ae2eed93987b37da0376" kindref="member">key_counter</ref>++;</highlight></codeline>
+<codeline lineno="1802"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inp;</highlight></codeline>
+<codeline lineno="1803"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1804"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1805"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>return<sp/>a<sp/>key<sp/>with<sp/>none<sp/>value</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1806"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<ref refid="structcg__keyboard__input__t" kindref="compound">cg_keyboard_input_t</ref>){<ref refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbda4ed2e18b6ffb8ee5ae9f14e8999f824b" kindref="member">CG_KEY_NONE</ref>,<sp/></highlight><highlight class="charliteral">&apos;\0&apos;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="1807"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1808"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1809"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a018e934fdeb850e954c541f37ef6bad9" kindref="member">cg_is_key_pressed</ref>(<ref refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbd" kindref="member">cg_key_type_t</ref><sp/>key)</highlight></codeline>
+<codeline lineno="1810"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="1811"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref><sp/>==<sp/>NULL)</highlight></codeline>
+<codeline lineno="1812"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1813"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="1814"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1815"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>count<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="1816"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(count<sp/>&lt;<sp/>128)</highlight></codeline>
+<codeline lineno="1817"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1818"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structcg__keyboard__input__t" kindref="compound">cg_keyboard_input_t</ref><sp/>inp<sp/>=<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a7cace5fe2ec55a20511070e3a0117e7e" kindref="member">keys_pressed</ref>[count];</highlight></codeline>
+<codeline lineno="1819"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(inp.<ref refid="structcg__keyboard__input__t_1aaa93e8437d89ea147aab3f4e2785decb" kindref="member">key</ref><sp/>==<sp/><ref refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbda4ed2e18b6ffb8ee5ae9f14e8999f824b" kindref="member">CG_KEY_NONE</ref>)</highlight></codeline>
+<codeline lineno="1820"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1821"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="1822"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1823"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(inp.<ref refid="structcg__keyboard__input__t_1aaa93e8437d89ea147aab3f4e2785decb" kindref="member">key</ref><sp/>==<sp/>key)</highlight></codeline>
+<codeline lineno="1824"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1825"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
+<codeline lineno="1826"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1827"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>count++;</highlight></codeline>
+<codeline lineno="1828"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1829"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="1830"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1831"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1832"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1ae8e2508c5a807c038e27f78ebc4ad1a4" kindref="member">_cg_clock_get_time</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>timespec<sp/>*t)</highlight></codeline>
+<codeline lineno="1833"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="1834"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CG_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1835"><highlight class="normal"><sp/><sp/><sp/><sp/>_cg_win_clock_gettime(t);</highlight></codeline>
+<codeline lineno="1836"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CG_PLATFORM_POSIX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1837"><highlight class="normal"><sp/><sp/><sp/><sp/>clock_gettime(CLOCK_MONOTONIC,<sp/>t);</highlight></codeline>
+<codeline lineno="1838"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1839"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1840"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1841"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a03361f9fd32fab46291b1a48e90743b5" kindref="member">_cg_init_num_lookup</ref>()</highlight></codeline>
+<codeline lineno="1842"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="1843"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>256;<sp/>i++)</highlight></codeline>
+<codeline lineno="1844"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1845"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a7058ddeaf49e9013a4565ff762cd75e9" kindref="member">_cg_num_lookup</ref>[i].<ref refid="struct__cg__num__str__t_1a65b2e2cfd4691fc8e77d60325a729ccc" kindref="member">len</ref><sp/>=<sp/>sprintf(<ref refid="congfx_8h_1a7058ddeaf49e9013a4565ff762cd75e9" kindref="member">_cg_num_lookup</ref>[i].str,<sp/></highlight><highlight class="stringliteral">&quot;%d&quot;</highlight><highlight class="normal">,<sp/>i);</highlight></codeline>
+<codeline lineno="1846"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1847"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1848"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1849"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a74f52ae7ce7cf4eee0aeecf34fa09d0f" kindref="member">cg_create_graphics</ref>(<ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>w,<sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>h)</highlight></codeline>
+<codeline lineno="1850"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="1851"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>initialize<sp/>number<sp/>to<sp/>string<sp/>lookup<sp/>table</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1852"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a03361f9fd32fab46291b1a48e90743b5" kindref="member">_cg_init_num_lookup</ref>();</highlight></codeline>
+<codeline lineno="1853"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1854"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>allocate<sp/>the<sp/>graphics<sp/>context</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1855"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref><sp/>=<sp/>(<ref refid="struct__cg__graphics__context__t" kindref="compound">_cg_graphics_context_t</ref><sp/>*)<ref refid="congfx_8h_1ada5c282ee4dc3f71d374241eba71427c" kindref="member">_CG_CALLOC</ref>(1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct__cg__graphics__context__t" kindref="compound">_cg_graphics_context_t</ref>));</highlight></codeline>
+<codeline lineno="1856"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1857"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CG_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1858"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>windows<sp/>init<sp/>time</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1859"><highlight class="normal"><sp/><sp/><sp/><sp/>_cg_win_time_init();</highlight></codeline>
+<codeline lineno="1860"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1861"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1862"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref><sp/>==<sp/>NULL)</highlight></codeline>
+<codeline lineno="1863"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1864"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;FATAL<sp/>Error:<sp/>Unable<sp/>to<sp/>allocate<sp/>graphics<sp/>context.\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="1865"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1;</highlight></codeline>
+<codeline lineno="1866"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1867"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1868"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae8e2508c5a807c038e27f78ebc4ad1a4" kindref="member">_cg_clock_get_time</ref>(&amp;(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;start_time));</highlight></codeline>
+<codeline lineno="1869"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;prev_time<sp/>=<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;start_time;</highlight></codeline>
+<codeline lineno="1870"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;current_time<sp/>=<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;start_time;</highlight></codeline>
+<codeline lineno="1871"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a4332f971a0fbb159cb5cc6660ba0d941" kindref="member">should_exit</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="1872"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1873"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a870a8c67cb4c3a8aee59936607d45de6" kindref="member">delta_time_ideal</ref><sp/>=<sp/>1000000<sp/>/<sp/><ref refid="congfx_8h_1a003cae3fe20e851df481e460aa51056c" kindref="member">_fps</ref>;<sp/></highlight><highlight class="comment">//<sp/>in<sp/>microseconds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1874"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1875"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>init<sp/>random<sp/>numbers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1876"><highlight class="normal"><sp/><sp/><sp/><sp/>srand(time(NULL));</highlight></codeline>
+<codeline lineno="1877"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1878"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>create<sp/>the<sp/>command<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1879"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1a1525b6a6d47ca3998da1420490d6973a" kindref="member">_cg_term_create_command_buffer</ref>(&amp;<ref refid="congfx_8h_1a6e83f975a54e5dcc3f7f21c02d38027f" kindref="member">_cg_buffer</ref>)<sp/>==<sp/>-1)</highlight></codeline>
+<codeline lineno="1880"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1881"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;FATAL<sp/>Error:<sp/>Unable<sp/>to<sp/>create<sp/>command<sp/>buffer.\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="1882"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1;</highlight></codeline>
+<codeline lineno="1883"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1884"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1885"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>enable<sp/>raw<sp/>mode<sp/>for<sp/>terminal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1886"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad6c20707d5920689fa9b3fcc2f01bd62" kindref="member">_cg_term_enable_raw_mode</ref>();</highlight></codeline>
+<codeline lineno="1887"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1888"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>get<sp/>the<sp/>window<sp/>size</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1889"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rows,<sp/>cols;</highlight></codeline>
+<codeline lineno="1890"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(w<sp/>==<sp/>0<sp/>||<sp/>h<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="1891"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1892"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1aa02b4d924ebc2e247a7c6fe2cbc77c67" kindref="member">_cg_get_window_size</ref>(&amp;rows,<sp/>&amp;cols)<sp/>==<sp/>-1)</highlight></codeline>
+<codeline lineno="1893"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1894"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;FATAL<sp/>Error:<sp/>Unable<sp/>to<sp/>get<sp/>window<sp/>size.\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="1895"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1;</highlight></codeline>
+<codeline lineno="1896"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1897"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1898"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1899"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1900"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rows<sp/>=<sp/>h;</highlight></codeline>
+<codeline lineno="1901"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cols<sp/>=<sp/>w;</highlight></codeline>
+<codeline lineno="1902"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1903"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1904"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>init<sp/>locale<sp/>for<sp/>terminal,<sp/>and<sp/>wide<sp/>output</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1905"><highlight class="normal"><sp/><sp/><sp/><sp/>setlocale(LC_ALL,<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="1906"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>fwide(stdout,<sp/>1);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1907"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1908"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>there<sp/>is<sp/>no<sp/>canvas<sp/>created,<sp/>create<sp/>a<sp/>default<sp/>one</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1909"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1a87912191b23d298616001f3210b9d0a2" kindref="member">canvas_current</ref><sp/>==<sp/>NULL)</highlight></codeline>
+<codeline lineno="1910"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1911"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a8e26cc4d0c7e75eb225bfa5bec45a4b7" kindref="member">cg_create_canvas</ref>(cols,<sp/>rows);</highlight></codeline>
+<codeline lineno="1912"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1913"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad552fd9237d2694ef179e504e96499eb" kindref="member">cg_background</ref>(<ref refid="congfx_8h_1a1ea997d31e6b9b1760d24c55cde4eb82" kindref="member">default_bg_colour</ref>);</highlight></codeline>
+<codeline lineno="1914"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a4c9331ed66f6b72a2a4747e722fcace5" kindref="member">cg_set_colour</ref>(<ref refid="congfx_8h_1a95bcdd7c4a79261cdad325f409a1e277" kindref="member">default_fg_colour</ref>);</highlight></codeline>
+<codeline lineno="1915"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1916"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>swap<sp/>out<sp/>the<sp/>current<sp/>canvas,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1917"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>make<sp/>the<sp/>current<sp/>canvas<sp/>dirty<sp/>with<sp/>a<sp/>foreground<sp/>colour<sp/>so<sp/>that</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1918"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>it<sp/>will<sp/>not<sp/>match<sp/>with<sp/>the<sp/>previous<sp/>canvas<sp/>in<sp/>the<sp/>draw<sp/>call</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1919"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>then<sp/>draw<sp/>the<sp/>initial<sp/>canvas</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1920"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1acfb36c7099306701bccec1eac4d61245" kindref="member">cg_swap_canvas</ref>();</highlight></codeline>
+<codeline lineno="1921"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad552fd9237d2694ef179e504e96499eb" kindref="member">cg_background</ref>(<ref refid="congfx_8h_1a95bcdd7c4a79261cdad325f409a1e277" kindref="member">default_fg_colour</ref>);</highlight></codeline>
+<codeline lineno="1922"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1acfb36c7099306701bccec1eac4d61245" kindref="member">cg_swap_canvas</ref>();</highlight></codeline>
+<codeline lineno="1923"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1924"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>now<sp/>draw<sp/>the<sp/>canvas</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1925"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a0bba1782ad49e0131e2983bd0652ee02" kindref="member">cg_show_canvas</ref>();</highlight></codeline>
+<codeline lineno="1926"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1927"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>swap<sp/>out<sp/>the<sp/>current<sp/>canvas,<sp/>and<sp/>set<sp/>the<sp/>default<sp/>background<sp/>and<sp/>foreground</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1928"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>to<sp/>restore<sp/>the<sp/>initial<sp/>state<sp/>in<sp/>both<sp/>back<sp/>and<sp/>front<sp/>canvas</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1929"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1acfb36c7099306701bccec1eac4d61245" kindref="member">cg_swap_canvas</ref>();</highlight></codeline>
+<codeline lineno="1930"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad552fd9237d2694ef179e504e96499eb" kindref="member">cg_background</ref>(<ref refid="congfx_8h_1a1ea997d31e6b9b1760d24c55cde4eb82" kindref="member">default_bg_colour</ref>);</highlight></codeline>
+<codeline lineno="1931"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a4c9331ed66f6b72a2a4747e722fcace5" kindref="member">cg_set_colour</ref>(<ref refid="congfx_8h_1a95bcdd7c4a79261cdad325f409a1e277" kindref="member">default_fg_colour</ref>);</highlight></codeline>
+<codeline lineno="1932"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1933"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1934"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>set<sp/>default<sp/>background<sp/>and<sp/>forground</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1935"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1afff4c044ddce9b0c3fc002929f9d7c0b" kindref="member">_cg_term_reset</ref>();</highlight></codeline>
+<codeline lineno="1936"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1aab71e1304e3dd5d4fe0e8b2c76be8f20" kindref="member">_cg_term_set_foreground_colour</ref>(<ref refid="congfx_8h_1a95bcdd7c4a79261cdad325f409a1e277" kindref="member">default_fg_colour</ref>);</highlight></codeline>
+<codeline lineno="1937"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1938"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae0df00abe0adf0554f6ab446d5207aee" kindref="member">cg_cls</ref>();</highlight></codeline>
+<codeline lineno="1939"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a4a6d5781a371fe269d8c2bb61d45945a" kindref="member">cg_home</ref>();</highlight></codeline>
+<codeline lineno="1940"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1941"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="1942"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1943"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1944"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1adad8b0c22b2f9819a948e25d72f8373c" kindref="member">cg_create_graphics_fullscreen</ref>()</highlight></codeline>
+<codeline lineno="1945"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="1946"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a74f52ae7ce7cf4eee0aeecf34fa09d0f" kindref="member">cg_create_graphics</ref>(0,<sp/>0);</highlight></codeline>
+<codeline lineno="1947"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1948"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1949"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a677ad02c40ccbfbb1e18be09d499f887" kindref="member">cg_begin_draw</ref>()</highlight></codeline>
+<codeline lineno="1950"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="1951"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1aee37d147de132428c1489c4429864970" kindref="member">dt</ref><sp/>=<sp/><ref refid="congfx_8h_1a80d63b5b060b4fa97556fe86b4235939" kindref="member">_diff_time_micros</ref>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;current_time,<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;prev_time);</highlight></codeline>
+<codeline lineno="1952"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1953"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a8fad8ec4fcb2d480af8a017d7ed61c1a" kindref="member">_cg_read_key</ref>();</highlight></codeline>
+<codeline lineno="1954"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1955"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>the<sp/>key<sp/>pressed<sp/>is<sp/>ESC,<sp/>then<sp/>return<sp/>-1<sp/>to<sp/>exit</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1956"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1a018e934fdeb850e954c541f37ef6bad9" kindref="member">cg_is_key_pressed</ref>(<ref refid="congfx_8h_1a3843a6c50a39c330b814a0de0469cfbda6dfe2b713ff7209771729287b3d968a2" kindref="member">CG_KEY_ESCAPE</ref>))</highlight></codeline>
+<codeline lineno="1957"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1958"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad7d84e4c6eb1649f2a52e79a53ee1ea2" kindref="member">cg_exit_graphics</ref>();</highlight></codeline>
+<codeline lineno="1959"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1960"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1961"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1962"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1af76a416b029637c96792ad2e3a7c7979" kindref="member">cg_end_draw</ref>()</highlight></codeline>
+<codeline lineno="1963"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="1964"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>DEBUG<sp/>code<sp/>to<sp/>show<sp/>the<sp/>key<sp/>pressed</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1965"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>int<sp/>key_count<sp/>=<sp/>0;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1966"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>cg_keyboard_input_t<sp/>inp;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1967"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>cg_string<sp/>key_str<sp/>=<sp/>cg_make_string(100);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1968"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>while(inp<sp/>=<sp/>cg_get_key_pressed(),<sp/>inp.key<sp/>!=<sp/>CG_KEY_NONE)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1969"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1970"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>key_count++;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1971"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>snprintf(key_str,<sp/>100,<sp/>&quot;Key<sp/>Pressed<sp/>%d,<sp/>%c&quot;,<sp/>inp.key,<sp/>inp.char_value);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1972"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>cg_text(key_str,<sp/>0,<sp/>key_count);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1973"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1974"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1975"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>show<sp/>the<sp/>canvas</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1976"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a0bba1782ad49e0131e2983bd0652ee02" kindref="member">cg_show_canvas</ref>();</highlight></codeline>
+<codeline lineno="1977"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1978"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>how<sp/>much<sp/>time<sp/>spent</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1979"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae8e2508c5a807c038e27f78ebc4ad1a4" kindref="member">_cg_clock_get_time</ref>(&amp;(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a406ce66255cad01c536017ae8e298193" kindref="member">after_draw_time</ref>));</highlight></codeline>
+<codeline lineno="1980"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/>dt_done<sp/>=<sp/><ref refid="congfx_8h_1a80d63b5b060b4fa97556fe86b4235939" kindref="member">_diff_time_micros</ref>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a406ce66255cad01c536017ae8e298193" kindref="member">after_draw_time</ref>,<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;current_time);</highlight></codeline>
+<codeline lineno="1981"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>printf(&quot;Delta<sp/>ideal<sp/>%lu,<sp/>Delta<sp/>done<sp/>%lu\n&quot;,<sp/>delta_time_ideal,<sp/>dt_done);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1982"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a870a8c67cb4c3a8aee59936607d45de6" kindref="member">delta_time_ideal</ref><sp/>&gt;<sp/>dt_done)</highlight></codeline>
+<codeline lineno="1983"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="1984"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">timespec<sp/>dt_diff,<sp/>dt_diff_rem;</highlight></codeline>
+<codeline lineno="1985"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dt_diff.tv_sec<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="1986"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dt_diff.tv_nsec<sp/>=<sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a870a8c67cb4c3a8aee59936607d45de6" kindref="member">delta_time_ideal</ref><sp/>-<sp/>dt_done)<sp/>*<sp/>1000;</highlight></codeline>
+<codeline lineno="1987"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>sleep<sp/>for<sp/>the<sp/>difference</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1988"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>printf(&quot;sleep<sp/>for<sp/>-&gt;<sp/>[%ld]nanos\n&quot;,<sp/>dt_diff.tv_nsec);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1989"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CG_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1990"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_cg_win_nanosleep(&amp;dt_diff,<sp/>&amp;dt_diff_rem);</highlight></codeline>
+<codeline lineno="1991"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CG_PLATFORM_POSIX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1992"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nanosleep(&amp;dt_diff,<sp/>&amp;dt_diff_rem);</highlight></codeline>
+<codeline lineno="1993"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1994"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1995"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1996"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;prev_time<sp/>=<sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;current_time;</highlight></codeline>
+<codeline lineno="1997"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ae8e2508c5a807c038e27f78ebc4ad1a4" kindref="member">_cg_clock_get_time</ref>(&amp;(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;current_time));</highlight></codeline>
+<codeline lineno="1998"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>dt_done<sp/>=<sp/>_diff_time_micros(current_time,<sp/>prev_time);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1999"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>printf(&quot;After<sp/>sleep:<sp/>Delta<sp/>ideal<sp/>%lu,<sp/>Delta<sp/>done<sp/>%lu\n&quot;,<sp/>delta_time_ideal,<sp/>dt_done);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2000"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2001"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>swap<sp/>canvas</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2002"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1acfb36c7099306701bccec1eac4d61245" kindref="member">cg_swap_canvas</ref>();</highlight></codeline>
+<codeline lineno="2003"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2004"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>flush<sp/>the<sp/>command<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2005"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad89bb91bf9164bb6377b4f1c12d9fa43" kindref="member">_cg_term_flush_command_buffer</ref>(<ref refid="congfx_8h_1a6e83f975a54e5dcc3f7f21c02d38027f" kindref="member">_cg_buffer</ref>);</highlight></codeline>
+<codeline lineno="2006"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="2007"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2008"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a09496b0dcd3a6391d15866ccf20ca345" kindref="member">cg_destroy_graphics</ref>()</highlight></codeline>
+<codeline lineno="2009"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="2010"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>free<sp/>the<sp/>graphics<sp/>context</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2011"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref><sp/>!=<sp/>NULL)</highlight></codeline>
+<codeline lineno="2012"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="2013"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a5b36444620b2f4677a745b861acd1249" kindref="member">_CG_FREE</ref>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>);</highlight></codeline>
+<codeline lineno="2014"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="2015"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2016"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>flush<sp/>the<sp/>command<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2017"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ad89bb91bf9164bb6377b4f1c12d9fa43" kindref="member">_cg_term_flush_command_buffer</ref>(<ref refid="congfx_8h_1a6e83f975a54e5dcc3f7f21c02d38027f" kindref="member">_cg_buffer</ref>);</highlight></codeline>
+<codeline lineno="2018"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2019"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>dispose<sp/>of<sp/>the<sp/>command<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2020"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1a394f58703b11eb51cb71c1244a57fa8b" kindref="member">_cg_term_dispose_command_buffer</ref>(<ref refid="congfx_8h_1a6e83f975a54e5dcc3f7f21c02d38027f" kindref="member">_cg_buffer</ref>);</highlight></codeline>
+<codeline lineno="2021"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="2022"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2023"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1ad7d84e4c6eb1649f2a52e79a53ee1ea2" kindref="member">cg_exit_graphics</ref>()</highlight></codeline>
+<codeline lineno="2024"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="2025"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a4332f971a0fbb159cb5cc6660ba0d941" kindref="member">should_exit</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="2026"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="2027"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2028"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1a42a1913288e86a3319fe4cd3cdee81f3" kindref="member">cg_should_exit</ref>()</highlight></codeline>
+<codeline lineno="2029"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="2030"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref><sp/>==<sp/>NULL)</highlight></codeline>
+<codeline lineno="2031"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="2032"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
+<codeline lineno="2033"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="2034"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1a4332f971a0fbb159cb5cc6660ba0d941" kindref="member">should_exit</ref>;</highlight></codeline>
+<codeline lineno="2035"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="2036"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2037"><highlight class="normal"><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/><ref refid="congfx_8h_1a27968e74b249ed71cc5b06e75ce654f9" kindref="member">cg_get_deltatime_micros</ref>()</highlight></codeline>
+<codeline lineno="2038"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="2039"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1aee37d147de132428c1489c4429864970" kindref="member">dt</ref>;</highlight></codeline>
+<codeline lineno="2040"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="2041"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2042"><highlight class="normal"><ref refid="congfx_8h_1a6d9d6ff7737f67375e5209f1510902da" kindref="member">cg_uint</ref><sp/><ref refid="congfx_8h_1a81a7b666a5604f14d7017b2317f36c58" kindref="member">cg_get_deltatime_millis</ref>()</highlight></codeline>
+<codeline lineno="2043"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="2044"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="congfx_8h_1ac0c57ac6c0dbc39bc6900c97d2450bb9" kindref="member">_cg_gfx_context</ref>-&gt;<ref refid="struct__cg__graphics__context__t_1aee37d147de132428c1489c4429864970" kindref="member">dt</ref><sp/>/<sp/>1000;</highlight></codeline>
+<codeline lineno="2045"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="2046"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2047"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>CONGFX_IMPLEMENTATION</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2048"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2049"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//__CONGFX_H__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="congfx.h"/>
   </compounddef>
