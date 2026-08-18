@@ -1197,6 +1197,10 @@ int _cg_term_buffer_command(_cg_term_command_buffer_t *buffer, cg_string command
 
 int _cg_term_flush_command_buffer(_cg_term_command_buffer_t *buffer)
 {
+    if (buffer == NULL)
+    {
+        return 0;
+    }
     if (buffer->length == 0)
     {
         return 0;
@@ -1692,6 +1696,10 @@ void cg_clear_canvas()
 
 void cg_point(cg_uint x1, cg_uint y1, cg_char c)
 {
+    if (canvas_current == NULL)
+    {
+        return;
+    }
     if (x1 >= canvas_current->width || y1 >= canvas_current->height || x1 < 0 || y1 < 0)
     {
         return;
@@ -1780,6 +1788,10 @@ cg_keyboard_input_t cg_get_key_pressed()
 
 int cg_is_key_pressed(cg_key_type_t key)
 {
+    if (_cg_gfx_context == NULL)
+    {
+        return 0;
+    }
     cg_uint count = 0;
     while (count < 128)
     {
@@ -1995,6 +2007,10 @@ void cg_exit_graphics()
 
 int cg_should_exit()
 {
+    if (_cg_gfx_context == NULL)
+    {
+        return 1;
+    }
     return _cg_gfx_context->should_exit;
 }
 
