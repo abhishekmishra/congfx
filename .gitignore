@@ -63,3 +63,9 @@ docs/api
 docs/latex
 docs/html
 site/
+
+# CMake out-of-source build directory
+/build/
+
+# macos temp files
+.DS_Store
