@@ -7,6 +7,7 @@ set(CONGFX_EXAMPLES
     ex5_bouncing_balls
     ex6_move_block
     ex7_noise
+    ex8_pong
 )
 
 foreach(example IN LISTS CONGFX_EXAMPLES)
